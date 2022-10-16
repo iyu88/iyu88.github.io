@@ -132,13 +132,15 @@
 
   <div class="wrapper">
 
-    <h3 class="footer-heading">구멍을 외면하지 말자</h3>
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
 
     <div class="site-navigation">
 
       <p><strong>Site Map</strong></p>
       <ul class="pages">
-				
+        
 	
 
 	
@@ -180,28 +182,32 @@
         <li>
           <a href="mailto:iyu88887@gmail.com">
             <i class="fa fa-envelope-o"></i>
-            <span class="username">iyu88887@gmail.com</span>
+            <span class="username">
+              iyu88887@gmail.com</span>
           </a>
         </li>
 
         
-          
-          <li>
-            <a href="https://github.com/iyu88" title="https://github.com/iyu88">
-              <i class="fa fa-github"></i>
-              <span class="username">iyu88</span>
-            </a>
-          </li>
-          
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
         
 
       </ul>
     </div>
 
     <div class="site-signature">
-      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
-      <p class="text">first Dev blog
-</p>
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
     </div>
 
   </div>
@@ -216,34 +222,32 @@
 <script src="//unpkg.com/tippy.js@5"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-  // Default syntax highlighting
-  hljs.initHighlightingOnLoad();
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
 
-  // Header
-  var menuToggle = $('#js-mobile-menu').unbind();
-  $('#js-navigation-menu').removeClass("show");
-  menuToggle.on('click', function(e) {
-    e.preventDefault();
-    $('#js-navigation-menu').slideToggle(function(){
-      if($('#js-navigation-menu').is(':hidden')) {
-        $('#js-navigation-menu').removeAttr('style');
-      }
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
     });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
   });
-
-	// Enable tooltips via Tippy.js
-	if (Array.isArray(window.tooltips)) {
-		window.tooltips.forEach(function(tooltip) {
-			var selector = tooltip[0];
-			var config = tooltip[1];
-			tippy(selector, config);
-		})
-	}
-});
-
 </script>
-
 
 
 

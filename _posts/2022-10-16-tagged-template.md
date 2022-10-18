@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Javascript] Tagged Templates"
-date: 2022-10-16
+date: 2022-10-16 00:00:00
 author: Hyunbin Lee
 categories: Javascript
 tags: Javascript String TaggedTemplates

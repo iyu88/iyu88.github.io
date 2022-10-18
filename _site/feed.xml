@@ -6,16 +6,16 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Oct 2022 08:34:51 +0900</pubDate>
-    <lastBuildDate>Tue, 18 Oct 2022 08:34:51 +0900</lastBuildDate>
+    <pubDate>Tue, 18 Oct 2022 09:02:01 +0900</pubDate>
+    <lastBuildDate>Tue, 18 Oct 2022 09:02:01 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
         <title>[Javascript] Tagged Templates</title>
         <description>&lt;h1 id=&quot;tagged-templates&quot;&gt;Tagged Templates&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;javascript-의-template-literals-를-발전시켜서-함수로-파싱하여-사용할-수-있습니다&quot;&gt;💡 Javascript 의 Template Literals 를 발전시켜서 함수로 파싱하여 사용할 수 있습니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;p&gt;&lt;br /&gt; &lt;br /&gt;&lt;/p&gt; &lt;p&gt;자바스크립트에서는 ES6 부터 백틱 ( ` ` ) 을...</description>
-        <pubDate>Sun, 16 Oct 2022 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2022/10/16/tagged-templates.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2022/10/16/tagged-templates.html</guid>
+        <pubDate>Sun, 16 Oct 2022 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/javascript/2022/10/16/tagged-template.html</link>
+        <guid isPermaLink="true">http://localhost:4000/javascript/2022/10/16/tagged-template.html</guid>
         
         <category>Javascript</category>
         

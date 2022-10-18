@@ -30,7 +30,7 @@ console.log(`Today is ${today}`); // Today is Sun Oct 16 2022 23:01:55 GMT+0900 
 이를 발전시킨 Tagged Templates 는 백틱 안에 들어오는 값들을 함수의 인자처럼 사용할 수 있습니다.
 
 <pre>
-<code class="hljs">const today = new Date();
+<code class="hljs javascript">const today = new Date();
 const weather = "sunny";
 
 function taggedTemplate(strings, ...values) {
@@ -58,7 +58,7 @@ console.log(template);
 위의 예시에서 strings 을 출력하면 ‘raw’ 값이 포함되어 있는 것을 알 수 있습니다.
 
 <pre>
-<code class="hljs">0: "Today is "
+<code class="hljs javascript">0: "Today is "
 1: ", weather is "
 2: ""
 length: 3
@@ -73,7 +73,7 @@ raw: (3) ['Today is ', ', weather is ', '']</code>
 해당 값은 다음과 같이 문자열 안에 escape sequence 가 포함되어 있을 때 달라집니다.
 
 <pre>
-<code class="hljs">const template = taggedTemplate`Today is ${today}\n weather is ${weather}`;
+<code class="hljs javascript">const template = taggedTemplate`Today is ${today}\n weather is ${weather}`;
 console.log(template);
 // Today is Sun Oct 16 2022 23:02:09 GMT+0900 (한국 표준시)
 // weather is sunny
@@ -96,7 +96,7 @@ raw: (3) ['Today is ', ' \\n weather is ', '']</code>
 <br />
 
 <pre>
-<code class="hljs">const today = new Date();
+<code class="hljs javascript">const today = new Date();
 const weather = "sunny";
 
 function taggedTemplate(strings, ...values) {

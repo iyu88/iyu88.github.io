@@ -218,12 +218,6 @@ picture {
   margin: 0;
   max-width: 100%; }
 
-em {
-  display: block;
-  text-align: center;
-  font-size: .8rem;
-  color: light-grey; }
-
 html {
   box-sizing: border-box; }
 
@@ -666,3 +660,9 @@ pre code.hljs {
           margin-right: 0; } }
     .site-footer .site-signature a {
       text-decoration: underline; }
+
+img + em {
+  display: block;
+  text-align: center;
+  font-size: .8rem;
+  color: light-grey; }

@@ -6,9 +6,33 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 21 Oct 2022 20:09:19 +0900</pubDate>
-    <lastBuildDate>Fri, 21 Oct 2022 20:09:19 +0900</lastBuildDate>
+    <pubDate>Mon, 24 Oct 2022 00:38:20 +0900</pubDate>
+    <lastBuildDate>Mon, 24 Oct 2022 00:38:20 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[Web] Browser Render Test - Reflow, Repaint, dev Tools</title>
+        <description>&lt;h1 id=&quot;browser-render-test---reflow-repaint-dev-tools&quot;&gt;Browser Render Test - Reflow, Repaint, dev Tools&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-브라우저의-reflow-와-repaint-를-개발자-도구로-확인해봅니다&quot;&gt;💡 브라우저의 Reflow 와 Repaint 를 개발자 도구로 확인해봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-브라우저-렌더링-프로세스&quot;&gt;1. 브라우저 렌더링 프로세스&lt;/h2&gt; &lt;p&gt;일반적으로 웹을 개발할 때...</description>
+        <pubDate>Sun, 23 Oct 2022 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/web/2022/10/23/browser-render.html</link>
+        <guid isPermaLink="true">http://localhost:4000/web/2022/10/23/browser-render.html</guid>
+        
+        <category>Web</category>
+        
+        <category>Browser</category>
+        
+        <category>Render</category>
+        
+        <category>Reflow</category>
+        
+        <category>Repaint</category>
+        
+        <category>devTools</category>
+        
+        
+        <category>Web</category>
+        
+      </item>
     
       <item>
         <title>[Conference] 부스트 컨퍼런스 2022 후기</title>

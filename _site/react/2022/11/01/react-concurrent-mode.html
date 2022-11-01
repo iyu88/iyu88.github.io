@@ -232,21 +232,18 @@
 
 <p>API 서버로부터 받아온 정보만 화면에 렌더링하는 경우입니다. <code class="language-plaintext highlighter-rouge">/photos</code> 경로로 요청을 보내면 배열에 5천 개의 결과값을 받아옵니다.</p>
 
-<pre>
-<code class="hljs javascript">useEffect(() =&gt; {
-  const dataUrl = "https://jsonplaceholder.typicode.com/photos";
-  const fetchOnRender = async () =&gt; {
-    try {
-      const response = await axios.get(dataUrl);
-      setDummyData(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  fetchOnRender();
-}, []);
-</code>
-</pre>
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">dataUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://jsonplaceholder.typicode.com/photos</span><span class="dl">"</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">fetchOnRender</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">dataUrl</span><span class="p">);</span>
+      <span class="nx">setDummyData</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">fetchOnRender</span><span class="p">();</span>
+<span class="p">},</span> <span class="p">[]);</span></code></pre></figure>
 
 <p>컴포넌트가 마운트되었을 때 useEffect 안에서 <code class="language-plaintext highlighter-rouge">setDummyData()</code> 를 통해서 state 를 업데이트합니다. 데이터가 있을 경우에는 “데이터 로딩 중” 이라는 문자를 표시하고 데이터를 모두 받아왔을 때에는 해당 정보들을 표시하는 방식으로 구현한 결과입니다.</p>
 
@@ -341,21 +338,16 @@
 
 <p>동일한 API 서버로부터 정보를 받아와서 표시하지만 상단에 이미지 태그를 배치하고 난 뒤에 차이점을 살펴보았습니다.</p>
 
-<pre>
-<code class="hljs javascript"><xmp>
-return (
-  <div>
-    <img src="./image.JPG" alt="테스트 이미지" width="100px" />
-    {dummyData.length ? (
-      dummyData.map((d) =&gt; &lt;h4 key={d.id}&gt;{JSON.stringify(d)}&lt;/h4&gt;)
-    ) : (
-      <h1> 데이터 로딩 중...</h1>
-    )}
-  </div>
-);
-</xmp>
-</code>
-</pre>
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">return</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="p">=</span><span class="s">"./image.JPG"</span> <span class="na">alt</span><span class="p">=</span><span class="s">"테스트 이미지"</span> <span class="na">width</span><span class="p">=</span><span class="s">"100px"</span> <span class="p">/&gt;</span>
+    <span class="si">{</span><span class="nx">dummyData</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="p">(</span>
+      <span class="nx">dummyData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">d</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">h4</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">d</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;)</span>
+    <span class="p">)</span> <span class="p">:</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span> 데이터 로딩 중...<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">)</span><span class="si">}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">);</span></code></pre></figure>
 
 <p>JSX 반환값에서 데이터 목록을 표시하기 전에 이미지 태그를 먼저 위치시킵니다.</p>
 
@@ -593,22 +585,19 @@ return (
 
 <h4 id="4-2-1-데이터만-불러올-때">4-2-1) 데이터만 불러올 때</h4>
 
-<pre>
-<code class="hljs javascript">const photoData = fetchThenRender();
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">photoData</span> <span class="o">=</span> <span class="nx">fetchThenRender</span><span class="p">();</span>
 
-export default function ChildComponent() {
-  const [dummyData, setDummyData] = useState([]);
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">ChildComponent</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">dummyData</span><span class="p">,</span> <span class="nx">setDummyData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
 
-  useEffect(() =&gt; {
-    photoData.then((response) =&gt; {
-      setDummyData(response.data);
-    });
-  }, []);
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">photoData</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setDummyData</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
 
-  // (생략)
-}
-</code>
-</pre>
+  <span class="c1">// (생략)</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>컴포넌트 바깥에서 데이터를 불러오는 <code class="language-plaintext highlighter-rouge">fetchThenRender()</code> 함수를 호출합니다. useEffect 에서는 해당 변수에 Promise 객체가 결과를 반환할 때 state 를 업데이트해줍니다.</p>
 
@@ -877,31 +866,28 @@ export default function ChildComponent() {
 
 <p>이전까지 photos 데이터를 받아오기 위해서 API 요청을 한 번만 보냈다면, 5백 개의 comments 데이터까지 받아오기 위해서 추가적인 API 요청을 보냅니다.</p>
 
-<pre>
-<code class="hljs javascript">const fetchDummyData = () =&gt; {
-  return Promise.all([
-    fetchThenRender("photos"),
-    fetchThenRender("comments"),
-  ]).then(([photos, comments]) =&gt; [photos, comments]);
-};
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">fetchDummyData</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+    <span class="nx">fetchThenRender</span><span class="p">(</span><span class="dl">"</span><span class="s2">photos</span><span class="dl">"</span><span class="p">),</span>
+    <span class="nx">fetchThenRender</span><span class="p">(</span><span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span><span class="p">),</span>
+  <span class="p">]).</span><span class="nx">then</span><span class="p">(([</span><span class="nx">photos</span><span class="p">,</span> <span class="nx">comments</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">photos</span><span class="p">,</span> <span class="nx">comments</span><span class="p">]);</span>
+<span class="p">};</span>
 
-const dummyData = fetchDummyData();
+<span class="kd">const</span> <span class="nx">dummyData</span> <span class="o">=</span> <span class="nx">fetchDummyData</span><span class="p">();</span>
 
-export default function ChildComponent() {
-  const [dummyPhotoData, setDummyPhotoData] = useState([]);
-  const [dummyCommentData, setDummyCommentData] = useState([]);
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">ChildComponent</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">dummyPhotoData</span><span class="p">,</span> <span class="nx">setDummyPhotoData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">dummyCommentData</span><span class="p">,</span> <span class="nx">setDummyCommentData</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
 
-  useEffect(() =&gt; {
-    dummyData.then(([photos, comments]) =&gt; {
-      setDummyPhotoData(photos.data);
-      setDummyCommentData(comments.data);
-    });
-  }, []);
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dummyData</span><span class="p">.</span><span class="nx">then</span><span class="p">(([</span><span class="nx">photos</span><span class="p">,</span> <span class="nx">comments</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setDummyPhotoData</span><span class="p">(</span><span class="nx">photos</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+      <span class="nx">setDummyCommentData</span><span class="p">(</span><span class="nx">comments</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
 
-  // (생략);
-}
-</code>
-</pre>
+  <span class="c1">// (생략);</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>Promise.all() 을 사용하여 photos 와 comments 에 대한 응답을 하나의 변수에 저장합니다. useEffect 에서 각 state 를 업데이트합니다.</p>
 
@@ -988,47 +974,44 @@ export default function ChildComponent() {
 
 <h4 id="4-3-1-suspense-를-사용할-때">4-3-1) Suspense 를 사용할 때</h4>
 
-<pre>
-<code class="hljs javascript">const wrapPromise = (promise) =&gt; {
-  let status = "pending";
-  let response;
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">wrapPromise</span> <span class="o">=</span> <span class="p">(</span><span class="nx">promise</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">response</span><span class="p">;</span>
 
-  const suspender = promise.then(
-    (res) =&gt; {
-      status = "success";
-      response = res;
-    },
-    (err) =&gt; {
-      status = "error";
-      response = err;
-    }
-  );
+  <span class="kd">const</span> <span class="nx">suspender</span> <span class="o">=</span> <span class="nx">promise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span><span class="p">;</span>
+      <span class="nx">response</span> <span class="o">=</span> <span class="nx">res</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">;</span>
+      <span class="nx">response</span> <span class="o">=</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
 
-  const read = () =&gt; {
-    switch (status) {
-      case "pending":
-        throw suspender;
-      case "error":
-        throw response;
-      default:
-        return response;
-    }
-  };
+  <span class="kd">const</span> <span class="nx">read</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">:</span>
+        <span class="k">throw</span> <span class="nx">suspender</span><span class="p">;</span>
+      <span class="k">case</span> <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span>
+        <span class="k">throw</span> <span class="nx">response</span><span class="p">;</span>
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
 
-  return { read };
-};
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">read</span> <span class="p">};</span>
+<span class="p">};</span>
 
-const fetchDummyData = () =&gt; {
-  const requestURL = "https://jsonplaceholder.typicode.com/photos";
-  try {
-    const response = axios.get(requestURL);
-    return wrapPromise(response);
-  } catch (err) {
-    console.log(err);
-  }
-};
-</code>
-</pre>
+<span class="kd">const</span> <span class="nx">fetchDummyData</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">requestURL</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://jsonplaceholder.typicode.com/photos</span><span class="dl">"</span><span class="p">;</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">requestURL</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">wrapPromise</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span></code></pre></figure>
 
 <p>위 코드에서 각 함수의 역할은 다음과 같습니다.</p>
 
@@ -1042,29 +1025,23 @@ const fetchDummyData = () =&gt; {
   </li>
 </ul>
 
-<pre>
-<code class="hljs javascript"><xmp>
-function App() {
-  return (
-    &lt;Suspense fallback={<h1>데이터 로딩 중...</h1>}&gt;
-      <ChildComponent />
-    &lt;/Suspense&gt;
-  );
-}
-</xmp>
-</code>
-</pre>
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Suspense</span> <span class="na">fallback</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>데이터 로딩 중...<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ChildComponent</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Suspense</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>Suspense 의 fallback 속성을 통해서 데이터가 DOM 에 표시되기 전까지 “데이터 로딩 중…” 이라는 문자를 출력합니다.</p>
 
-<pre>
-<code class="hljs javascript">const response = fetchDummyData();
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">fetchDummyData</span><span class="p">();</span>
 
-export default function ChildComponent() {
-  const dummyData = response.read();
-  // (생략)
-</code>
-</pre>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">ChildComponent</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">dummyData</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">read</span><span class="p">();</span>
+
+  <span class="c1">// (생략)</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>위와 같이 Suspense 로 둘러싸인 컴포넌트에서는 데이터를 컴포넌트 외부에서 불러오고 실제 값은 내부에서 사용합니다.</p>
 
@@ -1185,18 +1162,14 @@ export default function ChildComponent() {
 
 <p>Suspense 를 사용하여 데이터를 여러 개 불러올 때도 fallback UI 를 사용할 수 있습니다.</p>
 
-<pre>
-<code class="hljs javascript"><xmp>return (&lt;&gt;
-  &lt;Suspense fallback={<h1>데이터 로딩 중...</h1>}&gt;
-    <ChildPhotoList />
-  &lt;/Suspense&gt;
-  &lt;Suspense fallback={<h1>데이터 로딩 중...</h1>}&gt;
-    <ChildCommentList />
-  &lt;/Suspense&gt;
-&lt;/&gt;);
-</xmp>
-</code>
-</pre>
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">return</span> <span class="p">(&lt;&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Suspense</span> <span class="na">fallback</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>데이터 로딩 중...<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">ChildPhotoList</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Suspense</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Suspense</span> <span class="na">fallback</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>데이터 로딩 중...<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">ChildCommentList</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Suspense</span><span class="p">&gt;</span>
+<span class="p">&lt;/&gt;);</span></code></pre></figure>
 
 <p>여러 개의 Suspense 를 사용할 때에는 다음과 같이 순차적으로 배치하면 됩니다.</p>
 
@@ -1358,24 +1331,21 @@ export default function ChildComponent() {
 
 <h3 id="5-1-usestate">5-1) useState</h3>
 
-<pre>
-<code class="hljs javascript">export default function BasicUseState() {
-  const [inputNumber, setInputNumber] = useState(0);
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">BasicUseState</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">inputNumber</span><span class="p">,</span> <span class="nx">setInputNumber</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 
-  useEffect(() =&gt; {
-    const interval = setInterval(() =&gt; {
-      setInputNumber((value) =&gt; value + 1);
-    }, 1000);
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setInputNumber</span><span class="p">((</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
-    setTimeout(() =&gt; {
-      clearInterval(interval);
-    }, 10000);
-  }, []);
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">10000</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
 
-  // (생략)
-};
-</code>
-</pre>
+  <span class="c1">// (생략)</span>
+<span class="p">};</span></code></pre></figure>
 
 <p>컴포넌트가 마운트되면 setInterval 내부의 setInputNumber() 함수가 1초마다 실행됩니다.</p>
 
@@ -1399,39 +1369,39 @@ export default function ChildComponent() {
   <li>업데이트를 지연시키고 싶은 state 를 감싸는 startTransition() 함수</li>
 </ul>
 
-<pre>
-<code class="hljs javascript">export default function Transition() {
-const [inputNumber, setInputNumber] = useState(0);
-const [pending, startTransition] = useTransition();
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Transition</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">inputNumber</span><span class="p">,</span> <span class="nx">setInputNumber</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">pending</span><span class="p">,</span> <span class="nx">startTransition</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useTransition</span><span class="p">();</span>
 
-useEffect(() =&gt; {
-  const interval = setInterval(() =&gt; {
-    startTransition(() =&gt; {
-      setInputNumber((value) =&gt; value + 1);
-    });
-  }, 1000);
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">startTransition</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setInputNumber</span><span class="p">((</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
-  setTimeout(() =&gt; {
-    clearInterval(interval);
-  }, 10000);
-}, []);
-</code>
-</pre>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">10000</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="c1">// (생략)</span>
+<span class="p">}</span></code></pre></figure>
 
 <p><code class="language-plaintext highlighter-rouge">5-1)</code> 과 동일한 구조로 되어 있지만 startTransition() 함수가 inputNumber 의 Setter 함수를 감싸고 있습니다.</p>
 
-<pre>
-<code class="hljs javascript"><xmp><p>아래에 입력값이 표시됩니다.</p>
-    {pending ? (
-      <div>
-        Pending is <strong>True</strong>
-      </div>
-    ) : (
-      DUMMY_ARRAY.map((_, index) =&gt; &lt;div key={index}&gt;{inputNumber}&lt;/div&gt;)
-    )}
-</xmp>
-</code>
-</pre>
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">return</span> <span class="p">(</span>
+  <span class="p">&lt;&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>아래에 입력값이 표시됩니다.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="nx">pending</span> <span class="p">?</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        Pending is <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>True<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span> <span class="p">:</span> <span class="p">(</span>
+      <span class="nx">DUMMY_ARRAY</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">inputNumber</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;)</span>
+    <span class="p">)</span><span class="si">}</span>
+  <span class="p">&lt;/&gt;</span>
+<span class="p">);</span></code></pre></figure>
 
 <p>또한 JSX 의 반환값에서 변수 <code class="language-plaintext highlighter-rouge">pending</code> 을 사용하여 바뀐 state 가 DOM 에 반영되지 않았을 때 표시할 fallback UI 를 정의합니다.</p>
 
@@ -1451,25 +1421,22 @@ useEffect(() =&gt; {
 
 <p>useDeferredValue 도 앞서 useTransition 과 동일하게 state 의 업데이트 우선순위를 낮추어서 자주 발생하는 state 변화에 대응하는 Hook 입니다. useTransition 이 startTransition() 과 같은 함수를 제공하여 우선순위를 낮추고자 하는 state 를 감싸는 방식으로 작성되었다면, useDeferredValue 는 선언 시에 state 를 초기값으로 전달합니다. 이후 해당 값의 업데이트 우선순위가 낮아지게 됩니다. 다만, state 의 업데이트 여부를 감지하는 변수는 제공되지 않습니다.</p>
 
-<pre>
-<code class="hljs javascript">export default function DeferredValue() {
-  const [inputNumber, setInputNumber] = useState(0);
-  const deferredValue = useDeferredValue(inputNumber);
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DeferredValue</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">inputNumber</span><span class="p">,</span> <span class="nx">setInputNumber</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">deferredValue</span> <span class="o">=</span> <span class="nx">useDeferredValue</span><span class="p">(</span><span class="nx">inputNumber</span><span class="p">);</span>
 
-  useEffect(() =&gt; {
-    const interval = setInterval(() =&gt; {
-      setInputNumber((value) =&gt; value + 1);
-    }, 1000);
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setInputNumber</span><span class="p">((</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
-    setTimeout(() =&gt; {
-      clearInterval(interval);
-    }, 10000);
-  }, []);
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">10000</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
 
-  // (생략)
-} 
-</code>
-</pre>
+  <span class="c1">// (생략)</span>
+<span class="p">}</span> </code></pre></figure>
 
 <p>useDeferredValue Hook 에서 inputNumber 를 초기값으로 지정하여 렌더링 우선순위를 낮춥니다. 이후 해당 값을 사용하는 DOM 노드들은 업데이트가 지연됩니다.</p>
 

@@ -6,9 +6,33 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 24 Oct 2022 00:44:39 +0900</pubDate>
-    <lastBuildDate>Mon, 24 Oct 2022 00:44:39 +0900</lastBuildDate>
+    <pubDate>Wed, 02 Nov 2022 01:22:30 +0900</pubDate>
+    <lastBuildDate>Wed, 02 Nov 2022 01:22:30 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[React] React Concurrent Mode - Data fetching, Suspense, React hook</title>
+        <description>&lt;h1 id=&quot;react-concurrent-mode---data-fetching-suspense-react-hook&quot;&gt;React Concurrent Mode - Data fetching, Suspense, React hook&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-react-의-동시성-모드와-관련한-기능들에-대해서-알아봅니다&quot;&gt;💡 React 의 동시성 모드와 관련한 기능들에 대해서 알아봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-react&quot;&gt;1. React&lt;/h2&gt; &lt;p&gt;React 가 등장하기 전에 동적인...</description>
+        <pubDate>Tue, 01 Nov 2022 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/react/2022/11/01/react-concurrent-mode.html</link>
+        <guid isPermaLink="true">http://localhost:4000/react/2022/11/01/react-concurrent-mode.html</guid>
+        
+        <category>React</category>
+        
+        <category>concurrentMode</category>
+        
+        <category>dataFetching</category>
+        
+        <category>Suspense</category>
+        
+        <category>useTransition</category>
+        
+        <category>useDeferredValue</category>
+        
+        
+        <category>React</category>
+        
+      </item>
     
       <item>
         <title>[Web] Browser Render Test - Reflow, Repaint, dev Tools</title>

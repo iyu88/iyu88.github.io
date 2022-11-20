@@ -6,9 +6,27 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Nov 2022 02:10:19 +0900</pubDate>
-    <lastBuildDate>Wed, 02 Nov 2022 02:10:19 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Nov 2022 19:45:02 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Nov 2022 19:45:02 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[Lighthouse] Lighthouse CI 적용기 - GitHub Actions 만들기</title>
+        <description>&lt;h1 id=&quot;lighthouse-ci-적용기---github-actions-만들기&quot;&gt;Lighthouse CI 적용기 - GitHub Actions 만들기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-웹-성능-측정-도구인-lighthouse-를-적용하고-github-actions-를-만들어봅니다&quot;&gt;💡 웹 성능 측정 도구인 Lighthouse 를 적용하고 GitHub Actions 를 만들어봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-lighthouse-도입-배경&quot;&gt;1. Lighthouse 도입 배경&lt;/h2&gt; &lt;p&gt;부스트캠프 그룹...</description>
+        <pubDate>Sun, 20 Nov 2022 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/lighthouse/2022/11/20/lighthouse-ci.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lighthouse/2022/11/20/lighthouse-ci.html</guid>
+        
+        <category>Lighthouse</category>
+        
+        <category>CI</category>
+        
+        <category>GitHub_Actions</category>
+        
+        
+        <category>Lighthouse</category>
+        
+      </item>
     
       <item>
         <title>[React] React Concurrent Mode - Data fetching, Suspense, React hook</title>

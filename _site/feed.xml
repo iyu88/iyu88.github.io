@@ -6,9 +6,29 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Nov 2022 19:45:02 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Nov 2022 19:45:02 +0900</lastBuildDate>
+    <pubDate>Fri, 30 Dec 2022 13:57:29 +0900</pubDate>
+    <lastBuildDate>Fri, 30 Dec 2022 13:57:29 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[Review] 부스트캠프 웹·모바일 7기 후기</title>
+        <description>&lt;h1 id=&quot;부스트캠프-웹모바일-7기-후기&quot;&gt;부스트캠프 웹·모바일 7기 후기&lt;/h1&gt; &lt;h2 id=&quot;들어가며&quot;&gt;들어가며&lt;/h2&gt; &lt;p&gt;어느덧 창밖의 초록은 지고 하얀 눈이 내려왔네요. 무려 5개월이 지났습니다.&lt;/p&gt; &lt;p&gt;부스트캠프를 하기 전까지만 해도 대학교 연구실에서 프론트엔드 개발자의 꿈을 키우며 관련된 연구 과제를...</description>
+        <pubDate>Thu, 29 Dec 2022 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/review/2022/12/29/boostcamp-review.html</link>
+        <guid isPermaLink="true">http://localhost:4000/review/2022/12/29/boostcamp-review.html</guid>
+        
+        <category>boostcamp</category>
+        
+        <category>review</category>
+        
+        <category>challenge</category>
+        
+        <category>membership</category>
+        
+        
+        <category>Review</category>
+        
+      </item>
     
       <item>
         <title>[Lighthouse] Lighthouse CI 적용기 - GitHub Actions 만들기</title>

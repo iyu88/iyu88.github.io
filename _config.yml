@@ -88,6 +88,12 @@ social:
     url: https://github.com/iyu88
     desc: https://github.com/iyu88
     share: true
+  - name: LinkedIn
+    icon: linkedin
+    username: HyunBin Lee
+    url: www.linkedin.com/in/현빈-이-66710325b
+    desc: Connect with me on LinkedIn
+    share: true
 # Social sharing protocols
 # These are for automatically generating sharing metadata for FB and Twitter
 # OS Protocol is for sharing the source of your site, if you're interested. For more, see osprotocol.com

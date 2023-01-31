@@ -1,0 +1,264 @@
+---
+layout: post
+title: "[JavaScript] JavaScript 의 Prototype 에 대해서"
+date: 2023-01-31 00:00:00
+author: Hyunbin Lee
+categories: JavaScript
+tags: javascript prototype
+cover: "/assets/instacode.png"
+---
+
+# JavaScript 의 Prototype 에 대해서
+
+> ### 💡 JavaScript 특징 중 하나인 Prototype 에 대한 지식을 정리합니다.
+
+## 1. 객체와 Prototype
+
+> Javascript에서는 객체를 상속하기 위하여 프로토타입이라는 방식을 사용합니다
+-MDN 설명 중-
+
+Java나 Python과 같은 프로그래밍 언어에서 '객체'를 '상속'하기 위해서 Class를 사용합니다. 
+일반적으로 Class에 대해서 배우게 되면 필드와 메서드로 구성된다고 이야기합니다.
+여기서 필드와 메서드는 각각 Class가 가질 수 있는 값(변수)과 행동(함수)에 해당합니다. 
+
+<br />
+<img alt="image" src="https://user-images.githubusercontent.com/31645195/215697453-69c5b15d-0861-43ef-9630-031acfdb7479.png">
+*사람을 간단하게 클래스로 나타낸다면*
+<br />
+
+
+하지만 Javascript는 객체를 상속하기 위해 Prototype을 사용합니다. 
+
+> ... 상속되는 속성과 메서드들은 각 객체가 아니라 객체의 생성자의 prototype 이라는 속성에 정의되어 있습니다. 
+
+그렇다면 객체 생성자는 무엇일까요?
+
+객체 생성자는 객체를 생성할 때 사용하는 함수로 객체 내부의 필드를 초기화할 때 호출합니다. 
+
+일단 JavaScript에서 객체를 생성하는 방법부터 천천히 알아보겠습니다. 
+
+#### 1) Literal 방식 
+
+위의 예시에서 들었던 사람 클래스를 Literal 방식으로 생성한다면 다음과 같습니다. 
+
+<pre>
+<code class="hljs javascript">const 사람 = {};
+사람.나이 = 25;
+사람.이름 = '홍길동';
+사람.먹다 = () => console.log("먹다");
+사람.자다 = () => console.log("자다");
+</code>
+</pre>
+
+{} 를 사용하여 객체를 생성하고 나서 내부에 필요한 속성을 하나씩 선언해줍니다. 가장 간단하게 객체를 생성할 수 있는 방법입니다. 
+
+#### 2) 생성자 함수를 사용하는 방식 
+
+같은 내용에 대해서 new Object()로 생성해보겠습니다. 
+
+<pre>
+<code class="hljs javascript">const 사람 = new Object();
+사람.나이 = 25;
+사람.이름 = '홍길동';
+사람.먹다 = () => console.log("먹다");
+사람.자다 = () => console.log("자다");
+</code>
+</pre>
+
+{}로 객체를 선언했던 부분을 new Object()로 변경만 했습니다. 정확하게 동일하게 작동합니다. 
+
+여기서 Object는 무엇일까요? 
+
+<br>
+<img alt="스크린샷 2023-01-31 17 19 46" src="https://user-images.githubusercontent.com/31645195/215705527-1c89a8d1-f866-4e29-9915-6e5a41e3b8be.png">
+<br>
+
+Object는 함수입니다. Object라는 함수와 new라는 키워드가 만나서 객체를 생성하고 있습니다. 
+
+따라서 여기서 Object는 객체를 생성하는 생성자 함수로 사용된 것입니다. 
+
+JavaScript에서는 다음과 같이 일반 함수를 사용하여 객체를 생성하는 방법도 있습니다. 
+
+<pre>
+<code class="hljs javascript">function 사람 () {
+  this.나이 = 25;
+  this.이름 = '홍길동';
+  this.먹다 = () => console.log("먹다");
+  this.자다 = () => console.log("자다");
+}
+
+const 나 = new 사람();
+</code>
+</pre>
+
+<br>
+<img alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215768467-2de940f0-f2de-4d96-a2ea-b4ee087a6177.png">
+<br>
+
+앞서 Object가 함수이고 new 키워드와 함께 쓰였던 것처럼 `사람`이라는 함수를 정의하여 객체를 생성할 수 있습니다. 
+
+즉, 위의 `사람`함수와 같이 객체를 생성할 때 사용된 함수를 객체 생성자가 됩니다. 
+
+이제 객체 생성자를 파악했으니 MDN에서 말하고 있는 것처럼 생성자의 프로토타입을 확인해보겠습니다. 
+
+프로토타입에 접근하기 위해서 getPrototypeOf 메서드를 사용하겠습니다. 
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215823028-0b85d734-6c1b-4991-8222-42381ecea5b6.png">
+<br>
+
+`나`라는 인스턴스를 생성할 때 사용했던 `사람`이라는 함수가 prototype으로 나옵니다.
+
+따라서 `나`가 상속받는 속성과 메서드들은 `사람`이라는 함수로부터 왔다는 것을 알 수 있습니다. 
+
+---
+
+## 2. Prototype Chain으로
+
+위에서 `사람` 함수를 생성하자마자 콘솔을 찍어보면 바로 내부에 Prototype이 생성되어있는 것을 확인할 수 있습니다. 
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215823783-6ecc201b-1659-455d-8c05-0e1b0554a1e0.png">
+<br>
+
+앞서 그림에서 함수를 선언하고 바로 객체를 생성하는 것이 아니라 표현되지 않은 과정이 하나 숨어있습니다.
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215778599-4d34390b-bf14-40af-b6f5-ecb655669774.png">
+<br>
+
+함수는 선언되자마자 해당 함수의 Prototype을 생성합니다. 또한 해당 함수를 생성자 함수로 하여 객체를 생성하게 되면 Prototype을 참조하여 속성들을 이어받게 됩니다. 
+
+이처럼 함수와 함께 생성된 프로토타입을 Prototype Property 라고 부르고 다음과 같이 접근합니다. 
+
+EX) `사람.prototype`
+
+
+한편, 인스턴스에서 확인할 수 있는 원본 객체의 프로토타입을 Prototype Link 라고 부르고 `__proto__` 로 접근할 수 있습니다. 
+
+EX) `나.__proto__`
+
+
+JavaScript는 속성값을 읽을 때 해당 값이 존재하지 않을 경우, 상위 Prototype에서 동일한 이름의 속성을 찾는 방식으로 동작합니다.
+이러한 참조 관계를 Prototype Chain이라고 합니다. 
+만약 `나` 라는 객체에서 완전 엉뚱한 메서드를 호출하면 어떻게 될까요?
+`나.놀기`를 호출한 결과는 다음과 같이 undefined 로 나오게 됩니다. 
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215813909-4440cc3c-667d-49e9-ae48-a585d22dbfac.png">
+<br>
+
+왜냐하면 `놀기`라는 필드나 메서드가 `나`에 존재하지 않기 때문입니다. 
+다음에는 hasOwnProperty 를 호출해본 결과입니다. 
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215813992-5cb71857-c309-4e7b-a9a4-2e90bedab513.png">
+<br>
+
+콘솔창에 나온 것처럼 함수가 존재하는 것을 확인할 수 있습니다. 
+이는 hasOwnProperty라는 값이 Object 객체에 정의되어 있기 때문입니다. 
+메서드의 호출은 나라는 객체에서 진행되었지만 해당 속성이 객체 내부에 존재하지 않았기 때문에 상위 Prototype에 동일한 속성에 접근하게 됩니다. 하지만 `사람`이라는 함수에도 해당 부분이 존재하지 않기 떄문에 그의 상위 Prototype인 Object에 있는 값을 사용하게 됩니다. 
+
+다시 `놀기` 라는 키값으로 접근했을 때를 살펴보면, 해당 값은 상위로 계속 올라가도 존재하지 않기 때문에 Object의 상위 Prototype인 null 값에 이르러서 undefined 를 내보냅니다. 두 상황을 그림으로 간단하게 표현해보면 다음과 같습니다. 
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215829817-1025a058-aa03-47b7-ab45-ca9bf98a1483.png">
+*상위 Prototype으로 계속 올라가면서 값이 존재하는지 확인합니다*
+<br>
+
+이러한 Prototype Chain 덕분에 객체들이 다른 객체의 값을 상속받을 수 있습니다. 
+
+---
+
+## 3. Prototype 과 Class 의 상속 
+
+ES6 에서 추가된 Class 문법으로 객체를 생성하면 다음과 같습니다.
+
+<pre>
+<code class="hljs javascript">class 사람 {
+
+  constructor (이름, 나이) {
+    this.이름 = 이름;
+    this.나이 = 나이;
+  }
+
+  먹다 = () => console.log("먹다");
+  자다 = () => console.log("자다");
+}
+</code>
+</pre>
+
+이제 새로운 하위 Class를 만들어서 `사람` Class를 상속해보겠습니다. 
+
+<pre>
+<code class="hljs javascript">class 학생 extends 사람 {
+  놀기 = () => console.log("놀기");
+}
+
+const 나 = new 학생('홍길동', 25);
+console.log(나); 
+// 학생 {이름: '홍길동', 나이: 25, 먹다: ƒ, 자다: ƒ, 놀기: ƒ}
+</code>
+</pre>
+
+`사람`을 extends 한 `학생` 클래스를 사용하면 위와 같이 두 클래스 내부에 있는 모든 필드와 메서드를 가진 객체를 생성할 수 있습니다. 
+
+흔히들 Class 문법을 Synthetic Sugar 라고 부르는 이유는 이러한 동작을 Prototype 과 Object 내장 함수인 create를 사용하여 동일하게 수행할 수 있기 때문입니다. 
+
+
+<pre>
+<code class="hljs javascript">function 사람 (이름, 나이) {
+  this.이름 = 이름;
+  this.나이 = 나이;
+
+  this.먹다 = () => console.log("먹다");
+  this.자다 = () => console.log("자다");
+}
+
+function 학생 (이름, 나이) {
+  사람.call(this, 이름, 나이); // 1
+}
+
+학생.prototype = Object.create(사람.prototype); // 2
+학생.prototype.constructor = 학생; // 3
+학생.prototype.놀기 = function () { // 4
+  console.log("놀기");
+}
+</code>
+</pre>
+
+한 줄 씩 설명해보면, 
+
+1. Function의 메서드인 call를 통해 실행 컨텍스트를 `학생` 함수로 변경하고 `사람` 함수를 호출합니다. 즉, 학생 객체를 생성하기 위해 상속하고자 하는 부모 클래스(혹은 함수)의 생성자 함수를 호출합니다.
+2. `사람`의 prototype을 갖는 새로운 객체를 `학생` prototype에 저장합니다. 학생 클래스가 사람 클래스의 필드와 메서드 정보를 알 수 있게 합니다. 
+3. 2에서 prototype 을 몽땅 복제했기 때문에 생성자 함수까지 `사람` 함수를 가리키는 상태이므로 `학생` 함수를 다시 생성자 함수로 지정합니다. 
+4. `학생` 함수만의 새로운 메서드를 prototype에 저장합니다.
+
+다시 그림으로 살펴보겠습니다. 
+
+
+<br>
+<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215849710-60695cc8-64a2-4421-a11f-e88f112ccf23.png">
+<br>
+
+---
+
+## 4. 맺으며
+
+Class 키워드를 사용하지 않을 경우 같은 기능을 만들기 위해서 꽤 많은 코드를 작성해야 하는 것을 알 수 있습니다. 객체 상속 시 불필요하게 반복되는 코드가 많이 발생할 수 있기 때문에 Class 문법을 사용하는 것이 좋은 선택이 될 것이라 생각합니다. 다만, 내부적으로 Prototype으로 인해 동일하게 작동한다는 것과 prototype 간의 참조가 어떻게 이루어지고 있는지 아는 것도 JavaScript를 이해하는 데에 도움이 된다고 생각합니다. 
+
+한편, 이러한 개념들을 이해하기 위해서는 단편적으로 Prototype에 대해서만 학습하기보다는 실행 컨텍스트와 this와 같은 주변 지식도 함께 필요하다는 것을 느꼈습니다. 물론 각각의 내용들이 방대하기 때문에 추후에 이어서 정리해보도록 하겠습니다. 
+
+---
+
+[참고]
+
+- [MDN - Object prototypes](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes)
+
+- [MDN - Object() constructor](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/Object)
+
+- [[JS 프로토타입] 자바스크립트의 프로토타입 훑어보기](https://evan-moon.github.io/2019/10/23/js-prototype/)
+
+- [자바스크립트는 왜 프로토타입을 선택했을까](https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42)
+
+- [[Javascript] 프로토타입과 프로토타입 체인](https://iamsjy17.github.io/javascript/2019/06/10/js33_17_prototype.html)

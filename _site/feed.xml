@@ -6,9 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 31 Dec 2022 18:26:44 +0900</pubDate>
-    <lastBuildDate>Sat, 31 Dec 2022 18:26:44 +0900</lastBuildDate>
+    <pubDate>Wed, 01 Feb 2023 03:40:32 +0900</pubDate>
+    <lastBuildDate>Wed, 01 Feb 2023 03:40:32 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[JavaScript] JavaScript 의 Prototype 에 대해서</title>
+        <description>&lt;h1 id=&quot;javascript-의-prototype-에-대해서&quot;&gt;JavaScript 의 Prototype 에 대해서&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-javascript-특징-중-하나인-prototype-에-대한-지식을-정리합니다&quot;&gt;💡 JavaScript 특징 중 하나인 Prototype 에 대한 지식을 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-객체와-prototype&quot;&gt;1. 객체와 Prototype&lt;/h2&gt; &lt;blockquote&gt; &lt;p&gt;Javascript에서는 객체를 상속하기 위하여 프로토타입이라는 방식을...</description>
+        <pubDate>Tue, 31 Jan 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/javascript/2023/01/31/javascript-prototype.html</link>
+        <guid isPermaLink="true">http://localhost:4000/javascript/2023/01/31/javascript-prototype.html</guid>
+        
+        <category>javascript</category>
+        
+        <category>prototype</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
     
       <item>
         <title>[LookingBack] 2022년 돌아보기 - 월별 일정을 중심으로</title>

@@ -6,9 +6,27 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Feb 2023 10:37:11 +0900</pubDate>
-    <lastBuildDate>Thu, 09 Feb 2023 10:37:11 +0900</lastBuildDate>
+    <pubDate>Sat, 25 Feb 2023 01:26:43 +0900</pubDate>
+    <lastBuildDate>Sat, 25 Feb 2023 01:26:43 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[Electron] React 웹 앱을 데스크탑 앱으로 만들어보기</title>
+        <description>&lt;h1 id=&quot;react-웹-앱을-데스크탑-앱으로-만들어보기&quot;&gt;React 웹 앱을 데스크탑 앱으로 만들어보기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-react로-만들었던-프로젝트를-electron으로-감싸는-과정과-발생한-에러에-대해서-다룹니다&quot;&gt;💡 React로 만들었던 프로젝트를 Electron으로 감싸는 과정과 발생한 에러에 대해서 다룹니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-electron-도입-배경&quot;&gt;1. Electron 도입 배경&lt;/h2&gt; &lt;p&gt;&lt;a href=&quot;https://iyu88.github.io/deployment/2023/02/09/aws-ec2-deployment.html&quot;&gt;저번 포스트&lt;/a&gt;에서 등장했던...</description>
+        <pubDate>Fri, 24 Feb 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/electron/2023/02/24/electron.html</link>
+        <guid isPermaLink="true">http://localhost:4000/electron/2023/02/24/electron.html</guid>
+        
+        <category>electron</category>
+        
+        <category>react</category>
+        
+        <category>error</category>
+        
+        
+        <category>Electron</category>
+        
+      </item>
     
       <item>
         <title>[AWS] Amazon EC2 를 사용해서 프로젝트 배포하기 - 사진으로 보는 튜토리얼</title>

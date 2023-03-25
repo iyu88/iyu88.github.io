@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [React] 디자인 시스템에 Compound Component Pattern 적용해보기
+  </title>
+  <meta name="description" content="디자인 시스템에 Compound Component Pattern 적용해보기">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/react/2023/03/25/react-compound-component-pattern.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+</head>
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [React] 디자인 시스템에 Compound Component Pattern 적용해보기
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        March 25, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/React">
+          React</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="디자인-시스템에-compound-component-pattern-적용해보기">디자인 시스템에 Compound Component Pattern 적용해보기</h1>
+
+<blockquote>
+  <h3 id="-디자인-시스템을-만들어가면서-react의-합성-컴포넌트-패턴을-사용하여-tabs-컴포넌트를-만들었던-내용을-정리합니다">💡 디자인 시스템을 만들어가면서 React의 합성 컴포넌트 패턴을 사용하여 Tabs 컴포넌트를 만들었던 내용을 정리합니다.</h3>
+</blockquote>
+
+<h2 id="1-배경">1. 배경</h2>
+
+<p>지난 2월 초부터 부스트캠프를 수료한 동료 프론트엔드 개발자분들과 의기투합하여 함께 디자인 시스템을 만들자는 원대한 목표를 가지고 ‘차가운 디자인 시스템 (Cold Design System, 이하 <code class="language-plaintext highlighter-rouge">CDS</code>)’을 만들어 가고 있습니다. React 앱에서 편리하게 사용할 수 있도록 라이브러리 차원에서 지원해야 하는 각 컴포넌트의 역할을 정의하고 실제로 사용하는 상황을 고려하며 여러 컴포넌트를 완성해가고 있습니다.</p>
+
+<p>프로젝트 초기에 구현한 컴포넌트들은 일반 텍스트를 표시하는 <code class="language-plaintext highlighter-rouge">Typography</code>, button 태그 역할을 하는 <code class="language-plaintext highlighter-rouge">Button</code>처럼 비교적 단순한 컴포넌트들과 여러 요소를 감싸는 데에 사용하는 <code class="language-plaintext highlighter-rouge">Container</code>, ‘display: flex’가 적용된 요소를 선언적으로 사용할 수 있는 <code class="language-plaintext highlighter-rouge">Flexbox</code> 등의 Layout을 구현했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227597943-548b5765-abc6-43f4-878f-fe13d83d4a7c.png" />
+<em>Typography 컴포넌트</em>
+<br /></p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227598499-a1611577-e63d-4485-8c4d-d0d48655a8da.png" />
+<em>Button 컴포넌트</em>
+<br /></p>
+
+<p>개발이 점차 진행되면서 디자인 시스템에서 제공해야 하는 컴포넌트들의 복잡도도 올라가게 되었습니다. 가령, 아래 Carousel처럼 비교적 복잡도가 높은 컴포넌트는 어떻게 구현해야 할지 고민하게 되었습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227600771-db6b4f93-5f96-4e4d-b519-999dd521555f.png" />
+<em>Carousel [출처:https://store.steampowered.com/]</em>
+<br /></p>
+
+<p>이러한 컴포넌트들을 구현하기 위해서 선택한 방법인 <code class="language-plaintext highlighter-rouge">Compound Component Pattern</code>(합성 컴포넌트 패턴)에 대해서 알아보고, 이를 사용하여 CDS의 Tabs 컴포넌트를 구현한 과정에 대해서 소개하겠습니다.</p>
+
+<p>*CDS 기술 스택: React, TypeScript, Emotion, Storybook, Vite</p>
+
+<p><br /></p>
+
+<h2 id="2-compound-component-pattern">2. Compound Component Pattern</h2>
+
+<p>Compound Component Pattern을 소개하고 있는 수많은 글 중에서 <a href="https://betterprogramming.pub/compound-component-design-pattern-in-react-34b50e32dea0">이 글</a>에서는 이렇게 설명하고 있습니다.</p>
+
+<blockquote>
+  <p>Compound components are a React pattern that provides an expressive and flexible way for a parent component to communicate with its children, while expressively separating logic and UI.</p>
+</blockquote>
+
+<p>서브(자식) 컴포넌트들이 메인(부모) 컴포넌트 내부의 상태를 공유하면서 비지니스 로직과 사용자 인터페이스와 관련된 부분을 구분하는 React 패턴입니다. 다시 말해, 합성 컴포넌트 패턴은 여러 개의 작은 컴포넌트들이 각각의 역할을 분담하도록 하고 이를 조립하여 하나의 큰 컴포넌트를 만드는 것이라고 할 수 있습니다.</p>
+
+<p>합성 컴포넌트 패턴의 장점은 컴포넌트를 사용할 때 개발자가 필요로 하는 서브 컴포넌트만 합성하여 사용할 수 있기 때문에 개발자에게 자율성을 줄 수 있다는 것과 하나의 컴포넌트 안에 수많은 Props를 한꺼번에 전달하지 않고 서브 컴포넌트에 적절히 분배하여 관심사를 분리할 수 있다는 것입니다.</p>
+
+<p>반면, UI에 대한 자유도가 높은만큼 컴포넌트의 의도대로 합성되지 않을 수도 있고 합성 컴포넌트 패턴을 사용하지 않았을 때보다 JSX 소스 코드 길이가 길어질 수 있다는 단점도 있습니다.</p>
+
+<p>따라서 지금처럼 라이브러리를 만드는 입장에서는 사용자(개발자)에게 어떤 인터페이스를 열어줄 것인지, 어떤 옵션을 선택할 수 있게 할 것인지 충분히 고민하고 구현해야 합니다. 이어서 앞서 언급했던 것처럼 서브 컴포넌트들이 부모 컴포넌트의 상태를 공유하는 방법과 관련하여 React의 Context API에 대해서 간략하게 살펴보겠습니다.</p>
+
+<p><br /></p>
+
+<h2 id="3-context-api">3. Context API</h2>
+
+<p>React에서 제공하는 Context API는 <code class="language-plaintext highlighter-rouge">Props Drilling</code>(상태를 공유하기 위해서 해당 상태가 필요하지 않은 컴포넌트들도 불필요하게 상태 값을 받아야 하는 문제)을 방지하면서 children 요소들이 상태를 공유할 수 있도록 해줍니다. 이를 합성 컴포넌트에서 사용하는 경우를 생각해보면 공유해야 하는 값은 Context를 사용하여 부모 컴포넌트 내부의 children들이 공유받도록 구현하고, 그렇지 않은 값은 각각의 자식 컴포넌트가 Props로 받아서 처리하게 됩니다.</p>
+
+<p>만약 아래와 같은 select-option 태그를 합성 컴포넌트 패턴으로 만든다면 현재 선택된 option에 대한 정보는 전체 컴포넌트에서 공유해야 하기 때문에 Context API로 관리하고, 나머지 개별적인 option 정보는 자식 컴포넌트가 Props로 전달받아 자체적으로 관리하는 방식으로 구현할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">"pets"</span> <span class="na">id=</span><span class="s">"pet-select"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"dog"</span><span class="nt">&gt;</span>Dog<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"cat"</span><span class="nt">&gt;</span>Cat<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"hamster"</span><span class="nt">&gt;</span>Hamster<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"parrot"</span><span class="nt">&gt;</span>Parrot<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"spider"</span><span class="nt">&gt;</span>Spider<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"goldfish"</span><span class="nt">&gt;</span>Goldfish<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="c">&lt;!-- 출처: https://developer.mozilla.org/ko/docs/Web/HTML/Element/select --&gt;</span></code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="4-tabs-컴포넌트">4. Tabs 컴포넌트</h2>
+
+<p>간단하게 Compound Component Pattern과 Context API에 대해서 알아보았습니다. 여기부터는 두 개념을 적용하여 Tabs 컴포넌트를 만들어 보겠습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227698050-cf8f5054-e630-4b28-bc9c-469ab8dc21f9.png" />
+<em>사진처럼 상단 메뉴를 누르면 하단에 내용이 바뀌는 컴포넌트를 만들 예정입니다.</em>
+<br /></p>
+
+<p>먼저 대략적으로 어떤 스펙으로 만들 것인지 생각해봅니다.</p>
+
+<h4 id="4-1-스펙-정리">4-1. 스펙 정리</h4>
+
+<p>크게 <code class="language-plaintext highlighter-rouge">기능</code>과 <code class="language-plaintext highlighter-rouge">디자인</code>으로 나누어 보았습니다.</p>
+
+<p>기능은 컴포넌트 내부에서 관리해야 하는 상태나 지원해야 하는 비지니스 로직과 관련한 부분이고, 디자인은 사용자에게 선택지를 제공하여 어떤 형태로 보여줄 것인지와 관련한 부분입니다.</p>
+
+<ol>
+  <li>기능: Tabs에서 사용자(개발자)가 기대하는 요소들
+    <ul>
+      <li>현재 선택된 Tab 정보</li>
+      <li>Tab 비활성화 기능</li>
+      <li>마우스로 클릭하거나 키보드로 이동</li>
+      <li>Tab이 많을 경우 스크롤 가능하도록 구현</li>
+      <li>Tab에 아이콘도 넣을 수 있도록 구현</li>
+    </ul>
+  </li>
+  <li>디자인: Tabs에서 사용자(개발자)가 선택 가능한 옵션들
+    <ul>
+      <li>Tab의 기본 생김새</li>
+      <li>Tab의 너비를 꽉 차게 배치할 수 있는지 여부</li>
+    </ul>
+  </li>
+</ol>
+
+<p>위 요소를 생각하면서 컴포넌트를 구현해보겠습니다.</p>
+
+<p><br /></p>
+
+<h4 id="4-2-context-생성">4-2. Context 생성</h4>
+
+<p>먼저 Tabs의 각 부분을 나누어 살펴보겠습니다. 상단에는 사용자가 선택할 수 있는 Tab 선택지들이 존재하고 하단에는 선택한 Tab에 대응하는 내용이 표시되어야 합니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227698297-a1812a18-591e-4c51-aedb-63548b1bcafa.png" />
+<em>상단과 하단이 각각 ‘선택할 수 있는 영역’과 ‘내용이 표시되는 영역’으로 구분됩니다.</em>
+<br /></p>
+
+<p>사용자가 선택한 Tab 정보가 상단과 하단에 모두 영향을 주기 때문에 해당 데이터는 Tabs 컴포넌트 내에서 공유되어야 하는 데이터가 됩니다. 선택한 Tab 정보를 담는 <code class="language-plaintext highlighter-rouge">selectedIndex 상태</code>를 공유하는 Tabs 컴포넌트를 Context API를 사용하여 만들어보겠습니다.</p>
+
+<p>*실제 코드와 달리 타입과 CSS 속성이 제외된 코드를 명기했습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">import</span> <span class="p">{</span> <span class="nx">createContext</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">TabsContext</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">Tabs</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">defaultValue</span><span class="p">,</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">selectedIndex</span><span class="p">,</span> <span class="nx">setSelectedIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">defaultValue</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">providerValue</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">selectedIndex</span><span class="p">,</span> <span class="nx">setSelectedIndex</span> <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">TabsContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">providerValue</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Container</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">Container</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">TabsContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>맨 처음에 활성화되어 있는 Tab 정보를 defaultValue로 받아서 useState로 관리합니다.</p>
+
+<p>이제 위에서 상단과 하단으로 나누었던 부분을 대략적인 JSX 구조로 나타내보겠습니다. 하위 컴포넌트의 이름은 MDN의 tab 접근성 가이드를 참고하여 명명했습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">List</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>첫번째 Trigger<span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>두번째 Trigger<span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>세번째 Trigger<span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">List</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>첫번째 Panel<span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>두번째 Panel<span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>세번째 Panel<span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>이제 각각의 부분을 실제 컴포넌트로 분리하고 개별 컴포넌트가 관리해야 하는 데이터를 Props로 전달 받을 수 있도록 구현합니다.</p>
+
+<p>*이제부터 클릭 가능한 개별 Tab 영역을 <code class="language-plaintext highlighter-rouge">Trigger</code>라는 이름으로 부르겠습니다.</p>
+
+<p><br /></p>
+
+<h4 id="4-3-tabs---상위-컴포넌트">4-3. Tabs - 상위 컴포넌트</h4>
+
+<p>상위 컴포넌트인 Tabs에서는 디자인적인 요소를 결정하는 Props를 추가적으로 받습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">Tabs</span> <span class="o">=</span> <span class="p">({</span>
+  <span class="nx">defaultValue</span><span class="p">,</span>
+  <span class="nx">variant</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">underline</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">isFitted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">children</span><span class="p">,</span>
+<span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">selectedIndex</span><span class="p">,</span> <span class="nx">setSelectedIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">defaultValue</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">providerValue</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">variant</span><span class="p">,</span>
+    <span class="nx">isFitted</span><span class="p">,</span>
+    <span class="nx">selectedIndex</span><span class="p">,</span>
+    <span class="nx">setSelectedIndex</span><span class="p">,</span>
+  <span class="p">};</span>
+
+  <span class="c1">// (생략)</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">variant</code>는 underline과 rounded 중 하나를 선택할 수 있도록 하고 <code class="language-plaintext highlighter-rouge">isFitted</code>는 Trigger들의 너비를 부모 요소 너비에 딱 맞게 들어가도록 넓힐 것인지 여부를 boolean 값으로 결정합니다. 각각의 props에 대해서 기본값도 지정해줍니다.</p>
+
+<p><br /></p>
+
+<h4 id="4-4-list---하위-컴포넌트">4-4. List - 하위 컴포넌트</h4>
+
+<p>List 컴포넌트는 내부에 Trigger들을 위치시키는 Wrapper 컴포넌트로 사용합니다. 따라서 CDS에서 배치를 도와주는 간단한 Layout 컴포넌트들만 가져와서 사용했습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Container</span> <span class="na">overflowX</span><span class="p">=</span><span class="s">"auto"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Flexbox</span> <span class="na">justifyContent</span><span class="p">=</span><span class="s">"flex-start"</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">Flexbox</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Container</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br /></p>
+
+<h4 id="4-5-trigger---하위-컴포넌트">4-5. Trigger - 하위 컴포넌트</h4>
+
+<p>가장 중요한 Trigger 컴포넌트입니다. 각각의 Trigger는 고유한 <code class="language-plaintext highlighter-rouge">value</code>를 받을 수 있도록 하여 Trigger가 선택되었을 때 동일한 value를 가진 Panel이 활성화되도록 구현할 것입니다. 또한 Trigger에 글자와 아이콘 등을 표시할 수 있도록 <code class="language-plaintext highlighter-rouge">text</code>와 <code class="language-plaintext highlighter-rouge">icon</code>을 받습니다. 추가로 비활성화된 Trigger임을 판단하기 위해서 <code class="language-plaintext highlighter-rouge">disabled</code> 값을 받습니다. 기본값은 false로 지정하여 비활성화되어야 하는 Trigger에서만 disabled 속성을 선언하도록 했습니다. 최종적인 Trigger의 Props는 아래처럼 정의했습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">Trigger</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">icon</span><span class="p">,</span> <span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TabsContext</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">value</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">disabled</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">icon</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Icon</span>
+          <span class="na">source</span><span class="p">=</span><span class="si">{</span><span class="nx">icon</span><span class="si">}</span>
+          <span class="na">color</span><span class="p">=</span><span class="si">{</span><span class="nx">isActive</span> <span class="p">?</span> <span class="nx">primary100</span> <span class="p">:</span> <span class="nx">black</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+      <span class="p">)</span><span class="si">}</span>
+      <span class="si">{</span><span class="nx">text</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"body"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">text</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Trigger가 현재 선택되었는지 판단하기 위해서 Context의 selectedIndex와 value가 동일한지 여부를 <code class="language-plaintext highlighter-rouge">isActive</code> 변수에 저장하고 스타일을 적용할 때 사용할 수 있습니다.</p>
+
+<p>한편, Tabs에서 받았던 variant 값에 따라 Trigger에 서로 다른 스타일을 반영하기 위해 다음 객체들을 이용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Trigger</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="nx">themeColor</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useTheme</span><span class="p">();</span> <span class="c1">// 테마를 가져오기 위한 커스텀 훅 </span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">primary100</span><span class="p">,</span> <span class="nx">gray100</span><span class="p">,</span> <span class="nx">black</span><span class="p">,</span> <span class="nx">white</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">themeColor</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">underlineStyle</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">borderColor</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">context</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">value</span> <span class="p">?</span> <span class="nx">primary100</span> <span class="p">:</span> <span class="nx">gray100</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">borderRadius</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">borderBottomWidth</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2px</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">borderBottomStyle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">solid</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">marginBottom</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-2px</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">}</span> 
+
+<span class="kd">const</span> <span class="nx">roundedStyle</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">border</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">context</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="s2">`2px </span><span class="p">${</span><span class="nx">gray100</span><span class="p">}</span><span class="s2"> solid`</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">borderRadius</span><span class="p">:</span> <span class="dl">'</span><span class="s1">10px</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">borderBottomLeftRadius</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">borderBottomRightRadius</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">borderBottomColor</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">white</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">marginBottom</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-2px</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">}</span> 
+
+<span class="kd">const</span> <span class="nx">triggerStyles</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">underline</span><span class="p">:</span> <span class="nx">underlineStyle</span><span class="p">,</span>
+  <span class="na">rounded</span><span class="p">:</span> <span class="nx">roundedStyle</span><span class="p">,</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>Props에 따라 속성들이 잘 적용된 것을 확인할 수 있습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227699903-a190ff72-6163-4204-aa9d-8b407ade3ce5.png" />
+<em>variant 값이 underline일 때(상단)와 rounded일 때(하단)</em>
+<br /></p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227699914-568aa00f-7b2c-4caa-b64b-b81c21b0a20d.png" />
+<em>isFitted 값이 true인 상태에서의 underline과 rounded</em>
+<br /></p>
+
+<p><br /></p>
+
+<p>구현 스펙의 기능 측면에 명시했듯이 disabled인 Trigger를 제외한 나머지 Trigger는 마우스로 클릭하거나 키보드의 특정 키를 눌러서 이동할 수 있어야 합니다. 이를 위해서 onClick에 등록할 onSelect 함수와 onKeyDown에 등록할 onPressArrow 함수를 정의합니다.</p>
+
+<p>키보드 방향키로 좌우 Trigger를 이동할 때, 현재 Trigger의 형제 요소를 탐색하기 위해서 <code class="language-plaintext highlighter-rouge">findFutureTrigger</code> 함수를 정의하여 호출합니다. 화살표 방향에 따라 Element의 <code class="language-plaintext highlighter-rouge">nextSiblingElement</code> 혹은 <code class="language-plaintext highlighter-rouge">previousSiblingElement</code> 필드에 접근하여 다음 Trigger를 찾아냅니다. disabled인 Trigger를 찾게 된다면 같은 방향으로 이어서 탐색합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Trigger</span>
+
+<span class="kd">const</span> <span class="nx">onSelect</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">disabled</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// disabled이면 early return</span>
+  <span class="nx">setSelectedIndex</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> 
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">onPressArrow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">currentTrigger</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+
+  <span class="c1">// key 정보와 현재 Trigger 전달</span>
+  <span class="kd">const</span> <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">findFutureTrigger</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="nx">currentTrigger</span><span class="p">);</span> 
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">futureTrigger</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">futureValue</span> <span class="o">=</span> <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="dl">'</span><span class="s1">triggerValue</span><span class="dl">'</span><span class="p">];</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">futureValue</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+  <span class="nx">setSelectedIndex</span><span class="p">(</span><span class="nx">futureValue</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">findFutureTrigger</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">currentTrigger</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">siblingProp</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NEXT_KEY</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">nextElementSibling</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">PREV_KEY</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">previousElementSibling</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">})(</span><span class="nx">key</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">siblingProp</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="kd">let</span> <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">currentTrigger</span><span class="p">[</span><span class="nx">siblingProp</span><span class="p">];</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">futureTrigger</span> <span class="o">&amp;&amp;</span> <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">futureTrigger</span><span class="p">[</span><span class="nx">siblingProp</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">futureTrigger</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">return</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">button</span> 
+    <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">disabled</span><span class="si">}</span>
+    <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">onSelect</span><span class="si">}</span>
+    <span class="na">onKeyDown</span><span class="p">=</span><span class="si">{</span><span class="nx">onPressArrow</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="err">!--</span> <span class="err">(생략)</span> <span class="err">--</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+)</code></pre></figure>
+
+<p><br /></p>
+
+<h4 id="4-6-panel---하위-컴포넌트">4-6. Panel - 하위 컴포넌트</h4>
+
+<p>다음은 선택된 Trigger에 대응하는 내용(컴포넌트)이 렌더링되는 Panel 부분입니다. List와 비슷하게 Panel은 children Props의 Wrapper 역할을 합니다. Trigger처럼 <code class="language-plaintext highlighter-rouge">value</code>를 받아서 selectedIndex와 동일한 Panel이 렌더링되도록 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">Panel</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TabsContext</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Container</span>
+      <span class="na">css</span><span class="p">=</span><span class="si">{</span><span class="nx">css</span><span class="s2">`
+        padding: 1rem;
+        display: </span><span class="p">${</span><span class="nx">context</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">value</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">block</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">}</span><span class="s2">;
+      `</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nc">Container</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span></code></pre></figure>
+
+<hr />
+
+<p>실제 동작을 확인하기에 앞서 Tabs 컴포넌트의 각 속성에 하위 컴포넌트들을 등록해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Tabs</span><span class="p">.</span><span class="nx">List</span> <span class="o">=</span> <span class="nx">List</span><span class="p">;</span>
+<span class="nx">Tabs</span><span class="p">.</span><span class="nx">Trigger</span> <span class="o">=</span> <span class="nx">Trigger</span><span class="p">;</span>
+<span class="nx">Tabs</span><span class="p">.</span><span class="nx">Panel</span> <span class="o">=</span> <span class="nx">Panel</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Tabs</span><span class="p">;</span></code></pre></figure>
+
+<p>최종적으로 아래와 같이 JSX를 구성하고 렌더링 결과를 확인해보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Tabs</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">'1'</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">List</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span> <span class="na">value</span><span class="p">=</span><span class="s">"1"</span> <span class="na">text</span><span class="p">=</span><span class="s">"첫번째 탭"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span> <span class="na">value</span><span class="p">=</span><span class="s">"2"</span> <span class="na">text</span><span class="p">=</span><span class="s">"두번째 탭"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Trigger</span> <span class="na">value</span><span class="p">=</span><span class="s">"3"</span> <span class="na">text</span><span class="p">=</span><span class="s">"세번째 탭"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">List</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span> <span class="na">value</span><span class="p">=</span><span class="s">"1"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">DUMMY_STR_1</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span> <span class="na">value</span><span class="p">=</span><span class="s">"2"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">DUMMY_STR_2</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span> <span class="na">value</span><span class="p">=</span><span class="s">"3"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">DUMMY_STR_3</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">.</span><span class="nc">Panel</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Tabs</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227709794-2c971a1c-f274-4fb8-a9de-7d9a5f3a4213.gif" />
+<em>마우스, 키보드 화살표로 움직일 수 있습니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h2 id="5-기능-개선">5. 기능 개선</h2>
+
+<p>Tabs의 기본적인 형태를 구현하긴 했지만 조금 더 완성도 있는 컴포넌트를 만들고 싶습니다.</p>
+
+<p>보완할만한 기능들을 추가로 정의하고 Tabs 컴포넌트를 개선하고자 합니다.</p>
+
+<p><br /></p>
+
+<h4 id="5-1-trigger-선택-시-스크롤-애니메이션">5-1. Trigger 선택 시 스크롤 애니메이션</h4>
+
+<p>아래 모바일 어플리케이션 GIF처럼 윈도우 너비가 좁거나 Trigger 개수가 많아 스크롤이 생긴 상황에서 사용자가 선택한 Trigger가 자동으로 좌측으로 이동하는 효과를 주고 싶습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227684976-c76646dd-f6ad-498a-b9a5-660acabe7edb.gif" />
+<em>상단 태그를 선택하면 좌측으로 자동 스크롤됩니다. [출처: 무신사]</em>
+<br /></p>
+
+<p>이를 Tabs에 적용하기 위해서 Element의 내장 함수인 <code class="language-plaintext highlighter-rouge">scrollIntoView</code>를 활용하기로 했습니다.
+마우스 이벤트나 키보드 이벤트가 발생하여 focus할 Trigger를 정상적으로 찾았을 때 해당 Element로 scrollIntoView 메서드를 실행합니다. 이 때, 애니메이션을 주기 위해서 <code class="language-plaintext highlighter-rouge">behavior: smooth</code> 옵션을 포함한 scrollOptions를 인자로 전달합니다.</p>
+
+<p>한편, onPressArrow 함수에서는 직접 DOM 요소를 찾기 때문에 문제없이 scrollIntoView를 호출할 수 있지만 onSelect에서는 그렇지 않습니다. 따라서 useRef를 사용하여 button 태그에 대한 reference를 저장합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">scrollOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">behavior</span><span class="p">:</span> <span class="dl">'</span><span class="s1">smooth</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">block</span><span class="p">:</span> <span class="dl">'</span><span class="s1">nearest</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">inline</span><span class="p">:</span> <span class="dl">'</span><span class="s1">start</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">onSelect</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">disabled</span> <span class="o">||</span> <span class="o">!</span><span class="nx">triggerRef</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+  <span class="nx">setSelectedIndex</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+  <span class="nx">triggerRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">(</span><span class="nx">scrollOptions</span><span class="p">);</span> <span class="c1">// 추가</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">onPressArrow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="nx">KeyboardEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">currentTrigger</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">findFutureTrigger</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="nx">currentTrigger</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">futureTrigger</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">futureValue</span> <span class="o">=</span> <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="dl">'</span><span class="s1">triggerValue</span><span class="dl">'</span><span class="p">];</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">futureValue</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+  <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">(</span><span class="nx">scrollOptions</span><span class="p">);</span> <span class="c1">// 추가</span>
+  <span class="nx">setSelectedIndex</span><span class="p">(</span><span class="nx">futureValue</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">return</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">button</span> 
+    <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="nx">triggerRef</span><span class="si">}</span> <span class="c1">// 추가</span>
+    <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">disabled</span><span class="si">}</span>
+    <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">onSelect</span><span class="si">}</span>
+    <span class="na">onKeyDown</span><span class="p">=</span><span class="si">{</span><span class="nx">onPressArrow</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="err">!--</span> <span class="err">(생략)</span> <span class="err">--</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+)</code></pre></figure>
+
+<p>추가로 예시 GIF처럼 사용자가 좌측에 추가적인 Trigger가 있다는 것을 인지할 수 있도록 <code class="language-plaintext highlighter-rouge">scroll-margin</code> 속성을 추가하여 좌측에 약간의 여백을 확보할 수 있습니다.</p>
+
+<p>최종적으로 아래와 같은 모습으로 만들어졌습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227710008-445f8b75-a7b2-478b-ade3-72ee63f12cc2.gif" />
+<em>부드럽게 잘 스크롤 됩니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h4 id="5-2-접근성-지원">5-2. 접근성 지원</h4>
+
+<p>Tabs 내부에 위치할 하위 컴포넌트들의 이름을 정할 때 MDN 접근성 가이드를 따라서 지은 바 있습니다. 이름만 접근성을 따르는 것이 아니라 실제로 <code class="language-plaintext highlighter-rouge">접근성을 지원하기 위한 여러 가지 HTML 속성</code>을 추가해주었습니다. 이를 위해 사용자가 직접 Tabs 컴포넌트 내부에서 공통적으로 사용할 수 있는 <code class="language-plaintext highlighter-rouge">label</code> 값을 입력할 수 있도록 상위 컴포넌트에서 Props를 추가로 받습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">Tabs</span> <span class="o">=</span> <span class="p">({</span>
+  <span class="nx">label</span><span class="p">,</span> <span class="c1">// 추가</span>
+  <span class="nx">defaultValue</span><span class="p">,</span>
+  <span class="nx">variant</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">underline</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">isFitted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">children</span><span class="p">,</span>
+<span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// (생략)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<p>우선 List에서 적용할 수 있는 접근성 속성들은 다음과 같습니다.</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">role</code>: List 컴포넌트가 tablist 역할이라는 것을 명시합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">aria-label</code>: 현재 List가 무엇을 위한 List인지에 대한 값을 전달합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">aria-orientation</code>: Tabs의 방향을 적어줍니다. 현재는 외부에서 방향을 제어할 수 없기 때문에 고정값으로 수평 방향을 의미하는 ‘horizontal’로 설정합니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">label</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useTabsContext</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Container</span>
+      <span class="na">role</span><span class="p">=</span><span class="s">'tablist'</span>
+      <span class="na">aria-label</span><span class="p">=</span><span class="si">{</span><span class="nx">label</span><span class="si">}</span>
+      <span class="na">aria-orientation</span><span class="p">=</span><span class="s">'horizontal'</span>
+      <span class="na">overflowX</span><span class="p">=</span><span class="s">"auto"</span>
+    <span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="err">!--</span> <span class="err">(생략)</span> <span class="err">--</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Container</span><span class="p">&gt;</span>
+  )
+}</code></pre></figure>
+
+<p><br /></p>
+
+<p>다음으로 Trigger에서 적용할 수 있는 접근성 속성은 다음과 같습니다.</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">role</code>: 사용자가 상호작용하게 되는 tab 역할이라는 것을 명시합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">aria-selected</code>: 현재 선택되었을 경우 true, 아닐 경우 false를 줍니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">aria-controls</code>: 특정 요소가 다른 요소에 변화를 줄 경우, 변화가 일어나는 요소의 Id를 명시합니다. Trigger는 Panel에 변화를 일으키키 때문에 값을 <code class="language-plaintext highlighter-rouge">${label}-panel-${value}</code>로 설정하고 Panel의 Id도 동일하게 설정합니다. 
+  (충분히 유일성이 보장될 수 있도록 임의로 Id를 설정했습니다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">aria-disabled</code>: Trigger가 disabled 상태일 경우 true로 설정합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">tabIndex</code>: MDN 문서에 따르면 Trigger가 focus된 상태에서 키보드 Tab 키를 누르면 다음 Trigger를 focus하는 것이 아니라 Panel 내부로 이동하는 것이 좋다고 합니다. 따라서 선택된 Trigger는 tabIndex 값을 0으로 하고 다른 모든 Trigger들은 -1로 설정합니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">Trigger</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">icon</span><span class="p">,</span> <span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TabsContext</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">value</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">button</span> 
+      <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="nx">triggerRef</span><span class="si">}</span> 
+      <span class="na">id</span><span class="p">=</span><span class="err">`$</span><span class="si">{</span><span class="nx">context</span><span class="p">.</span><span class="nx">label</span><span class="si">}</span><span class="err">-</span><span class="na">trigger-</span><span class="err">$</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="err">`</span>
+      <span class="na">role</span><span class="p">=</span><span class="s">'tab'</span>
+      <span class="na">aria-selected</span><span class="p">=</span><span class="si">{</span><span class="nx">isActive</span><span class="si">}</span>
+      <span class="na">aria-controls</span><span class="p">=</span><span class="err">`$</span><span class="si">{</span><span class="nx">context</span><span class="p">.</span><span class="nx">label</span><span class="si">}</span><span class="err">-</span><span class="na">panel-</span><span class="err">$</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="err">`</span>
+      <span class="na">aria-disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">disabled</span><span class="si">}</span>
+      <span class="na">tabIndex</span><span class="p">=</span><span class="si">{</span><span class="nx">isActive</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="si">}</span>
+      <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">disabled</span><span class="si">}</span>
+      <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">onSelect</span><span class="si">}</span>
+      <span class="na">onKeyDown</span><span class="p">=</span><span class="si">{</span><span class="nx">onPressArrow</span><span class="si">}</span>
+      <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="err">!--</span> <span class="err">(생략)</span> <span class="err">--</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span> 
+  )
+}</code></pre></figure>
+
+<p><br /></p>
+
+<p>마지막으로 Panel에서 적용할 수 있는 접근성 속성입니다.</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">role</code>: tabpanel 역할이라는 것을 명시합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">aria-labelledby</code>: 대응하는 Trigger의 Id를 명시하여 해당 Trigger가 Panel의 라벨 역할을 하도록 참조 관계를 설정합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">tabIndex</code>: Tab 키를 눌렀을 때 Panel 내부로 focus가 이동할 수 있도록 값을 0으로 설정합니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">Panel</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TabsContext</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Container</span>
+      <span class="na">id</span><span class="p">=</span><span class="err">`$</span><span class="si">{</span><span class="nx">context</span><span class="p">.</span><span class="nx">label</span><span class="si">}</span><span class="err">-</span><span class="na">panel-</span><span class="err">$</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="err">`</span>
+      <span class="na">role</span><span class="p">=</span><span class="s">'tabpanel'</span>
+      <span class="na">aria-labelledby</span><span class="p">=</span><span class="err">`$</span><span class="si">{</span><span class="nx">context</span><span class="p">.</span><span class="nx">label</span><span class="si">}</span><span class="err">-</span><span class="na">trigger-</span><span class="err">$</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="err">`</span>
+      <span class="na">tabIndex</span><span class="p">=</span><span class="si">{</span><span class="mi">0</span><span class="si">}</span>
+      <span class="na">css</span><span class="p">=</span><span class="si">{</span><span class="nx">css</span><span class="s2">`
+        padding: 1rem;
+        display: </span><span class="p">${</span><span class="nx">context</span><span class="p">.</span><span class="nx">selectedIndex</span> <span class="o">===</span> <span class="nx">value</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">block</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">}</span><span class="s2">;
+      `</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nc">Container</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br /></p>
+
+<h4 id="5-3-context-null-확인용-커스텀-훅-생성">5-3. Context null 확인용 커스텀 훅 생성</h4>
+
+<p>createContext()에 전달하는 초기값을 null로 설정했기 때문에 useContext()를 사용할 때마다 불필요한 코드가 생겨나게 됩니다. TypeScript를 사용했기 때문에 useContext()의 반환값이 null이 아닌지 항상 확인해주어야 했습니다. 만약 null일 경우 빈 Fragment를 반환하도록 했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227695909-be06deaa-530b-4b27-bca0-b0af26179454.png" />
+<em>Context를 사용하기 위해서 null 여부를 확인하는 반복적인 코드가 신경쓰입니다.</em>
+<br /></p>
+
+<p>이에 대한 해결법을 <a href="https://velog.io/@velopert/react-context-tutorial">다음 블로그</a> 글에서 찾을 수 있었습니다. Context를 사용할 때 null을 확인하는 로직을 커스텀 훅으로 분리하는 방법입니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">useTabsContext</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TabsContext</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">context</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">useTabsContext should be used within Tabs</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">context</span><span class="p">;</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>이를 사용하면 Context 값을 사용하고자 하는 하위 컴포넌트에서 더 이상 반복적인 null 체크를 진행하지 않고 바로 Object destructuring으로 원하는 값을 가져올 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">label</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useTabsContext</span><span class="p">();</span> <span class="c1">// 추가</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="c1">// (생략)</span>
+  <span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="6-보완할-점">6. 보완할 점</h2>
+
+<p>협업의 꽃, 코드 리뷰를 하는 도중에 tabIndex 값 설정과 관련된 질문을 받게 되었고 답변을 달기 위해 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tablist_role">MDN 사이트</a>에서 키 입력과 관련된 내용을 다시 읽다가 놓쳤던 내용을 발견하게 되었습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227697071-b425c590-8cf1-4bb4-8bbd-6705c82d1bbf.png" />
+<em>출처: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tablist_role</em>
+<br /></p>
+
+<p>Trigger를 이동할 때 맨 마지막 Trigger에서는 맨 처음으로 이동해야 하고 반대로 맨 처음 Trigger에서는 맨 마지막으로 이동해야 한다는 것입니다. 즉, 맨 처음과 맨 마지막이 이어져 있는 것처럼 동작해야 한다는 것입니다. 현재는 키보드 방향키로 양끝에 도달하게 되면 더 이상 움직이지 않는 구조입니다. findFutureTrigger 함수를 문서에 적힌 것처럼 작동하도록 업데이트해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kd">const</span> <span class="nx">findFutureTrigger</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">currentTrigger</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">siblingProp</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">NEXT_KEY</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">nextElementSibling</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">PREV_KEY</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">previousElementSibling</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">})(</span><span class="nx">key</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">siblingProp</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="kd">let</span> <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">currentTrigger</span><span class="p">[</span><span class="nx">siblingProp</span><span class="p">];</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">futureTrigger</span> <span class="o">&amp;&amp;</span> <span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">futureTrigger</span><span class="p">[</span><span class="nx">siblingProp</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">futureTrigger</span><span class="p">)</span> <span class="k">return</span> <span class="nx">futureTrigger</span><span class="p">;</span> 
+
+  <span class="c1">// 추가된 코드</span>
+  <span class="kd">const</span> <span class="nx">triggerParent</span> <span class="o">=</span> <span class="nx">currentTrigger</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">triggerParent</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="nx">futureTrigger</span> <span class="o">=</span>
+    <span class="nx">siblingProp</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">nextElementSibling</span><span class="dl">'</span>
+      <span class="p">?</span> <span class="p">(</span><span class="nx">triggerParent</span><span class="p">.</span><span class="nx">firstElementChild</span><span class="p">)</span>
+      <span class="p">:</span> <span class="p">(</span><span class="nx">triggerParent</span><span class="p">.</span><span class="nx">lastElementChild</span><span class="p">);</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">futureTrigger</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">futureTrigger</span> <span class="o">=</span> <span class="nx">futureTrigger</span><span class="p">[</span><span class="nx">siblingProp</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">futureTrigger</span><span class="p">;</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>수정한 코드를 적용하고 나서 테스트해보니 정상적으로 동작하는 것을 확인했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227715573-78395f99-32b8-4843-add6-6f77d5e245b3.gif" />
+<em>시작과 끝을 이동하며 focus할 수 있습니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h2 id="7-맺으며">7. 맺으며</h2>
+
+<p>Compound Component Pattern을 사용하여 Tabs 컴포넌트를 구현할 때 작은 단위로 나누고 각 컴포넌트를 조합하는 방식을 사용했습니다. 실제로 아래와 같이 다양한 형태의 Tabs 를 만들어 낼 수 있습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227734557-d88f11f6-956c-476b-bd7a-8fef57b1d01e.png" />
+<em>아이콘만 사용한 Trigger</em>
+<br /></p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/227734554-5f61c3af-4cbe-499b-bd2d-d1aae0e614f4.png" />
+<em>List를 하단에 배치한 Tabs</em>
+<br /></p>
+
+<p>앞으로도 CDS를 개발하면서 합성 컴포넌트 패턴이 필요한 곳에서 적절하게 도입하며 더 익숙해질 수 있도록 해야겠습니다. 개인적으로 합성 컴포넌트 패턴뿐만 아니라 접근성 관련 속성들을 자세하게 알아보고 적용해볼 수 있었다는 점에서 뜻깊었습니다.</p>
+
+<p>디자인 시스템을 만들면서 추상화에 대해서 생각해보고, 컴포넌트를 사용하는 개발자의 입장을 염두에 두고 개발하는 것이 색다른 경험인 것 같습니다. <code class="language-plaintext highlighter-rouge">CDS 1.0</code> 배포까지 모두 힘내서 개발하면 좋겠습니다. 😊</p>
+
+<hr />
+
+<p>[참고]</p>
+
+<ul>
+  <li>
+    <p><a href="https://betterprogramming.pub/compound-component-design-pattern-in-react-34b50e32dea0">Compound Component Design Pattern in React</a></p>
+  </li>
+  <li>
+    <p><a href="https://javascript.plainenglish.io/5-advanced-react-patterns-a6b7624267a6">5 Advanced React Patterns</a></p>
+  </li>
+  <li>
+    <p><a href="https://chakra-ui.com/docs/components/tabs">chakra-ui / Tabs</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.radix-ui.com/docs/primitives/components/tabs">radix-ui / Tabs</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element/select">MDN - HTML / select</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tab_role">ARIA: tab role</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tablist_role">ARIA: tablist role</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tabpanel_role">ARIA: tabpanel role</a></p>
+  </li>
+  <li>
+    <p><a href="https://velog.io/@velopert/react-context-tutorial">다른 사람들이 안 알려주는 리액트에서 Context API 잘 쓰는 방법</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/c-h-w-h/cds">cds (cold design system)</a></p>
+  </li>
+</ul>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/React">
+        React</a>,&nbsp;<a href="/tag/DesignSystem">
+        DesignSystem</a>,&nbsp;<a href="/tag/CompoundComponent">
+        CompoundComponent</a>,&nbsp;<a href="/tag/Accessibility">
+        Accessibility</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Freact%2F2023%2F03%2F25%2Freact-compound-component-pattern.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-243662455-3', 'auto');
+  ga('send', 'pageview', {
+    'page': '/react/2023/03/25/react-compound-component-pattern.html',
+    'title': '[React] 디자인 시스템에 Compound Component Pattern 적용해보기'
+  });
+</script>
+
+
+  </body>
+
+</html>

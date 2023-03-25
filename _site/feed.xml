@@ -6,9 +6,29 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 11 Mar 2023 23:52:28 +0900</pubDate>
-    <lastBuildDate>Sat, 11 Mar 2023 23:52:28 +0900</lastBuildDate>
+    <pubDate>Sun, 26 Mar 2023 03:51:08 +0900</pubDate>
+    <lastBuildDate>Sun, 26 Mar 2023 03:51:08 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[React] 디자인 시스템에 Compound Component Pattern 적용해보기</title>
+        <description>&lt;h1 id=&quot;디자인-시스템에-compound-component-pattern-적용해보기&quot;&gt;디자인 시스템에 Compound Component Pattern 적용해보기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-디자인-시스템을-만들어가면서-react의-합성-컴포넌트-패턴을-사용하여-tabs-컴포넌트를-만들었던-내용을-정리합니다&quot;&gt;💡 디자인 시스템을 만들어가면서 React의 합성 컴포넌트 패턴을 사용하여 Tabs 컴포넌트를 만들었던 내용을 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-배경&quot;&gt;1. 배경&lt;/h2&gt; &lt;p&gt;지난 2월 초부터...</description>
+        <pubDate>Sat, 25 Mar 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/react/2023/03/25/react-compound-component-pattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/react/2023/03/25/react-compound-component-pattern.html</guid>
+        
+        <category>React</category>
+        
+        <category>DesignSystem</category>
+        
+        <category>CompoundComponent</category>
+        
+        <category>Accessibility</category>
+        
+        
+        <category>React</category>
+        
+      </item>
     
       <item>
         <title>[JavaScript] V8 Garbage Collection</title>
@@ -179,26 +199,6 @@
         
         
         <category>Web</category>
-        
-      </item>
-    
-      <item>
-        <title>[Conference] 부스트 컨퍼런스 2022 후기</title>
-        <description>&lt;h1 id=&quot;부스트-컨퍼런스-2022-후기&quot;&gt;부스트 컨퍼런스 2022 후기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-후기라고-쓰고-기행이라-읽습니다&quot;&gt;💡 후기라고 쓰고 기행이라 읽습니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;p&gt;네이버 부스트캠프에서 주관하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;부스트 컨퍼런스 2022&lt;/code&gt;에 참석했습니다. 부스트캠프 멤버십 (이하 ‘멤버십’) 과정에 있으면서 처음이자 마지막이...</description>
-        <pubDate>Fri, 21 Oct 2022 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/conference/2022/10/21/boost-conference.html</link>
-        <guid isPermaLink="true">http://localhost:4000/conference/2022/10/21/boost-conference.html</guid>
-        
-        <category>Conference</category>
-        
-        <category>boostcamp</category>
-        
-        <category>boostConference</category>
-        
-        <category>boostcampWebMobile</category>
-        
-        
-        <category>Conference</category>
         
       </item>
     

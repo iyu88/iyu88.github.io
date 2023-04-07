@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [Storybook] 스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기
+  </title>
+  <meta name="description" content="스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/storybook/2023/04/07/storybook-docs.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+</head>
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [Storybook] 스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        April 7, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/Storybook">
+          Storybook</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="스토리북의-docs-기능으로-컴포넌트-라이브러리-문서화하기">스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기</h1>
+
+<blockquote>
+  <h3 id="-ui-컴포넌트-렌더링을-확인할-때-사용했던-storybook으로-각-컴포넌트-정보를-문서화한-과정을-정리해봅니다">💡 UI 컴포넌트 렌더링을 확인할 때 사용했던 Storybook으로 각 컴포넌트 정보를 문서화한 과정을 정리해봅니다.</h3>
+</blockquote>
+
+<h2 id="1-문서화">1. 문서화</h2>
+
+<p><a href="https://iyu88.github.io/react/2023/03/25/react-compound-component-pattern.html">지난 포스트</a>에서 다루었던 CDS(Cold Design System)의 목표 중 하나로 라이브러리 배포를 준비하고 있습니다. 배포 전에 각 컴포넌트들을 리팩토링할 뿐만 아니라 <a href="https://chakra-ui.com/">chakra</a>, <a href="https://nextui.org/">NextUI</a>, <a href="https://www.radix-ui.com/">Radix</a>같은 라이브러리들처럼 각 컴포넌트에 대한 설명을 담은 문서에 대해서도 신경쓰기로 했습니다. 컴포넌트 라이브러리인 만큼 다른 개발자들이 쉽게 UI를 사용할 수 있게 하려면 컴포넌트와 용례에 대한 정돈된 정보를 제공해야 하는 것이 중요하다고 생각했기 때문입니다.</p>
+
+<p>처음에는 ‘직접 소개 홈페이지를 만들까?’에 대한 생각도 했지만, 팀 내부적인 논의 끝에 UI 컴포넌트 렌더링을 확인하기 위해 사용 중이던 <code class="language-plaintext highlighter-rouge">Storybook</code> 라이브러리에서 제공하는 Docs 기능을 활용하여 컴포넌트를 소개하기로 결정했습니다. 이를 위해서 대대적인 Story 파일 수정 작업이 필요했습니다. 왜냐하면 이전까지는 각자가 개발했던 컴포넌트의 동작을 확인하기 위한 목적으로 각각의 스토리를 작성했기 때문에 전반적으로 최소한의 형식만 지켜진 상태였습니다. 또한 컴포넌트나 스토리에 대한 설명을 고려하지 않은 채로 작업했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230436959-7ff2f4a2-88cf-46ac-8255-a9060aa309ac.png" />
+<em>기존 스토리는 정말 날것 그대로입니다.</em>
+<br /></p>
+
+<p>이제부터 Storybook이 제공하는 기능을 활용하여 각 컴포넌트의 스토리를 정리하고 문서화 작업을 진행한 과정을 되짚어 보겠습니다.</p>
+
+<p><br /></p>
+
+<h2 id="2-작업-목표">2. 작업 목표</h2>
+
+<p>먼저 Docs를 수정하기 전에 작업을 진행하면서 신경써야 할 점과 그렇지 않은 점을 구분했습니다.</p>
+
+<h4 id="신경써야-할-점">[신경써야 할 점]</h4>
+<ul>
+  <li>각 컴포넌트의 props 타입과 설명을 명시합니다.</li>
+  <li>컴포넌트 자체에 대한 설명과 각 스토리 설명 추가합니다.</li>
+  <li>스토리에서 수정할 부분이 있을 경우 수정합니다.</li>
+</ul>
+
+<h4 id="신경쓰지-않을-점">[신경쓰지 않을 점]</h4>
+<ul>
+  <li>만약 컴포넌트 자체에 문제가 있을 경우 일단 무시합니다.
+    <ul>
+      <li>발견한 문제를 컴포넌트 차원에서 해결해야 한다면 별도의 PR에서 작업합니다.</li>
+    </ul>
+  </li>
+  <li>현재까지 개발한 컴포넌트에 대해서만 작업합니다.
+    <ul>
+      <li>가령 Color Palette 등의 새로운 스토리는 추가하지 않습니다.</li>
+    </ul>
+  </li>
+  <li>리팩토링을 진행 중인 컴포넌트는 수정하지 않습니다.</li>
+</ul>
+
+<p>대략적인 작업 목표를 설정했으니 <a href="https://storybook.js.org/tutorials/design-systems-for-developers/react/ko/document/">Storybook</a>을 참고하면서 코드를 수정해보겠습니다.</p>
+
+<p><br /></p>
+
+<h2 id="3-작업-내용">3. 작업 내용</h2>
+
+<h3 id="3-1-argstable-수정하기">3-1. ArgsTable 수정하기</h3>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230456770-448e91ad-54cd-40ab-809f-36575f7cece4.png" />
+<em>Docs 탭에서 확인할 수 있는 ArgsTable</em>
+<br /></p>
+
+<p>컴포넌트의 ArgsTable은 각 스토리에서 <code class="language-plaintext highlighter-rouge">args</code>로 넘겨주고 있는 값을 토대로 props가 자동으로 추론되어 채워집니다. 이렇게 자동으로 추론되는 값을 사용해도 좋지만, 현재 스토리 별로 props를 전달하는 방식이 제각기여서 때론 props의 타입이 정확하게 추론되지 않는 경우도 존재합니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230457509-0f761af4-bd79-4a7b-b4b4-aaf68ca357fe.png" />
+<em>args에 size가 있는 객체를 명시적으로 전달하면 props와 타입이 잘 추론됩니다.</em>
+<br /></p>
+
+<p>따라서 ArgsTable을 직접적으로 설정하여 혼동을 줄이고자 합니다. 먼저 각각의 props를 명시하기 위해 스토리 객체에서 <code class="language-plaintext highlighter-rouge">argTypes</code> 속성을 추가합니다. 내부에 각 props의 이름을 Key로 하는 객체를 포함시킵니다. 이해를 돕기 위해 <code class="language-plaintext highlighter-rouge">Spacing.stories.tsx</code>의 코드를 살펴보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Spacing.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Spacing</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">component</span><span class="p">:</span> <span class="nx">Spacing</span><span class="p">,</span>
+  <span class="na">parameters</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">layout</span><span class="p">:</span> <span class="dl">'</span><span class="s1">fullscreen</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">argTypes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">size</span><span class="p">:</span> <span class="p">{},</span> <span class="c1">// 추가</span>
+  <span class="p">},</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Spacing</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p>size의 value인 객체 내부에서 size props에 대한 설정을 진행합니다. 사용할 수 있는 값은 다음과 같습니다.</p>
+
+<ul>
+  <li>① name : props 이름입니다.</li>
+  <li>② description : props에 대한 세부 설명을 적습니다.</li>
+  <li>table
+    <ul>
+      <li>③ type : props 타입을 설정합니다.</li>
+      <li>④ defaultValue : 초기값이 있으면 명시합니다.</li>
+    </ul>
+  </li>
+  <li>⑤ control : props 값을 수정해보고 싶을 때 어떤 방식으로 제공할 것인지 결정합니다.
+    <ul>
+      <li>type : control의 타입을 설정합니다. 구체적인 옵션은 <a href="https://storybook.js.org/docs/react/essentials/controls">공식문서</a>를 참고합니다. (매우 다양합니다)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230440569-cbb8543c-f182-4e1d-8f63-11b4008953ee.png" />
+<em>실제 ArgsTable에 표시되는 위치</em>
+<br /></p>
+
+<p>위 사진을 참고하여 아래 코드처럼 설정하고 ArgsTable을 확인해보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="c1">// (생략)</span>
+  <span class="na">argTypes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">size</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">여백의 크기를 설정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">SpacingVariant</span><span class="dl">'</span> <span class="p">},</span>
+      <span class="p">},</span>
+      <span class="na">control</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">select</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">options</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Spacing</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230461196-fec34744-012b-44da-8ae0-b8b53a2ae253.png" />
+<em>Spacing의 수정된 ArgsTable입니다. control type이 select로 설정된 것을 확인할 수 있습니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h3 id="3-2-description-추가하기">3-2. description 추가하기</h3>
+
+<p>서두에 언급했던 다른 라이브러리들처럼 컴포넌트에 대한 설명과 각 용례에 대한 설명을 추가하고자 합니다. 먼저 컴포넌트 설명을 추가하기 위해 스토리 객체에서 다음 두 가지 속성을 사용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Example.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Example</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">component</span><span class="p">:</span> <span class="nx">Example</span><span class="p">,</span>
+  <span class="na">parameters</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">layout</span><span class="p">:</span> <span class="dl">'</span><span class="s1">fullscreen</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">componentSubtitle</span><span class="p">:</span> <span class="c1">// 추가</span>
+      <span class="dl">'</span><span class="s1">parameters-componentSubtitle은 이곳을 설명합니다.</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">docs</span><span class="p">:</span> <span class="p">{</span> 
+      <span class="na">description</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">component</span><span class="p">:</span> <span class="c1">// 추가</span>
+          <span class="s2">`parameters-docs-description-component는 이곳을 설명합니다.`</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Example</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230537127-8085a5a4-6b53-4f4d-a8ed-db7b42f6a266.png" />
+<em>componentSubtitle과 description의 위치</em>
+<br /></p>
+
+<p>전체 스토리에서 공통적으로 componentSubtitle은 컴포넌트에 대해 간단하게 <code class="language-plaintext highlighter-rouge">한 줄로 소개하는 역할</code>로 활용하고, description은 <code class="language-plaintext highlighter-rouge">자세하게 부연설명하는 역할</code>로 활용했습니다.</p>
+
+<p>특히, description은 컴포넌트의 props 중에서 사용자(개발자)가 선택할 수 있는 값의 종류를 명시하거나 Compound Component Pattern을 적용한 경우 children에서 사용할 수 있는 컴포넌트에 대해 설명하는 용도로 활용했습니다. 아래 사진을 보면 조금 더 와닿을 것 같습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230537106-b90d3df5-bdcb-4323-8557-60a4a661e15e.png" />
+<em>Toast 컴포넌트에서 사용하는 kind, vertical, horizontal에서 선택 가능한 값을 명시하고 있습니다.</em>
+<br /></p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230537110-f2d60056-dbc6-4605-99e3-9377180e2952.png" />
+<em>Tabs처럼 합성 패턴을 사용한 컴포넌트에서는 하위 컴포넌트에 대해 설명해줍니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<p>이제 컴포넌트에 대한 소개가 끝났으니 스토리 설명을 추가해보겠습니다. 이 부분도 위 과정과 비슷하게 스토리의 <code class="language-plaintext highlighter-rouge">parameters</code>에 객체를 할당하는 방식으로 완료할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Example.stories.tsx</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">StoryDescription</span> <span class="o">=</span> <span class="nx">Template</span><span class="p">.</span><span class="nx">bind</span><span class="p">({});</span>
+<span class="nx">StoryDescription</span><span class="p">.</span><span class="nx">args</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="c1">// parameters 속성에 객체를 할당</span>
+<span class="nx">StoryDescription</span><span class="p">.</span><span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">docs</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">storyDescription</span><span class="p">:</span>
+      <span class="dl">'</span><span class="s1">parameters-docs-storyDescription에서 각 스토리를 설명합니다.</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230537136-db2954c0-7f97-4578-a4ec-d3a2e18d7058.png" />
+<em>storyDescription에 있는 문자열이 스토리 설명으로 들어갑니다.</em>
+<br /></p>
+
+<p>스토리 이름은 각 <code class="language-plaintext highlighter-rouge">스토리 변수</code>를 기반으로 정해집니다. 위 코드에서 <code class="language-plaintext highlighter-rouge">StoryDescription</code>이라는 변수를 사용했기 때문에 실제 Docs에는 <code class="language-plaintext highlighter-rouge">Story Description</code>으로 표시됩니다. 만약 변수의 이름과 스토리 Docs에 표시되는 이름을 다르게 설정하고 싶은 경우, 다음과 같이 <code class="language-plaintext highlighter-rouge">storyName</code> 필드에 값을 할당하여 변경할 수 있습니다. 실제로 이를 Carousel 컴포넌트의 스토리 이름을 변경할 때 사용했습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">export</span> <span class="kd">const</span> <span class="nx">StoryDescription</span> <span class="o">=</span> <span class="nx">Template</span><span class="p">.</span><span class="nx">bind</span><span class="p">({});</span>
+<span class="nx">StoryDescription</span><span class="p">.</span><span class="nx">args</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="nx">StoryDescription</span><span class="p">.</span><span class="nx">storyName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Custom Story Name</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// 추가</span>
+<span class="nx">StoryDescription</span><span class="p">.</span><span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">docs</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">storyDescription</span><span class="p">:</span>
+      <span class="dl">'</span><span class="s1">parameters-docs-storyDescription에서 각 스토리를 설명합니다.</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230537142-d4b109f9-7215-4249-abec-d8ac8a59e668.png" />
+<em>storyName에 할당한 값으로 이름이 변경된 것을 확인할 수 있습니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h3 id="3-3-decorators">3-3. decorators</h3>
+
+<p>스토리를 살펴보면 컴포넌트들이 스토리가 표시되는 영역의 중앙에 위치하면 더 좋을 것 같다는 생각이 들었습니다. 실제로 몇몇 컴포넌트에서는 스토리를 잘 확인할 수 있도록 이미 Flexbox나 Center같은 Layout 컴포넌트를 사용하고 있는 것을 확인할 수 있었습니다. 아래 Dropdown 코드처럼 말입니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Dropdown.stories.tsx</span>
+<span class="kd">const</span> <span class="nx">Template</span><span class="p">:</span> <span class="nx">ComponentStory</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Dropdown</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nc">Flexbox</span>
+    <span class="na">justifyContent</span><span class="p">=</span><span class="s">'center'</span>
+    <span class="na">alignItems</span><span class="p">=</span><span class="s">'center'</span>
+    <span class="na">css</span><span class="p">=</span><span class="si">{</span><span class="nx">css</span><span class="s2">`
+      width: 300px;
+      height: 300px;    
+    `</span><span class="si">}</span>
+  <span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Dropdown</span> <span class="si">{</span><span class="p">...</span><span class="nx">args</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Dropdown</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">text</span><span class="p">=</span><span class="s">"팀원 목록"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="nx">MdPeople</span><span class="si">}</span> <span class="na">variant</span><span class="p">=</span><span class="s">"light"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Dropdown</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="err">!--</span> <span class="err">생략</span> <span class="err">--</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Dropdown</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Flexbox</span><span class="p">&gt;</span>
+);</code></pre></figure>
+
+<p>하지만 Dropdown과 무관한 코드를 모든 스토리에 적용하는 것은 불필요한 코드를 반복적으로 생성합니다. 이러한 문제를 <code class="language-plaintext highlighter-rouge">decorators</code> 속성을 활용하여 해결했습니다. decorators는 스토리에 공통적으로 적용하고 싶은 기본 설정을 추가할 수 있도록 도와줍니다. Dropdown을 개선해본다면, 다음과 같이 스토리 객체에 decorators 속성를 추가하고 모든 스토리가 중앙에 위치할 수 있도록 <code class="language-plaintext highlighter-rouge">{Story()}</code>를 Flexbox 컴포넌트로 감싸줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Dropdown.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Dropdown</span><span class="dl">'</span><span class="p">,</span>
+  <span class="c1">// (생략)</span>
+  <span class="na">decorators</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">(</span><span class="nx">Story</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">Flexbox</span>
+        <span class="na">justifyContent</span><span class="p">=</span><span class="s">'center'</span>
+        <span class="na">alignItems</span><span class="p">=</span><span class="s">'center'</span>
+        <span class="na">css</span><span class="p">=</span><span class="si">{</span><span class="nx">css</span><span class="s2">`
+          height: 300px;
+        `</span><span class="si">}</span>
+      <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Center</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">Story</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Center</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Flexbox</span><span class="p">&gt;</span>
+    <span class="p">),</span>
+  <span class="p">],</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Dropdown</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p>코드에서 {Story()}가 바로 &lt;Dropdown&gt;이 렌더링되는 위치가 됩니다. 이제 스토리 템플릿을 생성할 때 Layout과 관련된 코드 없이도 처음 코드와 동일하게 동작합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Dropdown.stories.tsx</span>
+<span class="kd">const</span> <span class="nx">Template</span><span class="p">:</span> <span class="nx">ComponentStory</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Dropdown</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Dropdown</span> <span class="si">{</span><span class="p">...</span><span class="nx">args</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Dropdown</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">text</span><span class="p">=</span><span class="s">"팀원 목록"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="nx">MdPeople</span><span class="si">}</span> <span class="na">variant</span><span class="p">=</span><span class="s">"light"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Dropdown</span><span class="p">.</span><span class="nc">Trigger</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="err">!--</span> <span class="err">생략</span> <span class="err">--</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Dropdown</span><span class="p">&gt;</span>
+);</code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230606182-fa4d6853-94fe-40e7-b87f-00b68c748c9d.png" />
+<em>Dropdown 컴포넌트가 정중앙에 배치되었습니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h3 id="3-4-스토리-계층-추가-및-sidebar-정렬">3-4. 스토리 계층 추가 및 Sidebar 정렬</h3>
+
+<p>Storybook을 실행하면 좌측 Sidebar에 확인할 수 있는 컴포넌트 스토리 목록이 나타납니다. 스토리 목록에서도 Layout과 Components로 컴포넌트가 구분되어 있다면 더 확인하기 편할 것 같습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230540741-5a4e4145-011d-4a54-a33f-e5104916e319.png" />
+<em>지금 구조에서 상위 계층이 하나 추가되면 좋을 것 같습니다.</em>
+<br /></p>
+
+<p>폴더 경로를 나타내듯이 스토리 객체의 title 속성에 ‘/’로 구분하여 계층을 추가할 수 있습니다. 앞서 언급한 대로 크게 Layout과 Components, 2가지로 나누도록 하겠습니다. Components도 세부적으로 나눌 수 있겠지만 아직 구체적으로 논의되지 않는 상태이므로 보류합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Container.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Layout/Container</span><span class="dl">'</span><span class="p">,</span>
+  <span class="c1">// (생략)</span>
+<span class="p">}</span><span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Container</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Table.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Components/Table</span><span class="dl">'</span><span class="p">,</span>
+  <span class="c1">// (생략)</span>
+<span class="p">}</span><span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Table</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230446995-b04623d0-a107-4536-b5ab-65073063e4f8.png" />
+<em>의도한대로 잘 구분된 스토리들</em>
+<br /></p>
+
+<p>Layout과 Components로 잘 묶었지만 한 가지 불편한 점은 순서가 뒤죽박죽이라는 점입니다. 컴포넌트의 순서도 명시적으로 정해주겠습니다. 전체 스토리에 대한 설정을 할 수 있는 <code class="language-plaintext highlighter-rouge">preview.jsx</code>로 이동하여 아래 코드처럼 options 객체를 parameters의 속성으로 추가합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// preview.jsx</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// (생략)</span>
+  <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">storySort</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">configure</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">includeNames</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">order</span><span class="p">:</span> <span class="p">[</span>
+        <span class="dl">'</span><span class="s1">Layout</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Container</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Flexbox</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Center</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">List</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">],</span>
+        <span class="dl">'</span><span class="s1">Components</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Spacing</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Typography</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Badge</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Image</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Button</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Input</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Table</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">RangeSelector</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Dropdown</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Select</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Tabs</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Carousel</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Spinner</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Modal</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Toast</span><span class="dl">'</span><span class="p">],</span>
+        <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span>
+      <span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">order</code>는 배열 내부에 컴포넌트 이름이 배치된 순서대로 Sidebar를 정렬합니다. 앞서 설정했던 스토리의 계층은 중첩된 배열 형태로 설정합니다. 위 코드처럼 <code class="language-plaintext highlighter-rouge">Layout/Container</code>는 <code class="language-plaintext highlighter-rouge">['Layout', ['Container']]</code>로 표현합니다. 중간에 <code class="language-plaintext highlighter-rouge">'*'</code>을 사용하면 순서가 정해지지 않은 컴포넌트들이 위치합니다. Docs를 확인하기 위해서 터미널에서 재실행합니다. (preview.jsx 파일을 수정하면 Storybook을 재실행해야 합니다)</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230447263-2fbdda05-51b7-4c03-9c3f-b721e1113245.png" />
+<em>코드대로 Sidebar가 정렬되었습니다.</em>
+<br /></p>
+
+<p>여기까지의 작업을 간단하게 정리하면 다음과 같습니다.</p>
+
+<ul>
+  <li>ArgsTable에 있는 props의 type과 description을 수정했습니다.</li>
+  <li>컴포넌트와 스토리에 대한 description을 추가했습니다.</li>
+  <li>공통적인 컴포넌트가 필요한 경우 decorators를 추가했습니다.</li>
+  <li>스토리에 계층을 부여하고 Sidebar에 있는 컴포넌트에 배치 순서를 부여합니다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="4-추가-작업">4. 추가 작업</h2>
+
+<p>기본적인 Storybook 정리 작업은 끝났습니다. 이후에는 지금까지 진행한 작업들에서 조금 더 개선할 수 있는 점들을 고쳐보는 내용을 다루겠습니다.</p>
+
+<h3 id="4-1-category-활용">4-1. category 활용</h3>
+
+<p>앞서 <code class="language-plaintext highlighter-rouge">3-2. description 추가하기</code>에서 잠깐 등장했던 Tabs 컴포넌트는 Compound Component Pattern을 사용했기 때문에 하위 컴포넌트들이 받는 props에 대한 정보도 ArgsTable에 명시되어 있어야 합니다. 가령, Tabs.Trigger가 받을 수 있는 <code class="language-plaintext highlighter-rouge">value</code>, <code class="language-plaintext highlighter-rouge">text</code>, <code class="language-plaintext highlighter-rouge">icon</code>, <code class="language-plaintext highlighter-rouge">disabled</code>나 Tabs.Panel이 받을 수 있는 <code class="language-plaintext highlighter-rouge">value</code>에 대한 타입과 설명을 추가하고자 합니다. 일단 기존에 작업한 방식대로 argsType에 새로운 props를 추가해보았습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Tabs.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span> 
+  <span class="c1">// (생략)</span>
+  <span class="na">argTypes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">각각의 Trigger와 Panel을 짝짓기 위한 값입니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span> <span class="na">required</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Trigger에 표시할 제목을 설정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">icon</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Trigger에 표시할 아이콘을 설정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">disabled</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Trigger의 비활성화 여부를 결정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="na">defaultValue</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Tabs</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p>이렇게 하면 하위 컴포넌트들의 props를 추가할 수 있지만 순서가 섞여 있기 때문에 각 props가 어느 컴포넌트를 위한 값인지 알 수 없다는 문제가 있습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230448010-9af06a7b-0aff-45bf-a705-1142c998b9e4.png" />
+<em>props가 뒤죽박죽입니다.😵‍💫</em>
+<br /></p>
+
+<p>대안을 찾아보다가 <code class="language-plaintext highlighter-rouge">subcomponents</code>라는 필드를 스토리 객체에서 사용할 수 있다는 것을 찾았습니다. 하지만 Storybook Issue에 subcomponents가 정상적으로 작동하지 않는다는 <a href="https://github.com/storybookjs/storybook/issues/21253">글</a>이 있습니다. <a href="https://github.com/storybookjs/storybook/issues/21253#issuecomment-1476967911">댓글</a>에서는 그 이유를 다음과 같이 설명합니다.</p>
+
+<blockquote>
+  <p>subcomponents is deprecated in 7.0. The API is very limiting and hard to improve on. It is somewhat of a half-baked feature, that we want to rethink and do better.</p>
+</blockquote>
+
+<p>라이브러리에서 subcomponents의 역할과 존재 의미에 대해서 고민하고 있는 것 같습니다. 프로젝트에서는 Storybook 6.5.16 버전을 사용하고 있지만 앞으로 deprecated될 기능을 사용하는 것은 지양하는 것이 좋겠다고 판단했습니다. 다른 방안을 찾아보다가 <code class="language-plaintext highlighter-rouge">category</code>를 활용하기로 결정했습니다.</p>
+
+<p>먼저 Tabs의 ArgsTable을 Tabs, Tabs.Trigger, Tabs.Panel 이렇게 세 가지로 나누기 위해 다음과 같이 각 props에 category를 정해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Tabs.stories.tsx</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="c1">// (생략)</span>
+  <span class="na">argTypes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">label</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">고유한 값으로 접근성 속성에 사용됩니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tabs</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 추가</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">defaultValue</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">초기에 활성화되어 있을 Trigger의 value를 입력합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tabs</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 추가</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="c1">// (생략)</span>
+    <span class="na">text</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Trigger에 표시할 제목을 설정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tabs.Trigger</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 추가</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">icon</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Trigger에 표시할 아이콘을 설정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tabs.Trigger</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 추가</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">disabled</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Trigger의 비활성화 여부를 결정합니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="na">defaultValue</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+        <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tabs.Trigger</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 추가</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="nx">Tabs</span><span class="o">&gt;</span><span class="p">;</span></code></pre></figure>
+
+<p>Tabs.Trigger와 Tabs.Panel이 사용하는 props 중 value라는 속성 이름이 겹칩니다. value props의 category에 두 컴포넌트 이름을 함께 넣어줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Tabs.stories.tsx</span>
+<span class="c1">// (생락)</span>
+<span class="nx">value</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">각각의 Trigger와 Panel을 짝짓기 위한 값입니다.</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">table</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span> <span class="na">required</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+    <span class="nx">category</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Tabs.Trigger</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Tabs.Panel</span><span class="dl">'</span><span class="p">],</span> <span class="c1">// 추가</span>
+  <span class="p">},</span>
+<span class="p">},</span>
+<span class="c1">// (생락)</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230448451-9f14bfab-08c2-4aa5-aab1-adeaf8a49fc3.png" />
+<em>ArgsTable에 category가 생겼습니다.</em>
+<br /></p>
+
+<p>원래 category는 textColor와 backgroundColor를 Color라는 category 아래에 위치시키듯, 비슷한 props 속성들을 묶어주는 용도로 사용합니다. category를 하위 컴포넌트의 props를 표시하는 데에 사용해서 찝찝한 느낌이 들어 여러 자료를 찾아보다가 <a href="https://github.com/storybookjs/storybook/issues/20782">이 Stotybook Issue</a>을 읽게 되었습니다. 댓글에서는 현재 subcomponents 기능에 대해서 논의하고 있기 때문에 대안으로 <code class="language-plaintext highlighter-rouge">category를 활용하는 방법</code>을 제시하고 있었습니다.</p>
+
+<blockquote>
+  <p>…you can specify categories when writing argTypes, which means you could create a category for each subcomponent and specify the arg types in the categories.</p>
+</blockquote>
+
+<p>참고로 subcomponents가 deprecated된 이유도 설명하고 있는데,</p>
+
+<ol>
+  <li>subcomponents가 Docs일 경우에만 작동해서 Canvas나 테스트에서 역할이 없고,</li>
+  <li>현재의 구조로는 기능을 추가할 여지가 없다고 합니다.</li>
+</ol>
+
+<p>이렇게 category를 사용하여 Compound Component Pattern에서 props를 나타냈습니다.</p>
+
+<p><br /></p>
+
+<h3 id="4-2-plop-js로-스토리-템플릿-만들기">4-2. Plop JS로 스토리 템플릿 만들기</h3>
+
+<p>지금까지 작업한 스토리들은 사전에 약속된 방식으로 작업했다기보다 스스로 판단하여 ‘이렇게 작성하면 좋겠다’라고 생각하여 작업한 내용입니다. 결국 혼자서 임의로 작성한 형식이기 때문에 앞으로 새로 만들어질 컴포넌트의 스토리는 지금과 다른 형태로 작성될 수도 있습니다. 더불어 ArgsTable에 어떤 내용을 포함하고 어떻게 명시해야 하는지는 문서화 작업을 진행한 사람이 가장 잘 알고 있습니다. 따라서 스토리 작성에 도움이 될 수 있도록 하나의 템플릿을 만들어 형식을 지키게 하고 각 속성에 대한 설명에 간단하게 접근할 수 있으면 좋겠다고 생각했습니다.</p>
+
+<p>겸사겸사 기존에 컴포넌트를 새로 만들 때 불편하게 생각했던 점 중 하나로 React 컴포넌트를 위한 index.tsx와 스토리를 위한 .stories.tsx 파일을 각각 생성해주어야 한다는 것이 있었습니다. 파일의 개수가 많진 않지만 반복적인 작업이 번거로웠습니다.</p>
+
+<p>이를 해결하기 위해서 <code class="language-plaintext highlighter-rouge">Plop JS</code>를 도입했습니다. Plop JS는 micro-generator 프레임워크로 코드 구조를 간단하게 생성할 수 있도록 도와줍니다. 우선 다음과 같이 기본 설정 파일을 작성합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// plopfile.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">plop</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">plop</span><span class="p">.</span><span class="nx">setGenerator</span><span class="p">(</span><span class="dl">"</span><span class="s2">component</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Create a component</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">prompts</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">컴포넌트 이름을 입력해주세요~</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="na">actions</span><span class="p">:</span> <span class="p">[</span>
+      <span class="c1">// index.tsx를 생성</span>
+      <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">add</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">path</span><span class="p">:</span> <span class="dl">"</span><span class="s2">src/components/{{pascalCase name}}/index.tsx</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">templateFile</span><span class="p">:</span> <span class="dl">"</span><span class="s2">templates/Component.tsx.hbs</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="c1">// stories.tsx를 생성</span>
+      <span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">add</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">path</span><span class="p">:</span> <span class="dl">"</span><span class="s2">src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">templateFile</span><span class="p">:</span> <span class="dl">"</span><span class="s2">templates/Story.tsx.hbs</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">});</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>터미널에서 사용자(개발자)가 명령어를 입력했을 때 실행하는 동작을 정의합니다. {{pascalCase name}}으로 되어 있는 부분은 사용자가 CLI로 입력한 값을 파스칼 케이스로 사용하는 부분입니다. 해당 값을 사용하여 폴더를 자동으로 만들고, index.tsx와 .stories.tsx를 생성합니다. 각각의 파일은 templateFile로 설정한 파일을 기반으로 생성됩니다. 여기서는 스토리의 템플릿에 해당하는 <code class="language-plaintext highlighter-rouge">templates/Story.tsx.hbs</code> 파일만 살펴보도록 하겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// Story.tsx.hbs</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ComponentStory</span><span class="p">,</span> <span class="nx">ComponentMeta</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@storybook/react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{{</span><span class="nx">pascalCase</span> <span class="nx">name</span><span class="p">}}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Components/{{pascalCase name}}</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">component</span><span class="p">:</span> <span class="p">{{</span><span class="nx">pascalCase</span> <span class="nx">name</span><span class="p">}},</span>
+  <span class="na">parameters</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">layout</span><span class="p">:</span> <span class="dl">'</span><span class="s1">fullscreen</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">componentSubtitle</span><span class="p">:</span>
+      <span class="dl">'</span><span class="s1">컴포넌트에 대한 간단한 설명을 적습니다.</span><span class="dl">'</span><span class="p">,</span>
+    <span class="c1">// docs-description-component (Optional) </span>
+    <span class="c1">// 세부 설명을 적습니다. </span>
+    <span class="na">docs</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">component</span><span class="p">:</span> <span class="dl">'</span><span class="s1">마크다운 문법이 적용됩니다. </span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">줄바꿈된 두번째 문장입니다.</span><span class="dl">'</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">argTypes</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">props1</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">props1은 default 값이 있는 필수적인 속성입니다.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">table</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// type</span>
+        <span class="c1">// 필수가 아닐 경우 required를 삭제합니다.</span>
+        <span class="na">type</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span> <span class="na">required</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+        <span class="c1">// defaultValue (Optional)</span>
+        <span class="c1">// ex) true, 'string' 등등</span>
+        <span class="na">defaultValue</span><span class="p">:</span> <span class="p">{</span> <span class="na">summary</span><span class="p">:</span> <span class="dl">'</span><span class="s1">기본 값이 있으면 여기에 적습니다.</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="c1">// category (Optional)</span>
+        <span class="c1">// Props의 카테고리가 필요할 때 사용합니다.</span>
+        <span class="c1">// 하나면 문자열, 여러 개면 배열로 전달합니다. </span>
+        <span class="na">category</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Compound1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Compound2</span><span class="dl">'</span><span class="p">],</span>
+      <span class="p">},</span>
+      <span class="na">control</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// Args Table에서 사용자가 조작할 수 있는 타입입니다.</span>
+        <span class="c1">// select일 경우 options를 배열로 제공합니다.</span>
+        <span class="c1">// 그 외 text, number, boolean, color, check, radio 등 존재합니다.</span>
+        <span class="c1">// control 불가능하게 하고 싶을 경우 객체가 아니라 false로 설정합니다.</span>
+        <span class="c1">// ex) control: false, </span>
+        <span class="c1">// 참고 : https://storybook.js.org/docs/react/essentials/controls</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">select</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">options</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">option1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">option2</span><span class="dl">'</span><span class="p">],</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="c1">// decorators (Optional)</span>
+  <span class="c1">// 공통적으로 적용하고 싶은 컴포넌트를 설정합니다.</span>
+  <span class="na">decorators</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">(</span><span class="nx">Story</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;&gt;</span>
+        <span class="si">{</span><span class="nx">Story</span><span class="p">()</span><span class="si">}</span>
+      <span class="p">&lt;/&gt;</span>
+    <span class="p">),</span>
+  <span class="p">],</span>
+<span class="p">}</span> <span class="k">as</span> <span class="nx">ComponentMeta</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="p">{{</span><span class="nx">pascalCase</span> <span class="nx">name</span><span class="p">}}</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Template</span><span class="p">:</span> <span class="nx">ComponentStory</span><span class="o">&lt;</span><span class="k">typeof</span> <span class="p">{{</span><span class="nx">pascalCase</span> <span class="nx">name</span><span class="p">}}</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="si">{</span><span class="p">{</span><span class="nx">pascalCase</span> <span class="nx">name</span><span class="p">}</span><span class="si">}</span> <span class="si">{</span><span class="p">...</span><span class="nx">args</span><span class="si">}</span><span class="p">&gt;&lt;/</span><span class="si">{</span><span class="p">{</span><span class="nx">pascalCase</span> <span class="nx">name</span><span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Default는 고정해주세요! 필요시 args를 전달합니다.</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">Default</span> <span class="o">=</span> <span class="nx">Template</span><span class="p">.</span><span class="nx">bind</span><span class="p">({});</span>
+
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">Example</span> <span class="o">=</span> <span class="nx">Template</span><span class="p">.</span><span class="nx">bind</span><span class="p">({});</span>
+<span class="nx">Example</span><span class="p">.</span><span class="nx">args</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">Example</span><span class="p">.</span><span class="nx">storyName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">표시되는 스토리 이름을 변경할 수 있습니다. (변수 이름이 너무 꼬이면 사용해요)</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">Example</span><span class="p">.</span><span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">docs</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">storyDescription</span><span class="p">:</span>
+      <span class="dl">'</span><span class="s1">스토리에 대한 설명을 적습니다.</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>이 글에서 작업했던 내용들이 총출동했습니다. 간단하게 설명하면 컴포넌트의 이름이 필요한 곳에 {{pascalCase name}}을 사용하고 Storybook 기능과 관련된 부분에 주석으로 간략하게 설명을 남겼습니다. CLI로 <code class="language-plaintext highlighter-rouge">yarn plop</code>을 실행하여 새로운 컴포넌트를 만드는 상황을 가정해보겠습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230587390-5d5c867e-0917-4e06-aa9a-439205a176c5.gif" />
+<em>Hyunbin 컴포넌트를 위한 파일들이 잘 만들어집니다.</em>
+<br /></p>
+
+<p>이제 팀원들을 위한 스토리 템플릿을 제공할 수 있게 되었습니다. Plop JS는 처음 적용해보았는데 다른 곳에서도 유용하게 사용할 수 있을 것 같습니다.</p>
+
+<p><br /></p>
+
+<h3 id="4-3-previewjsx-옵션-추가">4-3. preview.jsx 옵션 추가</h3>
+
+<p>마지막은 간단한 옵션들을 추가하는 작업입니다. Storybook 전체 설정을 위해 preview.jsx에서 부가적인 옵션을 설정합니다. 가장 먼저 필수적인 props들이 ArgsTable 상단에 위치하도록 하기 위해 controls 객체에 <code class="language-plaintext highlighter-rouge">sort: 'requiredFirst'</code>로 값을 추가하고 Toast의 ArgsTable을 살펴보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// preview.jsx</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">actions</span><span class="p">:</span> <span class="p">{</span> <span class="na">argTypesRegex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">^on[A-Z].*</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="na">controls</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sort</span><span class="p">:</span> <span class="dl">'</span><span class="s1">requiredFirst</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 추가</span>
+    <span class="na">matchers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">color</span><span class="p">:</span> <span class="sr">/</span><span class="se">(</span><span class="sr">background|color</span><span class="se">)</span><span class="sr">$/i</span><span class="p">,</span>
+      <span class="na">date</span><span class="p">:</span> <span class="sr">/Date$/</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230589012-00b8a4a3-110f-4c5a-ada5-280da2bfac55.png" />
+<em>설정 전에는 required들이 따로 있었습니다.</em>
+<br /></p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230589068-663210b4-f3d0-4292-b9a9-bf36b4d15d99.png" />
+<em>requiredFirst로 설정하면 사진처럼 필수값이 먼저 표시됩니다.</em>
+<br /></p>
+
+<p>다음으로 Storybook에 처음 들어왔을 때 Canvas가 아닌 Docs가 나오도록 하고, Canvas는 선택할 수 없도록 변경합니다. 이를 위해 viewMode와 previewTabs를 아래 코드처럼 변경합니다.</p>
+
+<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// preview.jsx</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// (생략)</span>
+  <span class="na">previewTabs</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">canvas</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">hidden</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// Canvas는 선택할 수 없도록 막습니다. </span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">viewMode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">docs</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// 접속하면 Docs로 진입합니다. </span>
+  <span class="c1">// (생략)</span>
+<span class="p">};</span></code></pre></figure>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230448737-b9bc73b0-d7af-46f0-9234-0ca85a9c117c.png" />
+<em>이제 Docs만 보입니다.</em>
+<br /></p>
+
+<p>진행한 추가 작업을 정리하면,</p>
+
+<ul>
+  <li>category 활용하여 Compound Pattern의 하위 컴포넌트 props를 명시합니다.</li>
+  <li>Plop JS로 스토리 템플릿을 생성할 수 있도록 설정합니다.</li>
+  <li>preview.jsx에서 sort, previewTabs, viewMode 값을 설정합니다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="5-맺으며">5. 맺으며</h2>
+
+<p>이전에는 사용하지 않았던 Storybook 기능들을 찾아보며 적용할 수 있는 부분을 최대한 적용하려고 했던 것 같습니다. Storybook 문서에는 이런 말이 있습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/230592451-6011b5de-c95d-40a6-9ed3-342d8a1adf0d.png" />
+<em>맞습니다. 문서화는 힘든 작업이었습니다.</em>
+<br /></p>
+
+<p>Storybook이 도와준 부분이 많지만, 약 15개 정도의 컴포넌트를 작업하다보니 각 컴포넌트에서 빠진 점이 없는지 계속 확인하고 부연설명을 생각해내는 과정이 예상했던 것보다 더 많은 시간이 걸리도록 만든 것 같습니다. 긍정적으로 보면 더 큰 문서화 부채가 쌓이기 전에 진행하여 다행이었습니다. 한편으로는 ‘만약 개수가 더 많아진다면 어떻게 관리해야 할까?’에 대한 생각도 하게 됩니다.</p>
+
+<p>진행한 작업이 컴포넌트에 대해서 아주 자세한 설명을 추가하는 것은 아니여서 차차 보완해야 하겠지만, 앞으로의 개발 과정에 도움이 되도록 방향을 잡았다고 생각합니다. 그래서 그런지 작업한 내용들을 보면 보람차고 뿌듯합니다.</p>
+
+<p>이제는 정말 배포뿐이네요. 😊</p>
+
+<hr />
+
+<p>[참고]</p>
+
+<ul>
+  <li>
+    <p><a href="https://storybook.js.org/tutorials/design-systems-for-developers/react/ko/document/">Storybook / Tutorials</a></p>
+  </li>
+  <li>
+    <p><a href="https://storybook.js.org/docs/react/api/argtypes">Storybook / ArgTypes</a></p>
+  </li>
+  <li>
+    <p><a href="https://storybook.js.org/docs/react/essentials/controls">Storybook / Controls</a></p>
+  </li>
+  <li>
+    <p><a href="https://storybook.js.org/docs/react/api/doc-block-description">Storybook / Description</a></p>
+  </li>
+  <li>
+    <p><a href="https://storybook.js.org/docs/react/writing-stories/decorators">Storybook / Decorators</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/storybookjs/storybook/issues/6327">question / How to order top-level sections?</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/storybookjs/storybook/issues/20782">Feature Request / Subcomponents support</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/storybookjs/storybook/issues/21253">Bug / Types for subcomponents in Meta are broken (React)</a></p>
+  </li>
+  <li>
+    <p><a href="https://plopjs.com/documentation/">Plop: Consistency Made Simple</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/storybookjs/storybook/issues/12111">Configure default tab</a></p>
+  </li>
+</ul>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/Storybook">
+        Storybook</a>,&nbsp;<a href="/tag/Docs">
+        Docs</a>,&nbsp;<a href="/tag/DesignSystem">
+        DesignSystem</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fstorybook%2F2023%2F04%2F07%2Fstorybook-docs.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-243662455-3', 'auto');
+  ga('send', 'pageview', {
+    'page': '/storybook/2023/04/07/storybook-docs.html',
+    'title': '[Storybook] 스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기'
+  });
+</script>
+
+
+  </body>
+
+</html>

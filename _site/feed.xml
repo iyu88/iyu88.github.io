@@ -6,9 +6,27 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Mar 2023 03:51:08 +0900</pubDate>
-    <lastBuildDate>Sun, 26 Mar 2023 03:51:08 +0900</lastBuildDate>
+    <pubDate>Fri, 07 Apr 2023 22:25:24 +0900</pubDate>
+    <lastBuildDate>Fri, 07 Apr 2023 22:25:24 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[Storybook] 스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기</title>
+        <description>&lt;h1 id=&quot;스토리북의-docs-기능으로-컴포넌트-라이브러리-문서화하기&quot;&gt;스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-ui-컴포넌트-렌더링을-확인할-때-사용했던-storybook으로-각-컴포넌트-정보를-문서화한-과정을-정리해봅니다&quot;&gt;💡 UI 컴포넌트 렌더링을 확인할 때 사용했던 Storybook으로 각 컴포넌트 정보를 문서화한 과정을 정리해봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-문서화&quot;&gt;1. 문서화&lt;/h2&gt; &lt;p&gt;&lt;a href=&quot;https://iyu88.github.io/react/2023/03/25/react-compound-component-pattern.html&quot;&gt;지난 포스트&lt;/a&gt;에서...</description>
+        <pubDate>Fri, 07 Apr 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/storybook/2023/04/07/storybook-docs.html</link>
+        <guid isPermaLink="true">http://localhost:4000/storybook/2023/04/07/storybook-docs.html</guid>
+        
+        <category>Storybook</category>
+        
+        <category>Docs</category>
+        
+        <category>DesignSystem</category>
+        
+        
+        <category>Storybook</category>
+        
+      </item>
     
       <item>
         <title>[React] 디자인 시스템에 Compound Component Pattern 적용해보기</title>
@@ -175,30 +193,6 @@
         
         
         <category>React</category>
-        
-      </item>
-    
-      <item>
-        <title>[Web] Browser Render Test - Reflow, Repaint, dev Tools</title>
-        <description>&lt;h1 id=&quot;browser-render-test---reflow-repaint-dev-tools&quot;&gt;Browser Render Test - Reflow, Repaint, dev Tools&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-브라우저의-reflow-와-repaint-를-개발자-도구로-확인해봅니다&quot;&gt;💡 브라우저의 Reflow 와 Repaint 를 개발자 도구로 확인해봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-브라우저-렌더링-프로세스&quot;&gt;1. 브라우저 렌더링 프로세스&lt;/h2&gt; &lt;p&gt;일반적으로 웹을 개발할 때...</description>
-        <pubDate>Sun, 23 Oct 2022 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/web/2022/10/23/browser-render.html</link>
-        <guid isPermaLink="true">http://localhost:4000/web/2022/10/23/browser-render.html</guid>
-        
-        <category>Web</category>
-        
-        <category>Browser</category>
-        
-        <category>Render</category>
-        
-        <category>Reflow</category>
-        
-        <category>Repaint</category>
-        
-        <category>devTools</category>
-        
-        
-        <category>Web</category>
         
       </item>
     

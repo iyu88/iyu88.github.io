@@ -58,6 +58,15 @@ jekyll-archives:
 # Google analytics
 ga_tracking_id: "UA-243662455-3"
 
+# Google Tag Manager
+google_tag: 
+  ua: GTM-P48NKV3
+
+gtag_head: '{{ site.google_tag.ua }}'
+
+gtag_body: /ns.html?id={{ site.google_tag.ua }}
+
+
 # Category descriptions (for archive pages)
 descriptions:
   - cat: jekyll

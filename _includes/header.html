@@ -3,8 +3,9 @@
     <a href="{{ site.baseurl }}/" class="logo">
       {% if site.logo %}
       <img src="{{ site.logo | prepend: site.baseurl }}" alt="{{ site.title }}">
+      <h4 class="title">{{ site.name }}</h4>
       {% else %}
-      <span>{{ site.title }}</span>
+      <h4 class="title">{{ site.title }}</h4>
       {% endif %}
     </a>
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">

@@ -6,13 +6,13 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 23 Apr 2023 20:18:23 +0900</pubDate>
-    <lastBuildDate>Sun, 23 Apr 2023 20:18:23 +0900</lastBuildDate>
+    <pubDate>Tue, 25 Apr 2023 10:31:37 +0900</pubDate>
+    <lastBuildDate>Tue, 25 Apr 2023 10:31:37 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
         <title>[JavaScript] ECMAScript 2023 살펴보기</title>
-        <description>&lt;h1 id=&quot;ecmascript-2023-살펴보기&quot;&gt;ECMAScript 2023 살펴보기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-14번째-버전인-ecmascript-2023에-추가된-스펙에-대해서-살펴봅니다&quot;&gt;💡 14번째 버전인 ECMAScript 2023에 추가된 스펙에 대해서 살펴봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-새로운-기능들&quot;&gt;1. 새로운 기능들&lt;/h2&gt; &lt;p&gt;공부해야 하는 내용들은 대게 우연으로 다가옵니다. 며칠 전 JavaScript 스터디를...</description>
+        <description>&lt;h1 id=&quot;ecmascript-2023-살펴보기&quot;&gt;ECMAScript 2023 살펴보기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-14번째-버전인-ecmascript-2023에-추가된-스펙에-대해서-살펴봅니다&quot;&gt;💡 14번째 버전인 ECMAScript 2023에 추가된 스펙에 대해서 살펴봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-새로운-기능들&quot;&gt;1. 새로운 기능들&lt;/h2&gt; &lt;p&gt;공부해야 하는 내용은 대개 우연으로 다가옵니다. 며칠 전 JavaScript 스터디를...</description>
         <pubDate>Sun, 23 Apr 2023 09:00:00 +0900</pubDate>
         <link>http://localhost:4000/javascript/2023/04/23/ecma-script-2023.html</link>
         <guid isPermaLink="true">http://localhost:4000/javascript/2023/04/23/ecma-script-2023.html</guid>

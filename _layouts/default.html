@@ -7,11 +7,12 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    if (location.host !== 'iyu88.github.io') return;
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-4H99JTCZN9');
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
   </script>
   <!-- End of Google tag (gtag.js) -->
 

@@ -93,15 +93,16 @@ Progressive Web App 의 준말인 PWA 는 웹 사이트를 어플리케이션처
 
 본격적으로 프로젝트에 설치해보겠습니다. React 프로젝트 내부로 이동하여 다음의 커맨드를 입력합니다. 
 
-{% highlight shell%}
-npm i -g @lhci/cli
-{% endhighlight %}
+<pre>
+<code class="hljs shell">npm i -g @lhci/cli
+</code>
+</pre>
 
 같은 경로에 `.lighthouserc.json` 파일을 생성합니다.
 
 
-{% highlight json%}
-{
+<pre>
+<code class="hljs json">{
   "ci": {
     "collect": {
       "staticDistDir": "./build",
@@ -113,7 +114,8 @@ npm i -g @lhci/cli
     }
   }
 }
-{% endhighlight %}
+</code>
+</pre>
 
 - staticDistDir : 성능 측정에 사용할 HTML 파일이 위치하는 경로를 입력합니다. React 를 빌드 후 성능 측정하기 위해서 './build' 경로로 설정했습니다. 
 - url : 성능을 측정할 url 주소를 명시합니다. 한 개 이상 들어갈 수 있습니다. 
@@ -125,11 +127,11 @@ npm i -g @lhci/cli
 
 json 파일을 작성한 뒤에 React 를 빌드하고 Lighthouse 보고서를 확인해봅니다. 아래의 명령어를 차례대로 실행합니다. 
 
-{% highlight shell%}
-npm run build 
+<pre>
+<code class="hljs shell">npm run build 
 lhci autorun
-{% endhighlight %}
-
+</code>
+</pre>
 
 <br />
 <img src="https://user-images.githubusercontent.com/31645195/202856974-1d894bbc-8d47-437e-aa1c-d5823d0a8f24.png" alt="terminal에서 Lighthouse 성능 측정 커맨드를 실행하는 모습">
@@ -151,8 +153,8 @@ lhci autorun
 
 먼저 GitHub 에 PR 이 올라왔을 때 Lighthouse 를 실행하는 yaml 파일 구성입니다. 
 
-{% highlight yaml%}
-{% assign LHCI_GITHUB_APP_TOKEN = "{{ secrets.LHCI_GITHUB_APP_TOKEN }}" -%}
+<pre>
+<code class="hljs yaml">{% assign LHCI_GITHUB_APP_TOKEN = "{{ secrets.LHCI_GITHUB_APP_TOKEN }}" -%}
 # .github/workflows/lighthouse-ci.yaml
 name: Run lighthouse CI When Pull Request
 
@@ -193,7 +195,8 @@ jobs:
         run: |
           npm install -g @lhci/cli
           lhci autorun || echo "🚨 Fail to Run Lighthouse CI!"
-{% endhighlight %}
+</code>
+</pre>
 
 <br />
 
@@ -238,8 +241,8 @@ jobs:
 
 기존에 결과를 임시 스토리지에 저장하는 방식에서 폴더를 추가 생성하여 정적인 파일로 저장하도록 변경합니다.  
 
-{% highlight json%}
-{
+<pre>
+<code class="hljs json">{
   "ci": {
     "collect": {
       "staticDistDir": "./build",
@@ -247,11 +250,11 @@ jobs:
       "numberOfRuns": 5
     },
     "upload": {
-      # 파일로 저장하기 위해서 target 값을 변경합니다. 
+      // 파일로 저장하기 위해서 target 값을 변경합니다. 
       "target": "filesystem", 
-      # 보고서 결과가 위치할 폴더의 이름을 정합니다. 
+      // 보고서 결과가 위치할 폴더의 이름을 정합니다. 
       "outputDir": "./lhci_reports",
-      # 각 보고서 파일 이름 규칙을 지정합니다. 
+      // 각 보고서 파일 이름 규칙을 지정합니다. 
       "reportFilenamePattern": "%%PATHNAME%%-%%DATETIME%%-report.%%EXTENSION%%"
     },
     "assert": {
@@ -262,8 +265,8 @@ jobs:
     }
   }
 }
-{% endhighlight %}
-
+</code>
+</pre>
 
 위에서 `assert` 라는 속성이 추가된 것을 확인할 수 있습니다. 내부에서 선택한 값이 지정한 기준을 만족하지 못할 경우 실행할 동작을 고를 수 있습니다. 예를 들어 위의 경우에는 `first-contentful-paint 가 최소 점수 0.75 를 넘지 못하면 경고 (warn)` 하는 옵션을 주었습니다. 설정해준 값에 따라서 기준을 만족하지 못하면 에러를 반환하도록 설정할 수도 있습니다. 
 
@@ -273,8 +276,8 @@ jobs:
 
 이제 Actions 에 보고서 결과를 요약하고 댓글에 추가하는 동작을 정의하겠습니다. 
 
-
-{% highlight yaml%}
+<pre>
+<code class="hljs yaml">
 {% assign GITHUB_TOKEN = "{{ secrets.GITHUB_TOKEN }}" -%}
 - name: Format lighthouse score
     id: format_lighthouse_score
@@ -314,7 +317,8 @@ jobs:
           console.log(comments);
         });
         core.setOutput('comments', comments)
-{% endhighlight %}
+</code>
+</pre>
 
 위의 스크립트는 root 주소에서 Lighthouse 의 보고서 파일이 있는 경로로 이동하여 해당 파일로부터 원하는 지표만을 추출하여 Markdown Table 형식으로 가공하는 작업을 합니다. 
 
@@ -348,8 +352,8 @@ jobs:
 
 앞서 한 번 언급했지만 위의 스크립트는 Markdown Table 형식의 문자열을 반환합니다. 따라서 해당 값을 다음 작업에서 전달받아 댓글에 추가하면 됩니다. 이를 위해서 `unsplash/comment-on-pr@v1.3.0` 라는 액션을 사용했습니다. 
 
-{% highlight yaml%}
-{% assign GITHUB_TOKEN = "{{ secrets.GITHUB_TOKEN }}" -%}
+<pre>
+<code class="hljs yaml">{% assign GITHUB_TOKEN = "{{ secrets.GITHUB_TOKEN }}" -%}
 {% assign comments = "{{ steps.format_lighthouse_score.outputs.comments }}" -%}
 - name: comment PR
     uses: unsplash/comment-on-pr@v1.3.0
@@ -357,7 +361,8 @@ jobs:
       GITHUB_TOKEN: ${{ GITHUB_TOKEN }}
     with:
       msg: ${{ comments}}
-{% endhighlight %}
+</code>
+</pre>
 
 
 PR 을 올렸을 때 정상적으로 댓글에 테이블이 표시되는지 확인해보겠습니다. 
@@ -376,8 +381,8 @@ PR 을 올렸을 때 정상적으로 댓글에 테이블이 표시되는지 확�
 
 먼저 새로운 Repo 를 Public 으로 생성하고 root 에 action.yml 이라는 파일을 생성합니다. 파일 내부를 다음과 같이 작성했습니다. 
 
-{% highlight yaml%}
-name: 'lighthouse-report-formatter'
+<pre>
+<code class="hljs yaml">name: 'lighthouse-report-formatter'
 description: 'Format Lighthouse report into Markdown Table'
 author: "iyu88"
 inputs:
@@ -393,7 +398,8 @@ runs:
 branding:
   icon: 'sun'
   color: 'orange'
-{% endhighlight %}
+</code>
+</pre>
 
 각 속성의 역할은 다음과 같습니다. 
 
@@ -413,41 +419,45 @@ branding:
 
 위에서 확인할 수 있듯이 사용자는 `Lighthouse 가 설치된 위치`를 입력해야 하고, `.lighthouserc.json 파일에 정의된 outputDir` 을 입력값으로 받습니다. 실제 동작은 index.js 안에 작성합니다. 앞서 lighthouse.yaml 에 있던 스크립트를 가져옵니다. GihHub 에서 공개한 인터페이스를 사용하기 위해서는 다음의 패키지를 설치해야 합니다. 
 
-{% highlight shell%}
-npm i @actions/core
-{% endhighlight %}
+<pre>
+<code class="hljs shell">npm i @actions/core
+</code>
+</pre>
 
 앞서 action.yml 에서 `inputs` 으로 받았던 값을 스크립트 내부에서 사용하기 위해서 다음과 같이 코드를 작성합니다. 
 
-{% highlight javascript%}
-const lh_directory = core.getInput('lh_directory');
+<pre>
+<code class="hljs javascript">const lh_directory = core.getInput('lh_directory');
 const manifest_path = core.getInput('manifest_path');
-{% endhighlight %}
+</code>
+</pre>
 
 또한 index.js 의 반환값을 다음 actions 에 전달하기 위해서 setOutput() 이라는 메서드를 사용해야 합니다. 다음과 같이 첫 번째 인자로 입력된 문자열로 두 번째 인자로 전달된 값에 접근할 수 있습니다. 
 
-{% highlight javascript%}
-const comments = formatLighthouseReportTable(lh_directory, manifest_path);
+<pre>
+<code class="hljs javascript">const comments = formatLighthouseReportTable(lh_directory, manifest_path);
 core.setOutput("comments", comments);
-{% endhighlight %}
+</code>
+</pre>
 
 > 여기까지 진행한 뒤에 바로 Marketplace 에 릴리즈하고 적용을 하니 아예 Actions 가 적용되지 않는 문제가 생겼습니다. 배포 전에 해야할 일이 하나 더 있다는 것을 알아차리지 못했습니다. 
 
 이제 index.js 와 의존성이 있는 node 패키지들을 하나의 파일로 합쳐야 합니다. 왜냐하면 node_modules 전체를 저장소에 올리는 것은 비효율적이기 때문입니다. 따라서 @zeit/ncc 라는 라이브러리를 사용하여 index.js 와 종속성이 있는 패키지를 하나의 파일로 만듭니다. 
 
-{% highlight shell%}
-npm i -g @zeit/ncc
+<pre>
+<code class="hljs shell">npm i -g @zeit/ncc
 ncc build index.js
-{% endhighlight %}
+</code>
+</pre>
 
 위의 build 명령어를 사용하면 dist/index.js 파일이 새롭게 생깁니다. 따라서 action.yml 에서 실행하는 파일 경로도 수정합니다. 
 
-{% highlight yaml%}
-runs:
+<pre>
+<code class="hljs yaml">runs:
   using: 'node16'
   main: 'dist/index.js'
-{% endhighlight %}
-
+</code>
+</pre>
 
 이제 Marketplace 에 배포를 진행합니다.
 
@@ -477,9 +487,8 @@ runs:
 
 실제 lighthouse-ci.yaml 의 전문은 다음과 같습니다. 파일이 매우 짧아집니다! 성공적으로 배포를 끝마쳤습니다.
 
-
-{% highlight yaml%}
-{% assign GITHUB_TOKEN = "{{ secrets.GITHUB_TOKEN }}" -%}
+<pre>
+<code class="hljs yaml">{% assign GITHUB_TOKEN = "{{ secrets.GITHUB_TOKEN }}" -%}
 {% assign LHCI_GITHUB_APP_TOKEN = "{{ secrets.LHCI_GITHUB_APP_TOKEN }}" -%}
 {% assign comments = "{{ steps.format_lighthouse_score.outputs.comments }}" -%}
 name: Run lighthouse CI When Pull Request
@@ -537,8 +546,8 @@ jobs:
           GITHUB_TOKEN: ${{ GITHUB_TOKEN }}
         with:
           msg: ${{ comments }}
-
-{% endhighlight %}
+</code>
+</pre>
 
 <br />
 

@@ -349,22 +349,28 @@
 
 <p>본격적으로 프로젝트에 설치해보겠습니다. React 프로젝트 내부로 이동하여 다음의 커맨드를 입력합니다.</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm i <span class="nt">-g</span> @lhci/cli</code></pre></figure>
+<pre>
+<code class="hljs shell">npm i -g @lhci/cli
+</code>
+</pre>
 
 <p>같은 경로에 <code class="language-plaintext highlighter-rouge">.lighthouserc.json</code> 파일을 생성합니다.</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="nl">"ci"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"collect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"staticDistDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./build"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"http://localhost:3000"</span><span class="p">],</span><span class="w">
-      </span><span class="nl">"numberOfRuns"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"upload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temporary-public-storage"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span></code></pre></figure>
+<pre>
+<code class="hljs json">{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./build",
+      "url": ["http://localhost:3000"],
+      "numberOfRuns": 5
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
+</code>
+</pre>
 
 <ul>
   <li>staticDistDir : 성능 측정에 사용할 HTML 파일이 위치하는 경로를 입력합니다. React 를 빌드 후 성능 측정하기 위해서 ‘./build’ 경로로 설정했습니다.</li>
@@ -378,8 +384,11 @@
 
 <p>json 파일을 작성한 뒤에 React 를 빌드하고 Lighthouse 보고서를 확인해봅니다. 아래의 명령어를 차례대로 실행합니다.</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm run build 
-lhci autorun</code></pre></figure>
+<pre>
+<code class="hljs shell">npm run build 
+lhci autorun
+</code>
+</pre>
 
 <p><br />
 <img src="https://user-images.githubusercontent.com/31645195/202856974-1d894bbc-8d47-437e-aa1c-d5823d0a8f24.png" alt="terminal에서 Lighthouse 성능 측정 커맨드를 실행하는 모습" />
@@ -399,46 +408,49 @@ lhci autorun</code></pre></figure>
 
 <p>먼저 GitHub 에 PR 이 올라왔을 때 Lighthouse 를 실행하는 yaml 파일 구성입니다.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># .github/workflows/lighthouse-ci.yaml</span>
-<span class="na">name</span><span class="pi">:</span> <span class="s">Run lighthouse CI When Pull Request</span>
+<pre>
+<code class="hljs yaml"># .github/workflows/lighthouse-ci.yaml
+name: Run lighthouse CI When Pull Request
 
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">pull_request</span><span class="pi">:</span>
-    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">dev'</span><span class="pi">]</span> <span class="c1"># dev 브랜치에서만 작동하도록 합니다.</span>
-    <span class="na">paths</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s1">'</span><span class="s">./frontend/**'</span> <span class="c1"># frontend 폴더 아래에 변경 사항이 있을 때에만 실행합니다. </span>
-  <span class="c1"># 옵션을 추가하여 GitHub Repo 의 Actions 탭에서 수동으로 실행할 수 있게 합니다. </span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span> 
+on:
+  pull_request:
+    branches: ['dev'] # dev 브랜치에서만 작동하도록 합니다.
+    paths:
+      - './frontend/**' # frontend 폴더 아래에 변경 사항이 있을 때에만 실행합니다. 
+  # 옵션을 추가하여 GitHub Repo 의 Actions 탭에서 수동으로 실행할 수 있게 합니다. 
+  workflow_dispatch: 
 
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">lhci</span><span class="pi">:</span>
-    <span class="na">name</span><span class="pi">:</span> <span class="s">Lighthouse CI</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span> <span class="c1"># 본 동작을 실행할 운영체제를 명시합니다. </span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
-      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span> <span class="c1"># 소스 코드를 다운로드합니다. </span>
+jobs:
+  lhci:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest # 본 동작을 실행할 운영체제를 명시합니다. 
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v3 # 소스 코드를 다운로드합니다. 
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Use Node.js 18.x</span> <span class="c1"># Node 버전을 지정할 수 있습니다. </span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v3</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">node-version</span><span class="pi">:</span> <span class="s">18.x</span>
+      - name: Use Node.js 18.x # Node 버전을 지정할 수 있습니다. 
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
       
-      <span class="c1"># Actions 의 실행 위치가 root 이기 때문에 frontend 폴더로 이동하여 </span>
-      <span class="c1"># 패키지 다운로드 &amp; 빌드를 실행합니다. </span>
-      <span class="c1"># Lighthouse CLI 를 설치하고 autorun 명령어를 실행합니다.</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install packages</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">cd ./frontend</span>
-          <span class="s">npm ci</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">npm run build</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Lighthouse CI</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">LHCI_GITHUB_APP_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.LHCI_GITHUB_APP_TOKEN }}</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">npm install -g @lhci/cli</span>
-          <span class="s">lhci autorun || echo "🚨 Fail to Run Lighthouse CI!"</span></code></pre></figure>
+      # Actions 의 실행 위치가 root 이기 때문에 frontend 폴더로 이동하여 
+      # 패키지 다운로드 &amp; 빌드를 실행합니다. 
+      # Lighthouse CLI 를 설치하고 autorun 명령어를 실행합니다.
+      - name: Install packages
+        run: |
+          cd ./frontend
+          npm ci
+      - name: Build
+        run: |
+          npm run build
+      - name: Run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          npm install -g @lhci/cli
+          lhci autorun || echo "🚨 Fail to Run Lighthouse CI!"
+</code>
+</pre>
 
 <p><br /></p>
 
@@ -484,29 +496,32 @@ lhci autorun</code></pre></figure>
 
 <p>기존에 결과를 임시 스토리지에 저장하는 방식에서 폴더를 추가 생성하여 정적인 파일로 저장하도록 변경합니다.</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="nl">"ci"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"collect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"staticDistDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./build"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"http://localhost:3000"</span><span class="p">],</span><span class="w">
-      </span><span class="nl">"numberOfRuns"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"upload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">#</span><span class="w"> </span><span class="err">파일로</span><span class="w"> </span><span class="err">저장하기</span><span class="w"> </span><span class="err">위해서</span><span class="w"> </span><span class="err">target</span><span class="w"> </span><span class="err">값을</span><span class="w"> </span><span class="err">변경합니다.</span><span class="w"> 
-      </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filesystem"</span><span class="p">,</span><span class="w"> 
-      </span><span class="err">#</span><span class="w"> </span><span class="err">보고서</span><span class="w"> </span><span class="err">결과가</span><span class="w"> </span><span class="err">위치할</span><span class="w"> </span><span class="err">폴더의</span><span class="w"> </span><span class="err">이름을</span><span class="w"> </span><span class="err">정합니다.</span><span class="w"> 
-      </span><span class="nl">"outputDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./lhci_reports"</span><span class="p">,</span><span class="w">
-      </span><span class="err">#</span><span class="w"> </span><span class="err">각</span><span class="w"> </span><span class="err">보고서</span><span class="w"> </span><span class="err">파일</span><span class="w"> </span><span class="err">이름</span><span class="w"> </span><span class="err">규칙을</span><span class="w"> </span><span class="err">지정합니다.</span><span class="w"> 
-      </span><span class="nl">"reportFilenamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"%%PATHNAME%%-%%DATETIME%%-report.%%EXTENSION%%"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"assert"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"assertions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"first-contentful-paint"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"warn"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"minScore"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="w"> </span><span class="p">}],</span><span class="w">
-        </span><span class="nl">"largest-contentful-paint"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"warn"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"minScore"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="w"> </span><span class="p">}]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span></code></pre></figure>
+<pre>
+<code class="hljs json">{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./build",
+      "url": ["http://localhost:3000"],
+      "numberOfRuns": 5
+    },
+    "upload": {
+      // 파일로 저장하기 위해서 target 값을 변경합니다. 
+      "target": "filesystem", 
+      // 보고서 결과가 위치할 폴더의 이름을 정합니다. 
+      "outputDir": "./lhci_reports",
+      // 각 보고서 파일 이름 규칙을 지정합니다. 
+      "reportFilenamePattern": "%%PATHNAME%%-%%DATETIME%%-report.%%EXTENSION%%"
+    },
+    "assert": {
+      "assertions": {
+        "first-contentful-paint": ["warn", { "minScore": 0.75 }],
+        "largest-contentful-paint": ["warn", { "minScore": 0.75 }]
+      }
+    }
+  }
+}
+</code>
+</pre>
 
 <p>위에서 <code class="language-plaintext highlighter-rouge">assert</code> 라는 속성이 추가된 것을 확인할 수 있습니다. 내부에서 선택한 값이 지정한 기준을 만족하지 못할 경우 실행할 동작을 고를 수 있습니다. 예를 들어 위의 경우에는 <code class="language-plaintext highlighter-rouge">first-contentful-paint 가 최소 점수 0.75 를 넘지 못하면 경고 (warn)</code> 하는 옵션을 주었습니다. 설정해준 값에 따라서 기준을 만족하지 못하면 에러를 반환하도록 설정할 수도 있습니다.</p>
 
@@ -516,44 +531,48 @@ lhci autorun</code></pre></figure>
 
 <p>이제 Actions 에 보고서 결과를 요약하고 댓글에 추가하는 동작을 정의하겠습니다.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Format lighthouse score</span>
-    <span class="s">id</span><span class="err">:</span> <span class="s">format_lighthouse_score</span>
-    <span class="s">uses</span><span class="err">:</span> <span class="s">actions/github-script@v6</span>
-    <span class="s">with</span><span class="err">:</span>
-      <span class="na">github-token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
-      <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="s">const fs = require('fs');</span>
-        <span class="s">const results = JSON.parse(fs.readFileSync("./frontend/lhci_reports/manifest.json"));</span>
-        <span class="s">let comments = "";</span>
-        <span class="s">results.forEach((result) =&gt; {</span>
-          <span class="s">const { summary, jsonPath } = result;</span>
-          <span class="s">const details = JSON.parse(fs.readFileSync(jsonPath));</span>
-          <span class="s">const { audits } = details;</span>
-        <span class="no">  </span>
-          <span class="s">const formatScore = (res) =&gt; Math.round(res * 100);</span>
-          <span class="s">Object.keys(summary).forEach(</span>
-            <span class="s">(key) =&gt; (summary[key] = formatScore(summary[key]))</span>
-          <span class="s">);</span>
-          <span class="s">const scoreEmoji = (res) =&gt; (res &gt;= 90 ? "🟢" : res &gt;= 50 ? "🟠" : "🔴");</span>
-          <span class="s">const reportRow = (label, score) =&gt; `| ${scoreEmoji(score)} ${label} | ${score} |`;</span>
-          <span class="s">const detailRow = (label, score, displayValue) =&gt; `${reportRow(label, score)} ${displayValue} |`;</span>
-          <span class="s">const report = [`⚡️ Lighthouse Report!`,</span>
-          <span class="s">`| Category | Score |`,</span>
-          <span class="s">`| -------- | ----- |`,</span>
-          <span class="s">`${reportRow('Performance', summary.performance)}`,</span>
-          <span class="s">`${reportRow('Accessibility', summary.accessibility)}`,</span>
-          <span class="s">`${reportRow('Best practices', summary['best-practices'])}`,</span>
-          <span class="s">`${reportRow('SEO', summary.seo)}`,</span>
-          <span class="s">`${reportRow('PWA', summary.pwa)}`].join('\n');</span>
-          <span class="s">const detail = [`🔎 Performance Details`,</span>
-          <span class="s">`| Category | Score | DisplayValue |`,</span>
-          <span class="s">`| -------- | ----- | ------------ |`,</span>
-          <span class="s">`${detailRow("First Contentful Paint", audits['first-contentful-paint'].score * 100, audits['first-contentful-paint'].displayValue)}`,</span>
-          <span class="s">`${detailRow("Largest Contentful Paint", audits['largest-contentful-paint'].score * 100, audits['largest-contentful-paint'].displayValue)}`].join('\n');</span>
-          <span class="s">comments += report + "\n" + detail + "\n";</span>
-          <span class="s">console.log(comments);</span>
-        <span class="s">});</span>
-        <span class="s">core.setOutput('comments', comments)</span></code></pre></figure>
+<pre>
+<code class="hljs yaml">
+- name: Format lighthouse score
+    id: format_lighthouse_score
+    uses: actions/github-script@v6
+    with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      script: |
+        const fs = require('fs');
+        const results = JSON.parse(fs.readFileSync("./frontend/lhci_reports/manifest.json"));
+        let comments = "";
+        results.forEach((result) =&gt; {
+          const { summary, jsonPath } = result;
+          const details = JSON.parse(fs.readFileSync(jsonPath));
+          const { audits } = details;
+          
+          const formatScore = (res) =&gt; Math.round(res * 100);
+          Object.keys(summary).forEach(
+            (key) =&gt; (summary[key] = formatScore(summary[key]))
+          );
+          const scoreEmoji = (res) =&gt; (res &gt;= 90 ? "🟢" : res &gt;= 50 ? "🟠" : "🔴");
+          const reportRow = (label, score) =&gt; `| ${scoreEmoji(score)} ${label} | ${score} |`;
+          const detailRow = (label, score, displayValue) =&gt; `${reportRow(label, score)} ${displayValue} |`;
+          const report = [`⚡️ Lighthouse Report!`,
+          `| Category | Score |`,
+          `| -------- | ----- |`,
+          `${reportRow('Performance', summary.performance)}`,
+          `${reportRow('Accessibility', summary.accessibility)}`,
+          `${reportRow('Best practices', summary['best-practices'])}`,
+          `${reportRow('SEO', summary.seo)}`,
+          `${reportRow('PWA', summary.pwa)}`].join('\n');
+          const detail = [`🔎 Performance Details`,
+          `| Category | Score | DisplayValue |`,
+          `| -------- | ----- | ------------ |`,
+          `${detailRow("First Contentful Paint", audits['first-contentful-paint'].score * 100, audits['first-contentful-paint'].displayValue)}`,
+          `${detailRow("Largest Contentful Paint", audits['largest-contentful-paint'].score * 100, audits['largest-contentful-paint'].displayValue)}`].join('\n');
+          comments += report + "\n" + detail + "\n";
+          console.log(comments);
+        });
+        core.setOutput('comments', comments)
+</code>
+</pre>
 
 <p>위의 스크립트는 root 주소에서 Lighthouse 의 보고서 파일이 있는 경로로 이동하여 해당 파일로부터 원하는 지표만을 추출하여 Markdown Table 형식으로 가공하는 작업을 합니다.</p>
 
@@ -586,12 +605,15 @@ lhci autorun</code></pre></figure>
 
 <p>앞서 한 번 언급했지만 위의 스크립트는 Markdown Table 형식의 문자열을 반환합니다. 따라서 해당 값을 다음 작업에서 전달받아 댓글에 추가하면 됩니다. 이를 위해서 <code class="language-plaintext highlighter-rouge">unsplash/comment-on-pr@v1.3.0</code> 라는 액션을 사용했습니다.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">comment PR</span>
-    <span class="s">uses</span><span class="err">:</span> <span class="s">unsplash/comment-on-pr@v1.3.0</span>
-    <span class="s">env</span><span class="err">:</span>
-      <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
-    <span class="na">with</span><span class="pi">:</span>
-      <span class="na">msg</span><span class="pi">:</span> <span class="s">${{ steps.format_lighthouse_score.outputs.comments }}</span></code></pre></figure>
+<pre>
+<code class="hljs yaml">- name: comment PR
+    uses: unsplash/comment-on-pr@v1.3.0
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      msg: ${{ steps.format_lighthouse_score.outputs.comments }}
+</code>
+</pre>
 
 <p>PR 을 올렸을 때 정상적으로 댓글에 테이블이 표시되는지 확인해보겠습니다.</p>
 
@@ -606,22 +628,25 @@ lhci autorun</code></pre></figure>
 
 <p>먼저 새로운 Repo 를 Public 으로 생성하고 root 에 action.yml 이라는 파일을 생성합니다. 파일 내부를 다음과 같이 작성했습니다.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">lighthouse-report-formatter'</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Format</span><span class="nv"> </span><span class="s">Lighthouse</span><span class="nv"> </span><span class="s">report</span><span class="nv"> </span><span class="s">into</span><span class="nv"> </span><span class="s">Markdown</span><span class="nv"> </span><span class="s">Table'</span>
-<span class="na">author</span><span class="pi">:</span> <span class="s2">"</span><span class="s">iyu88"</span>
-<span class="na">inputs</span><span class="pi">:</span>
-  <span class="na">lh_directory</span><span class="pi">:</span>  
-    <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">directory</span><span class="nv"> </span><span class="s">path</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">lighthouse</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">applied'</span>
-  <span class="na">manifest_path</span><span class="pi">:</span>
-    <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">path</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reports</span><span class="nv"> </span><span class="s">manifest.json</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">saved'</span>
-    <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/lhci_reports'</span>
-<span class="na">runs</span><span class="pi">:</span>
-  <span class="na">using</span><span class="pi">:</span> <span class="s1">'</span><span class="s">node16'</span>
-  <span class="na">main</span><span class="pi">:</span> <span class="s1">'</span><span class="s">index.js'</span>
-<span class="na">branding</span><span class="pi">:</span>
-  <span class="na">icon</span><span class="pi">:</span> <span class="s1">'</span><span class="s">sun'</span>
-  <span class="na">color</span><span class="pi">:</span> <span class="s1">'</span><span class="s">orange'</span></code></pre></figure>
+<pre>
+<code class="hljs yaml">name: 'lighthouse-report-formatter'
+description: 'Format Lighthouse report into Markdown Table'
+author: "iyu88"
+inputs:
+  lh_directory:  
+    description: 'directory path to which the lighthouse is applied'
+  manifest_path:
+    description: 'path to which the reports manifest.json is saved'
+    required: true
+    default: '/lhci_reports'
+runs:
+  using: 'node16'
+  main: 'index.js'
+branding:
+  icon: 'sun'
+  color: 'orange'
+</code>
+</pre>
 
 <p>각 속성의 역할은 다음과 같습니다.</p>
 
@@ -649,17 +674,26 @@ lhci autorun</code></pre></figure>
 
 <p>위에서 확인할 수 있듯이 사용자는 <code class="language-plaintext highlighter-rouge">Lighthouse 가 설치된 위치</code>를 입력해야 하고, <code class="language-plaintext highlighter-rouge">.lighthouserc.json 파일에 정의된 outputDir</code> 을 입력값으로 받습니다. 실제 동작은 index.js 안에 작성합니다. 앞서 lighthouse.yaml 에 있던 스크립트를 가져옵니다. GihHub 에서 공개한 인터페이스를 사용하기 위해서는 다음의 패키지를 설치해야 합니다.</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm i @actions/core</code></pre></figure>
+<pre>
+<code class="hljs shell">npm i @actions/core
+</code>
+</pre>
 
 <p>앞서 action.yml 에서 <code class="language-plaintext highlighter-rouge">inputs</code> 으로 받았던 값을 스크립트 내부에서 사용하기 위해서 다음과 같이 코드를 작성합니다.</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">lh_directory</span> <span class="o">=</span> <span class="nx">core</span><span class="p">.</span><span class="nx">getInput</span><span class="p">(</span><span class="dl">'</span><span class="s1">lh_directory</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">manifest_path</span> <span class="o">=</span> <span class="nx">core</span><span class="p">.</span><span class="nx">getInput</span><span class="p">(</span><span class="dl">'</span><span class="s1">manifest_path</span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
+<pre>
+<code class="hljs javascript">const lh_directory = core.getInput('lh_directory');
+const manifest_path = core.getInput('manifest_path');
+</code>
+</pre>
 
 <p>또한 index.js 의 반환값을 다음 actions 에 전달하기 위해서 setOutput() 이라는 메서드를 사용해야 합니다. 다음과 같이 첫 번째 인자로 입력된 문자열로 두 번째 인자로 전달된 값에 접근할 수 있습니다.</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">comments</span> <span class="o">=</span> <span class="nx">formatLighthouseReportTable</span><span class="p">(</span><span class="nx">lh_directory</span><span class="p">,</span> <span class="nx">manifest_path</span><span class="p">);</span>
-<span class="nx">core</span><span class="p">.</span><span class="nx">setOutput</span><span class="p">(</span><span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span><span class="p">,</span> <span class="nx">comments</span><span class="p">);</span></code></pre></figure>
+<pre>
+<code class="hljs javascript">const comments = formatLighthouseReportTable(lh_directory, manifest_path);
+core.setOutput("comments", comments);
+</code>
+</pre>
 
 <blockquote>
   <p>여기까지 진행한 뒤에 바로 Marketplace 에 릴리즈하고 적용을 하니 아예 Actions 가 적용되지 않는 문제가 생겼습니다. 배포 전에 해야할 일이 하나 더 있다는 것을 알아차리지 못했습니다.</p>
@@ -667,14 +701,20 @@ lhci autorun</code></pre></figure>
 
 <p>이제 index.js 와 의존성이 있는 node 패키지들을 하나의 파일로 합쳐야 합니다. 왜냐하면 node_modules 전체를 저장소에 올리는 것은 비효율적이기 때문입니다. 따라서 @zeit/ncc 라는 라이브러리를 사용하여 index.js 와 종속성이 있는 패키지를 하나의 파일로 만듭니다.</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm i <span class="nt">-g</span> @zeit/ncc
-ncc build index.js</code></pre></figure>
+<pre>
+<code class="hljs shell">npm i -g @zeit/ncc
+ncc build index.js
+</code>
+</pre>
 
 <p>위의 build 명령어를 사용하면 dist/index.js 파일이 새롭게 생깁니다. 따라서 action.yml 에서 실행하는 파일 경로도 수정합니다.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">runs</span><span class="pi">:</span>
-  <span class="na">using</span><span class="pi">:</span> <span class="s1">'</span><span class="s">node16'</span>
-  <span class="na">main</span><span class="pi">:</span> <span class="s1">'</span><span class="s">dist/index.js'</span></code></pre></figure>
+<pre>
+<code class="hljs yaml">runs:
+  using: 'node16'
+  main: 'dist/index.js'
+</code>
+</pre>
 
 <p>이제 Marketplace 에 배포를 진행합니다.</p>
 
@@ -709,61 +749,64 @@ ncc build index.js</code></pre></figure>
 
 <p>실제 lighthouse-ci.yaml 의 전문은 다음과 같습니다. 파일이 매우 짧아집니다! 성공적으로 배포를 끝마쳤습니다.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">name</span><span class="pi">:</span> <span class="s">Run lighthouse CI When Pull Request</span>
+<pre>
+<code class="hljs yaml">name: Run lighthouse CI When Pull Request
 
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">pull_request</span><span class="pi">:</span>
-    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">dev'</span><span class="pi">]</span>
-    <span class="na">paths</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s1">'</span><span class="s">./frontend/**'</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+on:
+  pull_request:
+    branches: ['dev']
+    paths:
+      - './frontend/**'
+  workflow_dispatch:
 
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">lhci</span><span class="pi">:</span>
-    <span class="na">name</span><span class="pi">:</span> <span class="s">Lighthouse CI</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+jobs:
+  lhci:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Use Node.js 18.7.0</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v3</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">node-version</span><span class="pi">:</span> <span class="s">18.7.0</span>
+      - name: Use Node.js 18.7.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.7.0
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install packages</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">cd ./frontend</span>
-          <span class="s">npm ci</span>
+      - name: Install packages
+        run: |
+          cd ./frontend
+          npm ci
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">cd ./frontend</span>
-          <span class="s">npm run build</span>
-        <span class="na">env</span><span class="pi">:</span> 
-          <span class="na">CI</span><span class="pi">:</span> <span class="no">false</span>
+      - name: Build
+        run: |
+          cd ./frontend
+          npm run build
+        env: 
+          CI: false
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Lighthouse CI</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">LHCI_GITHUB_APP_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.LHCI_GITHUB_APP_TOKEN }}</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">cd ./frontend</span>
-          <span class="s">npm install -g @lhci/cli</span>
-          <span class="s">lhci autorun || echo "🚨 Fail to Run Lighthouse CI!"</span>
+      - name: Run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          cd ./frontend
+          npm install -g @lhci/cli
+          lhci autorun || echo "🚨 Fail to Run Lighthouse CI!"
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Format lighthouse score</span>
-        <span class="na">id</span><span class="pi">:</span> <span class="s">format_lighthouse_score</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">iyu88/lighthouse-report-formatter@1.0.0</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">lh_directory</span><span class="pi">:</span> <span class="s">./frontend/</span>
-          <span class="na">manifest_path</span><span class="pi">:</span> <span class="s">lhci_reports</span>
+      - name: Format lighthouse score
+        id: format_lighthouse_score
+        uses: iyu88/lighthouse-report-formatter@1.0.0
+        with:
+          lh_directory: ./frontend/
+          manifest_path: lhci_reports
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">comment PR</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">unsplash/comment-on-pr@v1.3.0</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">msg</span><span class="pi">:</span> <span class="s">${{ steps.format_lighthouse_score.outputs.comments }}</span></code></pre></figure>
+      - name: comment PR
+        uses: unsplash/comment-on-pr@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: ${{ steps.format_lighthouse_score.outputs.comments }}
+</code>
+</pre>
 
 <p><br /></p>
 

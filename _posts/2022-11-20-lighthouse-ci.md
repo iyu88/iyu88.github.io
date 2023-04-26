@@ -17,7 +17,7 @@ cover: "/assets/instacode.png"
 부스트캠프 그룹 프로젝트 기간 첫 주차에 저희 조 주제를 바탕으로 마스터께서 `테크 스펙`을 작성해주셨습니다. 이 때, 임팩트 측정에서 눈길을 사로 잡는 한 단어가 있었습니다. 바로 `라이트하우스` 입니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202853153-e3071593-0a9d-4bc9-ab64-1adf8557b0c5.png">
+<img src="https://user-images.githubusercontent.com/31645195/202853153-e3071593-0a9d-4bc9-ab64-1adf8557b0c5.png" alt="테크 스펙의 일부인 '임팩트 측정'의 항목들">
 *임팩트 측정에서 Lighthouse 에서 제공하는 기준을 적용합니다.*
 <br />
 
@@ -30,12 +30,12 @@ cover: "/assets/instacode.png"
 Lighthouse 는 구글에서 개발한 웹 성능 측정 오픈 소스 툴입니다. 개발자 도구 탭에서 `Lighthouse` 탭을 선택하여 현재 페이지의 품질을 측정할 수 있습니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202853412-df35c041-98ee-493f-b464-5d9add2ed89f.png">
+<img src="https://user-images.githubusercontent.com/31645195/202853412-df35c041-98ee-493f-b464-5d9add2ed89f.png" alt="개발자 도구에서 확인할 수 있는 Lighthouse 탭">
 *'Analyze page load' 버튼을 누르면 도구를 실행합니다.*
 <br />
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202853538-e24e875f-a9ff-489e-a217-fc8b1a66e80b.png">
+<img src="https://user-images.githubusercontent.com/31645195/202853538-e24e875f-a9ff-489e-a217-fc8b1a66e80b.png" alt="블로그의 성능을 측정한 결과로 나온 5개 항목에 대한 점수">
 *블로그 성능을 측정한 결과입니다. 여러 가지 지표가 상단에 나타납니다. 스크롤을 내리면 세부정보를 확인할 수 있습니다.*
 <br />
 
@@ -50,12 +50,12 @@ Lighthouse 는 구글에서 개발한 웹 성능 측정 오픈 소스 툴입니�
 말 그대로 웹 페이지의 성능입니다. 웹 페이지 요소들이 얼마나 빨리 화면에 렌더링되는지에 대해서 측정합니다. 방금 전 블로그 성능을 측정한 개발자 도구에서 Performance 를 누르면 다음과 같이 어떠한 요소들이 계산에 반영되었는지 확인해볼 수 있습니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202853910-19cb9e0a-a0e5-4993-a9d7-59c38a3a8544.png">
+<img src="https://user-images.githubusercontent.com/31645195/202853910-19cb9e0a-a0e5-4993-a9d7-59c38a3a8544.png" alt="Performance 점수가 90점이고 하단에 작게 링크들이 위치해 있음">
 *See calculator 를 누르면 새로운 창이 열립니다.*
 <br />
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202853925-aada9bd9-47b0-4a3c-a177-f5c238d65f68.png">
+<img src="https://user-images.githubusercontent.com/31645195/202853925-aada9bd9-47b0-4a3c-a177-f5c238d65f68.png" alt="Performance의 하위 지표 6가지에 대한 정보">
 *성능을 측정하기 위해서 위에서 확인할 수 있는 6가지 지표가 활용되었음을 알 수 있습니다.*
 <br />
 
@@ -74,7 +74,7 @@ Lighthouse 는 구글에서 개발한 웹 성능 측정 오픈 소스 툴입니�
 웹 페이지가 오류를 발생하는지 확인합니다. 콘솔 창에 생기는 오류, HTTPS 지원 여부, 소스 코드가 실제 동작에 활용되는지 여부가 점수에 반영됩니다. 실제로 블로그 성능 평가에서 Best Practices 가 75점으로 저조한 모습을 보이는데, 콘솔 창에 warning 과 issue 들이 존재하기 때문임을 알 수 있습니다.  
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202854567-120c45be-14fd-4e18-b38a-b002be89a451.png">
+<img src="https://user-images.githubusercontent.com/31645195/202854567-120c45be-14fd-4e18-b38a-b002be89a451.png" alt="Best Practices 점수를 저하시키는 원인인 경고 메세지들이 블로그 콘솔 창에 나타나 있는 모습">
 *무수히 많은 노란색 로그들이 보입니다.*
 <br />
 
@@ -132,13 +132,13 @@ lhci autorun
 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202856974-1d894bbc-8d47-437e-aa1c-d5823d0a8f24.png">
+<img src="https://user-images.githubusercontent.com/31645195/202856974-1d894bbc-8d47-437e-aa1c-d5823d0a8f24.png" alt="terminal에서 Lighthouse 성능 측정 커맨드를 실행하는 모습">
 *성능 측정 중...*
 <br />
 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202857238-288d882f-4867-458d-bde1-5d55e7ce19b0.png">
+<img src="https://user-images.githubusercontent.com/31645195/202857238-288d882f-4867-458d-bde1-5d55e7ce19b0.png" alt="프로젝트 성능을 Lighthouse로 측정한 결과, 5개 지표에 대한 점수가 표시됨">
 *콘솔 창에 있는 포트 번호로 접속하면 개발자 도구에서 봤던 보고서를 확인할 수 있습니다.*
 <br />
 
@@ -204,24 +204,24 @@ jobs:
 마지막 동작에서 `secrets.LHCI_GITHUB_APP_TOKEN` 라는 값이 있습니다. 이는 LHCI_GITHUB_APP_TOKEN 이라는 이름의 변수를 env (환경 변수) 로 사용하고 있는 것입니다. Lighthouse 를 사용하기 위한 토큰은 다음의 [링크](https://github.com/apps/lighthouse-ci) 에서 다운로드 받을 수 있습니다. 위의 GitHub Actions 를 등록하고 싶은 Repo 를 찾아서 비밀 토큰을 발급 받습니다. 해당 값을 환경 변수로 저장하기 위해서 Repo 의 Settings 탭으로 이동합니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202857992-19e36607-7080-42d7-82f6-8d7fe8388f66.png">
+<img src="https://user-images.githubusercontent.com/31645195/202857992-19e36607-7080-42d7-82f6-8d7fe8388f66.png" alt="GitHub 레포지토리에서 찾을 수 있는 Settings 탭">
 *Settings*
 <br />
 
 좌측의 사이드바에서 `Security - Secrets - Actions` 로 이동합니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202858412-d54bf761-4b24-4b66-89e7-8ebbe380e4df.png">
+<img src="https://user-images.githubusercontent.com/31645195/202858412-d54bf761-4b24-4b66-89e7-8ebbe380e4df.png" alt="좌측 사이드바 메뉴에서 찾을 수 있는 Actions 메뉴">
 *Actions*
 <br />
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202858483-62e2bc75-b4bb-493f-9a03-2cdc8a52fd16.png">
+<img src="https://user-images.githubusercontent.com/31645195/202858483-62e2bc75-b4bb-493f-9a03-2cdc8a52fd16.png" alt="환경 변수를 추가할 수 있는 'New repository secret' 버튼">
 *새로운 비밀 환경 변수를 추가합니다.*
 <br />
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202858484-eff4b97d-39d2-4945-82c5-7654e96a5268.png">
+<img src="https://user-images.githubusercontent.com/31645195/202858484-eff4b97d-39d2-4945-82c5-7654e96a5268.png" alt="Actions에서 사용할 변수 이름과 발급 받은 lighthouse 토큰을 각각 입력할 수 있는 Name과 Secret 입력 칸">
 *Actions 에서 사용할 변수 이름과 위에서 발급 받은 Lighthouse 비밀 토큰을 key-value 로 저장합니다.*
 <br />
 
@@ -321,7 +321,7 @@ jobs:
 핵심적인 부분은 보고서를 생성하면 manifest.json 이라는 파일을 생성하게 되는데, 해당 파일 내용을 읽어서 안에 있는 요약 정보와 세부 지표를 가져온다는 것입니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202860127-7a895edf-3540-42b8-b2f3-a5be54bd7948.png">
+<img src="https://user-images.githubusercontent.com/31645195/202860127-7a895edf-3540-42b8-b2f3-a5be54bd7948.png" alt="Lighthouse 성능 측정 실행 결과로 생성된 manifest.json 파일 내용">
 *.lighthouserc.json 에서 정의한 경로와 이름대로 보고서가 생성되어 배열 형태로 저장된 것을 확인할 수 있습니다.*
 <br />
 
@@ -329,14 +329,14 @@ jobs:
 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202860399-28c01d86-ccd9-4a9b-ae2c-4bbae8d02fb7.png">
+<img src="https://user-images.githubusercontent.com/31645195/202860399-28c01d86-ccd9-4a9b-ae2c-4bbae8d02fb7.png" alt="읽기 어렵게 되어 있는 성능 측정 결과 json 보고서">
 *가독성이 심히 안 좋은 json 파일이 있습니다.*
 <br />
 
 무엇인지 확인해보기 위해서 Web json formatter 로 정돈해보았습니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202860551-9ea9a8ec-eb6d-4f1a-aa20-0a061608e4de.png">
+<img src="https://user-images.githubusercontent.com/31645195/202860551-9ea9a8ec-eb6d-4f1a-aa20-0a061608e4de.png" alt="읽기 좋게 포맷팅된 json 결과 보고서 중 audits, first-contentful-paint, largest-contentful-paint 정보">
 *깔끔하게 정리되니까 가져다 쓸 정보가 보입니다.*
 <br />
 
@@ -364,7 +364,7 @@ PR 을 올렸을 때 정상적으로 댓글에 테이블이 표시되는지 확�
 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202861006-ac1a1a40-8e46-4abb-a737-2e6869f99140.png">
+<img src="https://user-images.githubusercontent.com/31645195/202861006-ac1a1a40-8e46-4abb-a737-2e6869f99140.png" alt="GitHub PR 댓글로 Lighthouse의 대표적인 지표 5개와 FCP, LCP 성능 점수가 표 형태로 추가됨">
 *5개의 주요 지표와 2개의 세부 지표가 표로 정상 출력됩니다.*
 <br />
 
@@ -452,12 +452,12 @@ runs:
 이제 Marketplace 에 배포를 진행합니다.
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202894399-1dc52d36-4390-4134-99c9-6784a6ab5b11.png">
+<img src="https://user-images.githubusercontent.com/31645195/202894399-1dc52d36-4390-4134-99c9-6784a6ab5b11.png" alt="GitHub 레포지토리에서 우측에 있는 'Releases'에서 'Create a new release' 링크">
 *GitHub Repo 의 우측 사이드바에서 'Create a new release' 버튼을 클릭합니다.*
 <br />
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202894612-674d6493-738f-4d70-aa5e-b6025fd625e3.png">
+<img src="https://user-images.githubusercontent.com/31645195/202894612-674d6493-738f-4d70-aa5e-b6025fd625e3.png" alt="Release를 진행하기 위해 위에서부터 계정 인증, README 추가, 카테고리 설정, 태그 및 브랜치 설정, 설명 추가를 차례대로 진행">
 *사진에 있는 입력 폼을 하나씩 채워줍니다.*
 <br />
 
@@ -471,7 +471,7 @@ runs:
 이렇게 작성을 완료하면 아래의 사진처럼 등록이 완료되고 Marketplace 에서 확인할 수 있습니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/202894769-b2c75ab0-0e08-4692-8886-07c2baf7db0a.png">
+<img src="https://user-images.githubusercontent.com/31645195/202894769-b2c75ab0-0e08-4692-8886-07c2baf7db0a.png" alt="Marketplace에 정상적으로 등록된 직접 만든 GitHub Actions">
 *Marketplace 등록 완료!*
 <br />
 

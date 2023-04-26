@@ -62,7 +62,7 @@ cover: "/assets/boostcamp_J164.png"
 이때 기본적인 CS 공부의 중요성을 깨달았기 때문에 멤버십이 끝난 지금, 더듬더듬 시작하고 있습니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/209993445-e5336e68-5cca-4acb-8e3d-17d3bc93049b.png" width="50%">
+<img src="https://user-images.githubusercontent.com/31645195/209993445-e5336e68-5cca-4acb-8e3d-17d3bc93049b.png" width="50%" alt="CS 학습 내용을 정리하는 노션 페이지">
 *며칠 전부터 시작한 CS 스터디*
 <br />
 
@@ -84,7 +84,7 @@ cover: "/assets/boostcamp_J164.png"
 만약 기록도 존재하지 않았다면, 그 시기를 보냈다는 증거가 없어질 뻔했습니다. 😅
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/209994002-87a8805a-c54b-4710-bfa0-740840abaa7e.jpeg" width="50%">
+<img src="https://user-images.githubusercontent.com/31645195/209994002-87a8805a-c54b-4710-bfa0-740840abaa7e.jpeg" width="50%" alt="Git File Lifecycle에 대해서 정리해두었던 필기 자료">
 *당시에 필기했던 Git File Lifecycle*
 <br />
 
@@ -178,7 +178,7 @@ cover: "/assets/boostcamp_J164.png"
 또한 몇 가지 단점도 알게 되었는데, 앞서 언급한 것의 반대급부로 인해 유연성이 부족하다는 점과 다른 사람의 의견에 너무 귀 기울이는 탓에 해당 의견에 빠르게 동조하여 스스로 의견을 생각해보지 않는 경우가 있다는 점입니다. 
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/209994198-bcf7a0e8-9d5d-497c-b583-b901f7ad7d25.png" width="50%">
+<img src="https://user-images.githubusercontent.com/31645195/209994198-bcf7a0e8-9d5d-497c-b583-b901f7ad7d25.png" width="50%" alt="그룹 프로젝트로 진행했던 Codocs의 문서 목록 페이지">
 *겨우겨우 배포했던 Codocs*
 <br />
 
@@ -231,9 +231,9 @@ cover: "/assets/boostcamp_J164.png"
 <table>
   <caption align="bottom">패브릭 파우치 삼형제</caption>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/31645195/209995493-a198a58e-46d2-4929-85be-3cb8c664ae38.jpeg"></td>
-    <td><img src="https://user-images.githubusercontent.com/31645195/210035116-8a280cb4-de20-461c-9128-f1051b18d14e.JPG"></td>
-     <td><img src="https://user-images.githubusercontent.com/31645195/209995459-5b5d34e6-f477-4f75-ac4c-a389e9b1658c.jpeg"></td>
+    <td><img src="https://user-images.githubusercontent.com/31645195/209995493-a198a58e-46d2-4929-85be-3cb8c664ae38.jpeg" alt="온보딩으로 받은 굿즈"></td>
+    <td><img src="https://user-images.githubusercontent.com/31645195/210035116-8a280cb4-de20-461c-9128-f1051b18d14e.JPG" alt="컨퍼런스 후기 글로 받은 굿즈"></td>
+     <td><img src="https://user-images.githubusercontent.com/31645195/209995459-5b5d34e6-f477-4f75-ac4c-a389e9b1658c.jpeg" alt="수료 기념으로 받은 굿즈"></td>
   </tr> 
 </table>
 
@@ -256,11 +256,10 @@ cover: "/assets/boostcamp_J164.png"
 <table>
   <caption align="bottom">페어 프로그래밍 1일차 일기(좌)와 수료식 축사(우)</caption>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/31645195/209995086-8c0fdbf1-dc57-46f9-8e7c-173294364c14.png"></td>
-    <td><img src="https://user-images.githubusercontent.com/31645195/209995230-731450e7-30fa-4ce4-9c2f-35a9cf087949.png"></td>
+    <td><img src="https://user-images.githubusercontent.com/31645195/209995086-8c0fdbf1-dc57-46f9-8e7c-173294364c14.png" alt="페어프로그래밍 1일차 일기"></td>
+    <td><img src="https://user-images.githubusercontent.com/31645195/209995230-731450e7-30fa-4ce4-9c2f-35a9cf087949.png" alt="수료식 축사"></td>
   </tr> 
 </table>
-
 
 <hr />
 
@@ -272,7 +271,7 @@ cover: "/assets/boostcamp_J164.png"
 이제는 조금은 속도를 조절하며 일상에 개발을 녹여내는 방식으로 바꿔도 좋을 것 같습니다.
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/209995666-0ecc461f-c98f-4ab7-a443-e2bac7512eb0.jpeg" width="50%">
+<img src="https://user-images.githubusercontent.com/31645195/209995666-0ecc461f-c98f-4ab7-a443-e2bac7512eb0.jpeg" width="50%" alt="교육 기간동안 엄청나게 줄어든 걸음 수">
 *처참한 운동량*
 <br />
 

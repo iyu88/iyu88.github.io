@@ -352,16 +352,15 @@
 
 <p>컴포넌트가 마운트되었을 때 useEffect 안에서 <code class="language-plaintext highlighter-rouge">setDummyData()</code> 를 통해서 state 를 업데이트합니다. 데이터가 있을 경우에는 “데이터 로딩 중” 이라는 문자를 표시하고 데이터를 모두 받아왔을 때에는 해당 정보들을 표시하는 방식으로 구현한 결과입니다.</p>
 
-<p><br /></p>
-
-<p><img src="https://user-images.githubusercontent.com/31645195/198887484-a8a302e8-a3a4-4dba-b15b-f4e5c08b8e4e.gif" alt="useEffect_fetch_on_render" /></p>
-
-<p><br /></p>
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/198887484-a8a302e8-a3a4-4dba-b15b-f4e5c08b8e4e.gif" alt="'데이터 로딩 중'이라는 글자가 보이다가 불러온 데이터가 렌더링되는 gif" />
+<em>useEffect를 사용한 fetch on render 방식</em>
+<br /></p>
 
 <p>다음은 크롬 확장 프로그램으로 존재하는 <code class="language-plaintext highlighter-rouge">React Developer Tools</code> 에서 <code class="language-plaintext highlighter-rouge">Profiler</code> 탭에서 확인할 수 있는 타임라인입니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/198887674-ac9fe2a8-3367-4203-93c0-b8a0333bc98a.png" />
+<img src="https://user-images.githubusercontent.com/31645195/198887674-ac9fe2a8-3367-4203-93c0-b8a0333bc98a.png" alt="데이터만 불러왔을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-1-1) Fetch on render / 데이터만 불러올 때</em>
 <br /></p>
 
@@ -459,16 +458,15 @@
 
 <p>JSX 반환값에서 데이터 목록을 표시하기 전에 이미지 태그를 먼저 위치시킵니다.</p>
 
-<p><br /></p>
-
-<p><img src="https://user-images.githubusercontent.com/31645195/198888673-ad72c76d-8a2c-403d-9185-6aa63056f8e1.gif" alt="useEffect_fetch_on_render_img_first" /></p>
-
-<p><br /></p>
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/198888673-ad72c76d-8a2c-403d-9185-6aa63056f8e1.gif" alt="불러온 데이터가 이미지 밑에 렌더링되는 gif" />
+<em>이미지를 상단에 배치했을 때</em>
+<br /></p>
 
 <p>위와 같이 이미지가 최상단에 위치해있고 데이터를 불러오면 이미지 아래에 렌더링하는 것을 확인할 수 있습니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/198888755-87e75e95-8ca0-4f0e-b561-36e3f4508391.png" />
+<img src="https://user-images.githubusercontent.com/31645195/198888755-87e75e95-8ca0-4f0e-b561-36e3f4508391.png" alt="불러온 데이터를 이미지 밑에 렌더링할 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-1-2) Fetch on render / 데이터를 불러오고 이미지를 상단에 배치했을 때</em>
 <br /></p>
 
@@ -538,16 +536,15 @@
 
 <p><code class="language-plaintext highlighter-rouge">4-1-2)</code> 와 동일하지만 이번에는 이미지 태그를 데이터 목록 하단에 위치시키고 테스트했습니다.</p>
 
-<p><br /></p>
-
-<p><img src="https://user-images.githubusercontent.com/31645195/198888928-f4e15e35-98ba-470f-ace4-75d35e5a8f30.gif" alt="useEffect_fetch_on_render_img_last" /></p>
-
-<p><br /></p>
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/198888928-f4e15e35-98ba-470f-ace4-75d35e5a8f30.gif" alt="불러온 데이터가 이미지 위에 렌더링되는 gif" />
+<em>이미지를 하단에 배치했을 때</em>
+<br /></p>
 
 <p>초기에는 이미지가 최상단에 위치해있고 데이터가 렌더링되면 이미지가 아래로 밀려나서 화면에서 사라지는 것을 확인할 수 있습니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/198889013-09905889-bc8c-496e-b5cd-675654637223.png" />
+<img src="https://user-images.githubusercontent.com/31645195/198889013-09905889-bc8c-496e-b5cd-675654637223.png" alt="불러온 데이터를 이미지 위에 렌더링할 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-1-3) Fetch on render / 데이터를 불러오고 이미지를 하단에 배치했을 때</em>
 <br /></p>
 
@@ -713,7 +710,7 @@ export default function ChildComponent() {
 <p>컴포넌트 바깥에서 데이터를 불러오는 <code class="language-plaintext highlighter-rouge">fetchThenRender()</code> 함수를 호출합니다. useEffect 에서는 해당 변수에 Promise 객체가 결과를 반환할 때 state 를 업데이트해줍니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199045526-455cced8-497f-4803-bfa8-1eafe9807d7d.png" />
+<img src="https://user-images.githubusercontent.com/31645195/199045526-455cced8-497f-4803-bfa8-1eafe9807d7d.png" alt="컴포넌트 바깥에서 데이터를 요청했을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-2-1) Fetch then render / 데이터만 불러올 때</em>
 <br /></p>
 
@@ -1006,7 +1003,7 @@ export default function ChildComponent() {
 <p>Promise.all() 을 사용하여 photos 와 comments 에 대한 응답을 하나의 변수에 저장합니다. useEffect 에서 각 state 를 업데이트합니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199139903-381bf13d-2eda-454d-87c5-588034ad30d6.png" />
+<img src="https://user-images.githubusercontent.com/31645195/199139903-381bf13d-2eda-454d-87c5-588034ad30d6.png" alt="두 개의 데이터 요청이 있을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-2-3) Fetch then render / 데이터를 두 개 불러올 때</em>
 <br /></p>
 
@@ -1169,7 +1166,7 @@ export default function ChildComponent() {
 <p>위와 같이 Suspense 로 둘러싸인 컴포넌트에서는 데이터를 컴포넌트 외부에서 불러오고 실제 값은 내부에서 사용합니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199047638-52d93f94-e076-450a-8e4f-c8c673e69f0f.png" />
+<img src="https://user-images.githubusercontent.com/31645195/199047638-52d93f94-e076-450a-8e4f-c8c673e69f0f.png" alt="Suspense를 사용했을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-3-1) Render as fetch / Suspense 를 사용할 때</em>
 <br /></p>
 
@@ -1302,12 +1299,12 @@ export default function ChildComponent() {
 <p>여러 개의 Suspense 를 사용할 때에는 다음과 같이 순차적으로 배치하면 됩니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199050041-5726631d-c3dc-4fa6-9a6e-9a7152795eb3.gif" />
+<img src="https://user-images.githubusercontent.com/31645195/199050041-5726631d-c3dc-4fa6-9a6e-9a7152795eb3.gif" alt="두 개의 데이터 요청 중 하단에 있는 요청 응답이 더 빨라 먼저 렌더링되는 gif" />
 <em>두 개의 데이터 중 로딩이 완료된 데이터 (하단) 부터 표시되는 것을 확인할 수 있습니다.</em>
 <br /></p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199048186-659790b3-2f0b-4163-8aa9-2ef29774463a.png" />
+<img src="https://user-images.githubusercontent.com/31645195/199048186-659790b3-2f0b-4163-8aa9-2ef29774463a.png" alt="두 개의 데이터 요청을 보냈을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
 <em>4-3-2) Render as fetch / 데이터를 두 개 불러올 때</em>
 <br /></p>
 
@@ -1481,13 +1478,13 @@ export default function ChildComponent() {
 <p>컴포넌트가 마운트되면 setInterval 내부의 setInputNumber() 함수가 1초마다 실행됩니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199054432-841f7572-3744-4dbb-b764-068408a0fb9d.gif" />
+<img src="https://user-images.githubusercontent.com/31645195/199054432-841f7572-3744-4dbb-b764-068408a0fb9d.gif" alt="setInterval로 인해 1초마다 state가 변경되면서 리렌더링이 일어나는 gif" />
 <em>useState 로 state 가 1초마다 바뀌면서 리렌더링이 일어나는 것을 확인할 수 있습니다.</em>
 <br /></p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199229576-70117a0f-0986-423f-a29d-3fdc98000d3b.png" />
-<em>5-1) useState</em>
+<img src="https://user-images.githubusercontent.com/31645195/199229576-70117a0f-0986-423f-a29d-3fdc98000d3b.png" alt="useState로 상태를 변경했을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
+<em>5-1) useState로 상태를 변경했을 때 Timeline 그래프</em>
 <br /></p>
 
 <p><br /></p>
@@ -1543,13 +1540,13 @@ export default function ChildComponent() {
 <p>또한 JSX 의 반환값에서 변수 <code class="language-plaintext highlighter-rouge">pending</code> 을 사용하여 바뀐 state 가 DOM 에 반영되지 않았을 때 표시할 fallback UI 를 정의합니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199054184-bf17fab8-1e77-4133-961c-be1f3f4a4475.gif" />
+<img src="https://user-images.githubusercontent.com/31645195/199054184-bf17fab8-1e77-4133-961c-be1f3f4a4475.gif" alt="setInterval로 인해 1초마다 state가 변경되지만 useTransition을 사용하여 fallback UI가 렌더링되는 gif" />
 <em>1초마다 state 가 바뀌지만 업데이트되기 전에 pending 이 true 가 되면서 fallback UI 가 나타납니다.</em>
 <br /></p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199229581-b9b5907f-23f4-446e-a94f-8112686db10c.png" />
-<em>5-2) useTransition</em>
+<img src="https://user-images.githubusercontent.com/31645195/199229581-b9b5907f-23f4-446e-a94f-8112686db10c.png" alt="useTransition으로 상태를 변경했을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
+<em>5-2) useTransition으로 상태를 변경했을 때 Timeline 그래프</em>
 <br /></p>
 
 <p><br /></p>
@@ -1581,8 +1578,8 @@ export default function ChildComponent() {
 <p>useDeferredValue Hook 에서 inputNumber 를 초기값으로 지정하여 렌더링 우선순위를 낮춥니다. 이후 해당 값을 사용하는 DOM 노드들은 업데이트가 지연됩니다.</p>
 
 <p><br />
-<img src="https://user-images.githubusercontent.com/31645195/199229591-f59d2b6f-4c3c-44bf-8b65-924fad3a00e3.png" />
-<em>5-3) useDeferredValue</em>
+<img src="https://user-images.githubusercontent.com/31645195/199229591-f59d2b6f-4c3c-44bf-8b65-924fad3a00e3.png" alt="useDeferredValue로 상태를 변경했을 때 React Dev Tools의 Profiler 정보 중 Timeline 그래프" />
+<em>5-3) useDeferredValue로 상태를 변경했을 때 Timeline 그래프</em>
 <br /></p>
 
 <h3 id="5-4-concurrent-mode-hooks-정리">5-4) Concurrent Mode Hooks 정리</h3>

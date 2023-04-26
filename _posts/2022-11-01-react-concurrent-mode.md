@@ -76,9 +76,8 @@ React 는 렌더링 과정에서 일어나는 일들을 작은 단위로 나누�
 
 API 서버로부터 받아온 정보만 화면에 렌더링하는 경우입니다. `/photos` 경로로 요청을 보내면 배열에 5천 개의 결과값을 받아옵니다. 
 
-
-{% highlight jsx%}
-useEffect(() => {
+<pre>
+<code class="hljs jsx">useEffect(() => {
   const dataUrl = "https://jsonplaceholder.typicode.com/photos";
   const fetchOnRender = async () => {
     try {
@@ -90,8 +89,8 @@ useEffect(() => {
   };
   fetchOnRender();
 }, []);
-{% endhighlight %}
-
+</code>
+</pre>
 
 컴포넌트가 마운트되었을 때 useEffect 안에서 `setDummyData()` 를 통해서 state 를 업데이트합니다. 데이터가 있을 경우에는 "데이터 로딩 중" 이라는 문자를 표시하고 데이터를 모두 받아왔을 때에는 해당 정보들을 표시하는 방식으로 구현한 결과입니다.
 
@@ -137,19 +136,19 @@ Profiler 에서 제공하는 각 이벤트 종류는 다음과 같은 의미를 
 
 동일한 API 서버로부터 정보를 받아와서 표시하지만 상단에 이미지 태그를 배치하고 난 뒤에 차이점을 살펴보았습니다. 
 
-
-{% highlight jsx%}
-return (
-  <div>
-    <img src="./image.JPG" alt="테스트 이미지" width="100px" />
+<pre>
+<code class="hljs jsx">return (
+  &lt;div&gt;
+    &lt;img src="./image.JPG" alt="테스트 이미지" width="100px" /&gt;
     {dummyData.length ? (
-      dummyData.map((d) => <h4 key={d.id}>{JSON.stringify(d)}</h4>)
+      dummyData.map((d) => &lt;h4 key={d.id}&gt;{JSON.stringify(d)}&lt;/h4&gt;)
     ) : (
-      <h1> 데이터 로딩 중...</h1>
+      &lt;h1&gt; 데이터 로딩 중...&lt;/h1&gt;
     )}
-  </div>
+  &lt;/div&gt;
 );
-{% endhighlight %}
+</code>
+</pre>
 
 JSX 반환값에서 데이터 목록을 표시하기 전에 이미지 태그를 먼저 위치시킵니다. 
 
@@ -246,8 +245,8 @@ JSX 반환값에서 데이터 목록을 표시하기 전에 이미지 태그를 
 
 #### 4-2-1) 데이터만 불러올 때 
 
-{% highlight jsx%}
-const photoData = fetchThenRender();
+<pre>
+<code class="hljs jsx">const photoData = fetchThenRender();
 
 export default function ChildComponent() {
   const [dummyData, setDummyData] = useState([]);
@@ -260,7 +259,8 @@ export default function ChildComponent() {
 
   // (생략)
 }
-{% endhighlight %}
+</code>
+</pre>
 
 
 컴포넌트 바깥에서 데이터를 불러오는 `fetchThenRender()` 함수를 호출합니다. useEffect 에서는 해당 변수에 Promise 객체가 결과를 반환할 때 state 를 업데이트해줍니다. 
@@ -342,8 +342,8 @@ Fetch then render 는 데이터 로딩을 빠르게 시작한다는 점에서 La
 
 이전까지 photos 데이터를 받아오기 위해서 API 요청을 한 번만 보냈다면, 5백 개의 comments 데이터까지 받아오기 위해서 추가적인 API 요청을 보냅니다.
 
-{% highlight jsx%}
-const fetchDummyData = () => {
+<pre>
+<code class="hljs jsx">const fetchDummyData = () => {
   return Promise.all([
     fetchThenRender("photos"),
     fetchThenRender("comments"),
@@ -365,7 +365,8 @@ export default function ChildComponent() {
 
   // (생략);
 }
-{% endhighlight %}
+</code>
+</pre>
 
 
 Promise.all() 을 사용하여 photos 와 comments 에 대한 응답을 하나의 변수에 저장합니다. useEffect 에서 각 state 를 업데이트합니다. 
@@ -407,8 +408,8 @@ Promise.all() 을 사용하여 photos 와 comments 에 대한 응답을 하나�
 #### 4-3-1) Suspense 를 사용할 때 
 
 
-{% highlight jsx%}
-const wrapPromise = (promise) => {
+<pre>
+<code class="hljs jsx">const wrapPromise = (promise) => {
   let status = "pending";
   let response;
 
@@ -446,7 +447,8 @@ const fetchDummyData = () => {
     console.log(err);
   }
 };
-{% endhighlight %}
+</code>
+</pre>
 
 위 코드에서 각 함수의 역할은 다음과 같습니다. 
 
@@ -456,28 +458,30 @@ const fetchDummyData = () => {
   + read : Promise 가 정상적으로 반환되었을 경우 값을 반환하고, 그렇지 않을 경우 오류를 발생시킵니다. 
 
 
-{% highlight jsx%}
-function App() {
+<pre>
+<code class="hljs jsx">function App() {
   return (
-    <Suspense fallback={<h1>데이터 로딩 중...</h1>}>
-      <ChildComponent />
-    </Suspense>
+    &lt;Suspense fallback={&lt;h1&gt;데이터 로딩 중...&lt;/h1&gt;}&gt;
+      &lt;ChildComponent /&gt;
+    &lt;/Suspense&gt;
   );
 }
-{% endhighlight %}
+</code>
+</pre>
 
 
 Suspense 의 fallback 속성을 통해서 데이터가 DOM 에 표시되기 전까지 "데이터 로딩 중..." 이라는 문자를 출력합니다.
 
-{% highlight jsx%}
-const response = fetchDummyData();
+<pre>
+<code class="hljs jsx">const response = fetchDummyData();
 
 export default function ChildComponent() {
   const dummyData = response.read();
 
   // (생략)
 }
-{% endhighlight %}
+</code>
+</pre>
 
 위와 같이 Suspense 로 둘러싸인 컴포넌트에서는 데이터를 컴포넌트 외부에서 불러오고 실제 값은 내부에서 사용합니다. 
 
@@ -515,16 +519,19 @@ export default function ChildComponent() {
 
 Suspense 를 사용하여 데이터를 여러 개 불러올 때도 fallback UI 를 사용할 수 있습니다.
 
-{% highlight jsx%}
-return (<>
-  <Suspense fallback={<h1>데이터 로딩 중...</h1>}>
-    <ChildPhotoList />
-  </Suspense>
-  <Suspense fallback={<h1>데이터 로딩 중...</h1>}>
-    <ChildCommentList />
-  </Suspense>
-</>);
-{% endhighlight %}
+<pre>
+<code class="hljs jsx">return (
+  <>
+    &lt;Suspense fallback={&lt;h1&gt;데이터 로딩 중...&lt;/h1&gt;}&gt;
+      &lt;ChildPhotoList /&gt;
+    &lt;/Suspense&gt;
+    &lt;Suspense fallback={&lt;h1&gt;데이터 로딩 중...&lt;/h1&gt;}&gt;
+      &lt;ChildCommentList /&gt;
+    &lt;/Suspense&gt;
+  </>
+);
+</code>
+</pre>
 
 여러 개의 Suspense 를 사용할 때에는 다음과 같이 순차적으로 배치하면 됩니다. 
 
@@ -579,8 +586,8 @@ React 의 함수형 컴포넌트 안에서 반환값에 사용하고 싶은 변�
 
 ### 5-1) useState 
 
-{% highlight jsx%}
-export default function BasicUseState() {
+<pre>
+<code class="hljs jsx">export default function BasicUseState() {
   const [inputNumber, setInputNumber] = useState(0);
 
   useEffect(() => {
@@ -595,7 +602,8 @@ export default function BasicUseState() {
 
   // (생략)
 };
-{% endhighlight %}
+</code>
+</pre>
 
 
 컴포넌트가 마운트되면 setInterval 내부의 setInputNumber() 함수가 1초마다 실행됩니다. 
@@ -618,8 +626,8 @@ useTransition 은 컴포넌트 내 state 의 업데이트 우선순위를 낮춰
 - 초기값으로 전달한 state 가 업데이트 되었는지를 나타내는 boolean 값
 - 업데이트를 지연시키고 싶은 state 를 감싸는 startTransition() 함수
 
-{% highlight jsx%}
-export default function Transition() {
+<pre>
+<code class="hljs jsx">export default function Transition() {
   const [inputNumber, setInputNumber] = useState(0);
   const [pending, startTransition] = useTransition();
 
@@ -637,24 +645,26 @@ export default function Transition() {
 
   // (생략)
 }
-{% endhighlight %}
+</code>
+</pre>
 
 `5-1)` 과 동일한 구조로 되어 있지만 startTransition() 함수가 inputNumber 의 Setter 함수를 감싸고 있습니다. 
 
-{% highlight jsx%}
-return (
+<pre>
+<code class="hljs jsx">return (
   <>
-    <p>아래에 입력값이 표시됩니다.</p>
+    &lt;p&gt;아래에 입력값이 표시됩니다.&lt;/p&gt;
     {pending ? (
-      <div>
-        Pending is <strong>True</strong>
-      </div>
+      &lt;div&gt;
+        Pending is &lt;strong&gt;True&lt;/strong&gt;
+      &lt;/div&gt;
     ) : (
-      DUMMY_ARRAY.map((_, index) => <div key={index}>{inputNumber}</div>)
+      DUMMY_ARRAY.map((_, index) => &lt;div key={index}&gt;{inputNumber}&lt;/div&gt;)
     )}
   </>
 );
-{% endhighlight %}
+</code>
+</pre>
 
 
 또한 JSX 의 반환값에서 변수 `pending` 을 사용하여 바뀐 state 가 DOM 에 반영되지 않았을 때 표시할 fallback UI 를 정의합니다. 
@@ -677,8 +687,8 @@ return (
 
 useDeferredValue 도 앞서 useTransition 과 동일하게 state 의 업데이트 우선순위를 낮추어서 자주 발생하는 state 변화에 대응하는 Hook 입니다. useTransition 이 startTransition() 과 같은 함수를 제공하여 우선순위를 낮추고자 하는 state 를 감싸는 방식으로 작성되었다면, useDeferredValue 는 선언 시에 state 를 초기값으로 전달합니다. 이후 해당 값의 업데이트 우선순위가 낮아지게 됩니다. 다만, state 의 업데이트 여부를 감지하는 변수는 제공되지 않습니다. 
 
-{% highlight jsx%}
-export default function DeferredValue() {
+<pre>
+<code class="hljs jsx">export default function DeferredValue() {
   const [inputNumber, setInputNumber] = useState(0);
   const deferredValue = useDeferredValue(inputNumber);
 
@@ -694,7 +704,8 @@ export default function DeferredValue() {
 
   // (생략)
 } 
-{% endhighlight %}
+</code>
+</pre>
 
 useDeferredValue Hook 에서 inputNumber 를 초기값으로 지정하여 렌더링 우선순위를 낮춥니다. 이후 해당 값을 사용하는 DOM 노드들은 업데이트가 지연됩니다. 
 

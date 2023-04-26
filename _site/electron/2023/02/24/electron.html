@@ -393,7 +393,7 @@ app.on('window-all-closed', () =&gt; { // (4)
 <p>이어서 터미널에서 React 빌드 후 Electron을 실행시켜보았습니다.</p>
 
 <pre>
-<code class="hljs json">npm run build 
+<code class="hljs shell">npm run build 
 npm run electron
 </code>
 </pre>
@@ -437,15 +437,18 @@ package.json 의 homepage 속성을 설정해주었습니다.</p>
 
 <p>원인은 React-router에 있었습니다. Router 컴포넌트에서 사용하고 있는 <code class="language-plaintext highlighter-rouge">BrowserRouter</code>는 서버 요청을 기반으로 작동하기 때문에 현재 main.ts에서 loadFile을 통해 index.html을 정적으로 불러오는 방식에 맞지 않습니다. 따라서 파일 경로를 기반으로 작동하는 <code class="language-plaintext highlighter-rouge">HashRouter</code>를 대신 사용하기로 했습니다.</p>
 
-<figure class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">import</span> <span class="p">{</span> <span class="nx">HashRouter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
+<pre>
+<code class="hljs jsx">import { HashRouter } from 'react-router-dom';
 
-<span class="kd">const</span> <span class="nx">Router</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">HashRouter</span><span class="p">&gt;</span>
+const Router = () =&gt; {
+  return (
+    &lt;HashRouter&gt;
     ... (생략)
-    <span class="p">&lt;/</span><span class="nc">HashRouter</span><span class="p">&gt;</span>
-  <span class="p">)</span>
-<span class="p">}</span></code></pre></figure>
+    &lt;/HashRouter&gt;
+  )
+}
+</code>
+</pre>
 
 <p>시도해보지는 않았지만 BrowserRouter를 유지한다면 파일을 불러오는 loadFile 대신에 loadURL 메서드를 사용하는 방법도 있을 것 같습니다.</p>
 

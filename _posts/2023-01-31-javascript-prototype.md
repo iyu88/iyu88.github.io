@@ -22,7 +22,7 @@ Java나 Python과 같은 프로그래밍 언어에서 '객체'를 '상속'하기
 여기서 필드와 메서드는 각각 Class가 가질 수 있는 값(변수)과 행동(함수)에 해당합니다. 
 
 <br />
-<img alt="image" src="https://user-images.githubusercontent.com/31645195/215697453-69c5b15d-0861-43ef-9630-031acfdb7479.png">
+<img src="https://user-images.githubusercontent.com/31645195/215697453-69c5b15d-0861-43ef-9630-031acfdb7479.png" alt="사람을 클래스로 나타낸다고 했을 때 필드에는 이름, 나이가 있고 메서드에는 먹다, 자다가 있음">
 *사람을 간단하게 클래스로 나타낸다면*
 <br />
 
@@ -70,7 +70,7 @@ Java나 Python과 같은 프로그래밍 언어에서 '객체'를 '상속'하기
 여기서 Object는 무엇일까요? 
 
 <br>
-<img alt="스크린샷 2023-01-31 17 19 46" src="https://user-images.githubusercontent.com/31645195/215705527-1c89a8d1-f866-4e29-9915-6e5a41e3b8be.png">
+<img src="https://user-images.githubusercontent.com/31645195/215705527-1c89a8d1-f866-4e29-9915-6e5a41e3b8be.png" alt="Object를 console.log()로 확인해본 결과 Object()가 출력됨">
 <br>
 
 Object는 함수입니다. Object라는 함수와 new라는 키워드가 만나서 객체를 생성하고 있습니다. 
@@ -92,7 +92,7 @@ const 나 = new 사람();
 </pre>
 
 <br>
-<img alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215768467-2de940f0-f2de-4d96-a2ea-b4ee087a6177.png">
+<img src="https://user-images.githubusercontent.com/31645195/215768467-2de940f0-f2de-4d96-a2ea-b4ee087a6177.png" alt="'사람'이라는 함수로 '나'라는 객체를 생성하는 경우를 나타낸 그림">
 <br>
 
 앞서 Object가 함수이고 new 키워드와 함께 쓰였던 것처럼 `사람`이라는 함수를 정의하여 객체를 생성할 수 있습니다. 
@@ -104,7 +104,7 @@ const 나 = new 사람();
 프로토타입에 접근하기 위해서 getPrototypeOf 메서드를 사용하겠습니다. 
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215823028-0b85d734-6c1b-4991-8222-42381ecea5b6.png">
+<img src="https://user-images.githubusercontent.com/31645195/215823028-0b85d734-6c1b-4991-8222-42381ecea5b6.png" alt="'나'라는 객체의 프로토타입을 확인해보면 constructor에 '사람' 함수가 있음">
 <br>
 
 `나`라는 인스턴스를 생성할 때 사용했던 `사람`이라는 함수가 prototype으로 나옵니다.
@@ -118,13 +118,13 @@ const 나 = new 사람();
 위에서 `사람` 함수를 생성하자마자 콘솔을 찍어보면 바로 내부에 Prototype이 생성되어있는 것을 확인할 수 있습니다. 
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215823783-6ecc201b-1659-455d-8c05-0e1b0554a1e0.png">
+<img src="https://user-images.githubusercontent.com/31645195/215823783-6ecc201b-1659-455d-8c05-0e1b0554a1e0.png" alt="console.dir()로 '사람' 함수의 프로토타입을 확인">
 <br>
 
 앞서 그림에서 함수를 선언하고 바로 객체를 생성하는 것이 아니라 표현되지 않은 과정이 하나 숨어있습니다.
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215778599-4d34390b-bf14-40af-b6f5-ecb655669774.png">
+<img  src="https://user-images.githubusercontent.com/31645195/215778599-4d34390b-bf14-40af-b6f5-ecb655669774.png" alt="'사람' 함수를 선언하면 프로토타입이 자동으로 생성되는 것을 표현한 그림">
 <br>
 
 함수는 선언되자마자 해당 함수의 Prototype을 생성합니다. 또한 해당 함수를 생성자 함수로 하여 객체를 생성하게 되면 Prototype을 참조하여 속성들을 이어받게 됩니다. 
@@ -145,14 +145,14 @@ JavaScript는 속성값을 읽을 때 해당 값이 존재하지 않을 경우, 
 `나.놀기`를 호출한 결과는 다음과 같이 undefined 로 나오게 됩니다. 
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215813909-4440cc3c-667d-49e9-ae48-a585d22dbfac.png">
+<img src="https://user-images.githubusercontent.com/31645195/215813909-4440cc3c-667d-49e9-ae48-a585d22dbfac.png" alt="객체 '나'에서 '놀기'라는 메서드에 접근하면 undefined를 출력">
 <br>
 
 왜냐하면 `놀기`라는 필드나 메서드가 `나`에 존재하지 않기 때문입니다. 
 다음에는 hasOwnProperty 를 호출해본 결과입니다. 
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215813992-5cb71857-c309-4e7b-a9a4-2e90bedab513.png">
+<img src="https://user-images.githubusercontent.com/31645195/215813992-5cb71857-c309-4e7b-a9a4-2e90bedab513.png" alt="객체 '나'에서 'hasOwnProperty'라는 메서드에 접근하면 함수가 출력">
 <br>
 
 콘솔창에 나온 것처럼 함수가 존재하는 것을 확인할 수 있습니다. 
@@ -162,7 +162,7 @@ JavaScript는 속성값을 읽을 때 해당 값이 존재하지 않을 경우, 
 다시 `놀기` 라는 키값으로 접근했을 때를 살펴보면, 해당 값은 상위로 계속 올라가도 존재하지 않기 때문에 Object의 상위 Prototype인 null 값에 이르러서 undefined 를 내보냅니다. 두 상황을 그림으로 간단하게 표현해보면 다음과 같습니다. 
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215829817-1025a058-aa03-47b7-ab45-ca9bf98a1483.png">
+<img src="https://user-images.githubusercontent.com/31645195/215829817-1025a058-aa03-47b7-ab45-ca9bf98a1483.png" alt="Prototype Chain을 나타낸 그림">
 *상위 Prototype으로 계속 올라가면서 값이 존재하는지 확인합니다*
 <br>
 
@@ -238,7 +238,7 @@ function 학생 (이름, 나이) {
 
 
 <br>
-<img  alt="스크린샷 2023-01-31 18 23 22" src="https://user-images.githubusercontent.com/31645195/215849710-60695cc8-64a2-4421-a11f-e88f112ccf23.png">
+<img src="https://user-images.githubusercontent.com/31645195/215849710-60695cc8-64a2-4421-a11f-e88f112ccf23.png" alt="'사람'을 extends한 '학생'이 객체를 생성할 때 내부적으로 일어나는 동작을 표현한 그림">
 <br>
 
 ---

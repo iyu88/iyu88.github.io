@@ -205,7 +205,7 @@ cover: "/assets/instacode.png"
 새해에도 습관을 하나 만들면 이렇게 꾸준하게 할 수 있지 않을까요?
 
 <br />
-<img src="https://user-images.githubusercontent.com/31645195/210131455-3c86be54-1b35-45d6-8b20-90fe76957cd4.png" width="50%">
+<img src="https://user-images.githubusercontent.com/31645195/210131455-3c86be54-1b35-45d6-8b20-90fe76957cd4.png" width="50%" alt="알고리즘 문제를 362일 연속으로 풀었다는 기록">
 *글 올리고 바로 오늘 문제 풀러 가야겠습니다.*
 <br />
 

@@ -6,9 +6,23 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 27 Apr 2023 00:06:54 +0900</pubDate>
-    <lastBuildDate>Thu, 27 Apr 2023 00:06:54 +0900</lastBuildDate>
+    <pubDate>Sun, 07 May 2023 14:35:15 +0900</pubDate>
+    <lastBuildDate>Sun, 07 May 2023 14:35:15 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[OpenSource] 첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나</title>
+        <description>&lt;h1 id=&quot;첫-오픈-소스-컨트리뷰션-이야기-어떻게-시작했고-무엇을-배웠나&quot;&gt;첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-처음으로-오픈-소스에-기여한-경험을-공유합니다&quot;&gt;💡 처음으로 오픈 소스에 기여한 경험을 공유합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-어떻게-시작했나&quot;&gt;1. 어떻게 시작했나&lt;/h2&gt; &lt;p&gt;작년에 진행한 프로젝트에서 실시간 공동 편집이라는...</description>
+        <pubDate>Sun, 07 May 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/opensource/2023/05/07/open-source-contribution.html</link>
+        <guid isPermaLink="true">http://localhost:4000/opensource/2023/05/07/open-source-contribution.html</guid>
+        
+        <category>OpenSource</category>
+        
+        
+        <category>OpenSource</category>
+        
+      </item>
     
       <item>
         <title>[JavaScript] ECMAScript 2023 살펴보기</title>
@@ -167,24 +181,6 @@
         
         
         <category>Review</category>
-        
-      </item>
-    
-      <item>
-        <title>[Lighthouse] Lighthouse CI 적용기 - GitHub Actions 만들기</title>
-        <description>&lt;h1 id=&quot;lighthouse-ci-적용기---github-actions-만들기&quot;&gt;Lighthouse CI 적용기 - GitHub Actions 만들기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-웹-성능-측정-도구인-lighthouse-를-적용하고-github-actions-를-만들어봅니다&quot;&gt;💡 웹 성능 측정 도구인 Lighthouse 를 적용하고 GitHub Actions 를 만들어봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-lighthouse-도입-배경&quot;&gt;1. Lighthouse 도입 배경&lt;/h2&gt; &lt;p&gt;부스트캠프 그룹...</description>
-        <pubDate>Sun, 20 Nov 2022 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/lighthouse/2022/11/20/lighthouse-ci.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lighthouse/2022/11/20/lighthouse-ci.html</guid>
-        
-        <category>Lighthouse</category>
-        
-        <category>CI</category>
-        
-        <category>GitHub_Actions</category>
-        
-        
-        <category>Lighthouse</category>
         
       </item>
     

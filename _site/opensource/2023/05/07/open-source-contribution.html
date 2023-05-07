@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [OpenSource] 첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나
+  </title>
+  <meta name="description" content="첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/opensource/2023/05/07/open-source-contribution.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P48NKV3');</script>
+  <!-- End Google Tag Manager -->
+  
+  
+</head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
+  </script>
+  <!-- End of Google tag (gtag.js) -->
+
+  <body>
+
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48NKV3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+    
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      <h4 class="title">Hyunbin Lee</h4>
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [OpenSource] 첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        May 7, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/OpenSource">
+          Opensource</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="첫-오픈-소스-컨트리뷰션-이야기-어떻게-시작했고-무엇을-배웠나">첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나</h1>
+
+<blockquote>
+  <h3 id="-처음으로-오픈-소스에-기여한-경험을-공유합니다">💡 처음으로 오픈 소스에 기여한 경험을 공유합니다.</h3>
+</blockquote>
+
+<h2 id="1-어떻게-시작했나">1. 어떻게 시작했나</h2>
+
+<p>작년에 진행한 프로젝트에서 실시간 공동 편집이라는 주제로 웹 어플리케이션을 만들었던 적이 있습니다. 
+당시에 여러 레퍼런스를 찾아보던 중 <code class="language-plaintext highlighter-rouge">yorkie</code>라는 오픈 소스 라이브러리를 발견하게 되었습니다. 
+CRDT라는 다소 생소한 자료구조를 구현해야 하는 것이 큰 과제였기 때문에 해당 오픈 소스 디스코드 채널에 들어가서 자체적으로 구현했던 방식에 대해서 소개한 뒤, 궁금한 점을 질문하고 도움을 받기도 했습니다.
+채널 내부에는 잘 연동된 디스코드 봇이 있었고, yorkie 라이브러리를 개발한 <code class="language-plaintext highlighter-rouge">yorkie-team</code>에서 관리 중인 레포지토리에서 일어나는 모든 일들을 알려주고 있었습니다.</p>
+
+<p>프로젝트가 끝난 뒤에는 커뮤니티와 추가적인 상호작용이 없었지만 최근에 문득 디스코드 봇이 알려주는 알림 내용에 궁금증이 생겼고, yorkie-team에 있는 여러 다른 레포지토리들을 하나씩 살펴보는 계기가 되었습니다. 
+그중에서 <code class="language-plaintext highlighter-rouge">dashboard</code>라는 레포지토리의 이슈를 보다가 해결해볼 수 있을 것 같은 아이템을 발견했습니다. 
+이전까지는 오픈 소스에 대해서, 특히나 <code class="language-plaintext highlighter-rouge">컨트리뷰션</code>이라는 행위에 큰 관심이 없었지만 yorkie의 코어 로직에 대한 깊은 이해가 없어도 시도해볼 수 있겠다는 생각에 git clone 명령어를 입력했습니다.</p>
+
+<p><br /></p>
+
+<h2 id="2-무엇을-배웠나">2. 무엇을 배웠나</h2>
+
+<p>이제부터 지난 몇 주간 오픈 소스와 함께하며 느낀 점 몇 가지를 정리해보려고 합니다.</p>
+
+<h4 id="1-모르면-물어보자">1. 모르면 물어보자</h4>
+
+<p>dashboard 레포지토리에 대해서 간단히 소개하면, yorkie를 사용해서 구현한 실시간 협업 어플리케이션을 관리할 수 있는 관리 페이지입니다. yorkie로 만든 어플리케이션이 Project가 되고 하위에 생성되는 개별적인 문서들을 document라고 부릅니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236639245-27ded0d1-25ef-4a16-b32e-b76ec0ee3fdb.png " alt="dashboard 프로젝트 메인 화면" />
+<em>메인 화면에서 Project 목록을 확인할 수 있습니다.</em>
+<br /></p>
+
+<p>발견했던 이슈 내용은 간단합니다.
+Project나 document 목록에 있는 검색창에 사용자가 원하는 항목을 검색하면, 검색 결과 개수를 화면에 표시하여 사용자에게 알려주면 좋을 것 같다는 개선점이 존재했습니다. 즉, 검색창과 검색 기능까지 구현이 모두 완료되어 있었고, 검색된 Project(혹은 document)의 개수를 렌더링하면 되는 것이었습니다. 텍스트로만 읽으면 작업 자체는 매우 간단해 보이지만, 개인적으로 다음과 같은 고민이 있었습니다.</p>
+
+<ol>
+  <li>처음 보는 코드에 대한 맥락 파악</li>
+  <li>어느 정도까지 코드를 수정해도 되는지</li>
+  <li>디자인은 마음대로 설정해도 되는지</li>
+</ol>
+
+<p>전에 해보지 않았던 낯선 일을 하려고 하니 조심스러워졌습니다. 처음 접하는 코드였기 때문에 프로젝트 폴더를 하나씩 열어 보면서 수정해야 하는 부분을 찾는 것부터 당황스러웠습니다. 
+지금 생각해보면 전체 프로젝트 규모가 그리 거대하지 않았고 다행히 작업의 규모도 크지 않았기 때문에 수정이 필요한 파일을 얼마 지나지 않아 찾을 수 있었습니다. 또한 React 기반으로 되어 있었기 때문에 이슈를 해결하기 위해서는 어떤 부분을 고쳐야 할지 금세 감이 잡혔습니다. 
+코드 작성 방식에 있어서 나름대로 기준을 잡았던 것은 기존 형태를 최대한 해치지 않는 선에서 수정하자는 것이었습니다. 이슈를 해결하기 위해 검색 결과를 나타내는 별도의 상태 값을 추가하면 (구조 파악까지 필요 없을 정도로 매우 쉽게) 해결할 수 있지만, 기존에 있는 상태를 활용해도 해결 불가능할 경우에만 상태를 추가하겠다는 기준을 잡았습니다.</p>
+
+<p>위와 같은 방식을 토대로 JSX에 새로운 태그를 추가해서 검색 결과를 그리는 방식으로 구현하고자 했습니다. 새로 추가한 태그의 디자인을 다른 UI와 비슷한 톤으로 맞추기 위해서 CSS 속성을 설정하려고 했지만 행동에 옮기지 못했습니다. 왜냐하면 전체 프로젝트에서 존재하는 CSS라곤 어글리파이된 파일 하나밖에 존재하지 않았기 때문입니다. 그렇다고 적절한 스타일을 적용하지 않은 채로 commit을 남길 수도 없었습니다. 결국 예전에 참여했던 디스코드 커뮤니티에 도움을 요청하는 방법밖에 없다고 판단했습니다. 당면한 상황과 필요한 액션이 잘 드러나도록 질문을 다듬었습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236634312-91888b20-8272-4e6a-a06b-59b6d8cc1ecb.png" alt="디스코드 채널에 올린 질문이 있는 사진" />
+<em>레포지토리에서는 영어를 쓰지만 디스코드에서는 한국어로 질문할 수 있었습니다.</em>
+<br /></p>
+
+<p>질문을 올리고 응답을 기다리는 시간이 왜인지 모르게 떨리고 길게만 느껴졌습니다. 
+이내 메인테이너분이 답장을 해주셨고, 다른 컨트리뷰터분으로부터 가이드를 얻을 수 있었습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236634851-e5a6561d-b114-4959-ae8b-6ad9f48a0f22.png" alt="컨트리뷰터분의 답변" />
+<em>다음 날에 컨트리뷰터분의 가이드가 도착했습니다.</em>
+<br /></p>
+
+<p>간단히 줄이면 UI 관련해서는 private 레포지토리에서 별도로 관리하고 있기 때문에 로컬에서 커스텀 스타일을 추가하는 것은 어렵다는 내용이었습니다. 몇번의 문답 끝에 처음에 시도했던 방식처럼 DOM을 새롭게 추가하는 것이 아니라 input 태그의 placeholder에 검색 결과를 표시하는 방식으로 대안을 제시해주셨습니다. 말씀해주신 방식대로 commit을 진행하고 이후 PR까지 올리게 되었습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236635048-d8645f84-37ab-4a96-b5bb-96c3aac57c23.png" alt="Commit 메세지에 대한 컨트리뷰션 가이드" />
+<em>컨트리뷰션 가이드도 처음 참고해보았습니다.</em>
+<br /></p>
+
+<p>모르면 물어보자는 원칙은 어느 곳에서나 적용할 수 있는 가장 기본적인 원칙이라고 할 수 있습니다.
+이러한 기본을 지켜서 오픈 소스 컨트리뷰션에 성공할 수 있었습니다. 
+더불어 질문하는 과정에서 오픈 소스 커뮤니티가 정말 따뜻한 곳이라는 것도 느낄 수 있었습니다. 😊</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236642010-0411784f-ecc7-496b-8ac2-2d20a6cbc7fa.png" alt="'Contributors'에 추가된 아바타" />
+<em>여기에 올라오니까 대놓고 뿌듯합니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<h4 id="2-컨트리뷰션에-대한-반응이-활발하게-일어나는-곳이-좋다">2. 컨트리뷰션에 대한 반응이 활발하게 일어나는 곳이 좋다</h4>
+
+<p>이렇게 컨트리뷰션을 하고 나서 자신감이 붙었습니다. 이제는 코드에서 불편한 것, 잘 작동하지 않는 것들을 찾아서 고치는 행위를 마음껏 해도 되겠다는 생각이 자리 잡았습니다. 이에 최근에 진행한 프로젝트인 CDS(Cold Design System)를 만들 때 많이 참고했던 <code class="language-plaintext highlighter-rouge">Chakra UI</code>의 Documents 페이지에서 발견한 불편한 점을 개선하려고 했습니다.</p>
+
+<p>Components 문서를 살펴볼 때 페이지 우측에 있는 <code class="language-plaintext highlighter-rouge">Table of Content</code> UI로 각각의 소제목 메뉴를 클릭하여 해당하는 부분을 살펴보려고 했습니다. 하지만 선택한 소제목의 텍스트가 정상적으로 하이라이팅되지 않는 경우가 있을 뿐만 아니라 몇몇 항목은 정상적으로 스크롤이 이동하지 않는 문제가 있었습니다. 여러 페이지를 살펴본 결과 공통적인 오류가 있다는 것을 확인했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236635448-8cfde5e8-4f10-4c35-a0e1-7e34a43552f6.gif" alt="chakra UI Document 페이지의 Table of Content가 정상적으로 작동하지 않는 gif" />
+<em>기존에는 우측 메뉴를 선택하면 클릭한 메뉴가 하이라이팅되지 않습니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<p>이를 해결하기 위해 다시 낯선 레포지토리에서 작업을 시작했습니다. 스크롤 관련 커스텀 훅의 내부 로직에 문제가 있는 것 같다고 생각하여 코드를 차근차근 살펴보니, 실제로 <code class="language-plaintext highlighter-rouge">Intersection Observer</code> 객체의 callback 함수로 전달되는 인자가 스크롤 이벤트마다 정상적으로 전달되지 않는 문제점이 있었습니다. 이외에도 부차적인 원인을 찾아 해결하고 PR을 올렸습니다.</p>
+
+<p><br /></p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236635509-25df4cba-7501-42eb-a1f8-14aaa20d8418.gif" alt="chakra UI Document 페이지의 Table of Content에서 선택한 메뉴가 정상적으로 하이라이팅되고 스크롤되는 gif" />
+<em>수정한 코드에서는 정상적으로 하이라이팅되고 스크롤도 잘 이동합니다.</em>
+<br /></p>
+
+<p><br /></p>
+
+<p>고치려고 꽤 많은 시간을 투자했지만 지금까지도 깜깜무소식입니다. 
+물론 Chakra 팀이 UI 컴포넌트를 개발하는 것에 가장 많은 리소스를 투자하고 있을 거라는 생각은 했지만 UI-Docs 레포지토리에 생각보다 더 관심이 없다는 느낌을 받았습니다.
+그래도 언젠가는 봐줄 거라는 기대를 하면서, 앞으로는 오픈 소스에 참여하기 전에 해당 오픈 소스가 외부 컨트리뷰션에 얼마나 기민하게 반응하는지도 파악해두면 좋을 것 같다고 생각했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236635732-3e83580c-0643-435b-a339-7ed619d45240.png" alt="Merge되지 않은 PR" />
+<em>발효되고 있는 PR 😅</em>
+<br /></p>
+
+<p><br /></p>
+
+<h4 id="3-컨트리뷰션은-곧-관심이다">3. 컨트리뷰션은 곧 관심이다</h4>
+
+<p>레포지토리를 관심 있게 들여다보는 만큼 그곳에서 새로운 이슈를 발견할 수 있습니다. 맨 처음에 언급했던 dashboard는 개발 환경을 설정하기 위해 Docker Container를 통해서 yorkie를 실행해야 합니다. 최근에 yorkie의 버전이 0.3.4로 올라감에 따라 dashboard를 개발할 때 사용하는 yorkie 버전도 자연스럽게 올라갔습니다.</p>
+
+<p>문제는 테스트용 document를 생성할 때 발생했습니다. document 생성 요청을 보내면 정상적으로 document 목록에 추가되어야 하는데 이전에는 볼 수 없었던 CORS 에러가 발생했습니다. 시험 삼아 최신 버전보다 낮은 버전으로 바꾸어 요청을 보내보니 정상적으로 생성되었습니다. 따라서 발생한 오류가 버전 업데이트와 연관이 있을 것 같다는 생각에 이슈로 제보했습니다. 문제 발생 상황에 관해서 기술하고, 글로 설명이 부족할 것 같아 동영상을 첨부했습니다.</p>
+
+<p><br />
+<img src="https://user-images.githubusercontent.com/31645195/236635903-a68610e0-1312-4923-a5bf-ada25bda2b02.png" alt="발견한 문제에 대해서 제기한 Issue" />
+<em>발견한 문제에 대해서 제기한 Issue</em>
+<br /></p>
+
+<p>몇분 지나지 않아 다른 개발자분들과 댓글로 소통하며 문제의 원인을 찾아갔고, 이내 최신 버전과 관련된 코드가 Docker 설정 파일에 빠져있다는 것을 알 수 있었습니다. dashboard를 사용자 입장에서 이용하고 있진 않지만, 최근에 눈여겨보고 있는 레포지토리였기 때문에 기존과 달랐던 점을 찾을 수 있었습니다. 
+컨트리뷰션 경험을 쌓고 싶다면 관심 있는 레포지토리, 평소에 쓰고 있는 오픈 소스의 이슈 목록부터 확인해보면 좋을 것 같습니다. 그 이후 지속적으로 사용하면서 개선이 필요한 부분을 커뮤니티에 제시하는 단계로 자연스럽게 이어질 수 있다고 생각합니다.</p>
+
+<p><br /></p>
+
+<h4 id="4-아주-작아도-된다">4. 아주 작아도 된다</h4>
+
+<p>사실 지금까지 위에서 적은 컨트리뷰션 내용들이 매우 혁신적인 기능을 추가하거나 엄청난 최적화를 이끌어낸다는 등의 대단하고 큰 작업이 아닙니다. 
+단지 해결할 수 있는 문제를 해결한 것뿐입니다.</p>
+
+<p>근래에 회사에서 하는 개발을 게임에 나오는 몬스터로 비유한 이야기를 들은 적이 있습니다. 
+일이 너무 많아 힘들 때는 던전에서 몬스터를 쓰러트리며 경험치를 얻는 것처럼 매일 성장하고 있다는 생각으로 임하면 좋다는 것입니다.
+회사의 업무와 오픈 소스는 분명 다른 부분이 있지만 위의 비유를 비슷하게 적용할 수 있을 것 같습니다. 
+이전에 큰 관심을 가지지 않았던 이유는 모든 몬스터들의 레벨이 상향 평준화되어 있으리라 생각했기 때문입니다. 하지만 자세히 살펴보니 그중에는 레벨이 낮은 몬스터가 섞여 있었습니다. 즉, 누구나 컨트리뷰션할 수 있는 크고 작은 일들이 많이 있어서 경험치를 차근차근 쌓을 수 있는 환경이었습니다. 자신이 잡을 수 있는 몬스터를 탐색하는 것처럼 해결할 수 있는 작은 작업을 찾아 시도한다면, 언젠가는 보스 몬스터처럼 큰 작업에도 기여할 수 있는 날이 올 것이라고 생각합니다.</p>
+
+<p><br /></p>
+
+<h2 id="3-맺으며">3. 맺으며</h2>
+
+<p>작성한 코드가 낯선 레포지토리에 올라가 있는 것이 지금도 신기하고, 디스코드 채널로 오는 알림에 직접 올린 이슈나 PR 내용이 포함되어 있는 것이 뿌듯하기도 합니다.
+앞으로는 잡을 수 있는 몬스터가 있는지 살피는 눈으로 레포지토리를 바라볼 것 같습니다. 
+아직은 간단한 기여만 하고 있지만 언젠가는 큰 단위의 PR을 남겨서 고수 개발자분들로부터 공짜 코드 리뷰(?)를 받아보는 것을 내심 기대하고 있습니다. 최근에 겪은 가장 신선한 경험을 공유하며 아직 오픈 소스에 대한 막연한 두려움을 가지고 있는 누군가에게 도움이 되길 바랍니다.</p>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/OpenSource">
+        OpenSource</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fopensource%2F2023%2F05%2F07%2Fopen-source-contribution.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+<!--  -->
+<!-- Google Analytics -->
+<!-- <script> -->
+  <!-- (function(i, s, o, g, r, a, m) { -->
+    <!-- i['GoogleAnalyticsObject'] = r; -->
+    <!-- i[r] = i[r] || function() { -->
+      <!-- (i[r].q = i[r].q || []).push(arguments) -->
+    <!-- }, i[r].l = 1 * new Date(); -->
+    <!-- a = s.createElement(o), -->
+      <!-- m = s.getElementsByTagName(o)[0]; -->
+    <!-- a.async = 1; -->
+    <!-- a.src = g; -->
+    <!-- m.parentNode.insertBefore(a, m) -->
+  <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
+  <!-- ga('create', 'UA-243662455-3', 'auto'); -->
+  <!-- ga('send', 'pageview', { -->
+    <!-- 'page': '/opensource/2023/05/07/open-source-contribution.html', -->
+    <!-- 'title': '[OpenSource] 첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나' -->
+  <!-- }); -->
+<!-- </script> -->
+<!--  -->
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "10c052150c690f0";
+    if(window.wcs) {
+    wcs_do();
+    }
+    </script>
+
+  </body>
+
+</html>

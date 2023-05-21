@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [JavaScript] 꼬리 물기 최적화
+  </title>
+  <meta name="description" content="꼬리 물기 최적화">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/javascript/2023/05/21/tail-call-optimization.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P48NKV3');</script>
+  <!-- End Google Tag Manager -->
+  
+  
+</head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
+  </script>
+  <!-- End of Google tag (gtag.js) -->
+
+  <body>
+
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48NKV3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+    
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      <h4 class="title">Hyunbin Lee</h4>
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [JavaScript] 꼬리 물기 최적화
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        May 21, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/JavaScript">
+          Javascript</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="꼬리-물기-최적화">꼬리 물기 최적화</h1>
+
+<blockquote>
+  <h3 id="-es6에서-추가되었던-꼬리-물기-최적화에-대해서-정리해봅니다">💡 ES6에서 추가되었던 꼬리 물기 최적화에 대해서 정리해봅니다.</h3>
+</blockquote>
+
+<h2 id="1-들어가며">1. 들어가며</h2>
+
+<p>이전에 작성했던 <a href="https://iyu88.github.io/javascript/2023/04/23/ecma-script-2023.html">ECMAScript 2023 살펴보기</a> 글을 작성하고 나서 이전 ECMAScript 버전의 변경 사항도 살펴볼 겸 ES6부터 추가된 스펙에 대해서 훑어보았습니다. 대부분은 그동안 JavaScript를 사용하며 자주 접했던 내용들이라 큰 문제없이 이해할 수 있었습니다. 그 중에서 얼마 전 JavaScript 스터디를 진행할 때에도 잠깐 등장했던 개념에 눈길이 갔습니다. 바로 <code class="language-plaintext highlighter-rouge">꼬리 물기 최적화</code>입니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/f994e97b-a8b1-462f-bfc9-93f698faaf6b" alt="ECMAScript 2015 문서에서의 proper tail calls" />
+<em>ECMAScript 2015 (ES6) 에서 추가된 proper tail calls</em>
+<br /></p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/9eef94c7-52a7-4320-8e13-4be69e3a40d7" alt="모던 JavaScript 튜토리얼에 등장하는 tail call optimization" />
+<em>모던 JavaScript 튜토리얼에 등장하는 tail call optimization</em>
+<br /></p>
+
+<p><br /></p>
+
+<h2 id="2-꼬리-물기-최적화">2. 꼬리 물기 최적화</h2>
+
+<p>JavaScript에서 함수를 호출하면 엔진 내부에 있는 Call Stack이라는 영역에 하나씩 함수가 쌓이게 되고, 이를 <code class="language-plaintext highlighter-rouge">Stack Frame</code>이라고 부릅니다. <code class="language-plaintext highlighter-rouge">꼬리 물기 최적화</code>(Tail Call Optimization, 이하 TCO)는 함수를 함수의 꼬리(return 등)에서 호출할 때 Stack Frame을 재활용할 수 있게 하는 최적화 방식을 말합니다. 이러한 동작이 큰 임팩트를 줄 수 있는 상황인 재귀 함수를 실행하는 경우를 예시로 들어보겠습니다. (TCO가 반드시 재귀적인 상황에서만 적용될 수 있는 것은 아닙니다)</p>
+
+<pre>
+<code class="hljs js">const pow = (x, n) =&gt; {
+  if (n === 1) {
+    return x;
+  } else {
+    return x * pow(x, n-1);
+  }
+}
+
+pow(2, 4);
+</code>
+</pre>
+
+<p>위와 같이 x를 n제곱하는 재귀 함수 <code class="language-plaintext highlighter-rouge">pow()</code>를 정의하고 x와 n을 각각 2와 4로 설정하여 호출하면 다음과 같은 흐름으로 진행됩니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/260f8e6a-7b54-47cb-9938-1375a6005cc0" alt="pow() 함수를 실행했을 때 Call Stack에 쌓이는 재귀 함수" />
+<em>재귀 함수이기 때문에 호출한 함수가 Call Stack에 쌓이게 됩니다.</em>
+<br /></p>
+
+<p>pow()의 내부가 재귀 함수로 동작하기 때문에 Call Stack 영역에 그림처럼 n이 1이 될 때까지 함수가 쌓이게 됩니다. 이후에는 쌓여 있는 함수가 값을 반환하기 시작하면서 점차 Call Stack을 비우게 됩니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/46cbe899-ed5e-4076-a5fa-61534b0a210c" alt="n이 1일 때부터 값을 반환하면서 Call Stack이 점점 비워짐" />
+<em>Call Stack이 점점 비워집니다.</em>
+<br /></p>
+
+<p>Call Stack에 이전에 호출한 함수가 쌓여있는 이유는 n이 1이 아닐 때 <code class="language-plaintext highlighter-rouge">x * pow(x, n-1)</code> 를 반환하기 위해서 함수 내부에 <strong>메모리가 유지된 채로 pow(x, n-1)의 실행 결과를 기다리고 있어야 하기 때문입니다.</strong> 지금은 n이 4인 경우를 예시로 들었기 때문에 Call Stack에 최대 4개의 재귀 함수가 등록됩니다.</p>
+
+<p>하지만 만약 n이 매우 커지면 어떻게 될까요? 분명 지금의 함수 구조에서는 Call Stack에 재귀 함수가 n개 쌓이게 될 것이고, 앞의 예시와 동일하게 하나씩 값을 반환하면서 Call Stack을 비우게 될 것입니다. Call Stack에 함수가 쌓인다는 것의 의미를 파악하기 위해 JavaScript의 실행 컨텍스트에 대해서 간단하게 다루어 보겠습니다.</p>
+
+<p><br /></p>
+
+<h2 id="3-실행-컨텍스트">3. 실행 컨텍스트</h2>
+
+<p>실행 컨텍스트는 <code class="language-plaintext highlighter-rouge">실행할 코드에 제공할 환경 정보들을 모아 놓은 객체</code>입니다. 함수를 호출할 때마다 새로운 실행 컨텍스트가 생성되며 함수 실행 절차를 내부적으로 관리합니다. 즉, 함수 실행에 필요한 변수, 함수 식별자와 그것에 해당하는 실제 값, 외부 실행 환경에 대한 참조도 저장합니다. 이를 위해서 실행 컨텍스트가 생성될 때 내부 메모리에 다음 세 가지가 생깁니다.</p>
+
+<ol>
+  <li>Variable Environment : 식별자 정보나 외부 환경 정보입니다. (이후 설명할 Lexical Environment의 스냅샷으로 고정된 값입니다)</li>
+  <li>Lexical Environment : 실제로 변경 사항이 반영되는 영역입니다. <code class="language-plaintext highlighter-rouge">Environment Record</code>와 <code class="language-plaintext highlighter-rouge">Outer Environment Reference</code>로 이루어져 있습니다.</li>
+  <li>this binding : 식별자가 바라보아야 할 객체입니다.</li>
+</ol>
+
+<p><br /></p>
+
+<p>가령, pow(2, 4)를 호출했을 때 생기는 실행 컨텍스트는 다음과 같습니다.</p>
+
+<p><br /></p>
+
+<ol>
+  <li>Variable Environment : 초기 Lexical Environment의 스냅샷을 저장합니다.</li>
+  <li>Lexical Environment
+    <ul>
+      <li>Environment Record : 매개변수로 전달받은 값이나 지역 변수에 대한 데이터를 저장합니다. 이 경우에는 x와 n에 대한 메모리를 확보합니다.</li>
+      <li>Outer Environment Reference : 전역 환경에서 함수를 호출한 것이기 때문에 전역 실행 컨텍스트를 참조합니다.</li>
+    </ul>
+  </li>
+  <li>this binding : 함수가 특정한 객체에 대해서 실행되고 있는 것이 아니기 때문에 전역 this를 참조합니다.</li>
+</ol>
+
+<p>여기서 주목해야 할 부분은 <code class="language-plaintext highlighter-rouge">Environment Record</code>입니다. 함수를 실행할 때마다 필요한 지역 변수를 메모리에 할당하게 되는데, 앞선 pow() 함수 예시처럼 Call Stack에 함수가 계속해서 쌓이면 메모리가 해제되지 않은 채로 남아있게 됩니다. 즉, Call Stack에 함수가 올라올 때마다 실행 컨텍스트가 생성되고 이는 곧 메모리 할당이 일어남을 의미합니다. 이러한 실행 컨텍스트가 Call Stack에 적재되고 적절한 시점에 해제되지 않을 경우 메모리를 효율적으로 사용할 수 없게 되며 최악의 경우에는 <code class="language-plaintext highlighter-rouge">Maximum call stack size exceeded</code> 에러를 마주할 수 있습니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/62fe40b7-379c-4355-8aa4-c586763e8fa3" alt="Call Stack에 쌓인 함수마다 실행 컨텍스트가 별도로 존재" />
+<em>함수마다 실행 컨텍스트가 생성됩니다.</em>
+<br /></p>
+
+<p>이러한 문제가 발생하지 않도록 하기 위해 언어 차원에서 도입된 TCO로 해결할 수 있습니다.</p>
+
+<p><br /></p>
+
+<h2 id="4-다시-꼬리-물기-최적화">4. 다시 꼬리 물기 최적화</h2>
+
+<p>결국 기존 pow() 함수의 return 문에서 <code class="language-plaintext highlighter-rouge">pow(x, n-1)</code>의 실행 결과를 기다리지 않기 위해 함수를 다음과 같이 변환할 수 있습니다.</p>
+
+<pre>
+<code class="hljs js">const pow = (x, n, acc) =&gt; { // acc 추가
+  if (n === 1) {
+    return x * acc;
+  } else {
+    return pow(x, n-1, x * acc); // 변경
+  }
+}
+
+pow(2, 4, 1);
+</code>
+</pre>
+
+<p>n이 1이 아닌 경우 <code class="language-plaintext highlighter-rouge">x * pow(x, n-1)</code> 부분에서 곱하기 연산을 제거해주기 위해서 <code class="language-plaintext highlighter-rouge">acc</code>라는 누계 값을 저장하는 인자를 추가했습니다. 이로 인해서 더 이상 pow()의 결과를 반환할 때 이전 실행 컨텍스트를 유지하지 않고 다음 함수를 호출합니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/9c545c8a-54b9-483a-89fd-74be010994ed" alt="Call Stack에서 Stack Frame을 하나씩 유지" />
+<em>더 이상 이전 함수들이 Call Stack에서 기다리지 않습니다.</em>
+<br /></p>
+
+<p>여기에 추가적으로 TCO가 적용되면 기존 함수가 사용하고 있던 Stack Frame을 재활용합니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/9b888446-1a9f-4f37-8876-eeacfa3bff18" alt="첫번째 Call Stack은 Stack Frame을 재활용한다는 설명, 네번째 Call Stack은 반환 주소를 변경한다는 설명" />
+<em>하나의 Stack Frame을 재활용합니다.</em>
+<br /></p>
+
+<p>가령, pow(2, 4, 1)을 호출했을 때 <code class="language-plaintext highlighter-rouge">x = 2, n = 4, acc = 1</code> 이라는 Stack Frame이 생성되었다면 다음에 호출되는 pow(2, 3, 2)를 호출했을 때는 이전에 있던 Stack Frame을 <code class="language-plaintext highlighter-rouge">x = 2, n = 3, acc = 2</code> 로 재활용할 수 있다는 것입니다. 또한 개선 후 코드처럼 메모리를 유지하지 않아도 되게끔 함수를 작성하면 언어가 알아서 return point를 변경해줍니다.</p>
+
+<p><br /></p>
+
+<p>물론 여기에 조건이 몇 가지 필요합니다.</p>
+
+<p>먼저 꼬리에서 함수를 호출해야 합니다. 함수의 꼬리 종류는 다음과 같습니다.</p>
+
+<ol>
+  <li>return 문</li>
+  <li>객체의 메서드</li>
+  <li>call 이나 apply 로 바인딩된 함수</li>
+</ol>
+
+<p>즉, pow() 함수가 <code class="language-plaintext highlighter-rouge">return pow(x, n-1, x * acc)</code>로 함수를 호출하는 것처럼 작성하면 됩니다.</p>
+
+<p>다음으로는 아래처럼 지연 평가로 인해 Stack Memory를 붙잡지 않는 연산자를 사용하면 됩니다.</p>
+
+<ul>
+  <li>삼항 연산자 (<code class="language-plaintext highlighter-rouge">? :</code>)</li>
+  <li>논리 연산자 OR (<code class="language-plaintext highlighter-rouge">||</code>)</li>
+  <li>논리 연산자 AND (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>)</li>
+  <li>쉼표 연산자 (<code class="language-plaintext highlighter-rouge">,</code>)</li>
+</ul>
+
+<p>pow() 함수에도 이를 반영하면 다음과 같이 간단하게 변경할 수 있습니다.</p>
+
+<pre>
+<code class="hljs js">// 삼항 연산자 적용 
+const pow = (x, n, acc) =&gt; (
+  n === 1 ? x * acc : pow(x, n-1, x * acc) 
+)
+
+pow(2, 4, 1);
+</code>
+</pre>
+
+<p>마지막 조건은 반드시 <code class="language-plaintext highlighter-rouge">strict mode</code>에서 실행되어야 한다는 점입니다. 만일 strict mode가 아닐 경우에는 Call Stack 정보에 접근할 수 있는 <code class="language-plaintext highlighter-rouge">function.prototype.arguments</code>나 <code class="language-plaintext highlighter-rouge">function.prototype.caller</code> 같은 속성을 사용할 수 있습니다. 하지만 Stack Frame을 재활용하게 되면서 속성 값들이 유지되지 않을 수 있기 때문에 해당 속성을 사용할 수 없는 strict mode에서만 TCO가 작동합니다.</p>
+
+<p><br /></p>
+
+<h2 id="5-맺으며">5. 맺으며</h2>
+
+<p>일반적으로 반복문이 재귀 함수보다 빠른 이유는 반복문의 경우 Loop Block에 대한 Stack Cleaning을 하기 때문에 블록 내부에서 사용하는 메모리를 해제하는 반면, 재귀 함수에서는 최종적으로 반환될 때까지 메모리를 해제하지 않기 때문입니다. TCO가 적용된다면, 메모리를 적절하게 관리하면서 for나 while을 사용하지 않고도 높은 성능의 재귀 함수를 구현할 수 있습니다.</p>
+
+<p>한 가지 주의해야 할 점은 ES6에 추가되어 언어 스펙에는 추가되었지만 사실 이를 지원하고 있는 JavaScript 엔진은 사실상 WebKit이 유일하다는 점입니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/iyu88.github.io/assets/31645195/5b80f9a2-20bb-45be-9fde-392be3199a10" alt="compat-table에서 TCO를 지원하는 엔진은 WebKit이 유일" />
+<em>Safari와 iOS에서만 지원하는 TCO 스펙</em>
+<br /></p>
+
+<p>최적화 영향을 받지 못하더라도 Call Stack을 잘 관리할 수 있는 방식으로 평소에도 신경 쓰면서 프로그램을 짜면 좋을 것 같습니다.</p>
+
+<hr />
+
+<p>[참고]</p>
+
+<ul>
+  <li>
+    <p><a href="https://262.ecma-international.org/6.0/#sec-tail-position-calls">ECMAScript® 2015 Language Specification</a></p>
+  </li>
+  <li>
+    <p><a href="https://kangax.github.io/compat-table/es6/#test-proper_tail_calls_(tail_call_optimisation)">ES6 compat-table</a></p>
+  </li>
+  <li>
+    <p><a href="https://junilhwang.github.io/TIL/Javascript/Domain/Execution-Context/">실행 컨텍스트</a></p>
+  </li>
+  <li>
+    <p><a href="https://velog.io/@yesdoing/%EA%BC%AC%EB%A6%AC-%EB%AC%BC%EA%B8%B0-%EC%B5%9C%EC%A0%81%ED%99%94Tail-Call-Optimization%EB%9E%80-2yjnslo7sr">꼬리 물기 최적화(Tail Call Optimization)란?</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.linkedin.com/pulse/tail-call-optimizations-es6-michael-clark/">Tail Call Optimizations - ES6</a></p>
+  </li>
+  <li>
+    <p><a href="https://2ality.com/2015/06/tail-call-optimization.html#the-conditional-operator">Tail call optimization in ECMAScript 6</a></p>
+  </li>
+</ul>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/JavaScript">
+        JavaScript</a>,&nbsp;<a href="/tag/TailCallOptimization">
+        TailCallOptimization</a>,&nbsp;<a href="/tag/TailRecursion">
+        TailRecursion</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fjavascript%2F2023%2F05%2F21%2Ftail-call-optimization.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+<!--  -->
+<!-- Google Analytics -->
+<!-- <script> -->
+  <!-- (function(i, s, o, g, r, a, m) { -->
+    <!-- i['GoogleAnalyticsObject'] = r; -->
+    <!-- i[r] = i[r] || function() { -->
+      <!-- (i[r].q = i[r].q || []).push(arguments) -->
+    <!-- }, i[r].l = 1 * new Date(); -->
+    <!-- a = s.createElement(o), -->
+      <!-- m = s.getElementsByTagName(o)[0]; -->
+    <!-- a.async = 1; -->
+    <!-- a.src = g; -->
+    <!-- m.parentNode.insertBefore(a, m) -->
+  <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
+  <!-- ga('create', 'UA-243662455-3', 'auto'); -->
+  <!-- ga('send', 'pageview', { -->
+    <!-- 'page': '/javascript/2023/05/21/tail-call-optimization.html', -->
+    <!-- 'title': '[JavaScript] 꼬리 물기 최적화' -->
+  <!-- }); -->
+<!-- </script> -->
+<!--  -->
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "10c052150c690f0";
+    if(window.wcs) {
+    wcs_do();
+    }
+    </script>
+
+  </body>
+
+</html>

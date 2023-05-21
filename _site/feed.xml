@@ -6,9 +6,27 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 May 2023 14:35:15 +0900</pubDate>
-    <lastBuildDate>Sun, 07 May 2023 14:35:15 +0900</lastBuildDate>
+    <pubDate>Sun, 21 May 2023 22:55:26 +0900</pubDate>
+    <lastBuildDate>Sun, 21 May 2023 22:55:26 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[JavaScript] 꼬리 물기 최적화</title>
+        <description>&lt;h1 id=&quot;꼬리-물기-최적화&quot;&gt;꼬리 물기 최적화&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-es6에서-추가되었던-꼬리-물기-최적화에-대해서-정리해봅니다&quot;&gt;💡 ES6에서 추가되었던 꼬리 물기 최적화에 대해서 정리해봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-들어가며&quot;&gt;1. 들어가며&lt;/h2&gt; &lt;p&gt;이전에 작성했던 &lt;a href=&quot;https://iyu88.github.io/javascript/2023/04/23/ecma-script-2023.html&quot;&gt;ECMAScript 2023 살펴보기&lt;/a&gt; 글을 작성하고 나서 이전 ECMAScript 버전의...</description>
+        <pubDate>Sun, 21 May 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/javascript/2023/05/21/tail-call-optimization.html</link>
+        <guid isPermaLink="true">http://localhost:4000/javascript/2023/05/21/tail-call-optimization.html</guid>
+        
+        <category>JavaScript</category>
+        
+        <category>TailCallOptimization</category>
+        
+        <category>TailRecursion</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
     
       <item>
         <title>[OpenSource] 첫 오픈 소스 컨트리뷰션 이야기: 어떻게 시작했고 무엇을 배웠나</title>
@@ -161,26 +179,6 @@
         
         
         <category>LookingBack</category>
-        
-      </item>
-    
-      <item>
-        <title>[Review] 부스트캠프 웹·모바일 7기 후기</title>
-        <description>&lt;h1 id=&quot;부스트캠프-웹모바일-7기-후기&quot;&gt;부스트캠프 웹·모바일 7기 후기&lt;/h1&gt; &lt;h2 id=&quot;들어가며&quot;&gt;들어가며&lt;/h2&gt; &lt;p&gt;어느덧 창밖의 초록은 지고 하얀 눈이 내려왔네요. 무려 5개월이 지났습니다.&lt;/p&gt; &lt;p&gt;부스트캠프를 하기 전까지만 해도 대학교 연구실에서 프론트엔드 개발자의 꿈을 키우며 관련된 연구 과제를...</description>
-        <pubDate>Thu, 29 Dec 2022 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/review/2022/12/29/boostcamp-review.html</link>
-        <guid isPermaLink="true">http://localhost:4000/review/2022/12/29/boostcamp-review.html</guid>
-        
-        <category>boostcamp</category>
-        
-        <category>review</category>
-        
-        <category>challenge</category>
-        
-        <category>membership</category>
-        
-        
-        <category>Review</category>
         
       </item>
     

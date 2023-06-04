@@ -6,9 +6,33 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 May 2023 22:55:26 +0900</pubDate>
-    <lastBuildDate>Sun, 21 May 2023 22:55:26 +0900</lastBuildDate>
+    <pubDate>Mon, 05 Jun 2023 00:58:36 +0900</pubDate>
+    <lastBuildDate>Mon, 05 Jun 2023 00:58:36 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[Cypress/Storybook] 컴포넌트 인터랙션 테스트</title>
+        <description>&lt;h1 id=&quot;컴포넌트-인터랙션-테스트&quot;&gt;컴포넌트 인터랙션 테스트&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-컴포넌트-인터랙션을-테스트해보기-위해서-storybook에서-cypress와-play-function을-적용한-내용을-정리합니다&quot;&gt;💡 컴포넌트 인터랙션을 테스트해보기 위해서 Storybook에서 Cypress와 Play function을 적용한 내용을 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-들어가며&quot;&gt;1. 들어가며&lt;/h2&gt; &lt;p&gt;이전에 작성했던 글(&lt;a href=&quot;https://iyu88.github.io/react/2023/03/25/react-compound-component-pattern.html&quot;&gt;디자인 시스템에 Compound Component Pattern...</description>
+        <pubDate>Sun, 04 Jun 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/cypress/2023/06/04/component-interaction-test.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cypress/2023/06/04/component-interaction-test.html</guid>
+        
+        <category>Cypress</category>
+        
+        <category>E2E_Test</category>
+        
+        <category>Storybook</category>
+        
+        <category>Component_Test</category>
+        
+        <category>Interaction_Test</category>
+        
+        <category>PlayFunction</category>
+        
+        
+        <category>Cypress</category>
+        
+      </item>
     
       <item>
         <title>[JavaScript] 꼬리 물기 최적화</title>
@@ -163,22 +187,6 @@
         
         
         <category>JavaScript</category>
-        
-      </item>
-    
-      <item>
-        <title>[LookingBack] 2022년 돌아보기 - 월별 일정을 중심으로</title>
-        <description>&lt;h1 id=&quot;2022년-돌아보기---월별-일정을-중심으로&quot;&gt;2022년 돌아보기 - 월별 일정을 중심으로&lt;/h1&gt; &lt;p&gt;원래는 연말 회고를 할 생각이 없었습니다. 거창한 내용을 적어야 할 것 같았고, 그렇게 적을만한 사건도 없다는 생각에 그냥 넘기려고 했죠. 근데 막상 12월의...</description>
-        <pubDate>Sat, 31 Dec 2022 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/lookingback/2022/12/31/looking-back-the-year.html</link>
-        <guid isPermaLink="true">http://localhost:4000/lookingback/2022/12/31/looking-back-the-year.html</guid>
-        
-        <category>Looking_Back_the_year</category>
-        
-        <category>2022</category>
-        
-        
-        <category>LookingBack</category>
         
       </item>
     

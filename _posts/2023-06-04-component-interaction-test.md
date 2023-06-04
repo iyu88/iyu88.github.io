@@ -276,7 +276,7 @@ Cypress.Commands.add("getStory", (componentName, storyName) => {
 declare namespace Cypress {
   interface Chainable {
     visitStory(path: string): void,
-    getStory(componentName: string, storyName: string): Chainable<JQuery<HTMLElement>>
+    getStory(componentName: string, storyName: string): Chainable&lt;JQuery&lt;HTMLElement&gt;&gt;
   }
 }
 </code>

@@ -239,7 +239,7 @@ describe('Slider component test', () => {
 - cy.wrap() : cypress 체이닝을 적용하고 싶은 객체를 감싸줍니다. 매개변수가 Promise일 경우 resolve될 때까지 기다립니다. 
 - cy.find() : cy.get()처럼 DOM 요소를 찾지만, 최상위가 아닌 현재 체이닝된 대상부터 탐색합니다. 
 
-위 메서드들을 사용하여 `#storybook-preview-iframe`에 해당하는 부분을 찾아서 iframe 내부에 DOM 요소를 불러왔을 때 `#story --components-slider--default`를 id로 하는 Slider가 존재하는지 확인합니다. 
+위 메서드들을 사용하여 `#storybook-preview-iframe`에 해당하는 부분을 찾아서 iframe 내부에 DOM 요소를 불러왔을 때 `#story--components-slider--default`를 id로 하는 Slider가 존재하는지 확인합니다. 
 
 <br />
 <img src="https://github.com/iyu88/Algorithm/assets/31645195/fdd2dbab-314e-4334-8226-2c7ab7bfa157" alt="Default Slider가 렌더링 되었는지 확인하는 테스트가 통과한 모습">
@@ -901,7 +901,7 @@ Default.play = async ({ canvasElement }) => {
 </code>
 </pre>
 
-나머지 스토리에 대해서도 필요한 테스트 케이스만 추가한 뒤 처음에 정의했던 yarn test:play 명령어를 실행합니다.
+나머지 스토리에 대해서도 필요한 테스트 케이스만 추가한 뒤 처음에 정의했던 'yarn test:play' 명령어를 실행합니다.
 
 <br />
 <img src="https://github.com/iyu88/Algorithm/assets/31645195/dfe397b6-4971-4422-a693-06c51f3af28c" alt="터미널에서 프로젝트 폴더에 있는 모든 stories 파일에 대해 테스트를 실행한 모습">

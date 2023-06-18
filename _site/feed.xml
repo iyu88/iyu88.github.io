@@ -6,9 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 05 Jun 2023 00:58:36 +0900</pubDate>
-    <lastBuildDate>Mon, 05 Jun 2023 00:58:36 +0900</lastBuildDate>
+    <pubDate>Sun, 18 Jun 2023 23:57:08 +0900</pubDate>
+    <lastBuildDate>Sun, 18 Jun 2023 23:57:08 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[LookingBack] 2023년 상반기 돌아보기 - 활동을 중심으로</title>
+        <description>&lt;h1 id=&quot;2023년-상반기-돌아보기---활동을-중심으로&quot;&gt;2023년 상반기 돌아보기 - 활동을 중심으로&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-지난-반년간-무엇을-했는지-돌아봅니다&quot;&gt;💡 지난 반년간 무엇을 했는지 돌아봅니다!&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;차가운-스터디&quot;&gt;차가운 스터디&lt;/h2&gt; &lt;p&gt;올해 1월부터 부스트캠프에서 만난 동료들과 스터디를 만들어 더 나은 개발자가 되기...</description>
+        <pubDate>Sun, 18 Jun 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/lookingback/2023/06/18/looking-back-the-first-half.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lookingback/2023/06/18/looking-back-the-first-half.html</guid>
+        
+        <category>Looking_Back_the_half</category>
+        
+        <category>2023</category>
+        
+        
+        <category>LookingBack</category>
+        
+      </item>
     
       <item>
         <title>[Cypress/Storybook] 컴포넌트 인터랙션 테스트</title>
@@ -171,22 +187,6 @@
         
         
         <category>Deployment</category>
-        
-      </item>
-    
-      <item>
-        <title>[JavaScript] JavaScript 의 Prototype 에 대해서</title>
-        <description>&lt;h1 id=&quot;javascript-의-prototype-에-대해서&quot;&gt;JavaScript 의 Prototype 에 대해서&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-javascript-특징-중-하나인-prototype-에-대한-지식을-정리합니다&quot;&gt;💡 JavaScript 특징 중 하나인 Prototype 에 대한 지식을 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-객체와-prototype&quot;&gt;1. 객체와 Prototype&lt;/h2&gt; &lt;blockquote&gt; &lt;p&gt;Javascript에서는 객체를 상속하기 위하여 프로토타입이라는 방식을...</description>
-        <pubDate>Tue, 31 Jan 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2023/01/31/javascript-prototype.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2023/01/31/javascript-prototype.html</guid>
-        
-        <category>javascript</category>
-        
-        <category>prototype</category>
-        
-        
-        <category>JavaScript</category>
         
       </item>
     

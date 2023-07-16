@@ -6,9 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 18 Jun 2023 23:57:08 +0900</pubDate>
-    <lastBuildDate>Sun, 18 Jun 2023 23:57:08 +0900</lastBuildDate>
+    <pubDate>Sun, 16 Jul 2023 23:04:39 +0900</pubDate>
+    <lastBuildDate>Sun, 16 Jul 2023 23:04:39 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[CSS] @supports로 fallback style 적용하기</title>
+        <description>&lt;h1 id=&quot;supports로-fallback-style-적용하기&quot;&gt;@supports로 fallback style 적용하기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-css-쿼리를-사용한-하위-브라우저에서의-스타일-대응-방법을-소개합니다&quot;&gt;💡 CSS 쿼리를 사용한 하위 브라우저에서의 스타일 대응 방법을 소개합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-들어가며&quot;&gt;1. 들어가며&lt;/h2&gt; &lt;p&gt;웹 개발 환경이 빠르게 변한다는 것은 비단 유행하는 프레임워크가...</description>
+        <pubDate>Sun, 16 Jul 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/css/2023/07/16/css-fallback-style.html</link>
+        <guid isPermaLink="true">http://localhost:4000/css/2023/07/16/css-fallback-style.html</guid>
+        
+        <category>CSS</category>
+        
+        <category>@supports</category>
+        
+        
+        <category>CSS</category>
+        
+      </item>
     
       <item>
         <title>[LookingBack] 2023년 상반기 돌아보기 - 활동을 중심으로</title>
@@ -169,24 +185,6 @@
         
         
         <category>Electron</category>
-        
-      </item>
-    
-      <item>
-        <title>[AWS] Amazon EC2 를 사용해서 프로젝트 배포하기 - 사진으로 보는 튜토리얼</title>
-        <description>&lt;h1 id=&quot;amazon-ec2-를-사용해서-프로젝트-배포하기---사진으로-보는-튜토리얼&quot;&gt;Amazon EC2 를 사용해서 프로젝트 배포하기 - 사진으로 보는 튜토리얼&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-프로젝트-배포를-위해-aws-인스턴스를-생성하는-과정을-사진으로-정리합니다&quot;&gt;💡 프로젝트 배포를 위해 AWS 인스턴스를 생성하는 과정을 사진으로 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-배포하기&quot;&gt;1. 배포하기&lt;/h2&gt; &lt;p&gt;작년 12월을 끝으로...</description>
-        <pubDate>Thu, 09 Feb 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/deployment/2023/02/09/aws-ec2-deployment.html</link>
-        <guid isPermaLink="true">http://localhost:4000/deployment/2023/02/09/aws-ec2-deployment.html</guid>
-        
-        <category>aws</category>
-        
-        <category>ec2</category>
-        
-        <category>deployment</category>
-        
-        
-        <category>Deployment</category>
         
       </item>
     

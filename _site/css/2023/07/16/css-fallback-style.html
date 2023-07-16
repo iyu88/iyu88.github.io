@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [CSS] @supports로 fallback style 적용하기
+  </title>
+  <meta name="description" content="@supports로 fallback style 적용하기">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/css/2023/07/16/css-fallback-style.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P48NKV3');</script>
+  <!-- End Google Tag Manager -->
+  
+  
+</head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
+  </script>
+  <!-- End of Google tag (gtag.js) -->
+
+  <body>
+
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48NKV3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+    
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      <h4 class="title">Hyunbin Lee</h4>
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [CSS] @supports로 fallback style 적용하기
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        July 16, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/CSS">
+          Css</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="supports로-fallback-style-적용하기">@supports로 fallback style 적용하기</h1>
+
+<blockquote>
+  <h3 id="-css-쿼리를-사용한-하위-브라우저에서의-스타일-대응-방법을-소개합니다">💡 CSS 쿼리를 사용한 하위 브라우저에서의 스타일 대응 방법을 소개합니다.</h3>
+</blockquote>
+
+<h2 id="1-들어가며">1. 들어가며</h2>
+
+<p>웹 개발 환경이 빠르게 변한다는 것은 비단 유행하는 프레임워크가 시시각각 변한다는 것을 의미할 뿐만 아니라 새롭게 사용할 수 있는 기능들이 많아진다는 것을 의미하기도 하는 것 같습니다. 라이브러리나 프레임워크의 버전이 올라가면 이전에 쓰던 기능의 사용법이 바뀌기도 하고 신기능이 추가되기도 합니다. 이러한 버전에 따른 차이점은 바닐라 HTML, CSS, JavaScript도 예외가 아닙니다.</p>
+
+<p>언어에서 새로운 기능을 지원하는 경우에는 기존에 있던 불편함을 간단하게 해소해주는 경우가 있기 때문에 빨리 사용해보고 싶은 마음도 듭니다. 하지만 특정 브라우저에서 새로운 스펙을 지원하지 않는 경우에는 설레는 마음으로 코드를 작성해도 실제로는 적용되지 않는 경우도 있습니다. 따라서 웹 개발자들은 브라우저라는 실행 환경 또한 고려해야 합니다.</p>
+
+<p>이 글에서는 CSS 파일에서 사용한 기능에 대해 브라우저 지원 여부에 따라 fallback style을 적용할 수 있게 해주는 CSS 쿼리에 대해서 다루어 봅니다.</p>
+
+<h2 id="2-브라우저가-css-최신-스펙을-지원하지-않는다면">2. 브라우저가 CSS 최신 스펙을 지원하지 않는다면</h2>
+
+<p>CSS를 작성할 때 특정 선택자나 속성을 브라우저에서 지원하는지 확인하기 위해 <a href="https://caniuse.com/">Can I use…</a>와 같은 사이트를 이용하곤 합니다. 해당 사이트에서는 CSS 키워드를 검색하면 다음 사진처럼 각 브라우저 버전별 지원 여부를 보여줍니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/7c79c8ed-4f0c-4f9c-b8cc-ef5415bf8d88" alt="CANIUSE 사이트에서 flex를 검색한 결과" />
+<em>해당 사이트에서 flex라는 키워드를 검색한 결과입니다.</em>
+<br /></p>
+
+<p><a href="https://developer.chrome.com/blog/whats-new-css-ui-2023/#has">What’s new in CSS and UI: I/O 2023 Edition</a>에서 소개된 최신 CSS 스펙 중 하나인 <code class="language-plaintext highlighter-rouge">:has</code>에 대해서 살펴보겠습니다. :has 선택자는 has로 전달한 선택자를 포함하는 요소를 선택합니다. 가령, 아래와 같은 예제에서 <code class="language-plaintext highlighter-rouge">.parent:has(.children)</code>처럼 작성하면 <code class="language-plaintext highlighter-rouge">children 클래스를 가지고 있는 parent 클래스</code>라는 의미가 됩니다.</p>
+
+<pre>
+<code class="hljs html">// index.html
+&lt;div class="parent"&gt;
+  &lt;div class="children" /&gt;
+&lt;/div&gt;</code>
+</pre>
+
+<pre>
+<code class="hljs js">// index.css
+.parent {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.children {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+.parent:has(.children) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code>
+</pre>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/5502c1ef-1549-4acb-9bbb-568726e01895" alt="index.html과 index.css를 렌더링해본 결과 초록색 사각형 중앙에 빨간색 사각형이 위치해 있다" />
+<em>parent 클래스에 display:flex가 정상적으로 적용되었습니다.</em>
+<br /></p>
+
+<p>하지만 앞서 설명했던 것처럼 <code class="language-plaintext highlighter-rouge">:has</code> 선택자 같은 경우에는 비교적 최신 스펙이기 때문에 다른 브라우저에서 지원하지 않을 가능성이 높습니다. Can I use에서 검색해보면 다음과 같이 Chrome 105 이상, Safari 15.4 이상 브라우저 버전에서는 지원하지만 Firefox 같은 브라우저에서는 아직 지원하지 않는 것을 알 수 있습니다. 위에서 정상적으로 스타일이 적용된 이유는 코드를 실행한 브라우저가 Chrome 114 버전이기 때문입니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/f9274054-f476-4ddf-9f83-3ebe02627779" alt="CANIUSE 사이트에서 :has를 검색한 결과" />
+<em>Firefox 전 버전에서 사용이 불가능합니다.</em>
+<br /></p>
+
+<p>따라서 이러한 경우에는 해당 속성을 지원하지 않는 브라우저에서 개발자의 의도대로 스타일이 적용되지 않을 수 있습니다. 실제로 Firefox 브라우저에서 동일한 코드를 실행해보면 다음과 같이 렌더링됩니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/4608a560-2431-418c-a389-63ebfa568342" alt="index.html과 index.css를 렌더링해본 결과 초록색 사각형의 좌상단에 빨간색 사각형이 위치해 있다" />
+<em>Firefox에서는 .parent:has(.children) 내부에 정의한 속성이 적용되지 않습니다.</em>
+<br /></p>
+
+<h2 id="3-supports로-스타일-보완하기">3. @supports로 스타일 보완하기</h2>
+
+<p>위와 같은 상황을 해결할 수 있는 여러 방법이 있겠지만 여기서는 <code class="language-plaintext highlighter-rouge">@supports</code> 쿼리를 활용한 해결법을 소개합니다.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@supports">MDN @supports</a>에서 말하는 @supports의 역할은 다음과 같습니다.</p>
+
+<blockquote>
+  <p>The @supports CSS at-rule lets you specify CSS declarations that depend on a browser’s support for CSS features.</p>
+</blockquote>
+
+<p>즉, 개발자가 사용하고자 하는 CSS 기능에 대해 브라우저 지원 여부를 판단하여 추가적인 속성을 정의할 수 있도록 해줍니다. @supports를 사용하기 위해서 supports condition을 정의해야 하고, 가장 손쉽게 사용할 수 있는 방법은 <code class="language-plaintext highlighter-rouge">selector()</code> 함수를 사용하는 것입니다. 예를 들어, selector() 함수 내부에 A라는 선택자를 전달하면 <code class="language-plaintext highlighter-rouge">A 선택자를 지원하는 경우</code> 라는 의미가 됩니다.</p>
+
+<p>위에서 살펴보았던 예시에서 @supports 쿼리를 적용하여 :has 선택자를 지원하지 않을 경우 parent 클래스의 background-color를 변경하고 flex 속성도 함께 적용해보겠습니다.</p>
+
+<pre>
+<code class="hljs js">// index.css
+.parent {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.children {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+.parent:has(.children) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@supports not selector(:has) {
+  .parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+  }
+}
+</code>
+</pre>
+
+<p>not 키워드를 selector() 앞에 사용하면 부정의 의미로 한정할 수 있습니다. 위와 같이 @supports 내부에 작성한 fallback style이 정상적으로 적용되었는지 Firefox 브라우저에서 확인해본 결과는 다음과 같습니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/3cf7764d-96b2-4092-93e8-1b1d19cba95a" alt="index.html과 index.css를 렌더링해본 결과 파란색 사각형 중앙에 빨간색 사각형이 위치해 있다" />
+<em>의도한대로 스타일이 정상 적용된 것을 확인할 수 있습니다.</em>
+<br /></p>
+
+<h2 id="4-맺으며">4. 맺으며</h2>
+
+<p>@supports를 활용하여 특정 브라우저 버전에서 CSS 기능을 지원하지 않을 때 대응하는 방법에 대해서 알아보았습니다. 위에서 정말 간단한 예제를 살펴보았지만 실제 개발 상황에서는 다른 쿼리들과 혼합하여 복잡한 상황에 충분히 대응할 수 있을 것 같습니다. 혹은 <code class="language-plaintext highlighter-rouge">@supports selector(:has)</code>처럼 작성하면 오히려 :has와 같은 최신 스펙을 지원하는 브라우저에서만 사용하고 싶은 스타일을 적용할 수 있습니다. 단, @supports와 supports condition을 정의하는 데에 사용되는 기능의 지원 범위를 염두에 두고 적절하게 사용하는 것이 중요할 것 같습니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/83168fa2-6e2c-4e6f-9c39-3231288637ed" alt="CANIUSE 사이트에서 @supports를 검색한 결과" />
+<br /></p>
+
+<p>[참고]</p>
+
+<ul>
+  <li>
+    <p><a href="https://caniuse.com/">Can I use…</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.chrome.com/blog/whats-new-css-ui-2023/#has">What’s new in CSS and UI: I/O 2023 Edition</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:has">MDN - :has()</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@supports">MDN - @supports</a></p>
+  </li>
+</ul>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/CSS">
+        CSS</a>,&nbsp;<a href="/tag/@supports">
+        @supports</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fcss%2F2023%2F07%2F16%2Fcss-fallback-style.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+<!--  -->
+<!-- Google Analytics -->
+<!-- <script> -->
+  <!-- (function(i, s, o, g, r, a, m) { -->
+    <!-- i['GoogleAnalyticsObject'] = r; -->
+    <!-- i[r] = i[r] || function() { -->
+      <!-- (i[r].q = i[r].q || []).push(arguments) -->
+    <!-- }, i[r].l = 1 * new Date(); -->
+    <!-- a = s.createElement(o), -->
+      <!-- m = s.getElementsByTagName(o)[0]; -->
+    <!-- a.async = 1; -->
+    <!-- a.src = g; -->
+    <!-- m.parentNode.insertBefore(a, m) -->
+  <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
+  <!-- ga('create', 'UA-243662455-3', 'auto'); -->
+  <!-- ga('send', 'pageview', { -->
+    <!-- 'page': '/css/2023/07/16/css-fallback-style.html', -->
+    <!-- 'title': '[CSS] @supports로 fallback style 적용하기' -->
+  <!-- }); -->
+<!-- </script> -->
+<!--  -->
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "10c052150c690f0";
+    if(window.wcs) {
+    wcs_do();
+    }
+    </script>
+
+  </body>
+
+</html>

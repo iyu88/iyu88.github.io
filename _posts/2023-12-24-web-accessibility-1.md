@@ -217,10 +217,10 @@ cover: "/assets/instacode.png"
 {% highlight html%}
 <!-- visuallyhidden 클래스는 visibility: hidden 으로 보이지 않음 -->
 <li>
-	<span class="current">
-		<span class="visuallyhidden">Current Page: </span>
-		Space Bears
-	</span>
+<span class="current">
+  <span class="visuallyhidden">Current Page: </span>
+  Space Bears
+</span>
 </li>
 {% endhighlight %}
 
@@ -306,10 +306,65 @@ Fly-out 메뉴는 드롭다운 메뉴처럼 하위 메뉴를 담기 위해 별�
 
 #### 4-3-5. Complex Images
 짧은 문장으로 표현할 수 없을 정도로 중요하고 복잡한 정보가 들어있는 이미지 (그래프, 차트, 다이어그램, 삽화 등) 는 대체 텍스트를 두 부분으로 나누어서 제공합니다. 
-1. 이미지를 식별 가능한 수준으로 짧게 설명하고, 이어서 나올 2번 설명의 위치를 언급합니다. 
+1. 이미지를 식별 가능한 수준으로 짧게 설명하고, 이어서 나올 2번 설명의 구체적인 위치를 언급합니다. 
 2. 이미지에 있는 핵심적인 정보나 구체적인 수치를 글로 충분히 설명합니다. 
 
-단, 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, 가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 더 도움이 될 수 있습니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 증진에 도움될 수 있습니다. 
+이미지가 구조화된 정보(그래프, 표 등)를 담고 있는 경우 다음 세 가지 방법 중 하나를 선택하여 적용할 수 있습니다. 
+
+- 첫번째 방법 : 이미지 주변에 긴 설명으로 갈 수 있는 링크(외부 링크나 같은 페이지의 다른 요소)를 추가합니다. 하지만 이 방법은 이미지와 링크가 구조적으로 연관되지 않기 때문에 figure, figcaption 태그와 함께 사용하는 것이 좋습니다. 이 때, figure 태그를 지원하지 않는 브라우저가 있을 수 있기 때문에 [role='group'](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role) 속성도 추가해주면 좋습니다.
+
+{% highlight html%}
+<figure role="group">
+  <img
+      src="chart.png"
+      alt="Bar chart showing monthly and total visitors for the first quarter 2014 for sites 1 to 3">
+  <figcaption>
+      <a href="2014-first-qtr.html">Example.com Site visitors Jan to March 2014 text description of the bar chart</a>
+  </figcaption>
+</figure>
+{% endhighlight %}
+
+- 두번째 방법 : 긴 설명이 있는 페이지 내의 위치를 대체 텍스트로 사용합니다. 이 때, 콘텐츠 내용을 바탕으로 아주 구체적인 위치를 알려주는 것이 좋습니다. 아래 예시에서 alt 속성을 보면 h4 태그 내에 있는 실제 텍스트를 기반으로 어디에 구체적인 설명이 위치하는지 알려주고 있습니다. 
+
+{% highlight html%}
+<p>
+  <img
+    src="chart.png"
+    alt="Bar chart showing monthly and total visitors for the first quarter 2014 for sites 1 to 3. Described under the heading Site visitors full text.">
+</p>
+[…]
+<h4>Site visitors full text</h4>
+[…]
+{% endhighlight %}
+
+- 세번째 방법 : img 태그에서 longdesc 속성을 사용하여 자세한 설명이 있는 별도의 URI를 언급하거나 페이지 내 다른 요소의 id를 언급합니다.
+
+{% highlight html%}
+<img
+  src="chart.png"
+  alt="Bar chart showing monthly and total visitors for the first quarter 2014 for sites 1 to 3"
+  longdesc="#chart-longdesc">
+[…]
+<div id="chart-longdesc">
+  […]
+</div>
+{% endhighlight %}
+
+단, longdesc 속성을 지원하지 않는 브라우저(사파리, 모바일 플랫폼 등)를 위해 첫번째 방법(a 태그로 링크 제공)을 같이 사용하는 것이 좋습니다. 
+
+- 이미지가 텍스트로 된 정보를 포함하고 있는 경우
+  - aria-describedby 속성을 사용해서 이미지와 이미지에 대한 설명이 있는 요소를 이어줄 수 있습니다. 
+  {% highlight html%}
+<img src="peacock.jpg"
+  alt="Male peacock head"
+  aria-describedby="description">
+[…]
+<p id="description">
+  The male is metallic blue on the crown, the feathers of the head being short and curled. The fan-shaped crest on the head is made of feathers with bare black shafts and tipped with blush-green webbing. A white stripe above the eye and a crescent shaped white patch below the eye are formed by bare white skin. The sides of the head have iridescent greenish blue feathers. The back has scaly bronze-green feathers with black and copper markings.
+</p>{% endhighlight %}
+  aria-describedby로 이어진 요소들은 한 문단의 연속된 내용으로 취급되지만, 스크린 리더나 보조 기술에서 구조적인 정보에 접근할 수 없습니다. 즉, 시맨틱 태그로 이어지지 않아서 구조적인 관계를 나타내거나 네비게이션 기능을 제공받을 수 없고, 그저 텍스트를 읽어줄 뿐입니다. 따라서 **웹 페이지의 구조적인 정보와 상관없이 텍스트만 있는 긴 설명**에 사용하기 적합합니다. 
+
+중요한 것은 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, 가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 도움이 될 수 있다는 것입니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 향상에 도움될 수 있습니다. 
 
 #### 4-3-6. Groups of Images
 

@@ -35,7 +35,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/a11y/2023/12/24/web-accessibility.html">
+  <link rel="canonical" href="http://localhost:4000/a11y/2023/12/24/web-accessibility-1.html">
   <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
 
   <!-- Tooltips -->
@@ -534,10 +534,10 @@
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- visuallyhidden 클래스는 visibility: hidden 으로 보이지 않음 --&gt;</span>
 <span class="nt">&lt;li&gt;</span>
-	<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"current"</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Current Page: <span class="nt">&lt;/span&gt;</span>
-		Space Bears
-	<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"current"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Current Page: <span class="nt">&lt;/span&gt;</span>
+  Space Bears
+<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;/li&gt;</span></code></pre></figure>
 
 <p>한편, 활성화된 아이템에서는 a 태그를 제거하여 상호작용할 수 없게 해야 하고, 만일 불가능할 경우 활성화된 메뉴 아이템에 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current">aria-current=’page’</a> 속성을 사용하여 활성화된 페이지임을 보조 기술에 알려줍니다.</p>
@@ -654,11 +654,72 @@
 <h4 id="4-3-5-complex-images">4-3-5. Complex Images</h4>
 <p>짧은 문장으로 표현할 수 없을 정도로 중요하고 복잡한 정보가 들어있는 이미지 (그래프, 차트, 다이어그램, 삽화 등) 는 대체 텍스트를 두 부분으로 나누어서 제공합니다.</p>
 <ol>
-  <li>이미지를 식별 가능한 수준으로 짧게 설명하고, 이어서 나올 2번 설명의 위치를 언급합니다.</li>
+  <li>이미지를 식별 가능한 수준으로 짧게 설명하고, 이어서 나올 2번 설명의 구체적인 위치를 언급합니다.</li>
   <li>이미지에 있는 핵심적인 정보나 구체적인 수치를 글로 충분히 설명합니다.</li>
 </ol>
 
-<p>단, 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, 가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 더 도움이 될 수 있습니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 증진에 도움될 수 있습니다.</p>
+<p>이미지가 구조화된 정보(그래프, 표 등)를 담고 있는 경우 다음 세 가지 방법 중 하나를 선택하여 적용할 수 있습니다.</p>
+
+<ul>
+  <li>첫번째 방법 : 이미지 주변에 긴 설명으로 갈 수 있는 링크(외부 링크나 같은 페이지의 다른 요소)를 추가합니다. 하지만 이 방법은 이미지와 링크가 구조적으로 연관되지 않기 때문에 figure, figcaption 태그와 함께 사용하는 것이 좋습니다. 이 때, figure 태그를 지원하지 않는 브라우저가 있을 수 있기 때문에 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role">role=’group’</a> 속성도 추가해주면 좋습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;figure</span> <span class="na">role=</span><span class="s">"group"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span>
+      <span class="na">src=</span><span class="s">"chart.png"</span>
+      <span class="na">alt=</span><span class="s">"Bar chart showing monthly and total visitors for the first quarter 2014 for sites 1 to 3"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;figcaption&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"2014-first-qtr.html"</span><span class="nt">&gt;</span>Example.com Site visitors Jan to March 2014 text description of the bar chart<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/figcaption&gt;</span>
+<span class="nt">&lt;/figure&gt;</span></code></pre></figure>
+
+<ul>
+  <li>두번째 방법 : 긴 설명이 있는 페이지 내의 위치를 대체 텍스트로 사용합니다. 이 때, 콘텐츠 내용을 바탕으로 아주 구체적인 위치를 알려주는 것이 좋습니다. 아래 예시에서 alt 속성을 보면 h4 태그 내에 있는 실제 텍스트를 기반으로 어디에 구체적인 설명이 위치하는지 알려주고 있습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;img</span>
+    <span class="na">src=</span><span class="s">"chart.png"</span>
+    <span class="na">alt=</span><span class="s">"Bar chart showing monthly and total visitors for the first quarter 2014 for sites 1 to 3. Described under the heading Site visitors full text."</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+[…]
+<span class="nt">&lt;h4&gt;</span>Site visitors full text<span class="nt">&lt;/h4&gt;</span>
+[…]</code></pre></figure>
+
+<ul>
+  <li>세번째 방법 : img 태그에서 longdesc 속성을 사용하여 자세한 설명이 있는 별도의 URI를 언급하거나 페이지 내 다른 요소의 id를 언급합니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span>
+  <span class="na">src=</span><span class="s">"chart.png"</span>
+  <span class="na">alt=</span><span class="s">"Bar chart showing monthly and total visitors for the first quarter 2014 for sites 1 to 3"</span>
+  <span class="na">longdesc=</span><span class="s">"#chart-longdesc"</span><span class="nt">&gt;</span>
+[…]
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"chart-longdesc"</span><span class="nt">&gt;</span>
+  […]
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<p>단, longdesc 속성을 지원하지 않는 브라우저(사파리, 모바일 플랫폼 등)를 위해 첫번째 방법(a 태그로 링크 제공)을 같이 사용하는 것이 좋습니다.</p>
+
+<ul>
+  <li>이미지가 텍스트로 된 정보를 포함하고 있는 경우
+    <ul>
+      <li>aria-describedby 속성을 사용해서 이미지와 이미지에 대한 설명이 있는 요소를 이어줄 수 있습니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"peacock.jpg"</span>
+  <span class="na">alt=</span><span class="s">"Male peacock head"</span>
+  <span class="na">aria-describedby=</span><span class="s">"description"</span><span class="nt">&gt;</span>
+[…]
+<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"description"</span><span class="nt">&gt;</span>
+  The male is metallic blue on the crown, the feathers of the head being short and curled. The fan-shaped crest on the head is made of feathers with bare black shafts and tipped with blush-green webbing. A white stripe above the eye and a crescent shaped white patch below the eye are formed by bare white skin. The sides of the head have iridescent greenish blue feathers. The back has scaly bronze-green feathers with black and copper markings.
+<span class="nt">&lt;/p&gt;</span></code></pre></figure>
+
+<p>aria-describedby로 이어진 요소들은 한 문단의 연속된 내용으로 취급되지만, 스크린 리더나 보조 기술에서 구조적인 정보에 접근할 수 없습니다. 즉, 시맨틱 태그로 이어지지 않아서 구조적인 관계를 나타내거나 네비게이션 기능을 제공받을 수 없고, 그저 텍스트를 읽어줄 뿐입니다. 따라서 <strong>웹 페이지의 구조적인 정보와 상관없이 텍스트만 있는 긴 설명</strong>에 사용하기 적합합니다.</p>
+
+<p>중요한 것은 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, 가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 도움이 될 수 있다는 것입니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 향상에 도움될 수 있습니다.</p>
 
 <h4 id="4-3-6-groups-of-images">4-3-6. Groups of Images</h4>
 
@@ -749,7 +810,7 @@
       
       
       
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fa11y%2F2023%2F12%2F24%2Fweb-accessibility.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fa11y%2F2023%2F12%2F24%2Fweb-accessibility-1.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
       
@@ -1046,7 +1107,7 @@
   <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
   <!-- ga('create', 'UA-243662455-3', 'auto'); -->
   <!-- ga('send', 'pageview', { -->
-    <!-- 'page': '/a11y/2023/12/24/web-accessibility.html', -->
+    <!-- 'page': '/a11y/2023/12/24/web-accessibility-1.html', -->
     <!-- 'title': '[A11y] WAI 문서로 접근성 이해하기 (1/2)' -->
   <!-- }); -->
 <!-- </script> -->

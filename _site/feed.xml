@@ -6,16 +6,16 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 24 Dec 2023 23:46:28 +0900</pubDate>
-    <lastBuildDate>Sun, 24 Dec 2023 23:46:28 +0900</lastBuildDate>
+    <pubDate>Mon, 25 Dec 2023 00:50:49 +0900</pubDate>
+    <lastBuildDate>Mon, 25 Dec 2023 00:50:49 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
         <title>[A11y] WAI 문서로 접근성 이해하기 (1/2)</title>
         <description>&lt;h1 id=&quot;wai-문서로-접근성-이해하기-12&quot;&gt;WAI 문서로 접근성 이해하기 (1/2)&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-w3c에서-출판한-기술-사양을-읽어보며-접근성을-높일-수-있는-개발-요소들을-알아봅니다&quot;&gt;💡 W3C에서 출판한 기술 사양을 읽어보며 접근성을 높일 수 있는 개발 요소들을 알아봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-웹-접근성이란&quot;&gt;1. 웹 접근성이란&lt;/h2&gt; &lt;p&gt;웹 접근성이란 노인, 장애인,...</description>
         <pubDate>Sun, 24 Dec 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/a11y/2023/12/24/web-accessibility.html</link>
-        <guid isPermaLink="true">http://localhost:4000/a11y/2023/12/24/web-accessibility.html</guid>
+        <link>http://localhost:4000/a11y/2023/12/24/web-accessibility-1.html</link>
+        <guid isPermaLink="true">http://localhost:4000/a11y/2023/12/24/web-accessibility-1.html</guid>
         
         <category>Accessibility</category>
         

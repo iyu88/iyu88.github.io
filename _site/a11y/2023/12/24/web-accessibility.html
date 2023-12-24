@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [A11y] WAI 문서로 접근성 이해하기 (1/2)
+  </title>
+  <meta name="description" content="WAI 문서로 접근성 이해하기 (1/2)">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/a11y/2023/12/24/web-accessibility.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P48NKV3');</script>
+  <!-- End Google Tag Manager -->
+  
+  
+</head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
+  </script>
+  <!-- End of Google tag (gtag.js) -->
+
+  <body>
+
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48NKV3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+    
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      <h4 class="title">Hyunbin Lee</h4>
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [A11y] WAI 문서로 접근성 이해하기 (1/2)
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        December 24, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/A11y">
+          A11y</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="wai-문서로-접근성-이해하기-12">WAI 문서로 접근성 이해하기 (1/2)</h1>
+
+<blockquote>
+  <h3 id="-w3c에서-출판한-기술-사양을-읽어보며-접근성을-높일-수-있는-개발-요소들을-알아봅니다">💡 W3C에서 출판한 기술 사양을 읽어보며 접근성을 높일 수 있는 개발 요소들을 알아봅니다.</h3>
+</blockquote>
+
+<h2 id="1-웹-접근성이란">1. 웹 접근성이란</h2>
+
+<p>웹 접근성이란 노인, 장애인, 환자를 포함한 누구나 웹에 접근하여 웹 페이지를 탐색하거나 상호작용할 수 있게 지원하는 것을 말합니다.</p>
+
+<p>웹 접근성을 지원하기 위한 방법에는 대표적으로 WAI-ARIA(Web Accessibility Initiative – Accessible Rich Internet Applications)가 있습니다. 이는 웹 표준을 개발하는 조직인 W3C(World Wide Web Consortium)가 출판한 기술 사양으로 접근성을 증진하는 방법이 정리되어 있습니다.</p>
+
+<p>이 글에서는 <a href="https://www.w3.org/WAI/test-evaluate/preliminary/">Easy Checks</a> 와 <a href="https://www.w3.org/WAI/tutorials/">Tutorials</a>의 Page Structure, Menus, Images 파트에 있는 내용을 다룹니다.</p>
+
+<h2 id="2-easy-checks">2. Easy Checks</h2>
+
+<p>대부분의 사용자들은 별도로 접근성을 지원하지 않아도 화면에 나타난 글자와 이미지, 스피커에서 나오는 소리, 마우스와 키보드를 사용하여 자유롭게 웹을 탐색할 수 있습니다. 하지만 시각적, 청각적 접근성을 필요로 하는 사람들을 위해서 시각 콘텐츠는 듣기 쉽게, 청각 콘텐츠는 보기 쉽게 제작되어야 합니다. 또한 적절한 시맨틱 태그를 사용하여 웹 페이지의 구조를 전달할 수 있어야 하며 키보드 접근성도 고려해야 합니다. 모든 것을 고려하기 이전에 W3C에서 제시하는 간단한 확인 사항들을 알아봅니다.</p>
+
+<ul>
+  <li>개발자 도구에서 ‘접근성’ 기능을 활용합니다.</li>
+</ul>
+
+<p>크롬 개발자 도구를 기준으로 ‘접근성(Accessibility)’ 탭을 사용할 수 있습니다.</p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/8f11e7b9-19e3-414c-b966-8f35b01c21aa" alt="" />
+<em>Accessibility 탭에서 Enalble full-page accessibility tree 옵션을 체크하면 Element 탭에서 아이콘이 나타납니다</em>
+<br /></p>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/66b99095-81a5-4198-af55-f6cf20bd1e24" alt="" />
+<em>해당 아이콘을 활성화하면 이제 DOM Tree가 아닌 접근성 트리를 구성하는 노드만 남길 수 있습니다</em>
+<br /></p>
+
+<p>*접근성 트리에 대한 설명은 <a href="https://developer.mozilla.org/ko/docs/Glossary/Accessibility_tree">MDN 링크</a>을 참고해주세요.</p>
+
+<ul>
+  <li>Web Content Accessibility Guidelines (WCAG) 를 따릅니다.</li>
+</ul>
+
+<p>말 그대로 W3C에서 제시하는 웹 접근성을 높이기 위한 가이드라인입니다. 가장 최신 버전은 2023년 10월에 나온 <a href="https://www.w3.org/TR/WCAG22/">2.2버전</a>입니다. (3버전은 Exploratory 단계로 아직 준비 중입니다) 가이드라인에 있는 내용을 전부 파악하고 적용하는 것은 현실적으로 무리가 있을 것 같고, 문서에서 필요한 내용을 발췌해서 적용할 수 있을 것 같습니다.</p>
+
+<ul>
+  <li>적절한 마크업을 사용합니다.</li>
+</ul>
+
+<p>브라우저는 HTML 파일을 파싱하여 DOM Tree로 만들 뿐만 아니라 접근성 트리를 생성합니다. 이를 기반으로 웹 페이지가 스크린 리더나 보조 기술 (Assistive technology) 에 의한 지원을 받을 수 있기 때문에 적절한 HTML 태그와 속성을 명시하는 것이 중요합니다.</p>
+
+<ul>
+  <li>키보드 지시사항을 준수합니다.</li>
+</ul>
+
+<p>키보드로 웹을 탐색할 수 있게 하면서 동시에 여러 키 입력 조합이 필요한 경우 OS별 대응도 신경 써야 합니다. 대표적으로 Windows의 Ctrl과 MacOS의 cmd가 대응되야 합니다.</p>
+
+<h2 id="3-시맨틱-태그에서의-접근성">3. 시맨틱 태그에서의 접근성</h2>
+
+<p>위에서 설명한 것처럼 웹 페이지를 구성하는 각 요소에 적절한 시맨틱 태그를 사용하는 것은 중요합니다. 또한 각 태그를 사용할 때 상황에 맞게 접근성 관련 속성을 명시하는 것도 중요합니다. W3C 문서 내용을 토대로 각 태그를 사용할 때 신경써야 하는 점에 대해서 간추려봅니다.</p>
+
+<h3 id="3-1-title-element">3-1. title element</h3>
+
+<ul>
+  <li>title 태그에 있는 텍스트는 스크린 리더가 가장 먼저 읽는 요소이기 때문에 <strong>사용자의 현재 위치를 알려주기 위해 페이지 내용을 정확하고 간략하게 전달해야</strong> 하며 다른 웹 페이지들과 구분될 수 있어야 합니다. 즉, 모든 페이지가 동일한 title 을 가지고 있는 상황은 지양해야 합니다.</li>
+  <li>다음의 예시를 통해서 두괄식으로 요약된 페이지가 title 태그를 올바르게 사용했다고 볼 수 있습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 👍 좋은 예시 --&gt;</span>
+<span class="nt">&lt;title&gt;</span>[A11y] WAI 문서로 접근성 이해하기 (1/2) - 구멍을 외면하지 말자<span class="nt">&lt;/title&gt;</span>
+
+<span class="c">&lt;!-- 👎 안 좋은 예시 --&gt;</span>
+<span class="nt">&lt;title&gt;</span>구멍을 외면하지 말자 - [A11y] WAI 문서로 접근성 이해하기 (1/2)<span class="nt">&lt;/title&gt;</span></code></pre></figure>
+
+<p>본 블로그 이름에 해당하는 ‘구멍을 외면하지 말자’라는 텍스트는 사용자의 현재 위치를 구분해주지 못하기 때문에 앞쪽에 있는 것은 안좋은 예시라고 할 수 있습니다.</p>
+
+<h3 id="3-2-image-text-alternatives">3-2. Image text alternatives</h3>
+
+<ul>
+  <li>이미지를 볼 수 없는 사람들이 스크린 리더를 통해 이미지 내용을 파악할 때 사용되거나 이미지를 다운로드하지 못한 상태에서 유용합니다.</li>
+  <li>이미지가 어떤 맥락 속에서 사용된 것인지에 따라 alt 속성에 어떤 값을 명시하는 것이 좋은지가 결정됩니다.</li>
+  <li>기본적으로 모든 이미지는 alt 속성을 가지고 있어야 하며, 이미지를 그대로 묘사하는 것보다 해당 <strong>이미지를 사용함으로써 전달하고 싶은 의미가 무엇인지</strong> 파악하고 활용하는 것이 중요합니다.</li>
+  <li>자세한 내용은 <code class="language-plaintext highlighter-rouge">4-3. 이미지 (Images)</code> 에서 후술합니다.</li>
+</ul>
+
+<h3 id="3-3-headings">3-3. Headings</h3>
+
+<ul>
+  <li>각 페이지에 최소 하나의 heading 이 있어야 하고 시각적으로 제목처럼 보이는 요소는 heading 태그를 사용해야 합니다.</li>
+  <li>1에서 6까지의 위계가 있기 때문에 각기 다른 레벨의 heading 태그가 사용되었을 때 <strong>실제로 의미 있는 위계로</strong> 배치되었는지 고려해야 합니다.</li>
+</ul>
+
+<h3 id="3-4-contrast-ratio">3-4. Contrast Ratio</h3>
+
+<ul>
+  <li>배경과 전경의 충분한 색상 대비가 이루어지지 않으면 노인이나 난독증이 있는 사람들이 콘텐츠를 읽을 수 없습니다. 이는 단순히 색상이 충분하게 대비를 이뤄야 한다는 의미뿐만 아니라 <strong>색상의 밝고 어두움에 대한 휘도도 충분하게 대비되어야</strong> 한다는 뜻입니다.</li>
+  <li>적절한 대조를 이루고 있는지 확인하는 방법에 대해서는 <a href="https://www.w3.org/WAI/test-evaluate/preliminary/#contrast">W3C Easy Checks - Contrast Ratio</a>의 <code class="language-plaintext highlighter-rouge">What to check for</code>와 <code class="language-plaintext highlighter-rouge">Contrast Ratio </code>를 읽어보면 도움이 될 것 같습니다.</li>
+</ul>
+
+<h3 id="3-5-resize-text">3-5. Resize text</h3>
+
+<ul>
+  <li>사용자들이 자신에게 알맞은 글자 크기를 설정했을 때 웹 콘텐츠가 서로 겹치거나 수평 스크롤이 생겨서 가독성을 떨어트릴 수 있습니다.</li>
+  <li>글자 크기가 커져도 화면에서 <strong>다른 모든 요소를 볼 수 있고, 상호작용할 수 있어야 하며 수평 스크롤은 최대한 생기지 않게</strong> 하는 것이 좋습니다.</li>
+</ul>
+
+<h3 id="3-6-keyboard-access-and-visual-focus">3-6. Keyboard access and visual focus</h3>
+
+<ul>
+  <li>거동이 불편해서 보조 기술에 의존하거나 시각 장애가 있는 사용자는 키보드에 의존하여 웹 페이지를 탐색하기 때문에 키보드로 모든 웹 콘텐츠에 접근할 수 있어야 합니다. 이 때, 키보드로 포커스되고 있는 요소를 시각적으로 확인할 수 있어야 하고 논리적인 순서로 포커스가 이동해야 합니다.</li>
+  <li>자신의 웹 페이지가 논리적인 순서로 탭 인터랙션을 지원하는지 알아보기 위해서 <strong>주소창에 포커스를 둔 뒤 오로지 탭키만 눌러 탐색이 가능한지</strong> 여부로 판단할 수 있습니다.</li>
+</ul>
+
+<p>키보드 인터랙션과 관련하여 다음의 목록을 체크리스트로 삼아도 좋을 것 같습니다.</p>
+
+<ol>
+  <li>모든 요소에 접근할 수 있고</li>
+  <li>모든 요소에서 벗어날 수 있고</li>
+  <li>논리적으로 읽는 순서에 맞게 이동하고 (위에서 아래로, 왼쪽에서 오른쪽으로)</li>
+  <li>어떤 요소를 포커싱하고 있는지 시각적으로 알 수 있고</li>
+  <li>키보드만으로 모든 기능을 사용할 수 있고</li>
+  <li>드롭다운 리스트를 이용 가능하고</li>
+  <li>이미지에 링크가 걸려있는 경우에 포커스가 명확하게 표시되고 다른 키를 눌렀을 때 이동한다.</li>
+</ol>
+
+<h3 id="3-7-움직이고-깜빡거리는-콘텐츠">3-7. 움직이고 깜빡거리는 콘텐츠</h3>
+
+<ul>
+  <li>일반 사용자 뿐만 아니라 주의력 결핍, 시각 처리 장애를 가지고 있는 사람들을 위해서 광고, 비디오처럼 움직이는 콘텐츠는 사용자가 제어할 수 있어야 합니다.</li>
+  <li>제어가 불가능할 경우에는 움직이는 정보를 충분히 이해하지 못한 채 지나갈 수 있고, 콘텐츠 자체에 대한 집중력을 떨어트리는 문제가 있습니다.</li>
+  <li>특히 다음 사항에 해당하는 요소는 <strong>광과민성증후군 환자의 발작을 유발할 수 있기 때문에</strong> 유의해야 합니다.
+    <ol>
+      <li>1초에 3번 이상 깜빡이거나</li>
+      <li>화면의 넓은 부분을 차지하고</li>
+      <li>충분히 밝은 경우</li>
+    </ol>
+  </li>
+</ul>
+
+<p>따라서 웹 페이지를 구성할 때 반드시,</p>
+
+<ol>
+  <li>움직이고, 깜빡이는 정보가 자동으로 시작되고 5초 이상 지속되는지 (있다면 이를 제어할 수 있는지)</li>
+  <li>실시간으로 업데이트되는 정보가 있는지 (있다면 이를 제어할 수 있는지 또는 업데이트 주기를 조절할 수 있는지)</li>
+  <li>1초에 3번 이상 깜빡이는 콘텐츠가 있는지</li>
+</ol>
+
+<p>여부를 반드시 확인해야 합니다.</p>
+
+<h2 id="4-접근성을-위한-개발">4. 접근성을 위한 개발</h2>
+
+<h3 id="4-1-페이지-구조-page-structure">4-1. 페이지 구조 (Page Structure)</h3>
+
+<h4 id="4-1-1-page-region">4-1-1. Page Region</h4>
+
+<p>웹 페이지를 구성하는 각 영역에 사용할 수 있는 시맨틱 태그를 말합니다. 잘 알려진 시맨틱 태그처럼 main, nav, aside 등이 있습니다. 그 중에서 WAI-ARIA 속성과 관련된 특징이 있는 header와 footer에 대한 정보는 다음과 같습니다.</p>
+
+<ul>
+  <li>
+    <p>header : header는 웹 페이지 상단에 위치하여 전체 웹 페이지에 대한 정보를 담는 영역입니다. WAI-ARIA role로 보았을 때 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/banner_role">role=”banner”</a>을 수행하는데, article, section 태그 안에서 사용되면 해당 role을 잃고 보조 기술에 대한 지원을 받을 수 없습니다.</p>
+  </li>
+  <li>
+    <p>footer : footer는 웹 페이지 하단에 위치하여 header와 유사하게 사이트 정보를 담습니다. WAI-ARIA role로 보았을 때 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/contentinfo_role">role=”contentinfo”</a>을 수행하는데, article, section 태그 안에서 사용되면 해당 role을 잃고 보조 기술에 대한 지원을 받을 수 없습니다.</p>
+  </li>
+</ul>
+
+<p>대부분의 웹 브라우저들은 HTML5 요소를 지원하기 때문에 우리가 익히 아는 시맨틱 태그만 사용해도 괜찮지만, 브라우저와 보조 기술의 접근성을 극대화하기 위해서 HTML5 요소에 상응하는 role을 명시하는 것이 좋습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">role=</span><span class="s">"banner"</span><span class="nt">&gt;</span>…<span class="nt">&lt;/header&gt;</span>
+<span class="nt">&lt;main</span> <span class="na">role=</span><span class="s">"main"</span><span class="nt">&gt;</span>…<span class="nt">&lt;/main&gt;</span>
+<span class="nt">&lt;nav</span> <span class="na">role=</span><span class="s">"navigation"</span><span class="nt">&gt;</span>…<span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;footer</span> <span class="na">role=</span><span class="s">"contentinfo"</span><span class="nt">&gt;</span>…<span class="nt">&lt;/footer&gt;</span></code></pre></figure>
+
+<h4 id="4-1-2-labeling-regions">4-1-2. Labeling Regions</h4>
+
+<p>동일한 시맨틱 태그가 사용됐을 경우 각각을 구분하기 위해 label 속성을 사용하기도 합니다.</p>
+
+<ul>
+  <li>aria-labelledby : 다른 요소의 id 값을 설정하면 다른 모든 요소를 라벨로 사용할 수 있습니다. 아래의 예시처럼 heading 태그가 다른 Page Region(nav)안에 있을 경우 h2는 nav를 설명하는 역할을 맡습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">aria-labelledby=</span><span class="s">"regionheading"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">id=</span><span class="s">"regionheading"</span><span class="nt">&gt;</span>On this Page<span class="nt">&lt;/h2&gt;</span>
+    …
+<span class="nt">&lt;/nav&gt;</span></code></pre></figure>
+
+<ul>
+  <li>aria-label : 여러 개의 nav가 있을 경우 각 시맨틱 태그의 역할을 더 구체화할 필요가 있습니다. 아래 예시의 nav 태그는 Main 네비게이션이라는 의미를 aria-label에 담고 있습니다. aria-labelledby와 달리 다른 요소를 사용하지 않기 때문에 라벨이 시각적으로 드러나지 않아야 할 때 적합합니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">aria-label=</span><span class="s">"Main"</span><span class="nt">&gt;</span>
+  …
+<span class="nt">&lt;/nav&gt;</span></code></pre></figure>
+
+<h4 id="4-1-3-content-structure">4-1-3. Content Structure</h4>
+
+<p>웹 페이지에 들어가는 실제 내용을 구성할 때 사용하는 시맨틱 태그를 말합니다. 잘 알려진 태그들은 최대한 간단하게 서술하겠습니다.</p>
+
+<ul>
+  <li>article : 웹 페이지 내에서 그 자체만으로 완전한 정보를 담고 있는 영역에 사용됩니다.</li>
+  <li>section : 콘텐츠를 나타내기 위해 가장 일반적으로 사용되며 콘텐츠를 주제별로 묶을 때 사용됩니다.</li>
+  <li>paragraph : 글의 문단을 나타내는 데에 사용합니다. 일관적인 스타일이 적용되어 있을 경우 가독성이 올라갑니다.</li>
+  <li>list : 서로 다른 유형의 목록을 사용하여 정보를 목록화할 수 있습니다. ul, ol 이외에도 dl 태그도 존재합니다. dt, dd 태그와 함께 사용하여 용어를 설명할 때 사용합니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;dl&gt;</span>
+  <span class="nt">&lt;dt&gt;</span>term<span class="nt">&lt;/dt&gt;</span>
+  <span class="nt">&lt;dd&gt;</span>description<span class="nt">&lt;/dd&gt;</span>
+<span class="nt">&lt;/dl&gt;</span></code></pre></figure>
+
+<ul>
+  <li>quote : 인용된 문장에 사용하는 태그들입니다. 아래의 태그를 사용하면 보조 기술이 인용의 시작점과 끝점을 알려줍니다.
+    <ul>
+      <li>blockquote :  길고 복잡한 인용을 block으로 담을 때 사용합니다.</li>
+      <li>q : 짧은 인용을 inline으로 담을 때 사용합니다.</li>
+      <li>cite : 인용의 출처를 언급할 때 사용합니다.</li>
+    </ul>
+  </li>
+  <li>figure : 메인 콘텐츠에 대한 추가 정보를 제공할 때 사용합니다. 일반적으로 리스트, 이미지, 테이블 등을 포함하고 있고 figcaption 요소를 통해 figure에 라벨을 붙입니다. 아래 예시를 보면 복잡한 정보를 담고 있는 img 태그와 이에 대한 설명이 있는 a 태그를 figure 태그로 감싸고 있는 것을 볼 수 있습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>The sales volume of our SpaceBear product was steadily the first three quarters but had a huge success in quarter four with the introduction of SuperBear in time for the holiday season. See graphic G3 for details.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;figure</span> <span class="na">role=</span><span class="s">"group"</span> <span class="na">aria-labelledby=</span><span class="s">"fig-t3-capt"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;figcaption</span> <span class="na">id=</span><span class="s">"fig-t3-capt"</span><span class="nt">&gt;</span>G3: SpaceBear sales volume<span class="nt">&lt;/figcaption&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"…"</span>
+         <span class="na">alt=</span><span class="s">"SpaceBear sales diagram, showing the huge success in Q4"</span>
+         <span class="na">longdesc=</span><span class="s">"…"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"…"</span><span class="nt">&gt;</span>Long Description<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/figure&gt;</span></code></pre></figure>
+
+<h3 id="4-2-메뉴-menus">4-2. 메뉴 (Menus)</h3>
+
+<h4 id="4-2-1-structure">4-2-1. Structure</h4>
+
+<p>네비게이션 메뉴를 표현할 때 리스트 (ul, ol)를 사용하면 보조 기술이 메뉴에 있는 아이템 개수를 보조 기기 사용자에게 알려주고 네비게이션 관련 기능을 제공합니다.</p>
+
+<p>메뉴 접근성을 위해 현재 활성화된 메뉴 아이템에 대한 처리도 중요합니다. 눈에 보이지 않는 (visibility : hidden이 적용된) 텍스트를 통해 스크린 리더 사용자에게 활성화된 아이템을 알려주는 방법이 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- visuallyhidden 클래스는 visibility: hidden 으로 보이지 않음 --&gt;</span>
+<span class="nt">&lt;li&gt;</span>
+	<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"current"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Current Page: <span class="nt">&lt;/span&gt;</span>
+		Space Bears
+	<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/li&gt;</span></code></pre></figure>
+
+<p>한편, 활성화된 아이템에서는 a 태그를 제거하여 상호작용할 수 없게 해야 하고, 만일 불가능할 경우 활성화된 메뉴 아이템에 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current">aria-current=’page’</a> 속성을 사용하여 활성화된 페이지임을 보조 기술에 알려줍니다.</p>
+
+<h4 id="4-2-2-styling">4-2-2. Styling</h4>
+
+<p>메뉴에 명확하고 일관된 스타일이 적용될수록 사용자들이 메뉴를 쉽게 탐색할 수 있습니다. 여러가지 고려사항이 있지만 간추린 항목은 다음과 같습니다.</p>
+
+<ol>
+  <li>메뉴의 위치는 일반적으로 예상 가능한 위치에 있어야 합니다 (좌측 혹은 상단)</li>
+  <li>가독성을 위해 메뉴 아이템에 (영어의 경우) 전부 대문자를 사용하거나 줄바꿈, 하이픈(-)을 사용하지 않습니다.</li>
+  <li>충분한 공백을 줘서 모바일 기기에서 터치할 수 있도록 합니다.</li>
+  <li>글자 크기를 키웠을 때 다른 요소를 가리지 않도록 합니다.</li>
+  <li>메뉴의 상태를 전달하기 위해 색상과 함께 반드시 다른 스타일 요소로 변경되어야 합니다. (크기, 아이콘 변경 등)</li>
+</ol>
+
+<h4 id="4-2-3-fly-out-menus">4-2-3. Fly-out Menus</h4>
+
+<p>Fly-out 메뉴는 드롭다운 메뉴처럼 하위 메뉴를 담기 위해 별도의 DOM 요소가 나타났다 사라지는 것을 가리킵니다. 
+접근성을 위해 하위 메뉴의 노출 여부를 WAI-ARIA 속성 중 <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded">aria-expanded</a>에 명시해야 합니다.</p>
+
+<p>이런 Fly-out 메뉴는 마우스와 키보드 접근성 또한 고려해야 합니다.</p>
+
+<ul>
+  <li>
+    <p>마우스 사용자 : 하위 메뉴가 너무 빨리 사라지게 될 경우 마우스 조작이 불편한 사용자가 쉽게 이용할 수 없기 때문에 메뉴가 사라지기까지 <strong>약간의 딜레이를 주는 방법</strong>이 있습니다.</p>
+  </li>
+  <li>
+    <p>키보드 사용자 : 탭키를 사용해서 <strong>모든 하위 메뉴를 탐색하지 않도록 합니다.</strong> 즉, 탭키를 눌렀을 때 하위 메뉴가 열리며 모든 아이템에 포커스가 가는 방식은 좋지 않습니다. 이렇게 하면 키보드로 탐색하는 사용자가 불필요하게 너무 많은 메뉴에 접근해야 해서 원하는 정보에 접근하기 어려워지기 때문입니다.</p>
+  </li>
+</ul>
+
+<h4 id="4-2-4-application-menus">4-2-4. Application Menus</h4>
+
+<p>어플리케이션에서 메뉴를 제공할 때 하위 메뉴가 열리는 방식에 따라서 aria-expanded(드롭다운)나 aria-haspopup(모달) 중에서 적절한 WAI-ARIA 속성을 사용합니다. 또한 메뉴를 구성하는 각 요소에 적절한 role 속성도 명시합니다.</p>
+
+<ul>
+  <li>menubar: 수평으로 된 메뉴 막대</li>
+  <li>menu: 메뉴 막대에 있는 링크나 명령어의 집합. 주로 Fly-out 메뉴에 사용</li>
+  <li>menuitem: 개별 메뉴 아이템</li>
+  <li>separator: 메뉴에서 두 메뉴 그룹을 구분하는 구분자</li>
+</ul>
+
+<p>위의 WAI-ARIA 속성을 추가한다는 것이 자동으로 메뉴에 기능을 추가하거나 키보드 인터랙션이 더해진다는 것이 아니기 때문에 <strong>반드시 개발자가 기능(페이지 이동 등)과 키보드 이벤트 핸들러를 추가해야 합니다.</strong> 일반적으로 메뉴에서 사용되는 키와 기대되는 동작은 다음과 같습니다.</p>
+
+<ul>
+  <li>좌우 키보드 : 메뉴 아이템 간 이동</li>
+  <li>상하 키보드 : 하위 메뉴 아이템 탐색</li>
+  <li>Tab 키 : (메뉴 아이템 이동이 아닌) 다른 요소로 이동</li>
+</ul>
+
+<p>이 때, <strong>첫번째 메뉴 아이템은 tabindex 를 0으로 줘서 탭 포커싱을 받을 수 있도록 하고 나머지 아이템들은 -1로 설정하여 탭 포커싱을 받을 수 없도록 합니다.</strong> 이렇게 하면 메뉴에 포커스가 있는 상태에서 다른 요소로 이동하고 싶을 경우 Tab 키를 누르면 되고, 하위 메뉴를 탐색하고 싶을 경우 화살표와 Enter 키를 사용해서 이어나갈 수 있기 때문입니다.</p>
+
+<h3 id="4-3-이미지-images">4-3. 이미지 (Images)</h3>
+
+<h4 id="4-3-1-informative-images">4-3-1. Informative Images</h4>
+
+<p>이미지가 짧은 문장으로 표현할 수 있는 정보를 담고 있을 경우 해당 정보를 대체 텍스트로 사용합니다. 이는 이미지 자체에 대한 묘사를 의미하는 것은 아니지만 맥락에 따라서 묘사가 필요할 때도 있습니다.</p>
+
+<ul>
+  <li>설명에 대한 보충을 목적으로 사용된 경우
+    <ul>
+      <li>이미 웹 콘텐츠에 정보가 들어있기 때문에 대체 텍스트에 설명을 적기보다 이미지에 대한 짧은 설명만 있으면 충분합니다.</li>
+    </ul>
+  </li>
+  <li>간단한 정보를 전달하고 있을 경우
+    <ul>
+      <li>이미지가 전달하고 있는 정보를 대체 텍스트에서 자세하게 설명합니다.</li>
+    </ul>
+  </li>
+  <li>인상이나 감정을 전달하고 있을 경우
+    <ul>
+      <li>이미지가 사용되고 있는 맥락을 고려하여 의도한 인상을 묘사합니다.</li>
+    </ul>
+  </li>
+  <li>파일 포맷을 나타내는 경우
+    <ul>
+      <li>대체 텍스트에도 파일 포맷만 적습니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="4-3-2-decorative-images">4-3-2. Decorative Images</h4>
+
+<p>정보 전달이 목적이 아니라 시각적으로 예쁘게 꾸미기 위한 목적으로 사용된 이미지에는 <strong>null alt (alt=’’) 를 사용해야</strong> 스크린 리더나 보조 기술이 그냥 지나칠 수 있습니다.
+오히려 이런 이미지에 alt 값이 있을 경우 주변에 있는 설명과 내용이 다르면 스크린 리더를 사용하는 사람들에게 혼란을 줄 수 있기 때문입니다. 반대로 아예 alt 속성을 사용하지 않으면 몇몇 스크린 리더는 이미지 파일 이름을 읽어주기 때문에 부적절한 대응이 될 수 있습니다. 따라서 이미지를 사용하는 사람이 맥락을 잘 파악해서 이미지가 정보를 담고 있는지 판단하고 속성을 부여해야 합니다. 이러한 이유 때문에 가능하다면 장식용 이미지는 CSS background-image 속성으로 설명하는 편이 낫습니다.</p>
+
+<h4 id="4-3-3-functional-images">4-3-3. Functional Images</h4>
+
+<p>몇몇 이미지는 이미지를 통해 버튼, 링크 등 상호작용 가능한 요소에 사용자 행동을 이끌어내기 위해 사용됩니다. 이러한 이미지의 대체 텍스트에는 <strong>상호작용으로 어떠한 일이 이루어질지에 대해</strong> 설명해야 합니다. 기능성 이미지는 말 그대로 기능에 대한 의미를 담고 있기 때문에 alt 속성을 명시하지 않을 경우 큰 문제가 발생할 수도 있습니다.</p>
+
+<ul>
+  <li>로고에 링크가 걸려있는 경우
+    <ul>
+      <li>로고가 텍스트로 제공되지 않을 경우 alt 속성에 표시해주고, 있을 경우 null alt를 적어줍니다.</li>
+    </ul>
+  </li>
+  <li>이미지가 기능을 의미하는 경우
+    <ul>
+      <li>대체 텍스트에 해당 이미지와 상호작용했을 때 어떤 동작이 실행되는지 명시합니다.</li>
+    </ul>
+  </li>
+  <li>버튼에 사용된 이미지
+    <ul>
+      <li>대체 텍스트에 버튼의 목적을 설명합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="4-3-4-images-of-text">4-3-4. Images of Text</h4>
+
+<p>사용자가 이미지에 있는 글자를 읽도록 의도적으로 배치된 경우 대체 텍스트에는 <strong>이미지에 있는 글자와 동일한 내용</strong>을 담습니다. 하지만 이렇게 사용자가 읽는 것을 목적으로 하는 글자에 디자인을 넣고 싶은 경우 이미지보다 텍스트에 CSS를 최대한 활용하는 편이 더 좋습니다.</p>
+
+<h4 id="4-3-5-complex-images">4-3-5. Complex Images</h4>
+<p>짧은 문장으로 표현할 수 없을 정도로 중요하고 복잡한 정보가 들어있는 이미지 (그래프, 차트, 다이어그램, 삽화 등) 는 대체 텍스트를 두 부분으로 나누어서 제공합니다.</p>
+<ol>
+  <li>이미지를 식별 가능한 수준으로 짧게 설명하고, 이어서 나올 2번 설명의 위치를 언급합니다.</li>
+  <li>이미지에 있는 핵심적인 정보나 구체적인 수치를 글로 충분히 설명합니다.</li>
+</ol>
+
+<p>단, 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, 가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 더 도움이 될 수 있습니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 증진에 도움될 수 있습니다.</p>
+
+<h4 id="4-3-6-groups-of-images">4-3-6. Groups of Images</h4>
+
+<p>별점처럼 하나의 정보를 표현하기 위해 여러 개의 이미지가 사용되는 경우가 있습니다. 이 때는 모든 이미지에 대체 텍스트를 사용하지 말고, 하나의 이미지에만 전체 이미지 그룹이 의미하는 바를 대체 텍스트로 적어주면 됩니다. 동시에 나머지 이미지에는 null alt를 사용하여 보조 기술이 무시하게 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">Rating:
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"star-full.jpg"</span>  <span class="na">alt=</span><span class="s">"3.5 out of 5 stars"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"star-full.jpg"</span>  <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"star-full.jpg"</span>  <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"star-half.jpg"</span>  <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"star-empty.jpg"</span> <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span></code></pre></figure>
+
+<p>한편, 여러 개의 이미지가 관련된 하나의 주제로 묶여 이미지 모음을 표현할 때가 있습니다. (특정 시대의 예술 작품 등) 이 때는 각 이미지에 대체 텍스트를 설정하고, 시맨틱 태그를 사용하여 이미지들이 관계가 있음을 알려줘야 합니다. 아래 예시처럼 figure, figcaption 태그로 이미지들을 연관시키고 aria-labelledby 로 figcaption 요소가 올바른 figure에 대해 설명하도록 매핑합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;figure</span> <span class="na">role=</span><span class="s">"group"</span> <span class="na">aria-labelledby=</span><span class="s">"fig1"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;figcaption</span> <span class="na">id=</span><span class="s">"fig1"</span><span class="nt">&gt;</span>
+    The castle through the ages: 1423, 1756, and 1936 respectively.
+  <span class="nt">&lt;/figcaption&gt;</span>
+
+  <span class="nt">&lt;figure</span> <span class="na">role=</span><span class="s">"group"</span> <span class="na">aria-labelledby=</span><span class="s">"fig11"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"castle-etching.jpg"</span>
+      <span class="na">alt=</span><span class="s">"The castle has one tower, and a tall wall around it."</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;figcaption</span> <span class="na">id=</span><span class="s">"fig11"</span><span class="nt">&gt;</span>Charcoal on  wood. Anonymous, circa 1423.<span class="nt">&lt;/figcaption&gt;</span>
+  <span class="nt">&lt;/figure&gt;</span>
+
+   <span class="nt">&lt;figure</span> <span class="na">role=</span><span class="s">"group"</span> <span class="na">aria-labelledby=</span><span class="s">"fig12"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"castle-painting.jpg"</span>
+      <span class="na">alt=</span><span class="s">"The castle now has two towers and two walls."</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;figcaption</span> <span class="na">id=</span><span class="s">"fig12"</span><span class="nt">&gt;</span>Oil-based paint on canvas. Eloisa Faulkner, 1756.<span class="nt">&lt;/figcaption&gt;</span>
+  <span class="nt">&lt;/figure&gt;</span>
+<span class="nt">&lt;/figure&gt;</span></code></pre></figure>
+
+<h4 id="4-3-7-image-maps">4-3-7. Image Maps</h4>
+
+<p>map과 area 태그로 이루어진 이미지 맵은 다른 페이지로 이동할 수 있는 구성 요소와 상호작용이 가능합니다. 이 때, img 태그에서도 맥락을 전달하기 위해 대체 텍스트가 필요하고 area 태그에서도 링크 정보를 알려주기 위해 대체 텍스트가 필요합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"orgchart.png"</span>
+     <span class="na">alt=</span><span class="s">"Board of directors and related staff: "</span>
+     <span class="na">usemap=</span><span class="s">"#Map"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;map</span> <span class="na">id=</span><span class="s">"Map"</span> <span class="na">name=</span><span class="s">"Map"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;area</span> <span class="na">shape=</span><span class="s">"rect"</span>
+        <span class="na">coords=</span><span class="s">"176,14,323,58"</span>
+        <span class="na">href=</span><span class="s">"[…]"</span>
+        <span class="na">alt=</span><span class="s">"Davy Jones: Chairman"</span><span class="nt">&gt;</span>
+  […]
+  <span class="nt">&lt;area</span> <span class="na">shape=</span><span class="s">"rect"</span>
+        <span class="na">coords=</span><span class="s">"6,138,155,182"</span>
+        <span class="na">href=</span><span class="s">"[…]"</span>
+        <span class="na">alt=</span><span class="s">"Harry H Brown: Marketing Director (reports to chairman)"</span><span class="nt">&gt;</span>
+  […]
+<span class="nt">&lt;/map&gt;</span></code></pre></figure>
+
+<p>하지만 map, area 태그가 아직 몇몇 브라우저나 모바일 기기에서 불안정한 모습을 보이기 때문에 실제 사용하려면 주의사항을 충분히 숙지하거나 사용을 미루는 것이 좋아보입니다.</p>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/Accessibility">
+        Accessibility</a>,&nbsp;<a href="/tag/A11y">
+        A11y</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fa11y%2F2023%2F12%2F24%2Fweb-accessibility.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+<!--  -->
+<!-- Google Analytics -->
+<!-- <script> -->
+  <!-- (function(i, s, o, g, r, a, m) { -->
+    <!-- i['GoogleAnalyticsObject'] = r; -->
+    <!-- i[r] = i[r] || function() { -->
+      <!-- (i[r].q = i[r].q || []).push(arguments) -->
+    <!-- }, i[r].l = 1 * new Date(); -->
+    <!-- a = s.createElement(o), -->
+      <!-- m = s.getElementsByTagName(o)[0]; -->
+    <!-- a.async = 1; -->
+    <!-- a.src = g; -->
+    <!-- m.parentNode.insertBefore(a, m) -->
+  <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
+  <!-- ga('create', 'UA-243662455-3', 'auto'); -->
+  <!-- ga('send', 'pageview', { -->
+    <!-- 'page': '/a11y/2023/12/24/web-accessibility.html', -->
+    <!-- 'title': '[A11y] WAI 문서로 접근성 이해하기 (1/2)' -->
+  <!-- }); -->
+<!-- </script> -->
+<!--  -->
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "10c052150c690f0";
+    if(window.wcs) {
+    wcs_do();
+    }
+    </script>
+
+  </body>
+
+</html>

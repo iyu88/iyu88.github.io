@@ -18,7 +18,9 @@ cover: "/assets/instacode.png"
 
 웹 접근성을 지원하기 위한 방법에는 대표적으로 WAI-ARIA(Web Accessibility Initiative – Accessible Rich Internet Applications)가 있습니다. 이는 웹 표준을 개발하는 조직인 W3C(World Wide Web Consortium)가 출판한 기술 사양으로 접근성을 증진하는 방법이 정리되어 있습니다. 
 
-이 글에서는 [Easy Checks](https://www.w3.org/WAI/test-evaluate/preliminary/) 와 [Tutorials](https://www.w3.org/WAI/tutorials/)의 Page Structure, Menus, Images 파트에 있는 내용을 다룹니다. 
+이 글에서는 [Easy Checks](https://www.w3.org/WAI/test-evaluate/preliminary/) 와 [Tutorials](https://www.w3.org/WAI/tutorials/)의 Page Structure, Menus, Images 파트에 있는 내용과 예시를 다룹니다. 
+
+<br />
 
 ## 2. Easy Checks
 
@@ -52,6 +54,7 @@ cover: "/assets/instacode.png"
 
 키보드로 웹을 탐색할 수 있게 하면서 동시에 여러 키 입력 조합이 필요한 경우 OS별 대응도 신경 써야 합니다. 대표적으로 Windows의 Ctrl과 MacOS의 cmd가 대응되야 합니다. 
 
+<br />
 
 ## 3. 시맨틱 태그에서의 접근성 
 
@@ -127,6 +130,7 @@ cover: "/assets/instacode.png"
 
 여부를 반드시 확인해야 합니다. 
 
+<br />
 
 ## 4. 접근성을 위한 개발 
 
@@ -364,7 +368,7 @@ Fly-out 메뉴는 드롭다운 메뉴처럼 하위 메뉴를 담기 위해 별�
 </p>{% endhighlight %}
   aria-describedby로 이어진 요소들은 한 문단의 연속된 내용으로 취급되지만, 스크린 리더나 보조 기술에서 구조적인 정보에 접근할 수 없습니다. 즉, 시맨틱 태그로 이어지지 않아서 구조적인 관계를 나타내거나 네비게이션 기능을 제공받을 수 없고, 그저 텍스트를 읽어줄 뿐입니다. 따라서 **웹 페이지의 구조적인 정보와 상관없이 텍스트만 있는 긴 설명**에 사용하기 적합합니다. 
 
-중요한 것은 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, 가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 도움이 될 수 있다는 것입니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 향상에 도움될 수 있습니다. 
+중요한 것은 이미지를 복잡하게 만든 다음 대체 텍스트로 설명하려고 하지 말고, **가능하면 최대한 이미지를 단순화하고 메인 콘텐츠에 충분히 자세한 설명을 포함하여** 대체 텍스트에는 해당 위치만 가리킬 수 있도록 하는 것이 접근성을 높이는 데에 도움이 될 수 있다는 것입니다. 또한 이미지에 대한 간단한 요약을 추가하는 것도 접근성 향상에 도움될 수 있습니다. 
 
 #### 4-3-6. Groups of Images
 
@@ -425,3 +429,23 @@ map과 area 태그로 이루어진 이미지 맵은 다른 페이지로 이동�
 {% endhighlight %}
 
 하지만 map, area 태그가 아직 몇몇 브라우저나 모바일 기기에서 불안정한 모습을 보이기 때문에 실제 사용하려면 주의사항을 충분히 숙지하거나 사용을 미루는 것이 좋아보입니다. 
+
+<br />
+
+## 5. 맺으며 
+
+WAI 문서를 보면서 양이 정말 방대하다는 것을 느낄 수 있었고 접근성과 관련한 새로운 지식들을 많이 얻을 수 있었습니다.
+결국 이러한 내용을 하나로 관통하는 것은 각 태그를 역할에 맞게 사용하고 연관 있는 것들끼리 최대한 이어주어야 보조 기술의 도움을 받아 접근성을 높일 수 있다는 점 같습니다. 
+이번에는 한번 쭉 문서를 파악해보고 싶어서 시도해보고 있지만 결국 실제로 개발할 때 필요한 상황마다 와서 찾아보는 것도 좋은 접근법이 될 것 같습니다. 
+하나의 글로 작성하려 했지만 내용이 꽤 많기 때문에 시리즈로 이어서 작성합니다. 
+
+
+[참고]
+
+- [Easy Checks – A First Review of Web Accessibility](https://www.w3.org/WAI/test-evaluate/preliminary/)
+
+- [Page Structure Tutorial](https://www.w3.org/WAI/tutorials/page-structure/)
+
+- [Menus Tutorial](https://www.w3.org/WAI/tutorials/menus/)
+
+- [Images Tutorial](https://w3.org/WAI/tutorials/images/)

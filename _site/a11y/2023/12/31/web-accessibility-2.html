@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [A11y] WAI 문서로 접근성 이해하기 (2/2)
+  </title>
+  <meta name="description" content="WAI 문서로 접근성 이해하기 (2/2)">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2023">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/a11y/2023/12/31/web-accessibility-2.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P48NKV3');</script>
+  <!-- End Google Tag Manager -->
+  
+  
+</head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
+  </script>
+  <!-- End of Google tag (gtag.js) -->
+
+  <body>
+
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48NKV3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+    
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      <h4 class="title">Hyunbin Lee</h4>
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [A11y] WAI 문서로 접근성 이해하기 (2/2)
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        December 31, 2023
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/A11y">
+          A11y</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="wai-문서로-접근성-이해하기-22">WAI 문서로 접근성 이해하기 (2/2)</h1>
+
+<blockquote>
+  <h3 id="-w3c에서-출판한-기술-사양을-읽어보며-접근성을-높일-수-있는-개발-요소들을-알아봅니다">💡 W3C에서 출판한 기술 사양을 읽어보며 접근성을 높일 수 있는 개발 요소들을 알아봅니다.</h3>
+</blockquote>
+
+<h2 id="1-들어가며">1. 들어가며</h2>
+
+<p>지난 번에 작성한 <a href="https://iyu88.github.io/a11y/2023/12/24/web-accessibility-1.html">WAI 문서로 접근성 이해하기 (1/2)</a>에서는 웹 접근성이 무엇인지에 대해서 간략히 알아보고 시맨틱 태그를 사용할 때 접근성을 높이는 방법과 접근성을 고려하며 메뉴, 이미지 등의 요소를 개발하는 방법에 대해 알아보았습니다.</p>
+
+<p>이번에는 이어서 <a href="https://www.w3.org/WAI/tutorials/">Tutorials</a>에 남은 부분인 Tables, Forms, Carousels 파트에 있는 내용과 예시를 살펴보겠습니다.</p>
+
+<h2 id="2-표-tables">2. 표 (Tables)</h2>
+
+<p><code class="language-plaintext highlighter-rouge">table 태그</code>는 그리드 형식으로 데이터를 표현하는 데에 사용합니다. 따라서 콘텐츠의 레이아웃을 표현하기 위해 사용하는 것은 적절하지 않습니다. 표를 구성할 때 머리글은 <code class="language-plaintext highlighter-rouge">th 태그</code>, 데이터는 <code class="language-plaintext highlighter-rouge">td 태그</code>를 사용합니다. 또한 복잡도가 높은 표에서는 scope, id, headers 속성을 함께 사용하기도 합니다. 이는 스크린 리더가 table 태그를 탐색할 때, 맥락을 잃지 않도록 데이터 ➡️ 머리글 (td ➡️ th) 순서로 읽기 때문입니다. 따라서 보조 기술의 지원을 받으려면 적절한 마크업을 통해 데이터를 올바른 머리글과 연관 지어야 합니다. 종종 표가 PDF 등의 다른 파일 포맷에서 표현될 때 시맨틱 태그들이 사라지기도 하는데, 접근성을 위해 이를 유지시키는 것이 좋습니다.</p>
+
+<h3 id="2-1-머리글이-한-개인-경우">2-1. 머리글이 한 개인 경우</h3>
+
+<p>행 또는 열에 머리글이 하나만 있고 각 데이터가 분명하게 구분되는 경우 머리글에 th 태그를 사용합니다.</p>
+
+<ul>
+  <li>첫번째 행 또는 열이 머리글인 경우</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 머리글인 첫번째 열을 모두 th 태그로 표현합니다. --&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Date<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Event<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Venue<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>12 February<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Waltz with Strauss<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Main Hall<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  […]
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 머리글인 각 열의 첫번째 행을 th 태그로 표현합니다. --&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Date<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>12 February<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>24 March<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>14 April<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Event<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Waltz with Strauss<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>The Obelisks<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>The What<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Venue<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Main Hall<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>West Wing<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Main Hall<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<ul>
+  <li>모호한 데이터가 있는 경우</li>
+</ul>
+
+<p>데이터가 모호하여 머리글 정보 없이 임의의 칸에 있는 데이터를 다른 칸에 있는 데이터와 구분할 수 없는 경우 scope 속성으로 머리글 방향을 명시합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>Teddy bear collectors:<span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Last Name<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>First Name<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>City<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Phoenix<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Imari<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Henry<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Zeki<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Rome<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Min<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Apirka<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Kelly<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Brynn<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<p>위의 예시에서는 <code class="language-plaintext highlighter-rouge">scope='col'</code>을 명시하여 스크린 리더에 의해 ‘Phoenix’가 ‘Last Name’임을 알 수 있습니다.</p>
+
+<h3 id="2-2-머리글이-두-개인-경우">2-2. 머리글이 두 개인 경우</h3>
+
+<p>머리글이 행과 열에 동시에 존재하면 데이터의 의미가 모호해지기 쉽습니다. 따라서 앞서 진행한 것처럼 th 태그와 scope 속성 처리를 모든 머리글에 적용해야 합니다. 
+<!-- caption 태그를 사용하면 스크린 리더 사용자들이 표를 탐색할 때 사용하는 'Tables Mode'를 쓰기 편리해집니다. (자세한 내용은 Caption & Summary) --></p>
+
+<p>아래 예시에서 td 태그에 있는 ‘Closed’, ‘Open’이라는 정보는 행과 열에 있는 머리글과 연관되어야 의미가 있습니다. 따라서 th 태그 사용과 동시에 첫번째 열 머리글에는 <code class="language-plaintext highlighter-rouge">scope='col'</code>, 첫번째 행 머리글에는 <code class="language-plaintext highlighter-rouge">scope='row'</code>를 적용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>Delivery slots:<span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Monday<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Tuesday<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Wednesday<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Thursday<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Friday<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>09:00 – 11:00<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Closed<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Open<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Open<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Closed<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Closed<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>11:00 – 13:00<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Open<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Open<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Closed<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Closed<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Closed<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  […]
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<h3 id="2-3-머리글이-불규칙할-경우">2-3. 머리글이 불규칙할 경우</h3>
+
+<p>머리글이 여러 칸을 확장할 수도 있고, 계층을 형성하는 경우도 있습니다. 이러한 상황에서 사용할 수 있는 table 마크업은 다음과 같습니다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">&lt;colgroup&gt;</code> : 열 그룹을 정의할 때 사용합니다. 해당 태그 내에서 명시한 span 속성값 만큼 <code class="language-plaintext highlighter-rouge">&lt;col&gt;</code>을 사용한 것과 동일한 역할을 합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;thead&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;tbody&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;tfoot&gt;</code> : 행 그룹을 정의할 때 사용합니다. thead, tfoot은 table 태그 내에서 한번만 사용할 수 있고 tbody는 여러 번 사용할 수 있습니다.</li>
+</ol>
+
+<ul>
+  <li>머리글에 계층이 있는 경우</li>
+</ul>
+
+<p>아래 예시 코드 주석에 있는 각 숫자에 대응하는 부연설명은 다음과 같습니다.</p>
+<ol>
+  <li>기본적으로 col 태그를 사용하고 여러 열을 차지할 경우 colgroup 태그를 사용합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">scope='colgroup'</code>로 설정하면 모든 열 그룹과 연관됩니다. 즉, Mars는 Produced 값인 50,000과 Sold 값인 30,000과 연관되어 해당 데이터를 스크린 리더가 읽을 때 함께 읽힙니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">scope='col'</code>로 설정하면 오직 대응되는 열만 연관됩니다. 즉, Produced는 50,000과 연관되어 해당 데이터를 스크린 리더가 읽을 때 함께 읽힙니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;col&gt;</span>
+  <span class="nt">&lt;colgroup</span> <span class="na">span=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/colgroup&gt;</span> <span class="c">&lt;!-- 1 --&gt;</span>
+  <span class="nt">&lt;colgroup</span> <span class="na">span=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/colgroup&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">rowspan=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">colspan=</span><span class="s">"2"</span> <span class="na">scope=</span><span class="s">"colgroup"</span><span class="nt">&gt;</span>Mars<span class="nt">&lt;/th&gt;</span> <span class="c">&lt;!-- 2 --&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">colspan=</span><span class="s">"2"</span> <span class="na">scope=</span><span class="s">"colgroup"</span><span class="nt">&gt;</span>Venus<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Produced<span class="nt">&lt;/th&gt;</span> <span class="c">&lt;!-- 3 --&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Sold<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Produced<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Sold<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Teddy Bears<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>50,000<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>30,000<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>100,000<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>80,000<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Board Games<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;td&gt;</span>10,000<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>5,000<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>12,000<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>9,000<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<ul>
+  <li>머리글이 여러 개의 행과 열을 확장한 경우</li>
+</ul>
+
+<p>아래 예시처럼 머리글이 행을 확장한 경우 데이터 칸의 개수와 합쳐진 행의 수가 동일해야 합니다. 행을 확장하는 머리글에는 <code class="language-plaintext highlighter-rouge">scope='rowgroup'</code>을 명시하고 그룹으로 묶인 행은 tbody 태그로 감쌉니다. (머리글이 표의 상단에 있을 경우 thead 태그, 하단에 있을 경우 tfoot 태그를 사용합니다)</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>
+    Poster availability
+  <span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;col&gt;</span>
+  <span class="nt">&lt;col&gt;</span>
+  <span class="nt">&lt;colgroup</span> <span class="na">span=</span><span class="s">"3"</span><span class="nt">&gt;&lt;/colgroup&gt;</span>
+  <span class="nt">&lt;thead&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Poster name<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Color<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">colspan=</span><span class="s">"3"</span> <span class="na">scope=</span><span class="s">"colgroup"</span><span class="nt">&gt;</span>Sizes available<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/thead&gt;</span>
+  <span class="nt">&lt;tbody&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">rowspan=</span><span class="s">"3"</span> <span class="na">scope=</span><span class="s">"rowgroup"</span><span class="nt">&gt;</span>Zodiac<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Full color<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A2<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A3<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A4<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Black and white<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A1<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A2<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A3<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Sepia<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A3<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A4<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A5<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/tbody&gt;</span>
+  <span class="nt">&lt;tbody&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">rowspan=</span><span class="s">"2"</span> <span class="na">scope=</span><span class="s">"rowgroup"</span><span class="nt">&gt;</span>Angels<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Black and white<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A1<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A3<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A4<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"row"</span><span class="nt">&gt;</span>Sepia<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A2<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A3<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>A5<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<h3 id="2-4-머리글-다중-계층으로-이루어진-경우">2-4. 머리글 다중 계층으로 이루어진 경우</h3>
+
+<p>이미 위에서 머리글이 많고 복잡해질 경우 데이터와의 연관성을 분명하게 하기 위해 scope 속성을 사용했습니다. 여기서는 표의 구조가 한층 더 복잡해졌을 때 머리글의 id 값을 사용하는 방법을 다룹니다. 하지만 가능하면 구조를 단순하게 만들기 위해 정보 구조를 재설계하는 것이 더 낫습니다.</p>
+
+<ul>
+  <li>각 열마다 여러 개의 열 머리글이 있는 표</li>
+</ul>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/6a678372-ad3e-4572-86ce-40d1af422b56" alt="각 열마다 여러 개의 열 머리글이 있는 표" />
+<em>출처: https://www.w3.org/WAI/tutorials/tables/multi-level/</em>
+<br /></p>
+
+<p>위의 사진을 보면 표를 반으로 나눴을 때 위쪽과 아랫쪽이 제공하고 있는 정보가 다릅니다. 
+각 데이터를 올바른 머리글과 연관짓기 위해 머리글(th 태그)는 고유한 id 값을 가지고, 데이터(td 태그)는 headers 속성에 관련된 머리글의 id 값을 공백으로 구분하여 나열합니다. 
+이 때, 비어있는 머리글은 <code class="language-plaintext highlighter-rouge">id='blank'</code>로 설정하여 스크린 리더가 해당 칸을 읽지 않도록 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;td</span> <span class="na">id=</span><span class="s">"blank"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"co1"</span> <span class="na">headers=</span><span class="s">"blank"</span><span class="nt">&gt;</span>Example 1 Ltd<span class="nt">&lt;/th&gt;</span>
+<span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"co2"</span> <span class="na">headers=</span><span class="s">"blank"</span><span class="nt">&gt;</span>Example 2 Co<span class="nt">&lt;/th&gt;</span>
+[…]
+<span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"c1"</span> <span class="na">headers=</span><span class="s">"blank"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/th&gt;</span>
+[…]
+
+<span class="nt">&lt;td</span> <span class="na">headers=</span><span class="s">"co1 c1"</span><span class="nt">&gt;</span>James Phillips<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">headers=</span><span class="s">"co2 c1"</span><span class="nt">&gt;</span>Marie Beauchamp<span class="nt">&lt;/td&gt;</span>
+[…]</code></pre></figure>
+
+<ul>
+  <li>각 데이터 칸에 관련된 세 개의 머리글이 있는 표</li>
+</ul>
+
+<p><br />
+<img src="https://github.com/iyu88/Algorithm/assets/31645195/c0fd6588-a336-4014-a1ab-6bf44e157365" alt="각 데이터 칸에 관련된 세 개의 머리글이 있는 표" />
+<em>출처: https://www.w3.org/WAI/tutorials/tables/multi-level/</em>
+<br /></p>
+
+<p>머리글을 부제목으로 사용하는 경우 데이터를 명확하게 전달하기 위해 해당 머리글의 id 값도 headers 속성에 명시해야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">[…]
+  <span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"par"</span> <span class="na">colspan=</span><span class="s">"5"</span> <span class="na">scope=</span><span class="s">"colgroup"</span><span class="nt">&gt;</span>Paris<span class="nt">&lt;/th&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+  <span class="nt">&lt;th</span> <span class="na">id=</span><span class="s">"pbed1"</span><span class="nt">&gt;</span>1 bedroom<span class="nt">&lt;/th&gt;</span>
+[…]</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">[…]
+<span class="nt">&lt;td</span> <span class="na">headers=</span><span class="s">"par pbed1 stud"</span><span class="nt">&gt;</span>11<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">headers=</span><span class="s">"par pbed1 apt"</span><span class="nt">&gt;</span> 20<span class="nt">&lt;/td&gt;</span>
+[…]</code></pre></figure>
+
+<h3 id="2-5-caption--summary">2-5. Caption &amp; Summary</h3>
+
+<ul>
+  <li>caption 태그로 표 구분하기</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;caption&gt;</code>을 사용하여 표에 짧은 제목을 지을 수 있습니다. 대부분의 스크린 리더가 caption의 내용을 읽어주기 때문에 이를 table 태그의 첫번째 자식 요소로 사용하면 사용자가 표 내용을 계속해서 탐색할지 결정하는 데에 도움을 줍니다. 만약 ‘Tables Mode’를 사용하고 있다면, caption은 표를 찾는 데에 가장 중요한 요소가 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>Concerts<span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Date<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Event<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Venue<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>12 Feb<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Waltz with Strauss<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>Main Hall<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  […]
+<span class="nt">&lt;/table&gt;</span></code></pre></figure>
+
+<ul>
+  <li>caption 태그 내부에 요약을 포함하기</li>
+</ul>
+
+<p>caption 태그에서 표가 다루고 있는 정보를 적고 자세한 설명은 요약하여 caption의 자식 요소로 배치합니다. 이 때, 요약 설명에는 caption에서 제공한 정보를 되풀이하면 안됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;caption&gt;</span>Availability of holiday accommodation <span class="nt">&lt;br&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Column one has the location and size of accommodation, other columns show the type and number of properties available<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/caption&gt;</span></code></pre></figure>
+
+<ul>
+  <li>요약을 제공하기 위해 aria-describedby 사용하기</li>
+</ul>
+
+<p>table 태그에 aria-describedby 속성을 사용하고 표에 대한 요약 설명이 있는 요소의 id 값을 명시하여 둘을 연관지을 수 있습니다. 해당 요소가 table 태그 주변에 있을 경우 스크린 리더를 사용하지 않는 사람들이 빠르게 발견할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"tblDesc"</span><span class="nt">&gt;</span>Column one has the location and size of accommodation, other columns show the type and number of properties available.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">aria-describedby=</span><span class="s">"tblDesc"</span><span class="nt">&gt;</span>
+[…]</code></pre></figure>
+
+<ul>
+  <li>요약을 제공하기 위해 figure 태그 사용하기</li>
+</ul>
+
+<p>아래의 예시처럼 <code class="language-plaintext highlighter-rouge">&lt;figure&gt;</code>로 표를 감싸고 <code class="language-plaintext highlighter-rouge">&lt;figcaption&gt;</code>의 자식 요소로 표의 제목과 요약 설명을 위치시키는 방법입니다. table 태그에 aria-labelledby와 aria-describedby를 사용하여 각각 figcaption 태그, 요약 설명이 있는 요소와 연관 짓습니다.</p>
+
+<p>단, 이 방식은 스크린 리더를 사용할 때 다음과 같은 두 가지 단점이 있습니다.</p>
+<ol>
+  <li>caption 태그를 사용하지 않아 스크린 리더가 ‘Tables Mode’에서 표를 찾을 수 없습니다.</li>
+  <li>표의 제목과 요약 설명이 스크린 리더에 의해 여러 번 읽힐 수 있습니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;figure&gt;</span>
+  <span class="nt">&lt;figcaption&gt;</span>
+    <span class="nt">&lt;strong</span> <span class="na">id=</span><span class="s">"paris-caption"</span><span class="nt">&gt;</span>Paris: Availability of holiday accommodation<span class="nt">&lt;/strong&gt;&lt;br&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"paris-summary"</span><span class="nt">&gt;</span>Column one has the location and size of accommodation, other columns show the type and number of properties available.<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/figcaption&gt;</span>
+  <span class="nt">&lt;table</span> <span class="na">aria-labelledby=</span><span class="s">"paris-caption"</span> <span class="na">aria-describedby=</span><span class="s">"paris-summary"</span><span class="nt">&gt;</span>
+[…]
+  <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/figure&gt;</span></code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="3-양식-forms">3. 양식 (Forms)</h2>
+
+<p>양식은 로그인, 결제 등 웹 페이지에서 사용자에게 상호작용을 제공합니다. 사용자는 간단하고 짧은 양식을 선호하기 때문에 되도록 꼭 필요한 것만 입력하도록 구성해야 합니다. 만약 불필요한 데이터를 요청한다면 사용자는 도중에 입력을 포기할 수 있습니다. 또한 각자의 속도로 양식을 입력할 수 있도록 시간 제한을 두지 않는 것이 좋습니다.</p>
+
+<h3 id="3-1-라벨-제어하기">3-1. 라벨 제어하기</h3>
+
+<p>텍스트 필드, 체크박스, 라디오 버튼 등 양식을 제어하는 모든 요소를 식별하기 위해 <code class="language-plaintext highlighter-rouge">&lt;label&gt;</code> 태그로 라벨을 제공합니다. 여기서는 라벨을 제공하는 방법에 대해 설명합니다.</p>
+
+<ul>
+  <li>명시적으로 라벨 연관 짓기</li>
+</ul>
+
+<p>가능하면 label 태그를 사용해서 양식 요소와 연관 짓습니다. 양식 요소의 id 속성값과 label의 for 속성값이 일치해야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"firstname"</span><span class="nt">&gt;</span>First name:<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"firstname"</span> <span class="na">id=</span><span class="s">"firstname"</span><span class="nt">&gt;&lt;br&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"subscribe"</span> <span class="na">id=</span><span class="s">"subscribe"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"subscribe"</span><span class="nt">&gt;</span>Subscribe to newsletter<span class="nt">&lt;/label&gt;</span></code></pre></figure>
+
+<ul>
+  <li>라벨 글씨 숨기기</li>
+</ul>
+
+<p>이미 렌더링된 요소로 양식 요소의 목적이 명확하게 전달된 경우 라벨을 시각적으로 숨겨도 좋습니다. 단, 스크린 리더나 다른 보조 기술의 지원을 받기 위해서 코드 상으로는 계속 존재해야 합니다.</p>
+
+<ol>
+  <li>라벨 요소 숨기기</li>
+</ol>
+
+<p>아래 예시에는 버튼에 이미 Search 라고 명시되어 있어 맥락을 충분히 파악할 수 있습니다. 따라서 중복을 피하기 위해 ‘visuallyhidden’ 클래스를 추가하여 라벨을 렌더링하지 않습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+--&gt;</span>
+
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"search"</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Search: <span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">"search"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span></code></pre></figure>
+
+<ol>
+  <li>aria-label / aria-labelledby 속성 사용</li>
+</ol>
+
+<p>aria-label과 aria-labelledby 속성은 스크린 리더나 보조 기술의 지원을 받을 수 있지만 사용자에게 렌더링되지 않습니다. 따라서 양식 요소의 라벨로 삼을만한 콘텐츠가 주변에 있을 때만 사용합니다. aria-labelledby를 사용할 때는 라벨 텍스트를 가지고 있는 요소의 id 속성값을 aria-labelledby로 설정합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- aria-label --&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"search"</span> <span class="na">aria-label=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span>
+
+<span class="c">&lt;!-- aria-labelledby --&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"search"</span> <span class="na">aria-labelledby=</span><span class="s">"searchbutton"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"searchbutton"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span></code></pre></figure>
+
+<ol>
+  <li>title 속성 사용</li>
+</ol>
+
+<p>title 속성을 제공하면 마우스로 호버했을 때 title 내용이 툴팁으로 나타납니다. 하지만 몇몇 스크린 리더나 보조 기술이 title 속성을 label 태그의 대체제로 해석하지 못하기 때문에 추천하는 방법은 아닙니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">title=</span><span class="s">"Search"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"search"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span></code></pre></figure>
+
+<ul>
+  <li>암시적으로 라벨 연관 짓기</li>
+</ul>
+
+<p>라벨을 적용해야 하는 요소의 id를 모르거나 요소에 id를 설정하지 않은 경우가 있을 수 있습니다. 이 때는 label 태그를 라벨 텍스트와 양식 요소의 컨테이너로 사용합니다. 라벨과 양식 요소를 암시적으로 연관 지어 스크린 리더와 보조 기술의 지원을 받을 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;label&gt;</span>
+  First name:
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"firstname"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">name=</span><span class="s">"subscribe"</span><span class="nt">&gt;</span>
+  Subscribe to newsletter
+<span class="nt">&lt;/label&gt;</span></code></pre></figure>
+
+<ul>
+  <li>버튼 라벨링</li>
+</ul>
+
+<p>어떤 요소를 버튼으로 사용하는지에 따라 두 가지 경우로 나눌 수 있습니다.</p>
+
+<ol>
+  <li>button 태그 : 라벨 텍스트를 자식 요소에 넣어서 사용합니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>Cancel<span class="nt">&lt;/button&gt;</span></code></pre></figure>
+
+<ol>
+  <li>input 태그 : 라벨 텍스트를 value 속성값으로 사용합니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Cancel"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<ul>
+  <li>라벨 텍스트의 위치</li>
+</ul>
+
+<p>라벨은 예측 가능하고 이해할 수 있는 위치에 존재하는 것이 중요합니다. 왼쪽에서 오른쪽으로 읽는 언어는 체크박스나 라디오 버튼의 오른쪽, 필드의 읜쪽에 라벨이 있는 것이 익숙합니다. 라벨이 필드 상단에 있을 경우 저시력자나 모바일 사용자가 수평 스크롤을 하지 않도록 도와줍니다. 중요한 것은 라벨과 필드 요소가 가까워야 하고 시각적으로 명확한 관계를 유지해야 한다는 것입니다.</p>
+
+<h3 id="3-2-제어-요소를-그룹으로-묶기">3-2. 제어 요소를 그룹으로 묶기</h3>
+
+<p>관련 있는 양식 요소를 그룹으로 묶는 것은 사용자가 양식을 더 잘 이해할 수 있게 만듭니다. 전체 양식을 한번에 받아들이기보다 작은 단위의 그룹에 집중하게 합니다. <code class="language-plaintext highlighter-rouge">&lt;fieldset&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;legend&gt;</code>를 사용하여 시각적으로, 코드 상으로 묶어줄 수 있습니다. 또한 <code class="language-plaintext highlighter-rouge">&lt;optgroup&gt;</code>으로 관련 있는 <code class="language-plaintext highlighter-rouge">&lt;select&gt;</code>들을 묶어줄 수 있습니다.</p>
+
+<ul>
+  <li>fieldset 태그로 관련 있는 제어 요소 연관 짓기</li>
+</ul>
+
+<p>fieldset 태그로 관련 있는 요소들을 묶어줄 수 있고, legend 태그는 해당 그룹의 제목 역할을 합니다. 아래 예시에는 동일한 필드 구조를 가진 두 개의 양식이 있는데 이러한 상황에서 fieldset 태그가 각각을 구별하는 데에 도움을 줍니다. 
+몇몇 스크린 리더는 모든 양식 요소를 읽을 때마다 legend를 읽어주기도 하지만 아예 읽지 않는 경우도 있습니다. 따라서 legend와 label을 작성할 때 다음 두 가지 사항을 고려해야 합니다.</p>
+<ol>
+  <li>매번 라벨과 함께 legend를 읽을 수 있기 때문에 legend는 가능한 짧게 작성합니다.</li>
+  <li>legend를 아예 읽지 않을 수 있기 때문에 각 라벨에 충분한 설명을 작성합니다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;fieldset&gt;</span>
+	<span class="nt">&lt;legend&gt;</span>Shipping Address:<span class="nt">&lt;/legend&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"shipping_name"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Shipping <span class="nt">&lt;/span&gt;</span>Name:
+    <span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"shipping_name"</span> <span class="na">id=</span><span class="s">"shipping_name"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"shipping_street"</span><span class="nt">&gt;</span>Street:<span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"shipping_street"</span> <span class="na">id=</span><span class="s">"shipping_street"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+	[…]
+<span class="nt">&lt;/fieldset&gt;</span>
+<span class="nt">&lt;fieldset&gt;</span>
+	<span class="nt">&lt;legend&gt;</span>Billing Address:<span class="nt">&lt;/legend&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"billing_name"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Billing <span class="nt">&lt;/span&gt;</span>Name:
+    <span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"billing_name"</span> <span class="na">id=</span><span class="s">"billing_name"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"billing_street"</span><span class="nt">&gt;</span>Street:<span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"billing_street"</span> <span class="na">id=</span><span class="s">"billing_street"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+	[…]
+<span class="nt">&lt;/fieldset&gt;</span></code></pre></figure>
+
+<ul>
+  <li>WAI-ARIA로 관련 있는 제어 요소 연관 짓기</li>
+</ul>
+
+<p>role 속성에는 fieldset, legend와 비슷한 역할을 하는 <code class="language-plaintext highlighter-rouge">role='group'</code>이 있습니다. 이를 aria-labelledby와 함께 사용하면 그룹의 라벨도 지정할 수 있습니다. 아래 예시에서 최상위 div 태그에 두 속성이 모두 적용된 것을 확인할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">role=</span><span class="s">"group"</span> <span class="na">aria-labelledby=</span><span class="s">"shipping_head"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"shipping_head"</span><span class="nt">&gt;</span>Shipping Address:<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"shipping_name"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Shipping <span class="nt">&lt;/span&gt;</span>Name:
+    <span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"shipping_name"</span> <span class="na">id=</span><span class="s">"shipping_name"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	[…]
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">role=</span><span class="s">"group"</span> <span class="na">aria-labelledby=</span><span class="s">"billing_head"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"billing_head"</span><span class="nt">&gt;</span>Billing Address:<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div&gt;</span>
+		<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"billing_name"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Billing <span class="nt">&lt;/span&gt;</span>Name:
+    <span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"billing_name"</span> <span class="na">id=</span><span class="s">"billing_name"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	[…]
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<ul>
+  <li>select 태그에서 관련 있는 아이템 묶어주기</li>
+</ul>
+
+<p>select 내부에서 관련 있는 option 태그를 묶어줄 때 optgroup 태그를 사용할 수 있습니다. optgroup의 label 속성은 해당 그룹의 라벨을 나타낼 때 사용합니다. 같은 종류로 분류할 수 있는 옵션이 매우 많을 경우 유용하게 쓸 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;select&gt;</span>
+	<span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">"8.01 Physics I: Classical Mechanics"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"8.01.1"</span><span class="nt">&gt;</span>Lecture 01: Powers of Ten<span class="nt">&lt;/option&gt;</span>
+		<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"8.01.2"</span><span class="nt">&gt;</span>Lecture 02: 1D Kinematics<span class="nt">&lt;/option&gt;</span>
+		<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"8.01.3"</span><span class="nt">&gt;</span>Lecture 03: Vectors<span class="nt">&lt;/option&gt;</span>
+	<span class="nt">&lt;/optgroup&gt;</span>
+	<span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">"8.02 Physics II: Electricity and Magnestism"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"8.02.1"</span><span class="nt">&gt;</span>Lecture 01: What holds our world together?<span class="nt">&lt;/option&gt;</span>
+		[…]
+	<span class="nt">&lt;/optgroup&gt;</span>
+	[…]
+<span class="nt">&lt;/select&gt;</span></code></pre></figure>
+
+<h3 id="3-3-양식-안내사항">3-3. 양식 안내사항</h3>
+
+<p>양식을 완성하기 위해 필요한 안내사항을 제공하여 사용자의 이해도를 높일 수 있습니다. 필수/선택 입력 필드에 대해서 알려주고 상황에 따라 데이터 형식을 알려주기도 합니다. 스크린 리더는 <code class="language-plaintext highlighter-rouge">&lt;form&gt;</code> 안에 있는 콘텐츠를 처리할 때 ‘Forms Mode’ 로 변경하곤 하는데, 보통 input, select, textarea, legend, label 태그만 읽어줍니다. 따라서 해당 태그들과 적절한 속성을 활용하여 양식 안내사항 또한 읽을 수 있게 만드는 것이 중요합니다.</p>
+
+<ul>
+  <li>전반적인 안내사항</li>
+</ul>
+
+<p>전체 양식에 적용할 수 있는 전반적인 안내사항을 제공합니다. 필수/선택 입력 필드, 데이터 형식, 시간 제한 등을 알려줍니다. ‘Forms Mode’로 변경하기 전에 스크린 리더가 읽을 수 있도록 form 태그 앞에 위치시킵니다.</p>
+
+<ul>
+  <li>인라인 안내사항</li>
+</ul>
+
+<p>양식 제어 요소의 라벨 안에 관련된 안내사항을 제공하는 것도 중요합니다. 라벨 텍스트 안에 필드의 필수 입력 여부와 데이터 형식을 표시합니다.</p>
+
+<ol>
+  <li>label 태그 안에 안내사항을 제공하기</li>
+</ol>
+
+<p>이 방식은 여러 웹 브라우저와 보조 기술의 지원을 받을 수 있습니다. 아래의 예시에서는 ‘Expiration date’ 라벨 우측에 날짜 형식을 알려주고 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"expire"</span><span class="nt">&gt;</span>Expiration date (MM/YYYY): <span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"expire"</span> <span class="na">id=</span><span class="s">"expire"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<ol>
+  <li>label 태그 밖에 안내사항을 제공하기</li>
+</ol>
+
+<p>반대로 이 방식은 브라우저와 보조 기술의 지원을 받을 수 없지만 안내사항의 위치를 더 유연하게 설정할 수 있습니다. aria-labelledby 속성과 aria-describedby 속성을 이용할 수 있습니다. 이 둘의 차이는 스크린 리더가 aria-describedby에 연관된 요소를 label과 다른 정보들을 모두 읽은 후 맨 마지막에 읽어준다는 것입니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- aria-labelledby --&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">id=</span><span class="s">"expLabel"</span> <span class="na">for=</span><span class="s">"expire"</span><span class="nt">&gt;</span>Expiration date:<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;span&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"expire"</span> <span class="na">id=</span><span class="s">"expire"</span> <span class="na">aria-labelledby=</span><span class="s">"expLabel expDesc"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"expDesc"</span><span class="nt">&gt;</span>MM/YYYY<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/span&gt;</span>
+
+<span class="c">&lt;!-- aria-describedby --&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">id=</span><span class="s">"expLabel"</span> <span class="na">for=</span><span class="s">"expire"</span><span class="nt">&gt;</span>Expiration date:<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;span&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"expire"</span> <span class="na">id=</span><span class="s">"expire"</span> <span class="na">aria-labelledby=</span><span class="s">"expLabel"</span> <span class="na">aria-describedby=</span><span class="s">"expDesc"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"expDesc"</span><span class="nt">&gt;</span>MM/YYYY<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/span&gt;</span></code></pre></figure>
+
+<ul>
+  <li>플레이스홀더</li>
+</ul>
+
+<p>플레이스홀더에 안내사항이 있을 경우 사용자는 자신이 제대로 응답했는지 확인하기 어렵습니다. 플레이스홀더가 사용자에게 중요한 정보를 전달하긴 하지만 플레이스홀더는 라벨의 대체제가 아닙니다. 스크린 리더와 같은 보조 기술은 플레이스홀더를 라벨로 취급하지 않습니다. 따라서 플레이스홀더와 별개로 라벨을 렌더링하는 것이 좋습니다.</p>
+
+<h3 id="3-4-입력값-검증하기">3-4. 입력값 검증하기</h3>
+
+<p>안내사항을 제공하는 것과 더불어 사용자의 입력값을 검증하여 실수를 방지합니다. HTML5는 이메일, 날짜 등 일반적인 input 타입을 검증하기 위한 내장 기능을 가지고 있습니다. 그 외에도 직접 검증 로직을 만들었다면 검증 결과를 사용자에게 알려줍니다.</p>
+
+<ul>
+  <li>필수적인 input 검증하기</li>
+</ul>
+
+<p>label 태그에 ‘required’ 라고 명시하기도 하고 input 태그에 required 속성을 사용하기도 합니다. label에 ‘required’ 라고 명시하는 것은 required 속성을 지원하지 않는 구형 브라우저와 보조 기술을 사용하지 않는 사람들을 위함입니다. 비슷하게 required 속성을 사용하면 <code class="language-plaintext highlighter-rouge">aria-required='true'</code>를 적용한 것과 동일하지만 이를 지원하지 않는 브라우저에 대응하기 위해 중복으로 사용할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span><span class="nt">&gt;</span>Name (required): <span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">id=</span><span class="s">"name"</span> <span class="na">required</span> <span class="na">aria-required=</span><span class="s">"true"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<ul>
+  <li>규칙있는 input 검증하기</li>
+</ul>
+
+<p>HTML5의 pattern 속성은 입력값을 정규표현식으로 검증할 수 있게 해줍니다. 전화번호, 우편번호 등 데이터에 특정한 규칙이 있을 때 유용합니다. 아래는 독일 차량 번호 검증을 위해 pattern 속성에 정규표현식을 사용한 예시입니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"license"</span>
+		<span class="na">pattern=</span><span class="s">"[A-ZÖÄÜ]{1,3} [A-Z]{2,4} [0-9]{1,4}"</span>
+	<span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<p>그 외에도 클라이언트/서버 검증 모두 진행하기, 사용자에게 입력한 값을 확인시키기, 실행 취소 기능 제공하기 등이 있습니다.</p>
+
+<h3 id="3-5-사용자-알림">3-5. 사용자 알림</h3>
+
+<p>성공 여부와 상관없이 사용자에게 양식 제출 결과에 대한 피드백을 제공합니다. 양식 제어 요소 근처에 인라인 피드백일 수도 있고, 양식 제출 이후에 전체 피드백일 수도 있지만 알림은 간결하고 명확해야 합니다. 특히 오류 메세지는 이해하기 쉽고 해결 방법에 대한 간단한 안내사항을 제공해야 합니다.</p>
+
+<ul>
+  <li>전체 피드백</li>
+</ul>
+
+<p>양식이 제출되면 성공했는지, 오류가 발생했는지에 대해 사용자에게 알려주는 것이 중요합니다.</p>
+
+<ol>
+  <li>heading 사용하기</li>
+</ol>
+
+<p>h1, h2 등으로 웹 페이지의 제목을 통해 알려주는 방법이 가장 일반적입니다. 이 때 오류가 발생했다면, ‘오류’라는 단어를 분명하게 사용하고 오류 개수도 알려주면 좋습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 실패 --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>3 Errors – Billing Address<span class="nt">&lt;/h1&gt;</span>
+<span class="c">&lt;!-- 성공 --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Thank you for submitting your order.<span class="nt">&lt;/h1&gt;</span></code></pre></figure>
+
+<ol>
+  <li>title 요소 사용하기</li>
+</ol>
+
+<p>title 요소를 통해 성공 여부를 알려줍니다. 
+스크린 리더 사용자들은 바로 피드백을 받을 수 있습니다 (title 요소가 가장 먼저 읽히기 때문에)
+따라서 heading 요소가 콘텐츠 깊은 곳에 위치해 있을 경우 유용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 실패 --&gt;</span>
+<span class="nt">&lt;title&gt;</span>3 Errors – Billing Address<span class="nt">&lt;/title&gt;</span>
+<span class="c">&lt;!-- 성공 --&gt;</span>
+<span class="nt">&lt;title&gt;</span>Thank you for submitting your order.<span class="nt">&lt;/title&gt;</span></code></pre></figure>
+
+<ol>
+  <li>다이얼로그 사용하기</li>
+</ol>
+
+<p>사용자가 놓친 부분을 알려주는 가장 일반적인 방법입니다. 
+아래는 브라우저 내장 alert()를 사용한 예시입니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"alertconfirm"</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/button&gt;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">alertconfirm</span><span class="dl">'</span><span class="p">)</span>
+	<span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="cm">/* [… code saving data …] */</span>
+		<span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Thanks for submitting the form!</span><span class="dl">'</span><span class="p">);</span>
+	<span class="p">});</span></code></pre></figure>
+
+<ol>
+  <li>오류 나열하기</li>
+</ol>
+
+<p>오류가 발생하면 form 요소 앞, 페이지 상단에 이를 나열합니다.
+heading 요소를 사용하여 쉽게 알아차릴 수 있게 합니다. 
+각각의 오류 메세지는</p>
+<ul>
+  <li>오류가 발생한 양식 제어 요소의 라벨을 알려줍니다.</li>
+  <li>누구나 쉽게 이해할 수 있도록 오류를 간결하게 설명합니다.</li>
+  <li>오류 수정 방법을 알려주고, 형식 요구사항을 상기시킵니다.</li>
+  <li>빠른 접근을 위해 양식 제어 요소에 대한 페이지 내 링크를 제공합니다.</li>
+</ul>
+
+<p>또한 이러한 오류 목록을 감싸는 컨테이너에 role=’alert’ 속성을 명시해야 보조 기술의 지원을 받을 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">role=</span><span class="s">"alert"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h4&gt;</span>There are 2 errors in this form<span class="nt">&lt;/h4&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+  	<span class="nt">&lt;li&gt;</span>
+  		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#firstname"</span> <span class="na">id=</span><span class="s">"firstname_error"</span><span class="nt">&gt;</span>
+  			The First name field is empty; it is a required field and must be filled in.
+  		<span class="nt">&lt;/a&gt;</span>
+  	<span class="nt">&lt;/li&gt;</span>
+  	<span class="nt">&lt;li&gt;</span>
+  		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#birthdate"</span> <span class="na">id=</span><span class="s">"birthdate_error"</span><span class="nt">&gt;</span>
+  			The Date field is in the wrong format; it should be similar to 17/09/2013 (use a / to separate day, month, and year).
+  		<span class="nt">&lt;/a&gt;</span>
+  	<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<p>오류가 발생한 필드는 aria-describedby 속성으로 오류 메세지와 연결해줄 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"firstname"</span><span class="nt">&gt;</span>First Name:<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"firstname"</span> <span class="na">aria-describedby=</span><span class="s">"firstname_error"</span><span class="nt">&gt;</span></code></pre></figure>
+
+<ul>
+  <li>인라인 피드백</li>
+</ul>
+
+<p>제어 요소 주위에 피드백이 있을 경우 사용자에게 더 도움을 줄 수 있습니다. 
+이는 오류가 발생했을 때 뿐만 아니라 정상적으로 입력했을 경우도 해당합니다. 
+통상적으로 메세지와 함께 시각적인 단서(아이콘)를 제공합니다.</p>
+
+<ol>
+  <li>제출한 뒤 피드백</li>
+</ol>
+
+<p>사용자가 양식을 완성할 수 있도록 적절한 성공, 오류 메세지를 표시합니다. 
+만약 오류가 발생했을 경우, 해당 input 요소에 포커스를 줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"success"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"username"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;strong&gt;</span>OK:<span class="nt">&lt;/strong&gt;</span> Username:
+	<span class="nt">&lt;/label&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"username"</span>
+		<span class="na">id=</span><span class="s">"username"</span> <span class="na">value=</span><span class="s">"spaceteddy13"</span>
+		<span class="na">aria-describedby=</span><span class="s">"userDesc"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"userDesc"</span><span class="nt">&gt;</span>✓<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"error"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"expire"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;strong&gt;</span>Error:<span class="nt">&lt;/strong&gt;</span>
+		Expiry date:
+	<span class="nt">&lt;/label&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"expire"</span>
+		<span class="na">id=</span><span class="s">"expire"</span> <span class="na">value=</span><span class="s">"03.2015"</span>
+		<span class="na">aria-describedby=</span><span class="s">"expDesc"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"expDesc"</span><span class="nt">&gt;</span>Use the format MM/YYYY.<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+	<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<ol>
+  <li>입력 중 피드백</li>
+</ol>
+
+<p>입력 중 즉각적인 피드백은 큰 도움을 줍니다. 
+이전 예제처럼 제출한 뒤 피드백을 주는 것은 정상 입력 여부를 여러 번 시도해야 알 수 있기 때문입니다. 
+단, 이러한 형태의 피드백이 모든 상황에서 옳은 것은 아니며 클라이언트에서의 오류 검증을 위한 코드가 필요합니다.</p>
+
+<p>2-1. 메세지 피드백</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div&gt;</span>
+	<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"username"</span><span class="nt">&gt;</span>Username:<span class="nt">&lt;/label&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">id=</span><span class="s">"username"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"username_feedback"</span> <span class="na">aria-live=</span><span class="s">"polite"</span><span class="nt">&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">username</span><span class="dl">'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keyup</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="kd">function</span> <span class="nx">setError</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">strong</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Error:</span><span class="dl">"</span><span class="p">;</span>
+		<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">;</span>
+		<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">span</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kd">function</span> <span class="nx">setSuccess</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">strong</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">OK:</span><span class="dl">"</span><span class="p">;</span>
+		<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">success</span><span class="dl">'</span><span class="p">;</span>
+		<span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">span</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">&amp;check;</span><span class="dl">"</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">!==</span> <span class="dl">""</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">taken_usernames</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">trim</span><span class="p">()))</span> <span class="p">{</span>
+			<span class="nx">setError</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="dl">'</span><span class="s1">&amp;cross; Sorry, this username is taken.</span><span class="dl">'</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">setSuccess</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="dl">'</span><span class="s1">&amp;check; You can use this username.</span><span class="dl">'</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">username_feedback</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+		<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">username_feedback</span><span class="dl">'</span><span class="p">)</span>
+			<span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+		<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">[for="username"] strong</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">});</span></code></pre></figure>
+
+<ul>
+  <li>span 요소 안에 aria-live=’polite’ 를 사용하여 live region 임을 스크린 리더에 알려줍니다. 
+polite 라는 값은 메세지의 중요성을 떨어트려 해당 메세지를 읽기 위해 스크린 리더가 현재 작업을 방해하지 않도록 합니다. 
+이로 인해 사용자가 키를 입력할 때마다 매번 읽는 것이 아니라 입력을 멈췄을 때만 한번 읽습니다.</li>
+</ul>
+
+<p>2-2. 규모에 대한 피드백</p>
+
+<p>비밀번호의 안전한 정도를 표시하는 것과 같이 성공과 오류를 이분적으로 나뉘는 것이 아니라 단계별로 피드백을 주는 경우도 있습니다. 
+이럴 때는 색상, 바로미터, 단계를 알려주는 라벨 등이 필요합니다.</p>
+
+<p>2-3. 포커스가 변경되었을 때 피드백</p>
+
+<p>날짜처럼 특정한 포맷으로 값이 입력되어야 하는 경우, 사용자가 입력하는 도중에 계속 오류 메세지가 뜰 것이기 때문에 이를 확인하는 것이 의미 없는 경우도 있습니다. 
+이러한 경우에는 탭키를 누르거나 마우스로 다른 필드를 클릭해서 포커스가 변경되었을 때 입력을 확인합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div&gt;</span>
+	<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"expire"</span><span class="nt">&gt;&lt;strong&gt;&lt;/strong&gt;</span> Expiry date:<span class="nt">&lt;/label&gt;</span>
+	<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"expire"</span> <span class="na">id=</span><span class="s">"expire"</span> <span class="na">value=</span><span class="s">"03.2015"</span> <span class="na">aria-describedby=</span><span class="s">"expDesc3"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"expDesc3"</span> <span class="na">aria-live=</span><span class="s">"assertive"</span><span class="nt">&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<ul>
+  <li>span 요소 안에 aria-live=’assertive’ 를 사용하여 live region 임을 스크린 리더에 알려줍니다. 
+assertive 라는 값은 메세지의 중요성을 강조하여 해당 메세지를 읽기 위해 스크린 리더가 현재 작업을 방해하도록 합니다. 
+이로 인해 포커스를 받는 다음 요소를 사용자에게 알려주기 전에 메세지를 읽어줍니다.</li>
+</ul>
+
+<h3 id="3-6-다중-페이지-양식">3-6. 다중 페이지 양식</h3>
+
+<p>가능하다면 긴 양식의 경우 논리적인 단계로 구성된 여러 개의 작은 양식으로 나누는 것이 좋습니다. 
+이는 긴 양식을 덜 어렵고 이해하기 쉽게 만들어 주며, 특히 컴퓨터 사용 경험이 적거나 인지 장애가 있는 사람들에게 도움이 됩니다. 
+순차적 양식에 적용되어야 하는 기본 원칙은 다음과 같습니다.</p>
+<ul>
+  <li>모든 페이지에 ‘전반적인 안내사항’ 을 반복합니다.</li>
+  <li>제어 요소의 논리적인 그룹에 따라 양식을 나눕니다. (가령, 온라인 쇼핑몰에서 배송과 결제 정보가 분리됩니다)</li>
+  <li>선택적인 요소는 건너뛸 수 있게 하고 쉽게 인지할 수 있게 만듭니다.</li>
+  <li>
+    <p>가능하면 시간 제한을 두지 않습니다. 시간 제한이 꼭 필요하다면, 사용자가 시간을 조절하거나 연장할 수 있는 기능을 제공합니다.</p>
+  </li>
+  <li>단계 표시하기</li>
+</ul>
+
+<p>가능하면 첫번째 단계에서 이후 몇 단계가 더 있는지 설명합니다. 
+각 단계는 사용자가 있는 단계를 알려줘야 합니다.</p>
+
+<ol>
+  <li>title 요소 사용하기</li>
+</ol>
+
+<p>스크린 리더가 가장 먼저 읽는 요소이기 때문에 현재 몇번째 단계에 있는지를 가장 먼저 적습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;title&gt;</span>Step 2 of 4: Shipping Address – Complete Purchase – Galactic Teddy Bears Shop<span class="nt">&lt;/title&gt;</span></code></pre></figure>
+
+<ol>
+  <li>heading 요소 사용하기</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1&gt;</span>Shipping Address (Step 2 of 4)<span class="nt">&lt;/h1&gt;</span></code></pre></figure>
+
+<ol>
+  <li>HTML5 progress 요소 사용하기</li>
+</ol>
+
+<p>어떻게 답변했는지에 따라 나머지 질문이 결정되는 설문조사처럼 사용자 입력에 단계의 수가 의존하는 상황일 때 유용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">Survey <span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">"7"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>(Step 1 of circa 7)<span class="nt">&lt;/progress&gt;&lt;br&gt;</span>
+
+Survey <span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">"7"</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>(Step 2 of circa 7)<span class="nt">&lt;/progress&gt;&lt;br&gt;</span>
+
+[…]
+
+Survey <span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">"7"</span> <span class="na">value=</span><span class="s">"6"</span><span class="nt">&gt;</span>(Step 6 of circa 7)<span class="nt">&lt;/progress&gt;&lt;br&gt;</span>
+
+Survey <span class="nt">&lt;progress</span> <span class="na">max=</span><span class="s">"7"</span> <span class="na">value=</span><span class="s">"7"</span><span class="nt">&gt;</span>(Finished)<span class="nt">&lt;/progress&gt;</span></code></pre></figure>
+
+<p>이러한 progress 요소에는 기본적으로 애니매이션이 적용되어 있는데, 이는 <a href=""></a>에서 말했던 사항들을 준수하지 못해 접근성을 떨어트릴 수 있습니다.</p>
+
+<p>따라서 아래와 같은 CSS를 사용하여 애니매이션을 멈출 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">/* Microsoft IE */
+progress {
+  color: #036;
+}
+
+/* Apple Safari and Google Chrome */
+progress::-webkit-progress-bar {
+	background-color: #036;
+}
+
+/* Mozilla Firefox */
+progress::-moz-progress-bar {
+	background-color: #036;
+}</code></pre></figure>
+
+<ol>
+  <li>각 단계를 표시하기</li>
+</ol>
+
+<p>아래의 예시는 ol와 li으로 각 단계를 나타내고 숨겨진 텍스트를 사용하여 현재 단계와 완료된 단계를 표시합니다. 
+가능하면 완료된 단계에 대한 링크를 제공하여 사용자가 다시 확인할 수 있게 합니다. 
+해당 링크로 이동했을 때는 현재 단계에서 입력한 값을 유지합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tlwrapper"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"timeline"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"timeline-past"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Completed: <span class="nt">&lt;/span&gt;</span>
+				<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"billing.html"</span><span class="nt">&gt;</span>Billing Address<span class="nt">&lt;/a&gt;</span>
+		<span class="nt">&lt;/li&gt;</span>
+		<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"timeline-current"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Current: <span class="nt">&lt;/span&gt;</span>
+			<span class="nt">&lt;span&gt;</span>Shipping Address<span class="nt">&lt;/span&gt;</span>
+		<span class="nt">&lt;/li&gt;</span>
+		<span class="nt">&lt;li&gt;&lt;span&gt;</span>Review Order<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+		<span class="nt">&lt;li&gt;&lt;span&gt;</span>Payment<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+		<span class="nt">&lt;li&gt;&lt;span&gt;</span>Finish Purchase<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+	<span class="nt">&lt;/ol&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<h2 id="4-캐러셀carousels">4. 캐러셀(Carousels)</h2>
+
+<p>콜렉션에 있는 아이템을 한번에 하나씩 보여주는 UI를 말합니다.</p>
+
+<p>W3C에서 제공하는 캐러셀 예시는 <a href="https://www.w3.org/WAI/tutorials/carousels/working-example/">여기</a>에서 확인하실 수 있습니다.</p>
+
+<ul>
+  <li>준수해야 하는 접근성</li>
+</ul>
+
+<ol>
+  <li>움직이는 것을 멈출 수 있어야 함 : 너무 빠르거나 산만할 수 있고, 글자를 읽기 힘들게 만듭니다.</li>
+  <li>네비게이션을 포함한 모든 기능은 키보드로 동작해야 합니다.</li>
+  <li>아이템이 변경되는 것은 스크린 리더 사용자를 포함한 모든 사용자에게 알려줘야 합니다.</li>
+  <li>포커스 되었을 때 키보드 위치는 합리적이고 이해하기 쉬운 방식으로 관리됩니다.</li>
+</ol>
+
+<ul>
+  <li>Carousels은 콘텐츠를 파악하기 힘들다는 이유로 사용성 측면에서 논쟁되기도 했는데, 접근성을 지키면 사용성을 증진시킬 수 있습니다.</li>
+</ul>
+
+<h3 id="4-1-carousel-structure">4-1. Carousel Structure</h3>
+
+<p>구조적 마크업은 다양한 상황에서 캐러셀 콘텐츠가 사용될 수 있게 보장해줍니다.</p>
+
+<ul>
+  <li>
+    <p>일반적인 구조</p>
+  </li>
+  <li>전형적으로 순서없는 목록으로 가장 잘 나타낼 수 있습니다.</li>
+  <li>
+    <p>맥락에 따라 다른 요소들도 사용될 수 있습니다.</p>
+  </li>
+  <li>
+    <p>모든 캐러셀은 사용자들이 쉽게 찾을 수 있도록 labeled region 안에 동봉되어야 합니다.</p>
+  </li>
+  <li>
+    <p>아래의 예시의 section 요소가 aria-labelledby 속성을 가지고 있는 것처럼 말입니다.</p>
+  </li>
+  <li>캐러셀 아이템</li>
+</ul>
+
+<p>캐러셀은 종종 이미지를 보여주기 위한 갤러리로 사용되기도 합니다. 
+하지만 보다 복잡하게 아티클이나 페이지 전체를 아이템으로 사용하기도 합니다. 
+모든 상황에서 콘텐츠의 의미를 명확하게 전달하기 위해 적절한 마크업을 사용해야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"slide"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"teddy1.jpg"</span> <span class="na">alt=</span><span class="s">"Space Teddy"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/li&gt;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"slide"</span> <span class="na">style=</span><span class="s">"background-image: url('teddy1.jpg');"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;article&gt;</span>
+    <span class="nt">&lt;h4&gt;</span>Space Teddy production reaches all-time high<span class="nt">&lt;/h4&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Teddies in Space Inc. has released outstanding numbers for the last solar year. The production of Space Teddies increased by 17%. The new version, scheduled to be released in a few months, will likely be the biggest Space Teddy release ever.<span class="nt">&lt;/p&gt;</span>
+    …
+  <span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;/li&gt;</span></code></pre></figure>
+
+<h3 id="4-2-functionality">4-2. Functionality</h3>
+
+<p>캐러셀 아이템을 선택하고, 아이템이 변경되었다는 것을 사용자에게 알려주는 기능을 제공합니다.</p>
+
+<ul>
+  <li>이전-다음 버튼 제공</li>
+</ul>
+
+<p>아이템 간 이동할 수 있도록 버튼을 제공합니다. 
+button 태그를 사용하여 보조 기술의 지원을 받을 수 있도록 합니다. 
+자바스크립트를 사용할 수 있을 때만 작동하므로, 자바스크립트로 버튼을 만들어서 추가합니다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ctrls</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">ctrls</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">controls</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">ctrls</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">&lt;li&gt;</span><span class="dl">'</span> <span class="o">+</span>
+    <span class="dl">'</span><span class="s1">&lt;button type="button" class="btn-prev"&gt;</span><span class="dl">'</span> <span class="o">+</span>
+      <span class="dl">'</span><span class="s1">&lt;img src="img/chevron-left.png" alt="Previous Item"&gt;</span><span class="dl">'</span> <span class="o">+</span>
+    <span class="dl">'</span><span class="s1">&lt;/button&gt;</span><span class="dl">'</span> <span class="o">+</span>
+  <span class="dl">'</span><span class="s1">&lt;/li&gt;</span><span class="dl">'</span> <span class="o">+</span>
+  <span class="dl">'</span><span class="s1">&lt;li&gt;</span><span class="dl">'</span> <span class="o">+</span>
+    <span class="dl">'</span><span class="s1">&lt;button type="button" class="btn-next"&gt;</span><span class="dl">'</span> <span class="o">+</span>
+      <span class="dl">'</span><span class="s1">&lt;img src="img/chevron-right.png" alt="Next Item"&gt;</span><span class="dl">'</span> <span class="o">+</span>
+    <span class="dl">'</span><span class="s1">&lt;/button&gt;</span><span class="dl">'</span> <span class="o">+</span>
+  <span class="dl">'</span><span class="s1">&lt;/li&gt;</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">ctrls</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.btn-prev</span><span class="dl">'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">prevSlide</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">ctrls</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.btn-next</span><span class="dl">'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">nextSlide</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">carousel</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">ctrls</span><span class="p">);</span></code></pre></figure>
+
+<ul>
+  <li>현재 아이템 알려주기</li>
+</ul>
+
+<p>WAI-ARIA live region(https://www.w3.org/TR/wai-aria-1.1/#live_region_roles)을 사용하여 스크린 리더 사용자들에게 현재 어떤 아이템을 보여주고 있는지 알려줍니다.</p>
+
+<p>또한 키보드 포커스가 계속해서 유지될 수 있도록 합니다. 
+현재 아이템이 사라졌다고 해서 사용자가 페이지의 현재 위치에서 멀어지지 말아야 합니다.</p>
+
+<p>마지막으로 이전-다음 버튼이 눌렸을 때 키보드 포커스를 움직이면 안됩니다. 
+이는 오히려 사용자가 캐러셀을 앞뒤로 왔다갔다 조종하는 것을 더 힘들게 만들 수 있습니다.</p>
+
+<p>*live region</p>
+<ul>
+  <li>alert, log, marquee, status, timer</li>
+</ul>
+
+<p>https://www.w3.org/TR/wai-aria-1.1/#dfn-live-region</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">liveregion</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">liveregion</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">aria-live</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">polite</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">liveregion</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">aria-atomic</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">liveregion</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">class</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">liveregion visuallyhidden</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">carousel</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">liveregion</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">announceItem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">carousel</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.liveregion</span><span class="dl">'</span><span class="p">).</span><span class="nx">textContent</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Item </span><span class="dl">'</span> <span class="o">+</span> <span class="p">(</span><span class="nx">new_current</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> of </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">slides</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>네비게이션 버튼 추가</li>
+</ul>
+
+<p>각 캐러셀 아이템에 대한 버튼을 표시하고 현재 아이템을 하이라이팅합니다. 
+이는 사용자가 캐러셀 컨텐츠에 대해 이해할 수 있게 해주고, 캐러셀 한가운데에 있어도 바로 다른 아이템으로 이동할 수 있습니다. 
+아래의 예시에서 버튼들은 캐러셀 아이템만큼 존재하고, 특히 현재 아이템에 대응되는 버튼은 시각적으로 구분되는 스타일을 가지고 있을 뿐만 아니라 스크린 리더를 위한 숨겨진 텍스트도 가지고 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"slidenav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"current"</span> <span class="na">data-slide=</span><span class="s">"0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>News<span class="nt">&lt;/span&gt;</span> 1
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>(Current Slide)<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">data-slide=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>News<span class="nt">&lt;/span&gt;</span> 2
+    <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">data-slide=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>News<span class="nt">&lt;/span&gt;</span> 3
+    <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
+
+<ul>
+  <li>선택된 캐러셀 아이템을 포커싱</li>
+</ul>
+
+<p>사용자가 네비게이션 버튼을 사용했을 때, 사용자의 포커스는 선택된 아이템에 가 있어야 합니다. 
+이 경우, (일반적인 구조로 구성했다면) li 요소에 포커스가 가야합니다. 
+이는 키보드와 보조 기술 사용자들이 상호작용을 더 쉽게 하도록 도와줍니다.</p>
+
+<p>단, 기본적으로 li는 포커스를 받을 수 없기 때문에 tabindex를 -1로 설정하면 자바스크립트를 통해 포커스를 받을 수 있게 됩니다.</p>
+
+<h3 id="4-3-애니매이션">4-3. 애니매이션</h3>
+
+<p>캐러셀에 애니매이션을 적용하지만, 콘텐츠를 읽을 시간이 필요한 사람을 위해 일시정지가 필요합니다.</p>
+
+<ul>
+  <li>재생/정지 버튼</li>
+</ul>
+
+<p>애니매이션을 제어할 수 있는 버튼을 제공합니다. 
+아래의 예시는 해당 버튼이 어떻게 마크업될 수 있는지 보여줍니다. 
+현재 애니매이션이 재생중인지 여부에 따라서 버튼의 라벨과 동작이 달라집니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">data-action=</span><span class="s">"stop"</span><span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Stop Animation <span class="nt">&lt;/span&gt;</span>￭<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">data-action=</span><span class="s">"start"</span><span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">"visuallyhidden"</span><span class="nt">&gt;</span>Start Animation <span class="nt">&lt;/span&gt;</span>▶<span class="nt">&lt;/button&gt;</span></code></pre></figure>
+
+<p>단, 버튼 요소 자체를 변경하는 것은 키보드 포커스를 잃을 수 있기 때문에 value와 속성만 변경하는 것이 좋습니다.</p>
+
+<ul>
+  <li>마우스 호버와 키보드 포커스 시 일시정지</li>
+</ul>
+
+<p>캐러셀 아이템이 마우스 호버된 상태이거나 키보드 포커스를 받고 있을 경우 애니매이션을 일시정지합니다. 
+이는 콘텐츠를 다 읽지 못한 사람에게 시간을 주고, 링크를 클릭하고 싶은 사람을 도와줄 수 있습니다. 
+키보드 포커스가 유지되면, 캐러셀이 멈춰도 위치를 유지할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">carousel</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mouseenter</span><span class="dl">'</span><span class="p">,</span> <span class="nx">suspendAnimation</span><span class="p">);</span>
+<span class="nx">carousel</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mouseleave</span><span class="dl">'</span><span class="p">,</span> <span class="nx">startAnimation</span><span class="p">);</span>
+
+<span class="nx">carousel</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">focusin</span><span class="dl">'</span><span class="p">,</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasClass</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span> <span class="dl">'</span><span class="s1">slide</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">suspendAnimation</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+<span class="nx">carousel</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">focusout</span><span class="dl">'</span><span class="p">,</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasClass</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span> <span class="dl">'</span><span class="s1">slide</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">startAnimation</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span></code></pre></figure>
+
+<ul>
+  <li>보조 기술로부터 트랜지션 중인 요소를 숨기기</li>
+</ul>
+
+<p>트랜지션 중, 현재 아이템과 다음 아이템이 보입니다. 
+비록 현재 아이템은 사라지는 중이지만 이는 보조 기술에 의해서 두 아이템 모두 이용 가능하다는 것을 의미하기 때문에 스크린 리더 사용자에게 혼란을 줄 수 있습니다. 
+다음 예제에서는 아이템이 활성화되면 화면에 보이도록 설정하는 ‘in-transition’ 클래스를 받습니다. 
+보조 기술로부터 아이템을 숨기기 위해서 aria-hidden=’true’로 설정하고, 트랜지션이 끝나면 해당 속성을 제거합니다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">slides</span><span class="p">[</span><span class="nx">new_next</span><span class="p">].</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">next slide</span><span class="dl">'</span>
+  <span class="o">+</span> <span class="p">((</span><span class="nx">transition</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">next</span><span class="dl">'</span><span class="p">)</span> <span class="p">?</span> <span class="dl">'</span><span class="s1"> in-transition</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="p">);</span>
+<span class="nx">slides</span><span class="p">[</span><span class="nx">new_next</span><span class="p">].</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">aria-hidden</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">slides</span><span class="p">[</span><span class="nx">new_prev</span><span class="p">].</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">prev slide</span><span class="dl">'</span>
+  <span class="o">+</span> <span class="p">((</span><span class="nx">transition</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">prev</span><span class="dl">'</span><span class="p">)</span> <span class="p">?</span> <span class="dl">'</span><span class="s1"> in-transition</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="p">);</span>
+<span class="nx">slides</span><span class="p">[</span><span class="nx">new_prev</span><span class="p">].</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">aria-hidden</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">slides</span><span class="p">[</span><span class="nx">new_current</span><span class="p">].</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current slide</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">slides</span><span class="p">[</span><span class="nx">new_current</span><span class="p">].</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">aria-hidden</span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="4-4-스타일링">4-4. 스타일링</h3>
+
+<p>버튼과 링크를 적절한 크기로 제공하고, 주의에 충분한 여백을 줍니다. 
+이는 운동 장애를 가지고 있는 사람, 모바일 기기와 같은 터치 스크린을 사용하는 사람에게 도움을 줍니다. 
+인라인이 아닌 버튼, 링크는 최소 44 x 44 픽셀이어야 합니다.</p>
+
+<ul>
+  <li>
+    <p>색상 대조 
+배경과 전경에 대해서 색상이 충분히 대조되어야 하지만 이미지 위에 버튼, 링크가 위치하면 적절한 값을 찾기 어려울 수 있습니다. 
+이 때, 배경 값을 (반)투명하게 설정하면 사용된 이미지와 상관없이 대조를 유지할 수 있습니다.</p>
+  </li>
+  <li>
+    <p>버튼 상태 표시
+캐러셀에 네비게이션 버튼이 추가되었지만 일반적으로 크기가 작기 때문에 버튼의 상태를 색상과 모양으로 알려주는 것이 중요합니다. 
+이를 통해 사람들이 변경점을 토대로 버튼의 현재 상태를 알 수 있기 때문입니다.</p>
+  </li>
+</ul>
+
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/Accessibility">
+        Accessibility</a>,&nbsp;<a href="/tag/A11y">
+        A11y</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fa11y%2F2023%2F12%2F31%2Fweb-accessibility-2.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+<!--  -->
+<!-- Google Analytics -->
+<!-- <script> -->
+  <!-- (function(i, s, o, g, r, a, m) { -->
+    <!-- i['GoogleAnalyticsObject'] = r; -->
+    <!-- i[r] = i[r] || function() { -->
+      <!-- (i[r].q = i[r].q || []).push(arguments) -->
+    <!-- }, i[r].l = 1 * new Date(); -->
+    <!-- a = s.createElement(o), -->
+      <!-- m = s.getElementsByTagName(o)[0]; -->
+    <!-- a.async = 1; -->
+    <!-- a.src = g; -->
+    <!-- m.parentNode.insertBefore(a, m) -->
+  <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
+  <!-- ga('create', 'UA-243662455-3', 'auto'); -->
+  <!-- ga('send', 'pageview', { -->
+    <!-- 'page': '/a11y/2023/12/31/web-accessibility-2.html', -->
+    <!-- 'title': '[A11y] WAI 문서로 접근성 이해하기 (2/2)' -->
+  <!-- }); -->
+<!-- </script> -->
+<!--  -->
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "10c052150c690f0";
+    if(window.wcs) {
+    wcs_do();
+    }
+    </script>
+
+  </body>
+
+</html>

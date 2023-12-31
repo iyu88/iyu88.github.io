@@ -6,9 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Dec 2023 01:07:42 +0900</pubDate>
-    <lastBuildDate>Mon, 25 Dec 2023 01:07:42 +0900</lastBuildDate>
+    <pubDate>Sun, 31 Dec 2023 23:53:35 +0900</pubDate>
+    <lastBuildDate>Sun, 31 Dec 2023 23:53:35 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[A11y] WAI 문서로 접근성 이해하기 (2/2)</title>
+        <description>&lt;h1 id=&quot;wai-문서로-접근성-이해하기-22&quot;&gt;WAI 문서로 접근성 이해하기 (2/2)&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-w3c에서-출판한-기술-사양을-읽어보며-접근성을-높일-수-있는-개발-요소들을-알아봅니다&quot;&gt;💡 W3C에서 출판한 기술 사양을 읽어보며 접근성을 높일 수 있는 개발 요소들을 알아봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-들어가며&quot;&gt;1. 들어가며&lt;/h2&gt; &lt;p&gt;지난 번에 작성한 &lt;a href=&quot;https://iyu88.github.io/a11y/2023/12/24/web-accessibility-1.html&quot;&gt;WAI...</description>
+        <pubDate>Sun, 31 Dec 2023 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/a11y/2023/12/31/web-accessibility-2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/a11y/2023/12/31/web-accessibility-2.html</guid>
+        
+        <category>Accessibility</category>
+        
+        <category>A11y</category>
+        
+        
+        <category>A11y</category>
+        
+      </item>
     
       <item>
         <title>[A11y] WAI 문서로 접근성 이해하기 (1/2)</title>
@@ -165,24 +181,6 @@
         
         
         <category>React</category>
-        
-      </item>
-    
-      <item>
-        <title>[JavaScript] V8 Garbage Collection</title>
-        <description>&lt;h1 id=&quot;v8-garbage-collection&quot;&gt;V8 Garbage Collection&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-v8-엔진에서-javascript-garbage-collection-동작-방식을-정리합니다&quot;&gt;💡 V8 엔진에서 JavaScript Garbage Collection 동작 방식을 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-garbage-collection&quot;&gt;1. Garbage Collection&lt;/h2&gt; &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Garbage Collection&lt;/code&gt;을 단어 그대로 해석하면 ‘쓰레기 수집’입니다.&lt;/p&gt; &lt;p&gt;프로그래밍에서...</description>
-        <pubDate>Sat, 11 Mar 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2023/03/11/garbage-collection.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2023/03/11/garbage-collection.html</guid>
-        
-        <category>JavaScript</category>
-        
-        <category>GarbageCollection</category>
-        
-        <category>V8</category>
-        
-        
-        <category>JavaScript</category>
         
       </item>
     

@@ -113,7 +113,7 @@ cover: "/assets/instacode.png"
 7. 이미지에 링크가 걸려있는 경우에 포커스가 명확하게 표시되고 다른 키를 눌렀을 때 이동한다.
 
 
-### 3-7. 움직이고 깜빡거리는 콘텐츠 
+### 3-7. Moving, Flashing, or Blinking Content
 
 - 일반 사용자 뿐만 아니라 주의력 결핍, 시각 처리 장애를 가지고 있는 사람들을 위해서 광고, 비디오처럼 움직이는 콘텐츠는 사용자가 제어할 수 있어야 합니다. 
 - 제어가 불가능할 경우에는 움직이는 정보를 충분히 이해하지 못한 채 지나갈 수 있고, 콘텐츠 자체에 대한 집중력을 떨어트리는 문제가 있습니다. 
@@ -157,7 +157,7 @@ cover: "/assets/instacode.png"
 
 동일한 시맨틱 태그가 사용됐을 경우 각각을 구분하기 위해 label 속성을 사용하기도 합니다.
 
-- aria-labelledby : 다른 요소의 id 값을 설정하면 다른 모든 요소를 라벨로 사용할 수 있습니다. 아래의 예시처럼 heading 태그가 다른 Page Region(nav)안에 있을 경우 h2는 nav를 설명하는 역할을 맡습니다.
+- aria-labelledby : 다른 요소의 id 값을 설정하면 다른 모든 요소를 레이블로 사용할 수 있습니다. 아래의 예시처럼 heading 태그가 다른 Page Region(nav)안에 있을 경우 h2는 nav를 설명하는 역할을 맡습니다.
 
 {% highlight html%}
 <nav aria-labelledby="regionheading">
@@ -166,7 +166,7 @@ cover: "/assets/instacode.png"
 </nav>
 {% endhighlight %}
 
-- aria-label : 여러 개의 nav가 있을 경우 각 시맨틱 태그의 역할을 더 구체화할 필요가 있습니다. 아래 예시의 nav 태그는 Main 네비게이션이라는 의미를 aria-label에 담고 있습니다. aria-labelledby와 달리 다른 요소를 사용하지 않기 때문에 라벨이 시각적으로 드러나지 않아야 할 때 적합합니다. 
+- aria-label : 여러 개의 nav가 있을 경우 각 시맨틱 태그의 역할을 더 구체화할 필요가 있습니다. 아래 예시의 nav 태그는 Main 네비게이션이라는 의미를 aria-label에 담고 있습니다. aria-labelledby와 달리 다른 요소를 사용하지 않기 때문에 레이블이 시각적으로 드러나지 않아야 할 때 적합합니다. 
 
 {% highlight html%}
 <nav aria-label="Main">
@@ -195,7 +195,7 @@ cover: "/assets/instacode.png"
   - q : 짧은 인용을 inline으로 담을 때 사용합니다. 
   - cite : 인용의 출처를 언급할 때 사용합니다. 
 
-- figure : 메인 콘텐츠에 대한 추가 정보를 제공할 때 사용합니다. 일반적으로 리스트, 이미지, 테이블 등을 포함하고 있고 figcaption 요소를 통해 figure에 라벨을 붙입니다. 아래 예시를 보면 복잡한 정보를 담고 있는 img 태그와 이에 대한 설명이 있는 a 태그를 figure 태그로 감싸고 있는 것을 볼 수 있습니다. 
+- figure : 메인 콘텐츠에 대한 추가 정보를 제공할 때 사용합니다. 일반적으로 리스트, 이미지, 테이블 등을 포함하고 있고 figcaption 요소를 통해 figure에 레이블을 붙입니다. 아래 예시를 보면 복잡한 정보를 담고 있는 img 태그와 이에 대한 설명이 있는 a 태그를 figure 태그로 감싸고 있는 것을 볼 수 있습니다. 
 
 {% highlight html%}
 <p>The sales volume of our SpaceBear product was steadily the first three quarters but had a huge success in quarter four with the introduction of SuperBear in time for the holiday season. See graphic G3 for details.</p>

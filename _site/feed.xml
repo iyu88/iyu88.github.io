@@ -6,9 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 01 Jan 2024 04:06:28 +0900</pubDate>
-    <lastBuildDate>Mon, 01 Jan 2024 04:06:28 +0900</lastBuildDate>
+    <pubDate>Mon, 15 Jan 2024 01:02:28 +0900</pubDate>
+    <lastBuildDate>Mon, 15 Jan 2024 01:02:28 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[LookingBack] 2023년 돌아보기</title>
+        <description>&lt;h1 id=&quot;2023년-돌아보기&quot;&gt;2023년 돌아보기&lt;/h1&gt; &lt;p&gt;연말에는 웹 접근성에 관한 글을 적느라 경황이 없었고 연초에는 개인 일정을 소화하느라 진득하게 회고할 겨를이 없었습니다. 그래서 2024년 새해가 시작된 지 2주가 지난 시점에서 2023년을 돌아봅니다.&lt;/p&gt; &lt;p&gt;아무래도...</description>
+        <pubDate>Sun, 14 Jan 2024 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/lookingback/2024/01/14/looking-back-the-year.html</link>
+        <guid isPermaLink="true">http://localhost:4000/lookingback/2024/01/14/looking-back-the-year.html</guid>
+        
+        <category>Looking_Back_the_year</category>
+        
+        <category>2023</category>
+        
+        
+        <category>LookingBack</category>
+        
+      </item>
     
       <item>
         <title>[A11y] WAI 문서로 접근성 이해하기 (2/2)</title>
@@ -161,26 +177,6 @@
         
         
         <category>Storybook</category>
-        
-      </item>
-    
-      <item>
-        <title>[React] 디자인 시스템에 Compound Component Pattern 적용해보기</title>
-        <description>&lt;h1 id=&quot;디자인-시스템에-compound-component-pattern-적용해보기&quot;&gt;디자인 시스템에 Compound Component Pattern 적용해보기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-디자인-시스템을-만들어가면서-react의-합성-컴포넌트-패턴을-사용하여-tabs-컴포넌트를-만들었던-내용을-정리합니다&quot;&gt;💡 디자인 시스템을 만들어가면서 React의 합성 컴포넌트 패턴을 사용하여 Tabs 컴포넌트를 만들었던 내용을 정리합니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-배경&quot;&gt;1. 배경&lt;/h2&gt; &lt;p&gt;지난 2월 초부터...</description>
-        <pubDate>Sat, 25 Mar 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/react/2023/03/25/react-compound-component-pattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/react/2023/03/25/react-compound-component-pattern.html</guid>
-        
-        <category>React</category>
-        
-        <category>DesignSystem</category>
-        
-        <category>CompoundComponent</category>
-        
-        <category>Accessibility</category>
-        
-        
-        <category>React</category>
         
       </item>
     

@@ -6,9 +6,33 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 15 Jan 2024 01:02:28 +0900</pubDate>
-    <lastBuildDate>Mon, 15 Jan 2024 01:02:28 +0900</lastBuildDate>
+    <pubDate>Sat, 02 Mar 2024 22:40:16 +0900</pubDate>
+    <lastBuildDate>Sat, 02 Mar 2024 22:40:16 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[JavaScript] 모듈 시스템 (CJS, ESM)</title>
+        <description>&lt;h1 id=&quot;모듈-시스템-cjs-esm&quot;&gt;모듈 시스템 (CJS, ESM)&lt;/h1&gt; &lt;h2 id=&quot;1-모듈&quot;&gt;1. 모듈&lt;/h2&gt; &lt;p&gt;코드를 짜다보면 프로그램의 규모가 점차 커지면서 하나의 파일에 작성했던 코드를 관련된 내용끼리 여러 파일에 분리하곤 합니다. JavaScript에서는 각 파일을 서로 다른 모듈로...</description>
+        <pubDate>Sat, 02 Mar 2024 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/javascript/2024/03/02/javascript-module-system.html</link>
+        <guid isPermaLink="true">http://localhost:4000/javascript/2024/03/02/javascript-module-system.html</guid>
+        
+        <category>javascript</category>
+        
+        <category>moduleSystem</category>
+        
+        <category>commonJS</category>
+        
+        <category>ecmaScriptModules</category>
+        
+        <category>cjs</category>
+        
+        <category>esm</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
     
       <item>
         <title>[LookingBack] 2023년 돌아보기</title>
@@ -159,24 +183,6 @@
         
         
         <category>JavaScript</category>
-        
-      </item>
-    
-      <item>
-        <title>[Storybook] 스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기</title>
-        <description>&lt;h1 id=&quot;스토리북의-docs-기능으로-컴포넌트-라이브러리-문서화하기&quot;&gt;스토리북의 Docs 기능으로 컴포넌트 라이브러리 문서화하기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-ui-컴포넌트-렌더링을-확인할-때-사용했던-storybook으로-각-컴포넌트-정보를-문서화한-과정을-정리해봅니다&quot;&gt;💡 UI 컴포넌트 렌더링을 확인할 때 사용했던 Storybook으로 각 컴포넌트 정보를 문서화한 과정을 정리해봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-문서화&quot;&gt;1. 문서화&lt;/h2&gt; &lt;p&gt;&lt;a href=&quot;https://iyu88.github.io/react/2023/03/25/react-compound-component-pattern.html&quot;&gt;지난 포스트&lt;/a&gt;에서...</description>
-        <pubDate>Fri, 07 Apr 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/storybook/2023/04/07/storybook-docs.html</link>
-        <guid isPermaLink="true">http://localhost:4000/storybook/2023/04/07/storybook-docs.html</guid>
-        
-        <category>Storybook</category>
-        
-        <category>Docs</category>
-        
-        <category>DesignSystem</category>
-        
-        
-        <category>Storybook</category>
         
       </item>
     

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    [JavaScript] 모듈 시스템 (CJS, ESM)
+  </title>
+  <meta name="description" content="모듈 시스템 (CJS, ESM)">
+  
+  <meta name="author" content="Hyunbin Lee">
+  <meta name="copyright" content="&copy; Hyunbin Lee 2024">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/javascript/2024/03/02/javascript-module-system.html">
+  <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
+
+  <!-- Tooltips -->
+  <script type="text/javascript">
+    window.tooltips = []
+  </script>
+
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P48NKV3');</script>
+  <!-- End Google Tag Manager -->
+  
+  
+</head>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H99JTCZN9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    if (location.host === 'iyu88.github.io') {
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-4H99JTCZN9');
+    }
+  </script>
+  <!-- End of Google tag (gtag.js) -->
+
+  <body>
+
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48NKV3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+    
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="구멍을 외면하지 말자">
+      <h4 class="title">Hyunbin Lee</h4>
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [JavaScript] 모듈 시스템 (CJS, ESM)
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
+
+  <div class="wrapper">
+
+    
+
+    <section class="post-meta">
+      <div class="post-date">
+        March 2, 2024
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/JavaScript">
+          Javascript</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="모듈-시스템-cjs-esm">모듈 시스템 (CJS, ESM)</h1>
+
+<h2 id="1-모듈">1. 모듈</h2>
+
+<p>코드를 짜다보면 프로그램의 규모가 점차 커지면서 하나의 파일에 작성했던 코드를 관련된 내용끼리 여러 파일에 분리하곤 합니다. 
+JavaScript에서는 각 파일을 서로 다른 모듈로 취급하고, 각 모듈에서는 변수나 함수를 공유하기 위해 이를 내보내고 불러올 수 있어야 합니다. 
+이 때, 프로젝트가 사용하고 있는 모듈 시스템과 사용하려는 모듈이 어떤 시스템을 따르고 있는지에 따라 사용 방식이 달라집니다. 
+여러 가지 모듈 시스템에 대해 알아보고, 주로 사용되는 CJS, ESM을 살펴봅니다.</p>
+
+<p><br /></p>
+
+<h2 id="2-여러-가지-모듈-시스템">2. 여러 가지 모듈 시스템</h2>
+
+<p>CJS, AMD, UMD, ESM에 대해서 순서대로 알아봅니다.</p>
+
+<h3 id="2-1-cjscommonjs">2-1. CJS(CommonJS)</h3>
+
+<p>CJS는 NodeJS에서 지원하는 모듈 시스템으로 알려져 있습니다. 모듈을 불러올 때는 <code class="language-plaintext highlighter-rouge">require</code>를 통해 동기적으로 불러오고, 내보낼 때는 <code class="language-plaintext highlighter-rouge">module.exports</code>를 사용합니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=01_cjs_syntax.js"></script>
+
+<p>module.exports는 전역 스코프로 취급되어 모듈의 보안성을 해칠 수 있습니다. require로 불러온 모듈을 수정하면 해당 모듈을 사용하는 다른 곳에 영향을 끼칠 수 있으니 주의해야 합니다. 아래 예시에서 <code class="language-plaintext highlighter-rouge">cjsModule</code>의 속성을 수정했을 때 값이 반영되는 것을 확인할 수 있습니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=02_cjs_scope.js"></script>
+
+<p><br /></p>
+
+<h3 id="2-2-amdasynchronous-module-definition">2-2. AMD(Asynchronous Module Definition)</h3>
+
+<p>NodeJS가 아닌 브라우저 환경에 적합한 모듈 시스템의 필요성이 커지면서 AMD가 등장하게 되었습니다. AMD는 브라우저에서 실행되는 어플리케이션의 성능을 위해 모듈을 비동기적으로 불러옵니다. 모듈을 불러올 때는 <code class="language-plaintext highlighter-rouge">require</code>, 내보낼 때는 <code class="language-plaintext highlighter-rouge">define</code>을 사용합니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=03_amd_syntax.js"></script>
+
+<p><br /></p>
+
+<h3 id="2-3-umduniversal-module-definition">2-3. UMD(Universal Module Definition)</h3>
+
+<p>이제 NodeJS 환경과 브라우저 환경을 지원하는 모듈 시스템이 하나씩 생겼습니다. JavaScript 모듈을 제공하는 입장에서는 어느 환경에서 모듈을 실행할지 알 수 없기 때문에 각각의 형태로 모두 제공해주어야 했습니다. 이러한 불편함을 해소하기 위해 CJS와 AMD 방식 모두를 지원하는 UMD가 등장하게 되었습니다. 
+JavaScript 유틸리티 라이브러리인 <a href="https://github.com/jashkenas/underscore/blob/master/underscore-umd.js">Underscore</a>가 UMD 모듈 시스템을 사용하고 있습니다.</p>
+
+<p><br /></p>
+
+<h3 id="2-4-esmecmascript-modules">2-4. ESM(ECMAScript Modules)</h3>
+
+<p>마지막으로 소개할 ESM은 ECMAScript에서 지정한 표준 모듈 시스템으로, 브라우저 환경의 지원을 받아 별도의 설정없이 실행할 수 있습니다. 모듈을 불러올 때는 <code class="language-plaintext highlighter-rouge">import</code>를 통해 비동기적으로 불러오고, 내보낼 때는 <code class="language-plaintext highlighter-rouge">export</code>를 사용합니다. 앞선 다른 모듈 시스템들과는 달리 정적 분석을 통해 모듈을 관리합니다. 덕분에 모듈 간 의존 관계를 파악하여 빌드 단계에서 사용하지 않는 코드를 번들에서 제외하는 트리 쉐이킹(Tree Shaking)이 가능합니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=04_esm_syntax.js"></script>
+
+<p>또한 ESM은 CJS처럼 module 전역 변수를 사용하지 않고 모듈마다 스코프를 따로 생성하여 보안에 유리합니다. 따라서 다음 예시에서 <code class="language-plaintext highlighter-rouge">esmModule</code>의 내용을 변경할 수 없습니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=05_esm_scope.js"></script>
+
+<p><br /></p>
+
+<h2 id="3-cjs와-esm의-호환">3. CJS와 ESM의 호환</h2>
+
+<p>위에서 살펴본 모듈 시스템 중 CJS와 ESM은 각각 NodeJS 환경과 브라우저 환경을 대표합니다. 만일 두 방식을 혼용한다면 어떻게 될까요? 두 가지 경우를 생각해볼 수 있습니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=06_compatibility.js"></script>
+
+<p>CJS와 ESM은 각각 동기적, 비동기적으로 모듈을 불러옵니다. 따라서 1번 상황은 동기적인 모듈을 비동기적으로 불러오는 것이라고 할 수 있습니다. ESM이 ES2022부터 추가된 <code class="language-plaintext highlighter-rouge">Top-level Await</code>(async 함수가 아닌 최상위에서 await을 사용하는 것)을 지원하는 덕분에 <strong>import를 사용하여 CJS 모듈을 정상적으로 불러올 수 있습니다.</strong></p>
+
+<p>반면 2번 상황은 정상적으로 동작하지 않습니다. 이는 CJS가 Top-level Await을 지원하지 않을 뿐더러 export 처리 방식에서 차이점을 보이기 때문입니다. 다음 예시에서 b.cjs 파일은 a.mjs 모듈을 불러올 때 default export 구문을 해석할 수 없습니다. <strong>따라서 CJS 환경에서 ESM 모듈을 불러올 수 없습니다.</strong></p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=07_default_export.js"></script>
+
+<p><br /></p>
+
+<p>ESM 모듈을 require로 불러오는 상황을 피하려면 <strong>모듈을 제공할 때 CJS와 ESM 두 가지 방식을 모두 지원하면 됩니다.</strong> package.json의 <code class="language-plaintext highlighter-rouge">exports</code> 필드를 활용하면 빌드 타임에 CJS 문법을 ESM 문법으로 (또는 그 반대로) 변경해줍니다.</p>
+
+<script src="https://gist.github.com/iyu88/e8c8177869bc7938ccea8f9961358209.js?file=08_redux_package.js"></script>
+
+<p>위와 같이 exports 속성을 작성하면 CJS 환경에서는 <code class="language-plaintext highlighter-rouge">./dist/cjs/redux.cjs</code>에 있는 모듈을 불러오고 ESM 환경에서는 <code class="language-plaintext highlighter-rouge">./dist/redux.mjs</code>에 있는 모듈을 불러올 수 있습니다.</p>
+
+<p><br /></p>
+
+<p>[참고]</p>
+
+<ul>
+  <li>
+    <p><a href="https://www.hoeser.dev/blog/2023-02-21-cjs-vs-esm/">CommonJS vs. ESM</a></p>
+  </li>
+  <li>
+    <p><a href="https://medium.com/@halilatilla/differences-between-javascript-modules-cjs-amd-umd-and-esm-f60124de131b">Differences Between JavaScript Modules: CJS, AMD, UMD, and ESM</a></p>
+  </li>
+  <li>
+    <p><a href="https://konstantin.digital/blog/es-modules-all-you-need-to-know">ES Modules: All You Need To Know</a></p>
+  </li>
+  <li>
+    <p><a href="https://yuzu.health/blog/cjs-vs-esm">yuzu health / CJS vs ESM</a></p>
+  </li>
+  <li>
+    <p><a href="https://webreflection.medium.com/cjs-vs-esm-5f8b90a4511a">medium / CJS vs ESM</a></p>
+  </li>
+  <li>
+    <p><a href="https://blog.stackademic.com/commonjs-vs-ecmascript-modules-esm-choosing-the-right-module-system-for-your-javascript-project-ef4efa856554">CommonJS vs ECMAScript Modules (ESM). Choosing the Right Module System for Your JavaScript Project</a></p>
+  </li>
+</ul>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/javascript">
+        javascript</a>,&nbsp;<a href="/tag/moduleSystem">
+        moduleSystem</a>,&nbsp;<a href="/tag/commonJS">
+        commonJS</a>,&nbsp;<a href="/tag/ecmaScriptModules">
+        ecmaScriptModules</a>,&nbsp;<a href="/tag/cjs">
+        cjs</a>,&nbsp;<a href="/tag/esm">
+        esm</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fjavascript%2F2024%2F03%2F02%2Fjavascript-module-system.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
+
+    
+
+  </div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">
+      구멍을 외면하지 말자
+    </h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:iyu88887@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">
+              iyu88887@gmail.com</span>
+          </a>
+        </li>
+
+        
+        
+        <li>
+          <a href="https://github.com/iyu88" title="https://github.com/iyu88">
+            <i class="fa fa-github"></i>
+            <span class="username">
+              iyu88</span>
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="https://linkedin.com/in/현빈-이-66710325b" title="Connect with me on LinkedIn">
+            <i class="fa fa-linkedin"></i>
+            <span class="username">
+              HyunBin Lee</span>
+          </a>
+        </li>
+        
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong></strong></p>
+      <p class="text">
+        first Dev blog
+
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Default syntax highlighting
+    hljs.initHighlightingOnLoad();
+
+    // Header
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function() {
+        if ($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+
+    // Enable tooltips via Tippy.js
+    if (Array.isArray(window.tooltips)) {
+      window.tooltips.forEach(function(tooltip) {
+        var selector = tooltip[0];
+        var config = tooltip[1];
+        tippy(selector, config);
+      })
+    }
+  });
+</script>
+
+
+
+<!--  -->
+<!-- Google Analytics -->
+<!-- <script> -->
+  <!-- (function(i, s, o, g, r, a, m) { -->
+    <!-- i['GoogleAnalyticsObject'] = r; -->
+    <!-- i[r] = i[r] || function() { -->
+      <!-- (i[r].q = i[r].q || []).push(arguments) -->
+    <!-- }, i[r].l = 1 * new Date(); -->
+    <!-- a = s.createElement(o), -->
+      <!-- m = s.getElementsByTagName(o)[0]; -->
+    <!-- a.async = 1; -->
+    <!-- a.src = g; -->
+    <!-- m.parentNode.insertBefore(a, m) -->
+  <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
+  <!-- ga('create', 'UA-243662455-3', 'auto'); -->
+  <!-- ga('send', 'pageview', { -->
+    <!-- 'page': '/javascript/2024/03/02/javascript-module-system.html', -->
+    <!-- 'title': '[JavaScript] 모듈 시스템 (CJS, ESM)' -->
+  <!-- }); -->
+<!-- </script> -->
+<!--  -->
+
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "10c052150c690f0";
+    if(window.wcs) {
+    wcs_do();
+    }
+    </script>
+
+  </body>
+
+</html>

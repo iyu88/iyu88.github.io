@@ -23,3 +23,8 @@ td,
 th {
   vertical-align: middle;
 }
+
+td.blob-num {
+  box-sizing: content-box;
+  border: none;
+}

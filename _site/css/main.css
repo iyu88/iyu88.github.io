@@ -153,6 +153,10 @@ td,
 th {
   vertical-align: middle; }
 
+td.blob-num {
+  box-sizing: content-box;
+  border: none; }
+
 body {
   -webkit-font-feature-settings: "kern", "liga", "pnum";
   -moz-font-feature-settings: "kern", "liga", "pnum";

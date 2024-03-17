@@ -7,10 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>
-    A11y
+    [A11y] aria-hidden='true'와 aria-role='none'
   </title>
-  <meta name="description" content="first Dev blog
-">
+  <meta name="description" content="aria-hidden=’true’와 aria-role=’none’">
   
   <meta name="author" content="Hyunbin Lee">
   <meta name="copyright" content="&copy; Hyunbin Lee 2024">
@@ -36,7 +35,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/category/a11y/">
+  <link rel="canonical" href="http://localhost:4000/a11y/2024/03/17/aria-hidden-and-role.html">
   <link rel="alternate" type="application/rss+xml" title="구멍을 외면하지 말자" href="http://localhost:4000/feed.xml" />
 
   <!-- Tooltips -->
@@ -276,35 +275,133 @@
 
 
     <div class="page-content">
-        <div class="wrapper">
-<div class="page">
+        <div class="post">
 
-  <header class="post-header">
-    <h1 class="post-title">Posts in "A11y"</h1>
-  </header>
+  <div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);" >
+    <div class="scrim has-cover">
+      <header class="post-header">
+        <h1 class="title">
+          [A11y] aria-hidden='true'와 aria-role='none'
+        </h1>
+        <p class="info">by <strong>
+            Hyunbin Lee</strong></p>
+      </header>
+    </div>
+  </div>
 
-  <span class="page-divider">
-  <span class="one"></span>
-  <span class="two"></span>
-</span>
+  <div class="wrapper">
 
+    
 
-  <article class="post-content">
-    <ul class="posts-list">
+    <section class="post-meta">
+      <div class="post-date">
+        March 17, 2024
+      </div>
+      <div class="post-categories">
+        in 
+        
+        <a href="/category/A11y">
+          A11y</a>
+        
+        
+      </div>
+    </section>
+
+    <article class="post-content">
+      <h1 id="aria-hiddentrue와-aria-rolenone">aria-hidden=’true’와 aria-role=’none’</h1>
+
+<h2 id="1-aria-hiddentrue">1. aria-hidden=’true’</h2>
+
+<p>aria-hidden 속성은 요소를 <a href="https://developer.mozilla.org/ko/docs/Glossary/Accessibility_tree">접근성 트리</a>에서 제거할 지 여부를 결정합니다. <code class="language-plaintext highlighter-rouge">aria-hidden='true'</code>로 설정하면 해당 요소가 접근성 트리에 노출되지 않을 뿐만 아니라 자식 요소들도 모두 영향 받아 사라지게 됩니다. 이렇게 접근성 트리에서 사라지면 스크린 리더 등 접근성을 지원하는 보조 기술의 도움을 받을 수 없습니다.</p>
+
+<p>aria-hidden 속성은 시각적인 렌더와는 직접적인 연관이 없습니다. <strong>다만 정상적으로 렌더링된 요소를 무턱대고 aria-hidden=’true’로 설정하는 것은 지양해야 합니다.</strong> 왜냐하면 시각적으로 파악할 수 있는 정보를 스크린 리더의 도움을 받을 수 없게 되어 보조 기술 사용자의 사용성을 저하시킬 수 있기 때문입니다. 따라서 불필요하다고 판단되거나 중복되는 정보에 한해서 설정해야 합니다.</p>
+
+<p><br /></p>
+
+<h2 id="2-aria-rolenone">2. aria-role=’none’</h2>
+
+<p>aria-role 속성은 요소에 역할을 명시하여 콘텐츠에 의미(semantic meaning)를 부여합니다. 이렇게 의미가 부여된 요소는 스크린 리더 등 보조 기술 사용자가 해당 요소의 의미를 파악하고 상호작용할 수 있게 도와줍니다.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#aria_role_types">다양한 role</a>이 존재하지만 이 중에서 <code class="language-plaintext highlighter-rouge">aria-role='none'</code>(aria-role=’presentation’과 동일)은 <strong>요소에 있는 시맨틱 의미를 제거하는 데에 사용합니다.</strong> 일반적으로 &lt;header&gt;, &lt;footer&gt;, &lt;article&gt;과 같은 시맨틱 태그와는 함께 사용하지 않습니다. 왜냐하면 이러한 경우에는 비시맨틱 태그인 &lt;div&gt;를 대신 사용하는 것이 더 적절하기 때문입니다. 다음 두 가지 상황에서 aria-role=’none’을 유용하게 활용할 수 있습니다.</p>
+
+<h4 id="2-1-레거시-마크업을-수정할-때">2-1. 레거시 마크업을 수정할 때</h4>
+
+<p>CSS 레이아웃 관련 속성들이 발전하기 이전에는 페이지 레이아웃을 구성하는 목적으로 &lt;table&gt; 태그를 마크업에 많이 사용했습니다. 만일 이러한 사이트를 유지보수해야 하는 경우 aria-role=’none’을 부여하여 오용된 &lt;table&gt;의 시맨틱 의미를 제거할 수 있습니다.</p>
+
+<h4 id="2-2-마크업-구조에서-시맨틱-의미를-제거하는-것이-도움이-될-경우">2-2. 마크업 구조에서 시맨틱 의미를 제거하는 것이 도움이 될 경우</h4>
+
+<p>오히려 aria-role=’none’으로 시맨틱 의미를 제거하는 것이 접근성에 도움이 되는 경우가 있습니다. 아래는 role=’tablist’ 마크업 예시입니다. 
+<script src="https://gist.github.com/iyu88/05caa5e430a638fe465d75d9613b5c21.js?file=01_tablist_example.html"></script>
+tablist는 자식 요소로 바로 role=’tab’에 해당하는 요소가 오는 것이 적절합니다. 이러한 경우 &lt;li&gt; 요소는 시맨틱 의미를 가질 필요가 없기 때문에 role=’none’으로 제거합니다.</p>
+
+<p><br /></p>
+
+<h2 id="3-두-속성의-공통점">3. 두 속성의 공통점</h2>
+
+<p>위 두 속성은 <strong>상호작용 가능한 요소에 설정하는 것을 지양해야 한다는 공통점</strong>을 가지고 있습니다. 이는 접근성 보조 기술이 파악할 수 없는 요소(aria-hidden=’true’)나 의도적으로 시맨틱 의미가 제거된 요소(aria-role=’none’)에 키보드 focus 혹은 마우스 포인터 focus가 가능할 경우, 각각 웹 접근성을 떨어트리고 <a href="https://www.w3.org/TR/wai-aria-1.2/#conflict_resolution_presentation_none">role 관련 표준 스펙</a>을 준수하지 못하는 문제가 있기 때문입니다.</p>
+
+<p><br /></p>
+
+<p>[참고]</p>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/ko/docs/Glossary/Accessibility_tree">MDN - 접근성 트리</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-hidden">MDN - aria-hidden</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles">MDN - WAI-ARIA Roles</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/presentation_role">MDN - ARIA: presentation role</a></li>
+  <li><a href="https://www.scottohara.me/blog/2018/05/05/hidden-vs-none.html">Know your ARIA: ‘Hidden’ vs ‘None’</a></li>
+</ul>
+
+    </article>
+
+    
+    
+    <section class="tags">
+      <strong>Tags:</strong> <a href="/tag/Accessibility">
+        Accessibility</a>,&nbsp;<a href="/tag/A11y">
+        A11y</a>
+    </section>
+    
+    
+
+    <hr />
+
+    <section>
+      <script src="https://utteranc.es/client.js" repo="iyu88/iyu88.github.io" issue-term="pathname" label="utterances" theme="preferred-color-scheme" crossorigin="anonymous" async>
+      </script>
+    </section>
+
+    <!-- <section class="share">
+      <span>Share: </span>
       
-      <li><strong><a class="post-link" href="/a11y/2024/03/17/aria-hidden-and-role.html">[A11y] aria-hidden='true'와 aria-role='none'</a></strong><span class="post-date"> - March 17, 2024</span></li>
       
-      <li><strong><a class="post-link" href="/a11y/2023/12/31/web-accessibility-2.html">[A11y] WAI 문서로 접근성 이해하기 (2/2)</a></strong><span class="post-date"> - December 31, 2023</span></li>
       
-      <li><strong><a class="post-link" href="/a11y/2023/12/24/web-accessibility-1.html">[A11y] WAI 문서로 접근성 이해하기 (1/2)</a></strong><span class="post-date"> - December 24, 2023</span></li>
       
-    </ul>
-  </article>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=%0A++++++http%3A%2F%2Flocalhost%3A4000%0A++++++%0A++++++%2Fa11y%2F2024%2F03%2F17%2Faria-hidden-and-role.html" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+      
+      
+      
+      
+      
+    </section> -->
 
+    
+
+  </div>
 </div>
-</div>
-<br>
-
     </div>
 
     <footer class="site-footer">
@@ -600,8 +697,8 @@
   <!-- })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); -->
   <!-- ga('create', 'UA-243662455-3', 'auto'); -->
   <!-- ga('send', 'pageview', { -->
-    <!-- 'page': '/category/a11y/', -->
-    <!-- 'title': 'A11y' -->
+    <!-- 'page': '/a11y/2024/03/17/aria-hidden-and-role.html', -->
+    <!-- 'title': '[A11y] aria-hidden='true'와 aria-role='none'' -->
   <!-- }); -->
 <!-- </script> -->
 <!--  -->

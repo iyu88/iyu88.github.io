@@ -6,9 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Mar 2024 22:40:16 +0900</pubDate>
-    <lastBuildDate>Sat, 02 Mar 2024 22:40:16 +0900</lastBuildDate>
+    <pubDate>Sun, 17 Mar 2024 23:45:51 +0900</pubDate>
+    <lastBuildDate>Sun, 17 Mar 2024 23:45:51 +0900</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>[A11y] aria-hidden=&apos;true&apos;와 aria-role=&apos;none&apos;</title>
+        <description>&lt;h1 id=&quot;aria-hiddentrue와-aria-rolenone&quot;&gt;aria-hidden=’true’와 aria-role=’none’&lt;/h1&gt; &lt;h2 id=&quot;1-aria-hiddentrue&quot;&gt;1. aria-hidden=’true’&lt;/h2&gt; &lt;p&gt;aria-hidden 속성은 요소를 &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Glossary/Accessibility_tree&quot;&gt;접근성 트리&lt;/a&gt;에서 제거할 지 여부를 결정합니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-hidden=&apos;true&apos;&lt;/code&gt;로 설정하면 해당 요소가 접근성 트리에 노출되지 않을 뿐만 아니라 자식 요소들도...</description>
+        <pubDate>Sun, 17 Mar 2024 09:00:00 +0900</pubDate>
+        <link>http://localhost:4000/a11y/2024/03/17/aria-hidden-and-role.html</link>
+        <guid isPermaLink="true">http://localhost:4000/a11y/2024/03/17/aria-hidden-and-role.html</guid>
+        
+        <category>Accessibility</category>
+        
+        <category>A11y</category>
+        
+        
+        <category>A11y</category>
+        
+      </item>
     
       <item>
         <title>[JavaScript] 모듈 시스템 (CJS, ESM)</title>
@@ -167,22 +183,6 @@
         
         
         <category>OpenSource</category>
-        
-      </item>
-    
-      <item>
-        <title>[JavaScript] ECMAScript 2023 살펴보기</title>
-        <description>&lt;h1 id=&quot;ecmascript-2023-살펴보기&quot;&gt;ECMAScript 2023 살펴보기&lt;/h1&gt; &lt;blockquote&gt; &lt;h3 id=&quot;-14번째-버전인-ecmascript-2023에-추가된-스펙에-대해서-살펴봅니다&quot;&gt;💡 14번째 버전인 ECMAScript 2023에 추가된 스펙에 대해서 살펴봅니다.&lt;/h3&gt; &lt;/blockquote&gt; &lt;h2 id=&quot;1-새로운-기능들&quot;&gt;1. 새로운 기능들&lt;/h2&gt; &lt;p&gt;공부해야 하는 내용은 대개 우연으로 다가옵니다. 며칠 전 JavaScript 스터디를...</description>
-        <pubDate>Sun, 23 Apr 2023 09:00:00 +0900</pubDate>
-        <link>http://localhost:4000/javascript/2023/04/23/ecma-script-2023.html</link>
-        <guid isPermaLink="true">http://localhost:4000/javascript/2023/04/23/ecma-script-2023.html</guid>
-        
-        <category>JavaScript</category>
-        
-        <category>ECMAScript</category>
-        
-        
-        <category>JavaScript</category>
         
       </item>
     
